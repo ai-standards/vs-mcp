@@ -1,5 +1,13 @@
 import OpenAI from "openai";
 import * as vscode from "vscode";
+import { zodTextFormat } from "openai/helpers/zod";
+import { z } from "zod";
+
+export async function getClient(context: vscode.ExtensionContext) {
+  const apiKey = await ensureOpenAIKey(context, "openai-api-key3");
+  const openai = new OpenAI({ apiKey });
+  return createAIFacade(openai);
+}
 
 export async function ensureOpenAIKey(ctx: vscode.ExtensionContext, secretId = "openai-api-key3") {
   let key = await ctx.secrets.get(secretId);
@@ -24,7 +32,6 @@ export function createAIFacade(openai: OpenAI) {
         model: opts?.model ?? "gpt-5-mini",
         input,
         tool_choice: "none",
-        // Remove reasoning.effort or set to a valid value if required by API
         max_output_tokens: Math.min(opts?.maxTokens ?? 600, 1200),
         ...(typeof opts?.temperature === "number" ? { temperature: opts.temperature } : {}),
       });
@@ -39,8 +46,6 @@ export function createAIFacade(openai: OpenAI) {
       return text;
     },
     async generateImages(prompt: string, opts?: { count?: number; size?: string; model?: string }) {
-      // Uses OpenAI's images.generate endpoint
-      // Only allow valid sizes per OpenAI API
       const allowedSizes = ["auto", "512x512", "1024x1024", "1536x1024", "1024x1536", "256x256", "1792x1024", "1024x1792"] as const;
       type OpenAISize = typeof allowedSizes[number];
       const requestedSize = opts?.size ?? "512x512";
@@ -53,8 +58,36 @@ export function createAIFacade(openai: OpenAI) {
         size,
         model: opts?.model ?? "dall-e-3",
       });
-      // Return array of image URLs
       return (resp.data ?? []).map((img: any) => img.url);
+    },
+    async generateFile(prompt: string, opts?: { model?: string; maxTokens?: number; temperature?: number }) {
+      // Prompt the model to return a filename and file text in a structured format
+      const fullPrompt = `Generate a new file for the following task. The response should be formatted as json, with the following fields:
+      - filename: a descriptive filename for the file. if the user specified one then use that, otherwise generate it
+      - extension: the type of file
+      - text: the file body text
+      
+      \nTask: ${prompt}`;
+
+      const FileSchema = z.object({
+        filename: z.string(),
+        extension: z.string(),
+        text: z.string(),
+      });
+
+      const resp = await openai.responses.parse({
+        model: opts?.model ?? "gpt-5-mini",
+        input: fullPrompt,
+        tool_choice: "none",
+        // max_output_tokens: Math.min(opts?.maxTokens ?? 800, 1600),
+        ...(typeof opts?.temperature === "number" ? { temperature: opts.temperature } : {}),
+        text: {
+          format: zodTextFormat(FileSchema, "file"),
+        }
+      });
+
+      console.log(resp);
+      return resp.output_parsed;
     },
   } as const;
 }

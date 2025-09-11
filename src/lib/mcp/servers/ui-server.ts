@@ -2,6 +2,9 @@
 import * as vscode from "vscode";
 import { McpServer, McpTool, McpResource } from "../types";
 
+// Store active progress dialogs by id
+const progressMap = new Map<string, { resolve: () => void }>();
+
 const tools: McpTool[] = [
   {
     name: "ui.info",
