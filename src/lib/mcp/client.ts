@@ -60,4 +60,5 @@ export class McpClient {
     if (!resource.list) throw new Error(`Resource not listable: ${resourceName}`);
     return resource.list(this.session);
   }
+
 }

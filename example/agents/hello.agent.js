@@ -2,7 +2,14 @@
 // Minimal MCP-based agent: shows a Hello World message via the UI tool.
 // Expects your extension to pass `{ mcp }` into the default export.
 
-export default async function hello({ mcp }) {
+export const metadata = {
+  id: 'hello',
+  name: 'Hello World',
+  description: 'Greets the current user'
+}
+
+export const run = async({ mcp, scope }) => {
+  mcp.call('ui.info', {message: 'FILE: ' + scope})
   try {
     // Use the MCP UI tool to show a simple message.
     await mcp.call("ui.info", {

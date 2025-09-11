@@ -1,7 +1,6 @@
-import * as path$2 from "path";
-import { pathToFileURL } from "url";
 import * as vscode from "vscode";
 import * as path$1 from "node:path";
+import * as path$2 from "path";
 function __classPrivateFieldSet(receiver, state, value, kind, f) {
   if (typeof state === "function" ? receiver !== state || true : !state.has(receiver))
     throw new TypeError("Cannot write private member to an object whose class did not declare it");
@@ -6697,14 +6696,65 @@ function createUiServer() {
     }
   };
 }
+async function listAgents() {
+  const files = await vscode.workspace.findFiles("**/*.agent.js");
+  const agents = [];
+  for (const file of files) {
+    try {
+      const modUrl = file.with({ scheme: "file" }).toString();
+      const imported = await import(
+        /* @vite-ignore */
+        modUrl
+      );
+      const { metadata } = imported;
+      if (metadata) {
+        agents.push({ ...metadata, path: file.fsPath });
+      }
+    } catch (err) {
+      console.warn(`Failed to import agent: ${file.fsPath}`, err);
+    }
+  }
+  return agents;
+}
+async function runAgent(agentPath, payload) {
+  const { metadata, run } = await import(
+    /* @vite-ignore */
+    agentPath
+  );
+  if (!run || typeof run !== "function") {
+    throw new Error("Agent module does not export a valid run function");
+  }
+  return await run(payload);
+}
+async function selectAgent() {
+  const agents = await listAgents();
+  if (!agents.length) {
+    vscode.window.showWarningMessage("No agents found in this project.");
+    return;
+  }
+  const items = agents.map((agent2) => ({
+    label: agent2.name,
+    description: agent2.description,
+    detail: agent2.path,
+    agent: agent2
+  }));
+  const selection = await vscode.window.showQuickPick(items, {
+    placeHolder: "Select an agent to run",
+    matchOnDescription: true,
+    matchOnDetail: true
+  });
+  return selection == null ? void 0 : selection.agent;
+}
 function isAgentFile(relPath) {
   return relPath.endsWith(".agent.js") || relPath.endsWith(".agent.mjs") || relPath.endsWith(".agent.ts");
 }
-function withinWorkspace(abs, root2) {
-  const R = path$2.resolve(root2) + path$2.sep;
-  const P = path$2.resolve(abs);
-  return P === path$2.resolve(root2) || P.startsWith(R);
-}
+const agent = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  isAgentFile,
+  listAgents,
+  runAgent,
+  selectAgent
+}, Symbol.toStringTag, { value: "Module" }));
 async function ensureOpenAIKey(ctx, secretId = "openai-api-key3") {
   let key = await ctx.secrets.get(secretId);
   if (!key) {
@@ -6749,42 +6799,77 @@ function createAIFacade(openai) {
     }
   };
 }
+function withinWorkspace(abs, root2) {
+  const R = path$2.resolve(root2) + path$2.sep;
+  const P = path$2.resolve(abs);
+  return P === path$2.resolve(root2) || P.startsWith(R);
+}
+function validateWorkspace(filepath) {
+  var _a2, _b;
+  if (!vscode.workspace.isTrusted) {
+    vscode.window.showWarningMessage("Trust this workspace to run agents.");
+    return;
+  }
+  if (!filepath) {
+    vscode.window.showErrorMessage("No file selected.");
+    return;
+  }
+  const ws = ((_b = (_a2 = vscode.workspace.workspaceFolders) == null ? void 0 : _a2[0]) == null ? void 0 : _b.uri.fsPath) ?? "";
+  if (!ws) {
+    vscode.window.showErrorMessage("Open a folder/workspace to run agents.");
+    return;
+  }
+  const rel = vscode.workspace.asRelativePath(filepath, false);
+  if (!isAgentFile(rel)) {
+    vscode.window.showErrorMessage("Only *.agent.{ts,js,mjs} files can be run as agents.");
+    return;
+  }
+  const abs = path$2.resolve(filepath);
+  if (!withinWorkspace(abs, ws)) {
+    vscode.window.showErrorMessage("Agent file must be within the current workspace.");
+    return;
+  }
+  return { abs, rel, ws };
+}
 async function activate(context) {
   const runAgentDisposable = vscode.commands.registerCommand("vs-mcp.runAgent", async (fileUri) => {
-    var _a2, _b;
+    const rel = vscode.workspace.asRelativePath(fileUri.fsPath, false);
+    const payload = { scope: rel };
+    let agentPath = fileUri.fsPath;
+    if (!isAgentFile(rel)) {
+      const selected = await Promise.resolve().then(() => agent).then((mod) => mod.selectAgent());
+      if (!selected || !selected.path) {
+        vscode.window.showInformationMessage("Agent selection cancelled.");
+        return;
+      }
+      agentPath = selected.path;
+    }
     try {
-      if (!vscode.workspace.isTrusted) {
-        vscode.window.showWarningMessage("Trust this workspace to run agents.");
+      const validPath = validateWorkspace(agentPath);
+      if (!validPath) {
         return;
       }
-      if (!fileUri || !fileUri.fsPath) {
-        vscode.window.showErrorMessage("No file selected.");
-        return;
-      }
-      const ws = ((_b = (_a2 = vscode.workspace.workspaceFolders) == null ? void 0 : _a2[0]) == null ? void 0 : _b.uri.fsPath) ?? "";
-      if (!ws) {
-        vscode.window.showErrorMessage("Open a folder/workspace to run agents.");
-        return;
-      }
-      const rel = vscode.workspace.asRelativePath(fileUri.fsPath, false);
-      if (!isAgentFile(rel)) {
-        vscode.window.showErrorMessage("Only *.agent.{ts,js,mjs} files can be run as agents.");
-        return;
-      }
-      const abs = path$2.resolve(fileUri.fsPath);
-      if (!withinWorkspace(abs, ws)) {
-        vscode.window.showErrorMessage("Agent file must be within the current workspace.");
-        return;
-      }
-      const confirm = await vscode.window.showWarningMessage(
-        `Run agent:
-${rel}
+      const { abs, rel: rel2, ws } = validPath;
+      const trustKey = `trustedAgent:${abs}`;
+      let trusted = context.globalState.get(trustKey);
+      if (!trusted) {
+        const confirm = await vscode.window.showWarningMessage(
+          `Run agent:
+${rel2}
 
-This executes code in the extension host.`,
-        { modal: true },
-        "Run"
-      );
-      if (confirm !== "Run") return;
+You are about to execute code from this file in the VS Code extension host.
+
+Only run agents you trust. You can choose to trust this agent and not be asked again.`,
+          { modal: true },
+          "Run",
+          "Run and don't ask again"
+        );
+        if (confirm === "Run and don't ask again") {
+          await context.globalState.update(trustKey, true);
+        } else if (confirm !== "Run") {
+          return;
+        }
+      }
       const apiKey = await ensureOpenAIKey(context, "openai-api-key3");
       const openai = new OpenAI({ apiKey });
       const server = composeServers(
@@ -6804,13 +6889,8 @@ This executes code in the extension host.`,
           workspaceRoot: ws
         }
       };
-      const mcp = new McpClient(server, session);
-      const modUrl = pathToFileURL(abs).toString() + `?t=${Date.now()}`;
-      const importedModule = await import(modUrl);
-      if (!(importedModule == null ? void 0 : importedModule.default) || typeof importedModule.default !== "function") {
-        throw new Error("No default export function found in the agent module.");
-      }
-      await importedModule.default({ mcp });
+      payload.mcp = new McpClient(server, session);
+      await runAgent(abs, payload);
     } catch (err) {
       console.error("vs-mcp.runAgent error:", err);
       vscode.window.showErrorMessage((err == null ? void 0 : err.message) ?? String(err));
