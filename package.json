@@ -39,13 +39,8 @@
       "editor/title": [
         {
           "command": "vs-mcp.runAgent",
-          "group": "mcp-agents@1",
-          "icon": "$(play)"
-        },
-        {
-          "command": "vs-mcp.createAgent",
-          "group": "mcp-agents@2",
-          "icon": "$(add)"
+          "when": "resourceFilename =~ /\\.agent\\.js$/",
+          "group": "navigation@1"
         }
       ]
     }
