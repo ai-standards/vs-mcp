@@ -1,6 +1,10 @@
 // lib/mcp/client.ts
 import { McpServer, McpTool, McpResource, McpSession, Json } from "./types";
 
+import * as path from 'path';
+import * as fs from 'fs';
+import { fileURLToPath } from 'url';
+
 /**
  * MCP client for calling tools/resources from an MCP server.
  * Wraps the server and session together into a convenient API.

@@ -19,20 +19,33 @@
       {
         "command": "vs-mcp.runAgent",
         "title": "Run Agent"
+      },
+      {
+        "command": "vs-mcp.createAgent",
+        "title": "Create Agent"
       }
     ],
     "menus": {
       "explorer/context": [
         {
           "command": "vs-mcp.runAgent",
-          "group": "navigation@1"
+          "group": "mcp-agents@1"
+        },
+        {
+          "command": "vs-mcp.createAgent",
+          "group": "mcp-agents@2"
         }
       ],
       "editor/title": [
         {
           "command": "vs-mcp.runAgent",
-          "group": "navigation@1",
+          "group": "mcp-agents@1",
           "icon": "$(play)"
+        },
+        {
+          "command": "vs-mcp.createAgent",
+          "group": "mcp-agents@2",
+          "icon": "$(add)"
         }
       ]
     }
@@ -58,6 +71,7 @@
   },
   "dependencies": {
     "openai": "^5.20.1",
-    "vscode": "^1.1.37"
+    "vscode": "^1.1.37",
+    "zod": "^3.25.76"
   }
 }

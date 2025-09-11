@@ -1,7 +1,3 @@
-// create-hello.agent.js
-// Minimal MCP-based agent: shows a Hello World message via the UI tool.
-// Expects your extension to pass `{ mcp }` into the default export.
-
 export const metadata = {
   id: 'hello',
   name: 'Hello World',
@@ -9,19 +5,24 @@ export const metadata = {
 }
 
 export const run = async({ mcp, scope }) => {
-  mcp.call('ui.info', {message: 'FILE: ' + scope})
+  mcp.call('status.bar', {
+    message: 'Creating greeting',
+    id: 'create',
+    spinner: true
+  })
+  
   try {
-    // Use the MCP UI tool to show a simple message.
-    await mcp.call("ui.info", {
-      message: "👋 Hello, world! This message was shown via MCP.",
-      actions: ["OK"]
-    });
+    const message = await mcp.call('ai.generateText', {
+      prompt: 'Create a short, friendly greeting for this vs-mcp extension user'
+    })
 
-    // If you want to also open a small virtual doc, uncomment:
-    // await mcp.call("editor.openVirtual", {
-    //   content: "# Hello, world!\n\nThis document was opened via MCP.",
-    //   language: "markdown"
-    // });
+    mcp.call('status.dismiss', {
+      id: 'create'
+    })
+
+    await mcp.call("ui.info", {
+      message: message.text
+    });
 
   } catch (err) {
     // Best-effort friendly error surface
