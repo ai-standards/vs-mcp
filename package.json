@@ -39,8 +39,8 @@
       "editor/title": [
         {
           "command": "vs-mcp.runAgent",
-          "group": "mcp-agents@1",
-          "when": "resourceFilename =~ /\\.agent\\.js$/"
+          "when": "resourceFilename =~ /\\.agent\\.js$/",
+          "group": "navigation@1"
         }
       ]
     }
