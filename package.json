@@ -25,14 +25,12 @@
       "explorer/context": [
         {
           "command": "vs-mcp.runAgent",
-          "when": "resourceFilename =~ /\\.agent\\.js$/",
           "group": "navigation@1"
         }
       ],
       "editor/title": [
         {
           "command": "vs-mcp.runAgent",
-          "when": "resourceFilename =~ /agent\\.js$/",
           "group": "navigation@1",
           "icon": "$(play)"
         }
