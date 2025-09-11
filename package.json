@@ -18,7 +18,7 @@
     "commands": [
       {
         "command": "vs-mcp.runAgent",
-        "title": "Run MCP Agent"
+        "title": "Run Agent"
       }
     ],
     "menus": {
@@ -27,6 +27,14 @@
           "command": "vs-mcp.runAgent",
           "when": "resourceFilename =~ /\\.agent\\.js$/",
           "group": "navigation@1"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "vs-mcp.runAgent",
+          "when": "resourceFilename =~ /agent\\.js$/",
+          "group": "navigation@1",
+          "icon": "$(play)"
         }
       ]
     }
