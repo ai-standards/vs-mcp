@@ -13,10 +13,14 @@ export interface McpSession {
   di?: Record<string, unknown>;
 }
 
-export interface McpTool {
+export interface McpToolApi {
   name: string;
   description?: string;
   schema?: { [field: string]: string };
+  response?: { [field: string]: string };
+}
+
+export interface McpTool extends McpToolApi {
   call(args: Json, session: McpSession): Promise<Json>;
 }
 

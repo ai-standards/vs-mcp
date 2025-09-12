@@ -10,6 +10,7 @@ export async function getClient(context: vscode.ExtensionContext) {
   if (apiUrl) {
     config.baseURL = apiUrl;
   }
+
   const openai = new OpenAI(config);
   return createAIFacade(openai);
 }
@@ -34,7 +35,7 @@ export function createAIFacade(openai: OpenAI) {
   return {
     async generateText(input: string, opts?: { maxTokens?: number; model?: string; temperature?: number }) {
       const resp = await openai.responses.create({
-        model: opts?.model ?? "gpt-5-mini",
+        model: opts?.model ?? "gpt-4o-mini",
         input,
         tool_choice: "none",
         max_output_tokens: Math.min(opts?.maxTokens ?? 600, 1200),
@@ -81,7 +82,7 @@ export function createAIFacade(openai: OpenAI) {
       });
 
       const resp = await openai.responses.parse({
-        model: opts?.model ?? "gpt-5-mini",
+        model: opts?.model ?? "gpt-4o-mini",
         input: fullPrompt,
         tool_choice: "none",
         // max_output_tokens: Math.min(opts?.maxTokens ?? 800, 1600),
@@ -91,7 +92,6 @@ export function createAIFacade(openai: OpenAI) {
         }
       });
 
-      console.log(resp);
       return resp.output_parsed;
     },
   } as const;

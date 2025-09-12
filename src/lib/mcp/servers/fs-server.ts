@@ -22,6 +22,7 @@ const tools: McpTool[] = [
     name: "fs.readFile",
     description: "Read a UTF-8 file inside the workspace.",
     schema: { path: "string" },
+    response: { path: "string", text: "string" },
     async call(args, session) {
       const abs = toAbs(session, String((args as any)?.path ?? ""));
       const buff = await vscode.workspace.fs.readFile(vscode.Uri.file(abs));
@@ -32,6 +33,7 @@ const tools: McpTool[] = [
     name: "fs.writeFile",
     description: "Write a UTF-8 file inside the workspace (with confirm).",
     schema: { path: "string", content: "string" },
+    response: { ok: "boolean", path: "string" },
     async call(args, session) {
       if (!session.scopes.includes("fs.write")) throw new Error("Missing scope: fs.write");
       const abs = toAbs(session, String((args as any)?.path ?? ""));
@@ -47,6 +49,7 @@ const tools: McpTool[] = [
     name: "fs.readDir",
     description: "List directory entries (name + kind).",
     schema: { dir: "string" },
+    response: { dir: "string", items: "{ name: string, type: string }[]" },
     async call(args, session) {
       const abs = toAbs(session, String((args as any)?.dir ?? ""));
       const items = await vscode.workspace.fs.readDirectory(vscode.Uri.file(abs));
@@ -57,6 +60,7 @@ const tools: McpTool[] = [
     name: "fs.find",
     description: "Find files by glob (workspace relative).",
     schema: { glob: "string", maxResults: "number?=100" },
+    response: { files: "string[]" },
     async call(args, session) {
       const { glob = "**/*", maxResults = 100 } = (args as any) ?? {};
       const files = await vscode.workspace.findFiles(String(glob), undefined, Number(maxResults));
