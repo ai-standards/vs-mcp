@@ -10,6 +10,12 @@ export async function activate(context: vscode.ExtensionContext) {
   activateCreateAgent(context);
   registerOpenMcpSettings(context);
   registerCreateIdeContext(context);
+  
+    // Register VS-MVC TreeView
+    const { VsMvcTreeDataProvider } = await import("./lib/vsMvcTree");
+    const vsMvcProvider = new VsMvcTreeDataProvider();
+    vscode.window.registerTreeDataProvider("vs-mvc", vsMvcProvider);
+    context.subscriptions.push(vscode.commands.registerCommand("vs-mvc.refresh", () => vsMvcProvider.refresh()));
 // ...existing code...
 }
 

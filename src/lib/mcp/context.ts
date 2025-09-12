@@ -117,7 +117,9 @@ export async function getContext(target?: IdeTarget): Promise<string> {
 		'- the functions are injected with {mcp, scope}. mcp is our mcp server and scope is the path the person clicked to run this',
 		'- always communicate with the users using the status and ui mcps',
 		'- always confirm before writing or editing a file',
-		'- include detailed comments explaining what you are doing and why'
+		'- include detailed comments explaining what you are doing and why',
+		'- always use default ai settings, dont set the model or temperature',
+		'- set a reasonable amount of max tokens so the content never gets cut off, at least 250'
 	].join('\n');
 
 	// Copilot — repo-wide markdown
