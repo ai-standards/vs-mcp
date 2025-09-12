@@ -21,7 +21,7 @@ const tools: McpTool[] = [
     response: { text: "string" },
     async call(args: Json, session: McpSession) {
       need(session, "ai.generate");
-      const { prompt, maxTokens = 600, model = "gpt-5-mini", temperature } = (args as any) ?? {};
+      const { prompt, maxTokens = 600, model = "gpt-4o-mini", temperature } = (args as any) ?? {};
       if (!prompt || typeof prompt !== "string") throw new Error("prompt:string required");
       const ai = getAI(session);
       const text = await ai.generateText(prompt, { maxTokens, model, temperature });
@@ -35,7 +35,7 @@ const tools: McpTool[] = [
     response: { data: "any" },
     async call(args: Json, session: McpSession) {
       need(session, "ai.generate");
-      const { prompt, schema, maxTokens = 600, model = "gpt-5-mini", temperature } = (args as any) ?? {};
+      const { prompt, schema, maxTokens = 600, model = "gpt-4o-mini", temperature } = (args as any) ?? {};
       if (!prompt || typeof prompt !== "string") throw new Error("prompt:string required");
       const ai = getAI(session);
       const fullPrompt = schema
@@ -85,7 +85,7 @@ const tools: McpTool[] = [
       const ai = getAI(session);
       const code = await ai.generateText(
         `Generate ${language} code in a ${style} style.\nReturn only code.\n\nTask:\n${prompt}`,
-        { maxTokens, model: "gpt-5-mini" }
+        { maxTokens, model: "gpt-4o-mini" }
       );
       return { code, language };
     },

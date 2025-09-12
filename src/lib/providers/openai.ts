@@ -42,6 +42,8 @@ export function createAIFacade(openai: OpenAI) {
         ...(typeof opts?.temperature === "number" ? { temperature: opts.temperature } : {}),
       });
 
+      console.log({resp});
+
       const text =
         (resp as any).output_text?.trim() ||
         (resp.output ?? [])

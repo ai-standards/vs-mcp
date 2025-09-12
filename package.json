@@ -16,7 +16,7 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
-    "configuration": {
+  "configuration": {
       "title": "MCP Settings",
       "properties": {
         "vs-mcp.apiUrl": {
@@ -25,6 +25,15 @@
           "description": "The AI API URL. Leave blank for default OpenAI endpoint."
         }
       }
+    },
+    "views": {
+      "explorer": [
+        {
+          "id": "vs-mvc",
+          "name": "VS-MVC",
+          "icon": "$(symbol-structure)"
+        }
+      ]
     },
     "commands": [
       {
