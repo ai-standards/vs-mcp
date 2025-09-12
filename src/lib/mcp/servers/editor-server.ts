@@ -20,6 +20,7 @@ const tools: McpTool[] = [
     name: "editor.openVirtual",
     description: "Open a read-only virtual document with content.",
     schema: { content: "string", language: "string?='markdown'" },
+    response: { ok: "boolean" },
     async call(args) {
       const { content, language = "markdown" } = (args as any) ?? {};
       const doc = await vscode.workspace.openTextDocument({ content: String(content ?? ""), language });
@@ -31,6 +32,7 @@ const tools: McpTool[] = [
     name: "editor.proposeEdits",
     description: "Show a diff and ask the user to apply changes.",
     schema: { targetPath: "string", newContent: "string", title: "string?='Agent: Proposed edits'" },
+    response: { applied: "boolean" },
     async call(args, session) {
       if (!session.scopes.includes("editor.apply")) throw new Error("Missing scope: editor.apply");
       const root = getRoot(session);

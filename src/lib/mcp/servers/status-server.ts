@@ -15,6 +15,7 @@ const tools: McpTool[] = [
         name: "status.window",
         description: "Show a status message in a window notification.",
         schema: { id: "string", message: "string" },
+        response: { shown: "boolean" },
         async call(args) {
             const { id, message } = (args as any) ?? {};
             if (!id || typeof id !== "string") throw new Error("id:string required");
@@ -33,6 +34,7 @@ const tools: McpTool[] = [
         name: "status.bar",
         description: "Show a status message in the status bar. Optionally show a spinner.",
         schema: { id: "string", message: "string", spinner: "boolean?" },
+        response: { shown: "boolean", spinner: "boolean" },
         async call(args) {
             const { id, message, spinner } = (args as any) ?? {};
             if (!id || typeof id !== "string") throw new Error("id:string required");
@@ -55,6 +57,7 @@ const tools: McpTool[] = [
         name: "status.dismiss",
         description: "Dismiss any status notification by id.",
         schema: { id: "string" },
+        response: { dismissed: "boolean" },
         async call(args) {
             const { id } = (args as any) ?? {};
             if (!id || typeof id !== "string") throw new Error("id:string required");

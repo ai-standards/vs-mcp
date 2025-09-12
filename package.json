@@ -11,7 +11,8 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:vs-mcp.helloWorld"
+    "onCommand:vs-mcp.helloWorld",
+    "onCommand:vs-mcp.createIdeContext"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -20,7 +21,7 @@
       "properties": {
         "vs-mcp.apiUrl": {
           "type": "string",
-          "default": "https://api.example.com",
+          "default": "",
           "description": "The AI API URL. Leave blank for default OpenAI endpoint."
         }
       }
@@ -28,15 +29,19 @@
     "commands": [
       {
         "command": "vs-mcp.runAgent",
-        "title": "Run Agent"
+        "title": "Run VS-MCP Agent"
       },
       {
         "command": "vs-mcp.createAgent",
-        "title": "Create Agent"
+        "title": "Create VS-MCP Agent"
       },
       {
         "command": "vs-mcp.openMcpSettings",
-        "title": "Open MCP Settings"
+        "title": "Open VS-MCP Settings"
+      },
+      {
+        "command": "vs-mcp.createIdeContext",
+        "title": "Create VS-MCP IDE Context"
       }
     ],
     "menus": {

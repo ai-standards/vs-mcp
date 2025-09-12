@@ -3,6 +3,7 @@ import * as vscode from "vscode";
 import { getClient } from "../providers/openai";
 import { mcpContext } from "../context/mcps";
 import * as path from "path";
+import { getContext } from "../mcp/context";
 
 // create an agent that prompts the user for their name, then generates a react profile page for them
 
@@ -22,6 +23,8 @@ export async function activateCreateAgent(context: vscode.ExtensionContext) {
     }
     
     const ai = await getClient(context);
+
+    const agentContext = await getContext();
 
     const prompt = `
 You are creating agentic runtime extensions for Visual Studio Code.
@@ -48,7 +51,7 @@ Here's the complete list of available MCPs and an example of how to create a MCP
 
 -----------------------
 
-${mcpContext}
+${agentContext}
 
 `;
 

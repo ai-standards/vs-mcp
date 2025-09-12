@@ -18,6 +18,7 @@ const tools: McpTool[] = [
     name: "ai.generateText",
     description: "Generate plain text from a prompt.",
     schema: { prompt: "string", maxTokens: "number?=600", model: "string?", temperature: "number?" },
+    response: { text: "string" },
     async call(args: Json, session: McpSession) {
       need(session, "ai.generate");
       const { prompt, maxTokens = 600, model = "gpt-5-mini", temperature } = (args as any) ?? {};
@@ -31,6 +32,7 @@ const tools: McpTool[] = [
     name: "ai.generateData",
     description: "Generate structured data (e.g., JSON) from a prompt.",
     schema: { prompt: "string", schema: "string?", maxTokens: "number?=600", model: "string?", temperature: "number?" },
+    response: { data: "any" },
     async call(args: Json, session: McpSession) {
       need(session, "ai.generate");
       const { prompt, schema, maxTokens = 600, model = "gpt-5-mini", temperature } = (args as any) ?? {};
@@ -40,6 +42,7 @@ const tools: McpTool[] = [
         ? `Generate structured data in JSON format matching this schema: ${schema}\nTask: ${prompt}\nReturn only valid JSON.`
         : `Generate structured data in JSON format.\nTask: ${prompt}\nReturn only valid JSON.`;
       const text = await ai.generateText(fullPrompt, { maxTokens, model, temperature });
+      console.log({text});
       let data;
       try {
         data = JSON.parse(text);
@@ -53,6 +56,7 @@ const tools: McpTool[] = [
     name: "ai.generateImages",
     description: "Generate images from a prompt.",
     schema: { prompt: "string", count: "number?=1", size: "string?='512x512'", model: "string?" },
+    response: { images: "any[]", note: "string?" },
     async call(args: Json, session: McpSession) {
       need(session, "ai.generate");
       const { prompt, count = 1, size = "512x512", model = "dall-e-3" } = (args as any) ?? {};
@@ -61,7 +65,7 @@ const tools: McpTool[] = [
       // If your AI facade supports image generation, call it here. Otherwise, return a stub.
       if (typeof ai.generateImages === "function") {
         const images = await ai.generateImages(prompt, { count, size, model });
-        return { images };
+        return { images, note: "" };
       } else {
         // Stub: return empty array or error
         return { images: [], note: "Image generation not implemented in AI facade." };
@@ -73,6 +77,7 @@ const tools: McpTool[] = [
     name: "ai.generateCode",
     description: "Generate new code from a natural language prompt.",
     schema: { prompt: "string", language: "string?=typescript", style: "string?='clean'", maxTokens: "number?=600" },
+    response: { code: "string", language: "string" },
     async call(args: Json, session: McpSession) {
       need(session, "ai.generate");
       const { prompt, language = "typescript", style = "clean", maxTokens = 600 } = (args as any) ?? {};
@@ -89,6 +94,7 @@ const tools: McpTool[] = [
     name: "ai.refactorCode",
     description: "Refactor existing code based on instructions.",
     schema: { code: "string", instructions: "string", language: "string?=typescript", style: "string?='clean'" },
+    response: { code: "string" },
     async call(args: Json, session: McpSession) {
       need(session, "ai.generate");
       const { code, instructions, language = "typescript", style = "clean" } = (args as any) ?? {};
@@ -104,6 +110,7 @@ const tools: McpTool[] = [
     name: "ai.testCode",
     description: "Generate unit tests for code.",
     schema: { code: "string", framework: "string?=vitest", language: "string?=typescript" },
+    response: { tests: "string", framework: "string", language: "string" },
     async call(args: Json, session: McpSession) {
       need(session, "ai.generate");
       const { code, framework = "vitest", language = "typescript" } = (args as any) ?? {};
@@ -120,6 +127,7 @@ const tools: McpTool[] = [
     name: "ai.writeDocumentation",
     description: "Write or update documentation for code.",
     schema: { code: "string", format: "string?='markdown'", audience: "string?='developers'" },
+    response: { docs: "string", format: "string" },
     async call(args: Json, session: McpSession) {
       need(session, "ai.generate");
       const { code, format = "markdown", audience = "developers" } = (args as any) ?? {};
