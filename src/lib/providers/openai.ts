@@ -5,7 +5,12 @@ import { z } from "zod";
 
 export async function getClient(context: vscode.ExtensionContext) {
   const apiKey = await ensureOpenAIKey(context, "openai-api-key3");
-  const openai = new OpenAI({ apiKey });
+  const config: any = { apiKey };
+  const apiUrl = vscode.workspace.getConfiguration().get<string>("vs-mcp.apiUrl");
+  if (apiUrl) {
+    config.baseURL = apiUrl;
+  }
+  const openai = new OpenAI(config);
   return createAIFacade(openai);
 }
 

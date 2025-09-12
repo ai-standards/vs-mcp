@@ -15,6 +15,16 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
+    "configuration": {
+      "title": "MCP Settings",
+      "properties": {
+        "vs-mcp.apiUrl": {
+          "type": "string",
+          "default": "https://api.example.com",
+          "description": "The AI API URL. Leave blank for default OpenAI endpoint."
+        }
+      }
+    },
     "commands": [
       {
         "command": "vs-mcp.runAgent",
@@ -23,6 +33,10 @@
       {
         "command": "vs-mcp.createAgent",
         "title": "Create Agent"
+      },
+      {
+        "command": "vs-mcp.openMcpSettings",
+        "title": "Open MCP Settings"
       }
     ],
     "menus": {
