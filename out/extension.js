@@ -11489,7 +11489,12 @@ function zodTextFormat(zodObject, name, props) {
 }
 async function getClient(context) {
   const apiKey = await ensureOpenAIKey(context, "openai-api-key3");
-  const openai = new OpenAI({ apiKey });
+  const config = { apiKey };
+  const apiUrl = vscode.workspace.getConfiguration().get("vs-mcp.apiUrl");
+  if (apiUrl) {
+    config.baseURL = apiUrl;
+  }
+  const openai = new OpenAI(config);
   return createAIFacade(openai);
 }
 async function ensureOpenAIKey(ctx, secretId = "openai-api-key3") {
@@ -11954,9 +11959,17 @@ ${mcpContext}
   });
   context.subscriptions.push(createAgentDisposable);
 }
+function registerOpenMcpSettings(context) {
+  context.subscriptions.push(
+    vscode.commands.registerCommand("vs-mcp.openMcpSettings", () => {
+      vscode.commands.executeCommand("workbench.action.openSettings", "vs-mcp.apiUrl");
+    })
+  );
+}
 async function activate(context) {
   activateRunAgent(context);
   activateCreateAgent(context);
+  registerOpenMcpSettings(context);
 }
 function deactivate() {
   console.log("AI Extension deactivated");
