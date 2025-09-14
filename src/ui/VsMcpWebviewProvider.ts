@@ -1,4 +1,3 @@
-
 import { dispatch } from "../server/server";
 import * as vscode from "vscode";
 
@@ -15,13 +14,21 @@ export class VsMcpWebviewProvider implements vscode.WebviewViewProvider {
   ) {
     this._view = webviewView;
     webviewView.webview.options = {
-      enableScripts: true
+      enableScripts: true,
+      localResourceRoots: [
+        vscode.Uri.joinPath(this.context.extensionUri, "media")
+      ]
     };
+
     webviewView.webview.html = this.getHtmlForWebview(webviewView.webview);
+
     // Listen for messages from the webview
     webviewView.webview.onDidReceiveMessage(async (message: any) => {
       if (message.type === "ping") {
-        webviewView.webview.postMessage({ type: "pong", text: "Hello from extension!" });
+        webviewView.webview.postMessage({
+          type: "pong",
+          text: "Hello from extension!"
+        });
         return;
       }
       if (message.mcp) {
@@ -52,21 +59,62 @@ export class VsMcpWebviewProvider implements vscode.WebviewViewProvider {
   }
 
   private getHtmlForWebview(webview: vscode.Webview): string {
-    const scriptUri = webview.asWebviewUri(vscode.Uri.joinPath(
-      this.context.extensionUri,
-      "media",
-      "webview",
-      "main.js"
-    ));
-    return `
+    const scriptUri = webview.asWebviewUri(
+      vscode.Uri.joinPath(
+        this.context.extensionUri,
+        "media",
+        "webview",
+        "main.js"
+      )
+    );
+
+    // Resolve Codicons CSS
+    const codiconsUri = webview.asWebviewUri(
+      vscode.Uri.joinPath(
+        this.context.extensionUri,
+        "node_modules",
+        "@vscode/codicons",
+        "dist",
+        "codicon.css"
+      )
+    );
+
+    return /* html */ `
       <!DOCTYPE html>
       <html lang="en">
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>VS-MCP Webview</title>
+        <link href="${codiconsUri}" rel="stylesheet" />
+        <style>
+          body {
+            font-family: var(--vscode-font-family, system-ui, sans-serif);
+            color: var(--vscode-foreground);
+            background: var(--vscode-editor-background);
+            padding: 1rem;
+          }
+          .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 4px 8px;
+            background: var(--vscode-button-background);
+            color: var(--vscode-button-foreground);
+            border: none;
+            border-radius: 4px;
+          }
+          .btn:hover {
+            background: var(--vscode-button-hoverBackground);
+          }
+        </style>
       </head>
       <body>
+        <button class="btn">
+          <span class="codicon codicon-add"></span>
+          New
+        </button>
+
         <div id="root"></div>
         <script type="module" src="${scriptUri}"></script>
       </body>

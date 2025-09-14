@@ -1,6 +1,7 @@
 import React from "react";
 import { useApi } from "./hooks/useApi";
 import { createMcpService } from "./services/mcpService";
+import { Button } from "./toolkit";
 
 // Add TypeScript definition for window.acquireVsCodeApi
 
@@ -20,7 +21,7 @@ export default function App() {
   return (
     <div>
       <h1>Hello</h1>
-      <button onClick={handleClick}>open file</button>
+      <Button onClick={handleClick}>open file</Button>
     </div>
   );
 }
