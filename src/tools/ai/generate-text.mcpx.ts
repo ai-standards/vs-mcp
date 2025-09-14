@@ -12,10 +12,10 @@ type OutputContext = InputContext & {
 };
 
 /**
+ * @namespace ai
  * @name Generate Text
  * @description Generate plain text from a prompt.
  * @returns something
- * 
  */
 async function generateText(context: InputContext): Promise<OutputContext> {
   const { prompt, maxTokens = 600, model = "gpt-4o-mini", temperature = 0.2 } = context;

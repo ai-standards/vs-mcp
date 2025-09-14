@@ -10,6 +10,7 @@ export type OutputContext = InputContext & {
 };
 
 /**
+ * @namespace editor
  * @name Open Virtual Document
  * @description Open a read-only virtual document with content and language.
  */

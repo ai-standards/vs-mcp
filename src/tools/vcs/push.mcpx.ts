@@ -6,6 +6,7 @@ export type OutputContext = {
 };
 
 /**
+ * @namespace vcs
  * @name Push Changes
  * @description Push committed changes to the remote repository (supports any VCS provider).
  */

@@ -8,6 +8,7 @@ export type OutputContext = {
 };
 
 /**
+ * @namespace editor
  * @name Editor Selection
  * @description Get selection offsets and text for the active editor.
  */

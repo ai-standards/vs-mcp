@@ -10,6 +10,7 @@ export type OutputContext = {
 };
 
 /**
+ * @namespace git
  * @name Create Git Branch
  * @description Create a new branch in the current repository using VS Code's Git extension.
  */

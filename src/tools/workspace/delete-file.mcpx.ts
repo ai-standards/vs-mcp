@@ -11,6 +11,7 @@ export type OutputContext = {
 };
 
 /**
+ * @namespace workspace
  * @name Delete Workspace File
  * @description Delete a file from the workspace.
  */

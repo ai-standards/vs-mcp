@@ -6,6 +6,7 @@ export type OutputContext = {
 };
 
 /**
+ * @namespace vcs
  * @name Pull Changes
  * @description Pull changes from the remote repository (supports any VCS provider).
  */

@@ -11,6 +11,7 @@ export type OutputContext = InputContext & {
 };
 
 /**
+ * @namespace fs
  * @name Read File
  * @description Read a UTF-8 file inside the workspace.
  */

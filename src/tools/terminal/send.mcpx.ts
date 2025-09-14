@@ -10,6 +10,7 @@ export type OutputContext = {
 };
 
 /**
+ * @namespace terminal
  * @name Send Text to Terminal
  * @description Send text or command to a specific integrated terminal.
  */

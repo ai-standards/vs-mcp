@@ -12,6 +12,7 @@ export type OutputContext = {
 };
 
 /**
+ * @namespace workspace
  * @name Create Workspace File
  * @description Create a new file in the workspace with optional content.
  */

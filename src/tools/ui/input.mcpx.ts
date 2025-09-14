@@ -10,6 +10,7 @@ export type OutputContext = {
 };
 
 /**
+ * @namespace ui
  * @name Show Input Box
  * @description Prompt user for a string input.
  */

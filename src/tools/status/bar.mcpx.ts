@@ -12,6 +12,7 @@ export type OutputContext = InputContext & {
 };
 
 /**
+ * @namespace status
  * @name Show Status Bar
  * @description Show a status message in the status bar. Optionally show a spinner.
  */

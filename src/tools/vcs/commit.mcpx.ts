@@ -10,6 +10,7 @@ export type OutputContext = {
 };
 
 /**
+ * @namespace vcs
  * @name Commit Changes
  * @description Commit staged changes in the current repository with a message (supports any VCS provider).
  */

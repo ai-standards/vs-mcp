@@ -27,6 +27,7 @@ main().then(
 export type MCPToolIndex = {
   tools: Array<{
     id: string;
+    namespace: string;
     name?: string;
     description?: string;
     path?: string;
@@ -124,33 +125,33 @@ export function generateMcpTypes(
   const propsKeyAliases: string[] = []; // not strictly needed but keeps intent clear
 
   for (const tool of tools) {
-    const id = tool.id;
-    const pascal = pascalCase(id);
-    const propsName = `${pascal}Props`;
-    const respName = `${pascal}Response`;
+      const key = `${tool.namespace}.${tool.id}`;
+      const pascal = pascalCase(key);
+      const propsName = `${pascal}Props`;
+      const respName = `${pascal}Response`;
 
-    chunks.push(renderInterface(propsName, tool.input, tool.description));
-    chunks.push(renderInterface(respName, tool.output));
+      chunks.push(renderInterface(propsName, tool.input, tool.description));
+      chunks.push(renderInterface(respName, tool.output));
 
-    commandMapEntries.push(
-      `  ${JSON.stringify(id)}: { props: ${propsName}; response: ${respName}; path: ${JSON.stringify(
-        tool.path ?? ""
-      )} };`
-    );
+      commandMapEntries.push(
+        `  ${JSON.stringify(key)}: { props: ${propsName}; response: ${respName}; path: ${JSON.stringify(
+          tool.path ?? ""
+        )} };`
+      );
 
-    propsKeyAliases.push(
-      `type ${pascal}PropsKey = ${JSON.stringify(`${id}Props`)};`,
-      `type ${pascal}ResponseKey = ${JSON.stringify(`${id}Response`)};`
-    );
+      propsKeyAliases.push(
+        `type ${pascal}PropsKey = ${JSON.stringify(`${key}Props`)};`,
+        `type ${pascal}ResponseKey = ${JSON.stringify(`${key}Response`)};`
+      );
   }
 
   // Registry types
-  chunks.push(
-    `export type ToolId = ${
-      tools.length ? tools.map((t) => JSON.stringify(t.id)).join(" | ") : "never"
-    };\n`
-  );
-
+    chunks.push(
+      `export type ToolId = ${
+        tools.length ? tools.map((t) => JSON.stringify(`${t.namespace}.${t.id}`)).join(" | ") : "never"
+      };
+  `
+    );
   chunks.push(`export type CommandMap = {\n${commandMapEntries.join("\n")}\n};\n`);
 
   // Helpful key aliases (optional but explicit)
@@ -184,6 +185,7 @@ export async function runTool<K extends keyof CommandMap>(
   if (includeDescriptors) {
     const descriptors = tools.map((t) => ({
       id: t.id,
+      namespace: t.namespace || 'default',
       path: t.path ?? "",
       name: t.name,
       description: t.description,

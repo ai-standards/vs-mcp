@@ -9,6 +9,7 @@ export type OutputContext = {
 };
 
 /**
+ * @namespace terminal
  * @name Close Terminal
  * @description Close a specific integrated terminal in VS Code.
  */

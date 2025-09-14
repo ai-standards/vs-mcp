@@ -13,6 +13,7 @@ export type OutputContext = InputContext & {
 };
 
 /**
+ * @namespace ai
  * @name Generate Code
  * @description Generate new code from a natural language prompt, specifying language and style.
  */

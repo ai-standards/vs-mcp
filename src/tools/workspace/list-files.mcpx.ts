@@ -9,6 +9,7 @@ export type OutputContext = {
 };
 
 /**
+ * @namespace workspace
  * @name List Workspace Files
  * @description List files in the workspace matching a glob pattern.
  */

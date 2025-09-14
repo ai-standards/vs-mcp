@@ -10,6 +10,7 @@ export type OutputContext = InputContext & {
 };
 
 /**
+ * @namespace status
  * @name Show Status Window
  * @description Show a status message in a window notification.
  */

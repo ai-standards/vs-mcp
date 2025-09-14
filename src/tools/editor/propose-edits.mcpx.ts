@@ -13,6 +13,7 @@ export type OutputContext = InputContext & {
 };
 
 /**
+ * @namespace editor
  * @name Propose Edits
  * @description Show a diff and ask the user to apply changes to a file in the workspace.
  */

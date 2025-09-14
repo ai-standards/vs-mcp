@@ -13,6 +13,7 @@ export type OutputContext = {
 };
 
 /**
+ * @namespace github
  * @name Create GitHub Pull Request
  * @description Create a new pull request in a GitHub repository using VS Code's GitHub integration.
  */

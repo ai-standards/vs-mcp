@@ -11,6 +11,7 @@ export type OutputContext = InputContext & {
 };
 
 /**
+ * @namespace fs
  * @name Read Directory
  * @description List directory entries (name + kind).
  */

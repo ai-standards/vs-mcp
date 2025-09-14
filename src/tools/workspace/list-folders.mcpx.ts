@@ -5,6 +5,7 @@ export type OutputContext = {
 };
 
 /**
+ * @namespace workspace
  * @name List Workspace Folders
  * @description List all workspace folders.
  */

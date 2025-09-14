@@ -1,14 +1,14 @@
 // AUTO-GENERATED FROM MCP TOOL INDEX. Do not edit by hand.
 
 /** Generate new code from a natural language prompt, specifying language and style. */
-export interface GenerateCodeProps {
+export interface AiGenerateCodeProps {
   "prompt": string;
   "language"?: string;
   "style"?: string;
   "maxTokens"?: number;
 }
 
-export interface GenerateCodeResponse {
+export interface AiGenerateCodeResponse {
   "prompt": string;
   "language": string;
   "style"?: string;
@@ -17,7 +17,7 @@ export interface GenerateCodeResponse {
 }
 
 /** Generate structured data (e.g., JSON) from a prompt and optional schema. */
-export interface GenerateDataProps {
+export interface AiGenerateDataProps {
   "prompt": string;
   "schema"?: string;
   "maxTokens"?: number;
@@ -25,7 +25,7 @@ export interface GenerateDataProps {
   "temperature"?: number;
 }
 
-export interface GenerateDataResponse {
+export interface AiGenerateDataResponse {
   "prompt": string;
   "schema"?: string;
   "maxTokens"?: number;
@@ -35,14 +35,14 @@ export interface GenerateDataResponse {
 }
 
 /** Generate images from a prompt using an AI model and optional parameters. */
-export interface GenerateImagesProps {
+export interface AiGenerateImagesProps {
   "prompt": string;
   "count"?: number;
   "size"?: "512x512";
   "model"?: string;
 }
 
-export interface GenerateImagesResponse {
+export interface AiGenerateImagesResponse {
   "prompt": string;
   "count"?: number;
   "size"?: "512x512";
@@ -52,14 +52,14 @@ export interface GenerateImagesResponse {
 }
 
 /** Generate plain text from a prompt. */
-export interface GenerateTextProps {
+export interface AiGenerateTextProps {
   "prompt": string;
   "maxTokens"?: number;
   "model"?: string;
   "temperature"?: number;
 }
 
-export interface GenerateTextResponse {
+export interface AiGenerateTextResponse {
   "prompt": string;
   "maxTokens"?: number;
   "model"?: string;
@@ -68,14 +68,14 @@ export interface GenerateTextResponse {
 }
 
 /** Refactor existing code based on instructions, language, and style. */
-export interface RefactorCodeProps {
+export interface AiRefactorCodeProps {
   "code": string;
   "instructions": string;
   "language"?: string;
   "style"?: string;
 }
 
-export interface RefactorCodeResponse {
+export interface AiRefactorCodeResponse {
   "code": string;
   "instructions": string;
   "language"?: string;
@@ -84,13 +84,13 @@ export interface RefactorCodeResponse {
 }
 
 /** Generate unit tests for code using the specified framework and language. */
-export interface TestCodeProps {
+export interface AiTestCodeProps {
   "code": string;
   "framework"?: string;
   "language"?: string;
 }
 
-export interface TestCodeResponse {
+export interface AiTestCodeResponse {
   "code": string;
   "framework"?: string;
   "language"?: string;
@@ -98,13 +98,13 @@ export interface TestCodeResponse {
 }
 
 /** Write or update documentation for code in the specified format and audience. */
-export interface WriteDocumentationProps {
+export interface AiWriteDocumentationProps {
   "code": string;
   "format"?: string;
   "audience"?: string;
 }
 
-export interface WriteDocumentationResponse {
+export interface AiWriteDocumentationResponse {
   "code": string;
   "format"?: string;
   "audience"?: string;
@@ -112,35 +112,35 @@ export interface WriteDocumentationResponse {
 }
 
 /** Get the active editor file's path, languageId, and selected or full text. */
-export interface ActiveFileProps {
+export interface EditorActiveFileProps {
 
 }
 
-export interface ActiveFileResponse {
+export interface EditorActiveFileResponse {
   "__self": null;
 }
 
 /** Open a read-only virtual document with content and language. */
-export interface OpenVirtualProps {
+export interface EditorOpenVirtualProps {
   "content": string;
   "language"?: string;
 }
 
-export interface OpenVirtualResponse {
+export interface EditorOpenVirtualResponse {
   "content": string;
   "language"?: string;
   "ok": false;
 }
 
 /** Show a diff and ask the user to apply changes to a file in the workspace. */
-export interface ProposeEditsProps {
+export interface EditorProposeEditsProps {
   "targetPath": string;
   "newContent": string;
   "title"?: string;
   "workspaceRoot": string;
 }
 
-export interface ProposeEditsResponse {
+export interface EditorProposeEditsResponse {
   "targetPath": string;
   "newContent": string;
   "title"?: string;
@@ -149,56 +149,86 @@ export interface ProposeEditsResponse {
 }
 
 /** Get selection offsets and text for the active editor. */
-export interface EditorSelectionProps {
+export interface EditorEditorSelectionProps {
 
 }
 
-export interface EditorSelectionResponse {
+export interface EditorEditorSelectionResponse {
   "__self": null;
 }
 
+/** Create a new branch in the current repository using VS Code's Git extension. */
+export interface GitCreateGitBranchProps {
+  "branchName": string;
+}
+
+export interface GitCreateGitBranchResponse {
+  "success": false;
+  "error"?: string;
+}
+
+/** Delete the specified branch in the current repository using VS Code's Git extension. */
+export interface GitDeleteGitBranchProps {
+  "branchName": string;
+}
+
+export interface GitDeleteGitBranchResponse {
+  "success": false;
+  "error"?: string;
+}
+
+/** Merge the specified branch into the current branch using VS Code's Git extension. */
+export interface GitMergeGitBranchProps {
+  "branchName": string;
+}
+
+export interface GitMergeGitBranchResponse {
+  "success": false;
+  "error"?: string;
+}
+
 /** Find files by glob pattern (workspace relative). */
-export interface FindFilesProps {
+export interface FsFindFilesProps {
   "glob"?: string;
   "maxResults"?: number;
 }
 
-export interface FindFilesResponse {
+export interface FsFindFilesResponse {
   "files": string[];
 }
 
 /** List directory entries (name + kind). */
-export interface ReadDirProps {
+export interface FsReadDirProps {
   "dir": string;
   "workspaceRoot": string;
 }
 
-export interface ReadDirResponse {
+export interface FsReadDirResponse {
   "dir": string;
   "workspaceRoot": string;
   "items": { name: string; type: string; }[];
 }
 
 /** Read a UTF-8 file inside the workspace. */
-export interface ReadFileProps {
+export interface FsReadFileProps {
   "path": string;
   "workspaceRoot": string;
 }
 
-export interface ReadFileResponse {
+export interface FsReadFileResponse {
   "path": string;
   "workspaceRoot": string;
   "text": string;
 }
 
 /** Write a UTF-8 file inside the workspace (with confirm). */
-export interface WriteFileProps {
+export interface FsWriteFileProps {
   "path": string;
   "content": string;
   "workspaceRoot": string;
 }
 
-export interface WriteFileResponse {
+export interface FsWriteFileResponse {
   "path": string;
   "content": string;
   "workspaceRoot": string;
@@ -206,13 +236,13 @@ export interface WriteFileResponse {
 }
 
 /** Show a status message in the status bar. Optionally show a spinner. */
-export interface ShowStatusBarProps {
+export interface StatusShowStatusBarProps {
   "id": string;
   "message": string;
   "spinner"?: false;
 }
 
-export interface ShowStatusBarResponse {
+export interface StatusShowStatusBarResponse {
   "id": string;
   "message": string;
   "spinner": false;
@@ -220,236 +250,40 @@ export interface ShowStatusBarResponse {
 }
 
 /** Dismiss any status notification by id. */
-export interface DismissStatusProps {
+export interface StatusDismissStatusProps {
   "id": string;
 }
 
-export interface DismissStatusResponse {
+export interface StatusDismissStatusResponse {
   "id": string;
   "dismissed": false;
 }
 
 /** Show a status message in a window notification. */
-export interface ShowStatusWindowProps {
+export interface StatusShowStatusWindowProps {
   "id": string;
   "message": string;
 }
 
-export interface ShowStatusWindowResponse {
+export interface StatusShowStatusWindowResponse {
   "id": string;
   "message": string;
   "shown": false;
 }
 
-/** Show info message with optional actions. */
-export interface ShowInfoMessageProps {
-  "message": string;
-  "actions"?: string[];
-}
-
-export interface ShowInfoMessageResponse {
-  "choice": null;
-}
-
-/** Prompt user for a string input. */
-export interface ShowInputBoxProps {
-  "prompt": string;
-  "placeHolder"?: string;
-}
-
-export interface ShowInputBoxResponse {
-  "value": null;
-}
-
-/** Show warning message with optional actions. */
-export interface ShowWarningMessageProps {
-  "message": string;
-  "actions"?: string[];
-}
-
-export interface ShowWarningMessageResponse {
-  "choice": null;
-}
-
-/** Commit staged changes in the current repository with a message (supports any VCS provider). */
-export interface CommitChangesProps {
-  "message": string;
-}
-
-export interface CommitChangesResponse {
-  "success": false;
-  "error"?: string;
-}
-
-/** Pull changes from the remote repository (supports any VCS provider). */
-export interface PullChangesProps {
-
-}
-
-export interface PullChangesResponse {
-  "success": false;
-  "error"?: string;
-}
-
-/** Push committed changes to the remote repository (supports any VCS provider). */
-export interface PushChangesProps {
-
-}
-
-export interface PushChangesResponse {
-  "success": false;
-  "error"?: string;
-}
-
-/** Get the status of the current repository (supports any VCS provider). */
-export interface GetVcsStatusProps {
-
-}
-
-export interface GetVcsStatusResponse {
-  "status": string;
-  "error"?: string;
-}
-
-/** Create a new file in the workspace with optional content. */
-export interface CreateWorkspaceFileProps {
-  "path": string;
-  "content"?: string;
-}
-
-export interface CreateWorkspaceFileResponse {
-  "success": false;
-  "error"?: string;
-}
-
-/** Delete a file from the workspace. */
-export interface DeleteWorkspaceFileProps {
-  "path": string;
-}
-
-export interface DeleteWorkspaceFileResponse {
-  "success": false;
-  "error"?: string;
-}
-
-/** List files in the workspace matching a glob pattern. */
-export interface ListWorkspaceFilesProps {
-  "glob"?: string;
-}
-
-export interface ListWorkspaceFilesResponse {
-  "files": string[];
-}
-
-/** List all workspace folders. */
-export interface ListWorkspaceFoldersProps {
-
-}
-
-export interface ListWorkspaceFoldersResponse {
-  "folders": string[];
-}
-
-/** Rename a folder in the workspace using VS Code's file system API (preserves user security permissions). */
-export interface RenameWorkspaceFolderProps {
-  "oldPath": string;
-  "newPath": string;
-}
-
-export interface RenameWorkspaceFolderResponse {
-  "success": false;
-  "error"?: string;
-}
-
-/** Create a new branch in the current repository using VS Code's Git extension. */
-export interface CreateGitBranchProps {
-  "branchName": string;
-}
-
-export interface CreateGitBranchResponse {
-  "success": false;
-  "error"?: string;
-}
-
-/** Delete the specified branch in the current repository using VS Code's Git extension. */
-export interface DeleteGitBranchProps {
-  "branchName": string;
-}
-
-export interface DeleteGitBranchResponse {
-  "success": false;
-  "error"?: string;
-}
-
-/** Merge the specified branch into the current branch using VS Code's Git extension. */
-export interface MergeGitBranchProps {
-  "branchName": string;
-}
-
-export interface MergeGitBranchResponse {
-  "success": false;
-  "error"?: string;
-}
-
-/** Close a specific integrated terminal in VS Code. */
-export interface CloseTerminalProps {
-  "terminalId": string;
-}
-
-export interface CloseTerminalResponse {
-  "success": false;
-}
-
-/** Create a new integrated terminal in VS Code. */
-export interface CreateTerminalProps {
-  "name"?: string;
-}
-
-export interface CreateTerminalResponse {
-  "terminalId": string;
-}
-
-/** List all open integrated terminals in VS Code. */
-export interface ListTerminalsProps {
-
-}
-
-export interface ListTerminalsResponse {
-  "terminals": string[];
-}
-
-/** Send text or command to a specific integrated terminal. */
-export interface SendTextToTerminalProps {
-  "terminalId": string;
-  "text": string;
-}
-
-export interface SendTextToTerminalResponse {
-  "success": false;
-}
-
-/** Show a specific integrated terminal in VS Code. */
-export interface ShowTerminalProps {
-  "terminalId": string;
-}
-
-export interface ShowTerminalResponse {
-  "success": false;
-}
-
 /** Create a new issue in a GitHub repository using VS Code's GitHub integration. */
-export interface CreateGitHubIssueProps {
+export interface GithubCreateGitHubIssueProps {
   "repository": string;
   "title": string;
   "body"?: string;
 }
 
-export interface CreateGitHubIssueResponse {
+export interface GithubCreateGitHubIssueResponse {
   "issueUrl": null;
 }
 
 /** Create a new pull request in a GitHub repository using VS Code's GitHub integration. */
-export interface CreateGitHubPullRequestProps {
+export interface GithubCreateGitHubPullRequestProps {
   "repository": string;
   "title": string;
   "body"?: string;
@@ -457,147 +291,313 @@ export interface CreateGitHubPullRequestProps {
   "head"?: string;
 }
 
-export interface CreateGitHubPullRequestResponse {
+export interface GithubCreateGitHubPullRequestResponse {
   "prUrl": null;
 }
 
 /** Open a GitHub repository in the browser using VS Code's GitHub integration. */
-export interface OpenGitHubRepositoryProps {
+export interface GithubOpenGitHubRepositoryProps {
   "repository": string;
 }
 
-export interface OpenGitHubRepositoryResponse {
+export interface GithubOpenGitHubRepositoryResponse {
   "repoUrl": string;
 }
 
-export type ToolId = "generateCode" | "generateData" | "generateImages" | "generateText" | "refactorCode" | "testCode" | "writeDocumentation" | "activeFile" | "openVirtual" | "proposeEdits" | "editorSelection" | "findFiles" | "readDir" | "readFile" | "writeFile" | "showStatusBar" | "dismissStatus" | "showStatusWindow" | "showInfoMessage" | "showInputBox" | "showWarningMessage" | "commitChanges" | "pullChanges" | "pushChanges" | "getVcsStatus" | "createWorkspaceFile" | "deleteWorkspaceFile" | "listWorkspaceFiles" | "listWorkspaceFolders" | "renameWorkspaceFolder" | "createGitBranch" | "deleteGitBranch" | "mergeGitBranch" | "closeTerminal" | "createTerminal" | "listTerminals" | "sendTextToTerminal" | "showTerminal" | "createGitHubIssue" | "createGitHubPullRequest" | "openGitHubRepository";
+/** Close a specific integrated terminal in VS Code. */
+export interface TerminalCloseTerminalProps {
+  "terminalId": string;
+}
 
+export interface TerminalCloseTerminalResponse {
+  "success": false;
+}
+
+/** Create a new integrated terminal in VS Code. */
+export interface TerminalCreateTerminalProps {
+  "name"?: string;
+}
+
+export interface TerminalCreateTerminalResponse {
+  "terminalId": string;
+}
+
+/** List all open integrated terminals in VS Code. */
+export interface TerminalListTerminalsProps {
+
+}
+
+export interface TerminalListTerminalsResponse {
+  "terminals": string[];
+}
+
+/** Send text or command to a specific integrated terminal. */
+export interface TerminalSendTextToTerminalProps {
+  "terminalId": string;
+  "text": string;
+}
+
+export interface TerminalSendTextToTerminalResponse {
+  "success": false;
+}
+
+/** Show a specific integrated terminal in VS Code. */
+export interface TerminalShowTerminalProps {
+  "terminalId": string;
+}
+
+export interface TerminalShowTerminalResponse {
+  "success": false;
+}
+
+/** Show info message with optional actions. */
+export interface UiShowInfoMessageProps {
+  "message": string;
+  "actions"?: string[];
+}
+
+export interface UiShowInfoMessageResponse {
+  "choice": null;
+}
+
+/** Prompt user for a string input. */
+export interface UiShowInputBoxProps {
+  "prompt": string;
+  "placeHolder"?: string;
+}
+
+export interface UiShowInputBoxResponse {
+  "value": null;
+}
+
+/** Show warning message with optional actions. */
+export interface UiShowWarningMessageProps {
+  "message": string;
+  "actions"?: string[];
+}
+
+export interface UiShowWarningMessageResponse {
+  "choice": null;
+}
+
+/** Commit staged changes in the current repository with a message (supports any VCS provider). */
+export interface VcsCommitChangesProps {
+  "message": string;
+}
+
+export interface VcsCommitChangesResponse {
+  "success": false;
+  "error"?: string;
+}
+
+/** Pull changes from the remote repository (supports any VCS provider). */
+export interface VcsPullChangesProps {
+
+}
+
+export interface VcsPullChangesResponse {
+  "success": false;
+  "error"?: string;
+}
+
+/** Push committed changes to the remote repository (supports any VCS provider). */
+export interface VcsPushChangesProps {
+
+}
+
+export interface VcsPushChangesResponse {
+  "success": false;
+  "error"?: string;
+}
+
+/** Get the status of the current repository (supports any VCS provider). */
+export interface VcsGetVcsStatusProps {
+
+}
+
+export interface VcsGetVcsStatusResponse {
+  "status": string;
+  "error"?: string;
+}
+
+/** Create a new file in the workspace with optional content. */
+export interface WorkspaceCreateWorkspaceFileProps {
+  "path": string;
+  "content"?: string;
+}
+
+export interface WorkspaceCreateWorkspaceFileResponse {
+  "success": false;
+  "error"?: string;
+}
+
+/** Delete a file from the workspace. */
+export interface WorkspaceDeleteWorkspaceFileProps {
+  "path": string;
+}
+
+export interface WorkspaceDeleteWorkspaceFileResponse {
+  "success": false;
+  "error"?: string;
+}
+
+/** List files in the workspace matching a glob pattern. */
+export interface WorkspaceListWorkspaceFilesProps {
+  "glob"?: string;
+}
+
+export interface WorkspaceListWorkspaceFilesResponse {
+  "files": string[];
+}
+
+/** List all workspace folders. */
+export interface WorkspaceListWorkspaceFoldersProps {
+
+}
+
+export interface WorkspaceListWorkspaceFoldersResponse {
+  "folders": string[];
+}
+
+/** Rename a folder in the workspace using VS Code's file system API (preserves user security permissions). */
+export interface WorkspaceRenameWorkspaceFolderProps {
+  "oldPath": string;
+  "newPath": string;
+}
+
+export interface WorkspaceRenameWorkspaceFolderResponse {
+  "success": false;
+  "error"?: string;
+}
+
+export type ToolId = "ai.generateCode" | "ai.generateData" | "ai.generateImages" | "ai.generateText" | "ai.refactorCode" | "ai.testCode" | "ai.writeDocumentation" | "editor.activeFile" | "editor.openVirtual" | "editor.proposeEdits" | "editor.editorSelection" | "git.createGitBranch" | "git.deleteGitBranch" | "git.mergeGitBranch" | "fs.findFiles" | "fs.readDir" | "fs.readFile" | "fs.writeFile" | "status.showStatusBar" | "status.dismissStatus" | "status.showStatusWindow" | "github.createGitHubIssue" | "github.createGitHubPullRequest" | "github.openGitHubRepository" | "terminal.closeTerminal" | "terminal.createTerminal" | "terminal.listTerminals" | "terminal.sendTextToTerminal" | "terminal.showTerminal" | "ui.showInfoMessage" | "ui.showInputBox" | "ui.showWarningMessage" | "vcs.commitChanges" | "vcs.pullChanges" | "vcs.pushChanges" | "vcs.getVcsStatus" | "workspace.createWorkspaceFile" | "workspace.deleteWorkspaceFile" | "workspace.listWorkspaceFiles" | "workspace.listWorkspaceFolders" | "workspace.renameWorkspaceFolder";
+  
 export type CommandMap = {
-  "generateCode": { props: GenerateCodeProps; response: GenerateCodeResponse; path: "src/tools/ai/generate-code.mcpx.ts" };
-  "generateData": { props: GenerateDataProps; response: GenerateDataResponse; path: "src/tools/ai/generate-data.mcpx.ts" };
-  "generateImages": { props: GenerateImagesProps; response: GenerateImagesResponse; path: "src/tools/ai/generate-images.mcpx.ts" };
-  "generateText": { props: GenerateTextProps; response: GenerateTextResponse; path: "src/tools/ai/generate-text.mcpx.ts" };
-  "refactorCode": { props: RefactorCodeProps; response: RefactorCodeResponse; path: "src/tools/ai/refactor-code.mcpx.ts" };
-  "testCode": { props: TestCodeProps; response: TestCodeResponse; path: "src/tools/ai/test-code.mcpx.ts" };
-  "writeDocumentation": { props: WriteDocumentationProps; response: WriteDocumentationResponse; path: "src/tools/ai/write-documentation.mcpx.ts" };
-  "activeFile": { props: ActiveFileProps; response: ActiveFileResponse; path: "src/tools/editor/active-file.mcpx.ts" };
-  "openVirtual": { props: OpenVirtualProps; response: OpenVirtualResponse; path: "src/tools/editor/open-virtual.mcpx.ts" };
-  "proposeEdits": { props: ProposeEditsProps; response: ProposeEditsResponse; path: "src/tools/editor/propose-edits.mcpx.ts" };
-  "editorSelection": { props: EditorSelectionProps; response: EditorSelectionResponse; path: "src/tools/editor/selection.mcpx.ts" };
-  "findFiles": { props: FindFilesProps; response: FindFilesResponse; path: "src/tools/fs/find.mcpx.ts" };
-  "readDir": { props: ReadDirProps; response: ReadDirResponse; path: "src/tools/fs/read-dir.mcpx.ts" };
-  "readFile": { props: ReadFileProps; response: ReadFileResponse; path: "src/tools/fs/read-file.mcpx.ts" };
-  "writeFile": { props: WriteFileProps; response: WriteFileResponse; path: "src/tools/fs/write-file.mcpx.ts" };
-  "showStatusBar": { props: ShowStatusBarProps; response: ShowStatusBarResponse; path: "src/tools/status/bar.mcpx.ts" };
-  "dismissStatus": { props: DismissStatusProps; response: DismissStatusResponse; path: "src/tools/status/dismiss.mcpx.ts" };
-  "showStatusWindow": { props: ShowStatusWindowProps; response: ShowStatusWindowResponse; path: "src/tools/status/window.mcpx.ts" };
-  "showInfoMessage": { props: ShowInfoMessageProps; response: ShowInfoMessageResponse; path: "src/tools/ui/info.mcpx.ts" };
-  "showInputBox": { props: ShowInputBoxProps; response: ShowInputBoxResponse; path: "src/tools/ui/input.mcpx.ts" };
-  "showWarningMessage": { props: ShowWarningMessageProps; response: ShowWarningMessageResponse; path: "src/tools/ui/warn.mcpx.ts" };
-  "commitChanges": { props: CommitChangesProps; response: CommitChangesResponse; path: "src/tools/vcs/commit.mcpx.ts" };
-  "pullChanges": { props: PullChangesProps; response: PullChangesResponse; path: "src/tools/vcs/pull.mcpx.ts" };
-  "pushChanges": { props: PushChangesProps; response: PushChangesResponse; path: "src/tools/vcs/push.mcpx.ts" };
-  "getVcsStatus": { props: GetVcsStatusProps; response: GetVcsStatusResponse; path: "src/tools/vcs/status.mcpx.ts" };
-  "createWorkspaceFile": { props: CreateWorkspaceFileProps; response: CreateWorkspaceFileResponse; path: "src/tools/workspace/create-file.mcpx.ts" };
-  "deleteWorkspaceFile": { props: DeleteWorkspaceFileProps; response: DeleteWorkspaceFileResponse; path: "src/tools/workspace/delete-file.mcpx.ts" };
-  "listWorkspaceFiles": { props: ListWorkspaceFilesProps; response: ListWorkspaceFilesResponse; path: "src/tools/workspace/list-files.mcpx.ts" };
-  "listWorkspaceFolders": { props: ListWorkspaceFoldersProps; response: ListWorkspaceFoldersResponse; path: "src/tools/workspace/list-folders.mcpx.ts" };
-  "renameWorkspaceFolder": { props: RenameWorkspaceFolderProps; response: RenameWorkspaceFolderResponse; path: "src/tools/workspace/rename-folder.mcpx.ts" };
-  "createGitBranch": { props: CreateGitBranchProps; response: CreateGitBranchResponse; path: "src/tools/git/create-branch.mcpx.ts" };
-  "deleteGitBranch": { props: DeleteGitBranchProps; response: DeleteGitBranchResponse; path: "src/tools/git/delete-branch.mcpx.ts" };
-  "mergeGitBranch": { props: MergeGitBranchProps; response: MergeGitBranchResponse; path: "src/tools/git/merge-branch.mcpx.ts" };
-  "closeTerminal": { props: CloseTerminalProps; response: CloseTerminalResponse; path: "src/tools/terminal/close.mcpx.ts" };
-  "createTerminal": { props: CreateTerminalProps; response: CreateTerminalResponse; path: "src/tools/terminal/create.mcpx.ts" };
-  "listTerminals": { props: ListTerminalsProps; response: ListTerminalsResponse; path: "src/tools/terminal/list.mcpx.ts" };
-  "sendTextToTerminal": { props: SendTextToTerminalProps; response: SendTextToTerminalResponse; path: "src/tools/terminal/send.mcpx.ts" };
-  "showTerminal": { props: ShowTerminalProps; response: ShowTerminalResponse; path: "src/tools/terminal/show.mcpx.ts" };
-  "createGitHubIssue": { props: CreateGitHubIssueProps; response: CreateGitHubIssueResponse; path: "src/tools/github/create-issue.mcpx.ts" };
-  "createGitHubPullRequest": { props: CreateGitHubPullRequestProps; response: CreateGitHubPullRequestResponse; path: "src/tools/github/create-pr.mcpx.ts" };
-  "openGitHubRepository": { props: OpenGitHubRepositoryProps; response: OpenGitHubRepositoryResponse; path: "src/tools/github/open-repo.mcpx.ts" };
+  "ai.generateCode": { props: AiGenerateCodeProps; response: AiGenerateCodeResponse; path: "src/tools/ai/generate-code.mcpx.ts" };
+  "ai.generateData": { props: AiGenerateDataProps; response: AiGenerateDataResponse; path: "src/tools/ai/generate-data.mcpx.ts" };
+  "ai.generateImages": { props: AiGenerateImagesProps; response: AiGenerateImagesResponse; path: "src/tools/ai/generate-images.mcpx.ts" };
+  "ai.generateText": { props: AiGenerateTextProps; response: AiGenerateTextResponse; path: "src/tools/ai/generate-text.mcpx.ts" };
+  "ai.refactorCode": { props: AiRefactorCodeProps; response: AiRefactorCodeResponse; path: "src/tools/ai/refactor-code.mcpx.ts" };
+  "ai.testCode": { props: AiTestCodeProps; response: AiTestCodeResponse; path: "src/tools/ai/test-code.mcpx.ts" };
+  "ai.writeDocumentation": { props: AiWriteDocumentationProps; response: AiWriteDocumentationResponse; path: "src/tools/ai/write-documentation.mcpx.ts" };
+  "editor.activeFile": { props: EditorActiveFileProps; response: EditorActiveFileResponse; path: "src/tools/editor/active-file.mcpx.ts" };
+  "editor.openVirtual": { props: EditorOpenVirtualProps; response: EditorOpenVirtualResponse; path: "src/tools/editor/open-virtual.mcpx.ts" };
+  "editor.proposeEdits": { props: EditorProposeEditsProps; response: EditorProposeEditsResponse; path: "src/tools/editor/propose-edits.mcpx.ts" };
+  "editor.editorSelection": { props: EditorEditorSelectionProps; response: EditorEditorSelectionResponse; path: "src/tools/editor/selection.mcpx.ts" };
+  "git.createGitBranch": { props: GitCreateGitBranchProps; response: GitCreateGitBranchResponse; path: "src/tools/git/create-branch.mcpx.ts" };
+  "git.deleteGitBranch": { props: GitDeleteGitBranchProps; response: GitDeleteGitBranchResponse; path: "src/tools/git/delete-branch.mcpx.ts" };
+  "git.mergeGitBranch": { props: GitMergeGitBranchProps; response: GitMergeGitBranchResponse; path: "src/tools/git/merge-branch.mcpx.ts" };
+  "fs.findFiles": { props: FsFindFilesProps; response: FsFindFilesResponse; path: "src/tools/fs/find.mcpx.ts" };
+  "fs.readDir": { props: FsReadDirProps; response: FsReadDirResponse; path: "src/tools/fs/read-dir.mcpx.ts" };
+  "fs.readFile": { props: FsReadFileProps; response: FsReadFileResponse; path: "src/tools/fs/read-file.mcpx.ts" };
+  "fs.writeFile": { props: FsWriteFileProps; response: FsWriteFileResponse; path: "src/tools/fs/write-file.mcpx.ts" };
+  "status.showStatusBar": { props: StatusShowStatusBarProps; response: StatusShowStatusBarResponse; path: "src/tools/status/bar.mcpx.ts" };
+  "status.dismissStatus": { props: StatusDismissStatusProps; response: StatusDismissStatusResponse; path: "src/tools/status/dismiss.mcpx.ts" };
+  "status.showStatusWindow": { props: StatusShowStatusWindowProps; response: StatusShowStatusWindowResponse; path: "src/tools/status/window.mcpx.ts" };
+  "github.createGitHubIssue": { props: GithubCreateGitHubIssueProps; response: GithubCreateGitHubIssueResponse; path: "src/tools/github/create-issue.mcpx.ts" };
+  "github.createGitHubPullRequest": { props: GithubCreateGitHubPullRequestProps; response: GithubCreateGitHubPullRequestResponse; path: "src/tools/github/create-pr.mcpx.ts" };
+  "github.openGitHubRepository": { props: GithubOpenGitHubRepositoryProps; response: GithubOpenGitHubRepositoryResponse; path: "src/tools/github/open-repo.mcpx.ts" };
+  "terminal.closeTerminal": { props: TerminalCloseTerminalProps; response: TerminalCloseTerminalResponse; path: "src/tools/terminal/close.mcpx.ts" };
+  "terminal.createTerminal": { props: TerminalCreateTerminalProps; response: TerminalCreateTerminalResponse; path: "src/tools/terminal/create.mcpx.ts" };
+  "terminal.listTerminals": { props: TerminalListTerminalsProps; response: TerminalListTerminalsResponse; path: "src/tools/terminal/list.mcpx.ts" };
+  "terminal.sendTextToTerminal": { props: TerminalSendTextToTerminalProps; response: TerminalSendTextToTerminalResponse; path: "src/tools/terminal/send.mcpx.ts" };
+  "terminal.showTerminal": { props: TerminalShowTerminalProps; response: TerminalShowTerminalResponse; path: "src/tools/terminal/show.mcpx.ts" };
+  "ui.showInfoMessage": { props: UiShowInfoMessageProps; response: UiShowInfoMessageResponse; path: "src/tools/ui/info.mcpx.ts" };
+  "ui.showInputBox": { props: UiShowInputBoxProps; response: UiShowInputBoxResponse; path: "src/tools/ui/input.mcpx.ts" };
+  "ui.showWarningMessage": { props: UiShowWarningMessageProps; response: UiShowWarningMessageResponse; path: "src/tools/ui/warn.mcpx.ts" };
+  "vcs.commitChanges": { props: VcsCommitChangesProps; response: VcsCommitChangesResponse; path: "src/tools/vcs/commit.mcpx.ts" };
+  "vcs.pullChanges": { props: VcsPullChangesProps; response: VcsPullChangesResponse; path: "src/tools/vcs/pull.mcpx.ts" };
+  "vcs.pushChanges": { props: VcsPushChangesProps; response: VcsPushChangesResponse; path: "src/tools/vcs/push.mcpx.ts" };
+  "vcs.getVcsStatus": { props: VcsGetVcsStatusProps; response: VcsGetVcsStatusResponse; path: "src/tools/vcs/status.mcpx.ts" };
+  "workspace.createWorkspaceFile": { props: WorkspaceCreateWorkspaceFileProps; response: WorkspaceCreateWorkspaceFileResponse; path: "src/tools/workspace/create-file.mcpx.ts" };
+  "workspace.deleteWorkspaceFile": { props: WorkspaceDeleteWorkspaceFileProps; response: WorkspaceDeleteWorkspaceFileResponse; path: "src/tools/workspace/delete-file.mcpx.ts" };
+  "workspace.listWorkspaceFiles": { props: WorkspaceListWorkspaceFilesProps; response: WorkspaceListWorkspaceFilesResponse; path: "src/tools/workspace/list-files.mcpx.ts" };
+  "workspace.listWorkspaceFolders": { props: WorkspaceListWorkspaceFoldersProps; response: WorkspaceListWorkspaceFoldersResponse; path: "src/tools/workspace/list-folders.mcpx.ts" };
+  "workspace.renameWorkspaceFolder": { props: WorkspaceRenameWorkspaceFolderProps; response: WorkspaceRenameWorkspaceFolderResponse; path: "src/tools/workspace/rename-folder.mcpx.ts" };
 };
 
-type GenerateCodePropsKey = "generateCodeProps";
-type GenerateCodeResponseKey = "generateCodeResponse";
-type GenerateDataPropsKey = "generateDataProps";
-type GenerateDataResponseKey = "generateDataResponse";
-type GenerateImagesPropsKey = "generateImagesProps";
-type GenerateImagesResponseKey = "generateImagesResponse";
-type GenerateTextPropsKey = "generateTextProps";
-type GenerateTextResponseKey = "generateTextResponse";
-type RefactorCodePropsKey = "refactorCodeProps";
-type RefactorCodeResponseKey = "refactorCodeResponse";
-type TestCodePropsKey = "testCodeProps";
-type TestCodeResponseKey = "testCodeResponse";
-type WriteDocumentationPropsKey = "writeDocumentationProps";
-type WriteDocumentationResponseKey = "writeDocumentationResponse";
-type ActiveFilePropsKey = "activeFileProps";
-type ActiveFileResponseKey = "activeFileResponse";
-type OpenVirtualPropsKey = "openVirtualProps";
-type OpenVirtualResponseKey = "openVirtualResponse";
-type ProposeEditsPropsKey = "proposeEditsProps";
-type ProposeEditsResponseKey = "proposeEditsResponse";
-type EditorSelectionPropsKey = "editorSelectionProps";
-type EditorSelectionResponseKey = "editorSelectionResponse";
-type FindFilesPropsKey = "findFilesProps";
-type FindFilesResponseKey = "findFilesResponse";
-type ReadDirPropsKey = "readDirProps";
-type ReadDirResponseKey = "readDirResponse";
-type ReadFilePropsKey = "readFileProps";
-type ReadFileResponseKey = "readFileResponse";
-type WriteFilePropsKey = "writeFileProps";
-type WriteFileResponseKey = "writeFileResponse";
-type ShowStatusBarPropsKey = "showStatusBarProps";
-type ShowStatusBarResponseKey = "showStatusBarResponse";
-type DismissStatusPropsKey = "dismissStatusProps";
-type DismissStatusResponseKey = "dismissStatusResponse";
-type ShowStatusWindowPropsKey = "showStatusWindowProps";
-type ShowStatusWindowResponseKey = "showStatusWindowResponse";
-type ShowInfoMessagePropsKey = "showInfoMessageProps";
-type ShowInfoMessageResponseKey = "showInfoMessageResponse";
-type ShowInputBoxPropsKey = "showInputBoxProps";
-type ShowInputBoxResponseKey = "showInputBoxResponse";
-type ShowWarningMessagePropsKey = "showWarningMessageProps";
-type ShowWarningMessageResponseKey = "showWarningMessageResponse";
-type CommitChangesPropsKey = "commitChangesProps";
-type CommitChangesResponseKey = "commitChangesResponse";
-type PullChangesPropsKey = "pullChangesProps";
-type PullChangesResponseKey = "pullChangesResponse";
-type PushChangesPropsKey = "pushChangesProps";
-type PushChangesResponseKey = "pushChangesResponse";
-type GetVcsStatusPropsKey = "getVcsStatusProps";
-type GetVcsStatusResponseKey = "getVcsStatusResponse";
-type CreateWorkspaceFilePropsKey = "createWorkspaceFileProps";
-type CreateWorkspaceFileResponseKey = "createWorkspaceFileResponse";
-type DeleteWorkspaceFilePropsKey = "deleteWorkspaceFileProps";
-type DeleteWorkspaceFileResponseKey = "deleteWorkspaceFileResponse";
-type ListWorkspaceFilesPropsKey = "listWorkspaceFilesProps";
-type ListWorkspaceFilesResponseKey = "listWorkspaceFilesResponse";
-type ListWorkspaceFoldersPropsKey = "listWorkspaceFoldersProps";
-type ListWorkspaceFoldersResponseKey = "listWorkspaceFoldersResponse";
-type RenameWorkspaceFolderPropsKey = "renameWorkspaceFolderProps";
-type RenameWorkspaceFolderResponseKey = "renameWorkspaceFolderResponse";
-type CreateGitBranchPropsKey = "createGitBranchProps";
-type CreateGitBranchResponseKey = "createGitBranchResponse";
-type DeleteGitBranchPropsKey = "deleteGitBranchProps";
-type DeleteGitBranchResponseKey = "deleteGitBranchResponse";
-type MergeGitBranchPropsKey = "mergeGitBranchProps";
-type MergeGitBranchResponseKey = "mergeGitBranchResponse";
-type CloseTerminalPropsKey = "closeTerminalProps";
-type CloseTerminalResponseKey = "closeTerminalResponse";
-type CreateTerminalPropsKey = "createTerminalProps";
-type CreateTerminalResponseKey = "createTerminalResponse";
-type ListTerminalsPropsKey = "listTerminalsProps";
-type ListTerminalsResponseKey = "listTerminalsResponse";
-type SendTextToTerminalPropsKey = "sendTextToTerminalProps";
-type SendTextToTerminalResponseKey = "sendTextToTerminalResponse";
-type ShowTerminalPropsKey = "showTerminalProps";
-type ShowTerminalResponseKey = "showTerminalResponse";
-type CreateGitHubIssuePropsKey = "createGitHubIssueProps";
-type CreateGitHubIssueResponseKey = "createGitHubIssueResponse";
-type CreateGitHubPullRequestPropsKey = "createGitHubPullRequestProps";
-type CreateGitHubPullRequestResponseKey = "createGitHubPullRequestResponse";
-type OpenGitHubRepositoryPropsKey = "openGitHubRepositoryProps";
-type OpenGitHubRepositoryResponseKey = "openGitHubRepositoryResponse";
+type AiGenerateCodePropsKey = "ai.generateCodeProps";
+type AiGenerateCodeResponseKey = "ai.generateCodeResponse";
+type AiGenerateDataPropsKey = "ai.generateDataProps";
+type AiGenerateDataResponseKey = "ai.generateDataResponse";
+type AiGenerateImagesPropsKey = "ai.generateImagesProps";
+type AiGenerateImagesResponseKey = "ai.generateImagesResponse";
+type AiGenerateTextPropsKey = "ai.generateTextProps";
+type AiGenerateTextResponseKey = "ai.generateTextResponse";
+type AiRefactorCodePropsKey = "ai.refactorCodeProps";
+type AiRefactorCodeResponseKey = "ai.refactorCodeResponse";
+type AiTestCodePropsKey = "ai.testCodeProps";
+type AiTestCodeResponseKey = "ai.testCodeResponse";
+type AiWriteDocumentationPropsKey = "ai.writeDocumentationProps";
+type AiWriteDocumentationResponseKey = "ai.writeDocumentationResponse";
+type EditorActiveFilePropsKey = "editor.activeFileProps";
+type EditorActiveFileResponseKey = "editor.activeFileResponse";
+type EditorOpenVirtualPropsKey = "editor.openVirtualProps";
+type EditorOpenVirtualResponseKey = "editor.openVirtualResponse";
+type EditorProposeEditsPropsKey = "editor.proposeEditsProps";
+type EditorProposeEditsResponseKey = "editor.proposeEditsResponse";
+type EditorEditorSelectionPropsKey = "editor.editorSelectionProps";
+type EditorEditorSelectionResponseKey = "editor.editorSelectionResponse";
+type GitCreateGitBranchPropsKey = "git.createGitBranchProps";
+type GitCreateGitBranchResponseKey = "git.createGitBranchResponse";
+type GitDeleteGitBranchPropsKey = "git.deleteGitBranchProps";
+type GitDeleteGitBranchResponseKey = "git.deleteGitBranchResponse";
+type GitMergeGitBranchPropsKey = "git.mergeGitBranchProps";
+type GitMergeGitBranchResponseKey = "git.mergeGitBranchResponse";
+type FsFindFilesPropsKey = "fs.findFilesProps";
+type FsFindFilesResponseKey = "fs.findFilesResponse";
+type FsReadDirPropsKey = "fs.readDirProps";
+type FsReadDirResponseKey = "fs.readDirResponse";
+type FsReadFilePropsKey = "fs.readFileProps";
+type FsReadFileResponseKey = "fs.readFileResponse";
+type FsWriteFilePropsKey = "fs.writeFileProps";
+type FsWriteFileResponseKey = "fs.writeFileResponse";
+type StatusShowStatusBarPropsKey = "status.showStatusBarProps";
+type StatusShowStatusBarResponseKey = "status.showStatusBarResponse";
+type StatusDismissStatusPropsKey = "status.dismissStatusProps";
+type StatusDismissStatusResponseKey = "status.dismissStatusResponse";
+type StatusShowStatusWindowPropsKey = "status.showStatusWindowProps";
+type StatusShowStatusWindowResponseKey = "status.showStatusWindowResponse";
+type GithubCreateGitHubIssuePropsKey = "github.createGitHubIssueProps";
+type GithubCreateGitHubIssueResponseKey = "github.createGitHubIssueResponse";
+type GithubCreateGitHubPullRequestPropsKey = "github.createGitHubPullRequestProps";
+type GithubCreateGitHubPullRequestResponseKey = "github.createGitHubPullRequestResponse";
+type GithubOpenGitHubRepositoryPropsKey = "github.openGitHubRepositoryProps";
+type GithubOpenGitHubRepositoryResponseKey = "github.openGitHubRepositoryResponse";
+type TerminalCloseTerminalPropsKey = "terminal.closeTerminalProps";
+type TerminalCloseTerminalResponseKey = "terminal.closeTerminalResponse";
+type TerminalCreateTerminalPropsKey = "terminal.createTerminalProps";
+type TerminalCreateTerminalResponseKey = "terminal.createTerminalResponse";
+type TerminalListTerminalsPropsKey = "terminal.listTerminalsProps";
+type TerminalListTerminalsResponseKey = "terminal.listTerminalsResponse";
+type TerminalSendTextToTerminalPropsKey = "terminal.sendTextToTerminalProps";
+type TerminalSendTextToTerminalResponseKey = "terminal.sendTextToTerminalResponse";
+type TerminalShowTerminalPropsKey = "terminal.showTerminalProps";
+type TerminalShowTerminalResponseKey = "terminal.showTerminalResponse";
+type UiShowInfoMessagePropsKey = "ui.showInfoMessageProps";
+type UiShowInfoMessageResponseKey = "ui.showInfoMessageResponse";
+type UiShowInputBoxPropsKey = "ui.showInputBoxProps";
+type UiShowInputBoxResponseKey = "ui.showInputBoxResponse";
+type UiShowWarningMessagePropsKey = "ui.showWarningMessageProps";
+type UiShowWarningMessageResponseKey = "ui.showWarningMessageResponse";
+type VcsCommitChangesPropsKey = "vcs.commitChangesProps";
+type VcsCommitChangesResponseKey = "vcs.commitChangesResponse";
+type VcsPullChangesPropsKey = "vcs.pullChangesProps";
+type VcsPullChangesResponseKey = "vcs.pullChangesResponse";
+type VcsPushChangesPropsKey = "vcs.pushChangesProps";
+type VcsPushChangesResponseKey = "vcs.pushChangesResponse";
+type VcsGetVcsStatusPropsKey = "vcs.getVcsStatusProps";
+type VcsGetVcsStatusResponseKey = "vcs.getVcsStatusResponse";
+type WorkspaceCreateWorkspaceFilePropsKey = "workspace.createWorkspaceFileProps";
+type WorkspaceCreateWorkspaceFileResponseKey = "workspace.createWorkspaceFileResponse";
+type WorkspaceDeleteWorkspaceFilePropsKey = "workspace.deleteWorkspaceFileProps";
+type WorkspaceDeleteWorkspaceFileResponseKey = "workspace.deleteWorkspaceFileResponse";
+type WorkspaceListWorkspaceFilesPropsKey = "workspace.listWorkspaceFilesProps";
+type WorkspaceListWorkspaceFilesResponseKey = "workspace.listWorkspaceFilesResponse";
+type WorkspaceListWorkspaceFoldersPropsKey = "workspace.listWorkspaceFoldersProps";
+type WorkspaceListWorkspaceFoldersResponseKey = "workspace.listWorkspaceFoldersResponse";
+type WorkspaceRenameWorkspaceFolderPropsKey = "workspace.renameWorkspaceFolderProps";
+type WorkspaceRenameWorkspaceFolderResponseKey = "workspace.renameWorkspaceFolderResponse";
 
 export type PropsFor<K extends keyof CommandMap> =
   { [P in `${Extract<K, string>}Props`]: CommandMap[K]["props"] };
@@ -623,248 +623,289 @@ export type ToolDescriptor = {
 export const AllTools = [
   {
     "id": "generateCode",
+    "namespace": "ai",
     "path": "src/tools/ai/generate-code.mcpx.ts",
     "name": "Generate Code",
     "description": "Generate new code from a natural language prompt, specifying language and style."
   },
   {
     "id": "generateData",
+    "namespace": "ai",
     "path": "src/tools/ai/generate-data.mcpx.ts",
     "name": "Generate Structured Data",
     "description": "Generate structured data (e.g., JSON) from a prompt and optional schema."
   },
   {
     "id": "generateImages",
+    "namespace": "ai",
     "path": "src/tools/ai/generate-images.mcpx.ts",
     "name": "Generate Images",
     "description": "Generate images from a prompt using an AI model and optional parameters."
   },
   {
     "id": "generateText",
+    "namespace": "ai",
     "path": "src/tools/ai/generate-text.mcpx.ts",
     "name": "Generate Text",
     "description": "Generate plain text from a prompt."
   },
   {
     "id": "refactorCode",
+    "namespace": "ai",
     "path": "src/tools/ai/refactor-code.mcpx.ts",
     "name": "Refactor Code",
     "description": "Refactor existing code based on instructions, language, and style."
   },
   {
     "id": "testCode",
+    "namespace": "ai",
     "path": "src/tools/ai/test-code.mcpx.ts",
     "name": "Generate Tests",
     "description": "Generate unit tests for code using the specified framework and language."
   },
   {
     "id": "writeDocumentation",
+    "namespace": "ai",
     "path": "src/tools/ai/write-documentation.mcpx.ts",
     "name": "Write Documentation",
     "description": "Write or update documentation for code in the specified format and audience."
   },
   {
     "id": "activeFile",
+    "namespace": "editor",
     "path": "src/tools/editor/active-file.mcpx.ts",
     "name": "Active File",
     "description": "Get the active editor file's path, languageId, and selected or full text."
   },
   {
     "id": "openVirtual",
+    "namespace": "editor",
     "path": "src/tools/editor/open-virtual.mcpx.ts",
     "name": "Open Virtual Document",
     "description": "Open a read-only virtual document with content and language."
   },
   {
     "id": "proposeEdits",
+    "namespace": "editor",
     "path": "src/tools/editor/propose-edits.mcpx.ts",
     "name": "Propose Edits",
     "description": "Show a diff and ask the user to apply changes to a file in the workspace."
   },
   {
     "id": "editorSelection",
+    "namespace": "editor",
     "path": "src/tools/editor/selection.mcpx.ts",
     "name": "Editor Selection",
     "description": "Get selection offsets and text for the active editor."
   },
   {
-    "id": "findFiles",
-    "path": "src/tools/fs/find.mcpx.ts",
-    "name": "Find Files",
-    "description": "Find files by glob pattern (workspace relative)."
-  },
-  {
-    "id": "readDir",
-    "path": "src/tools/fs/read-dir.mcpx.ts",
-    "name": "Read Directory",
-    "description": "List directory entries (name + kind)."
-  },
-  {
-    "id": "readFile",
-    "path": "src/tools/fs/read-file.mcpx.ts",
-    "name": "Read File",
-    "description": "Read a UTF-8 file inside the workspace."
-  },
-  {
-    "id": "writeFile",
-    "path": "src/tools/fs/write-file.mcpx.ts",
-    "name": "Write File",
-    "description": "Write a UTF-8 file inside the workspace (with confirm)."
-  },
-  {
-    "id": "showStatusBar",
-    "path": "src/tools/status/bar.mcpx.ts",
-    "name": "Show Status Bar",
-    "description": "Show a status message in the status bar. Optionally show a spinner."
-  },
-  {
-    "id": "dismissStatus",
-    "path": "src/tools/status/dismiss.mcpx.ts",
-    "name": "Dismiss Status",
-    "description": "Dismiss any status notification by id."
-  },
-  {
-    "id": "showStatusWindow",
-    "path": "src/tools/status/window.mcpx.ts",
-    "name": "Show Status Window",
-    "description": "Show a status message in a window notification."
-  },
-  {
-    "id": "showInfoMessage",
-    "path": "src/tools/ui/info.mcpx.ts",
-    "name": "Show Info Message",
-    "description": "Show info message with optional actions."
-  },
-  {
-    "id": "showInputBox",
-    "path": "src/tools/ui/input.mcpx.ts",
-    "name": "Show Input Box",
-    "description": "Prompt user for a string input."
-  },
-  {
-    "id": "showWarningMessage",
-    "path": "src/tools/ui/warn.mcpx.ts",
-    "name": "Show Warning Message",
-    "description": "Show warning message with optional actions."
-  },
-  {
-    "id": "commitChanges",
-    "path": "src/tools/vcs/commit.mcpx.ts",
-    "name": "Commit Changes",
-    "description": "Commit staged changes in the current repository with a message (supports any VCS provider)."
-  },
-  {
-    "id": "pullChanges",
-    "path": "src/tools/vcs/pull.mcpx.ts",
-    "name": "Pull Changes",
-    "description": "Pull changes from the remote repository (supports any VCS provider)."
-  },
-  {
-    "id": "pushChanges",
-    "path": "src/tools/vcs/push.mcpx.ts",
-    "name": "Push Changes",
-    "description": "Push committed changes to the remote repository (supports any VCS provider)."
-  },
-  {
-    "id": "getVcsStatus",
-    "path": "src/tools/vcs/status.mcpx.ts",
-    "name": "VCS Status",
-    "description": "Get the status of the current repository (supports any VCS provider)."
-  },
-  {
-    "id": "createWorkspaceFile",
-    "path": "src/tools/workspace/create-file.mcpx.ts",
-    "name": "Create Workspace File",
-    "description": "Create a new file in the workspace with optional content."
-  },
-  {
-    "id": "deleteWorkspaceFile",
-    "path": "src/tools/workspace/delete-file.mcpx.ts",
-    "name": "Delete Workspace File",
-    "description": "Delete a file from the workspace."
-  },
-  {
-    "id": "listWorkspaceFiles",
-    "path": "src/tools/workspace/list-files.mcpx.ts",
-    "name": "List Workspace Files",
-    "description": "List files in the workspace matching a glob pattern."
-  },
-  {
-    "id": "listWorkspaceFolders",
-    "path": "src/tools/workspace/list-folders.mcpx.ts",
-    "name": "List Workspace Folders",
-    "description": "List all workspace folders."
-  },
-  {
-    "id": "renameWorkspaceFolder",
-    "path": "src/tools/workspace/rename-folder.mcpx.ts",
-    "name": "Rename Workspace Folder",
-    "description": "Rename a folder in the workspace using VS Code's file system API (preserves user security permissions)."
-  },
-  {
     "id": "createGitBranch",
+    "namespace": "git",
     "path": "src/tools/git/create-branch.mcpx.ts",
     "name": "Create Git Branch",
     "description": "Create a new branch in the current repository using VS Code's Git extension."
   },
   {
     "id": "deleteGitBranch",
+    "namespace": "git",
     "path": "src/tools/git/delete-branch.mcpx.ts",
     "name": "Delete Git Branch",
     "description": "Delete the specified branch in the current repository using VS Code's Git extension."
   },
   {
     "id": "mergeGitBranch",
+    "namespace": "git",
     "path": "src/tools/git/merge-branch.mcpx.ts",
     "name": "Merge Git Branch",
     "description": "Merge the specified branch into the current branch using VS Code's Git extension."
   },
   {
-    "id": "closeTerminal",
-    "path": "src/tools/terminal/close.mcpx.ts",
-    "name": "Close Terminal",
-    "description": "Close a specific integrated terminal in VS Code."
+    "id": "findFiles",
+    "namespace": "fs",
+    "path": "src/tools/fs/find.mcpx.ts",
+    "name": "Find Files",
+    "description": "Find files by glob pattern (workspace relative)."
   },
   {
-    "id": "createTerminal",
-    "path": "src/tools/terminal/create.mcpx.ts",
-    "name": "Create Terminal",
-    "description": "Create a new integrated terminal in VS Code."
+    "id": "readDir",
+    "namespace": "fs",
+    "path": "src/tools/fs/read-dir.mcpx.ts",
+    "name": "Read Directory",
+    "description": "List directory entries (name + kind)."
   },
   {
-    "id": "listTerminals",
-    "path": "src/tools/terminal/list.mcpx.ts",
-    "name": "List Terminals",
-    "description": "List all open integrated terminals in VS Code."
+    "id": "readFile",
+    "namespace": "fs",
+    "path": "src/tools/fs/read-file.mcpx.ts",
+    "name": "Read File",
+    "description": "Read a UTF-8 file inside the workspace."
   },
   {
-    "id": "sendTextToTerminal",
-    "path": "src/tools/terminal/send.mcpx.ts",
-    "name": "Send Text to Terminal",
-    "description": "Send text or command to a specific integrated terminal."
+    "id": "writeFile",
+    "namespace": "fs",
+    "path": "src/tools/fs/write-file.mcpx.ts",
+    "name": "Write File",
+    "description": "Write a UTF-8 file inside the workspace (with confirm)."
   },
   {
-    "id": "showTerminal",
-    "path": "src/tools/terminal/show.mcpx.ts",
-    "name": "Show Terminal",
-    "description": "Show a specific integrated terminal in VS Code."
+    "id": "showStatusBar",
+    "namespace": "status",
+    "path": "src/tools/status/bar.mcpx.ts",
+    "name": "Show Status Bar",
+    "description": "Show a status message in the status bar. Optionally show a spinner."
+  },
+  {
+    "id": "dismissStatus",
+    "namespace": "status",
+    "path": "src/tools/status/dismiss.mcpx.ts",
+    "name": "Dismiss Status",
+    "description": "Dismiss any status notification by id."
+  },
+  {
+    "id": "showStatusWindow",
+    "namespace": "status",
+    "path": "src/tools/status/window.mcpx.ts",
+    "name": "Show Status Window",
+    "description": "Show a status message in a window notification."
   },
   {
     "id": "createGitHubIssue",
+    "namespace": "github",
     "path": "src/tools/github/create-issue.mcpx.ts",
     "name": "Create GitHub Issue",
     "description": "Create a new issue in a GitHub repository using VS Code's GitHub integration."
   },
   {
     "id": "createGitHubPullRequest",
+    "namespace": "github",
     "path": "src/tools/github/create-pr.mcpx.ts",
     "name": "Create GitHub Pull Request",
     "description": "Create a new pull request in a GitHub repository using VS Code's GitHub integration."
   },
   {
     "id": "openGitHubRepository",
+    "namespace": "github",
     "path": "src/tools/github/open-repo.mcpx.ts",
     "name": "Open GitHub Repository",
     "description": "Open a GitHub repository in the browser using VS Code's GitHub integration."
+  },
+  {
+    "id": "closeTerminal",
+    "namespace": "terminal",
+    "path": "src/tools/terminal/close.mcpx.ts",
+    "name": "Close Terminal",
+    "description": "Close a specific integrated terminal in VS Code."
+  },
+  {
+    "id": "createTerminal",
+    "namespace": "terminal",
+    "path": "src/tools/terminal/create.mcpx.ts",
+    "name": "Create Terminal",
+    "description": "Create a new integrated terminal in VS Code."
+  },
+  {
+    "id": "listTerminals",
+    "namespace": "terminal",
+    "path": "src/tools/terminal/list.mcpx.ts",
+    "name": "List Terminals",
+    "description": "List all open integrated terminals in VS Code."
+  },
+  {
+    "id": "sendTextToTerminal",
+    "namespace": "terminal",
+    "path": "src/tools/terminal/send.mcpx.ts",
+    "name": "Send Text to Terminal",
+    "description": "Send text or command to a specific integrated terminal."
+  },
+  {
+    "id": "showTerminal",
+    "namespace": "terminal",
+    "path": "src/tools/terminal/show.mcpx.ts",
+    "name": "Show Terminal",
+    "description": "Show a specific integrated terminal in VS Code."
+  },
+  {
+    "id": "showInfoMessage",
+    "namespace": "ui",
+    "path": "src/tools/ui/info.mcpx.ts",
+    "name": "Show Info Message",
+    "description": "Show info message with optional actions."
+  },
+  {
+    "id": "showInputBox",
+    "namespace": "ui",
+    "path": "src/tools/ui/input.mcpx.ts",
+    "name": "Show Input Box",
+    "description": "Prompt user for a string input."
+  },
+  {
+    "id": "showWarningMessage",
+    "namespace": "ui",
+    "path": "src/tools/ui/warn.mcpx.ts",
+    "name": "Show Warning Message",
+    "description": "Show warning message with optional actions."
+  },
+  {
+    "id": "commitChanges",
+    "namespace": "vcs",
+    "path": "src/tools/vcs/commit.mcpx.ts",
+    "name": "Commit Changes",
+    "description": "Commit staged changes in the current repository with a message (supports any VCS provider)."
+  },
+  {
+    "id": "pullChanges",
+    "namespace": "vcs",
+    "path": "src/tools/vcs/pull.mcpx.ts",
+    "name": "Pull Changes",
+    "description": "Pull changes from the remote repository (supports any VCS provider)."
+  },
+  {
+    "id": "pushChanges",
+    "namespace": "vcs",
+    "path": "src/tools/vcs/push.mcpx.ts",
+    "name": "Push Changes",
+    "description": "Push committed changes to the remote repository (supports any VCS provider)."
+  },
+  {
+    "id": "getVcsStatus",
+    "namespace": "vcs",
+    "path": "src/tools/vcs/status.mcpx.ts",
+    "name": "VCS Status",
+    "description": "Get the status of the current repository (supports any VCS provider)."
+  },
+  {
+    "id": "createWorkspaceFile",
+    "namespace": "workspace",
+    "path": "src/tools/workspace/create-file.mcpx.ts",
+    "name": "Create Workspace File",
+    "description": "Create a new file in the workspace with optional content."
+  },
+  {
+    "id": "deleteWorkspaceFile",
+    "namespace": "workspace",
+    "path": "src/tools/workspace/delete-file.mcpx.ts",
+    "name": "Delete Workspace File",
+    "description": "Delete a file from the workspace."
+  },
+  {
+    "id": "listWorkspaceFiles",
+    "namespace": "workspace",
+    "path": "src/tools/workspace/list-files.mcpx.ts",
+    "name": "List Workspace Files",
+    "description": "List files in the workspace matching a glob pattern."
+  },
+  {
+    "id": "listWorkspaceFolders",
+    "namespace": "workspace",
+    "path": "src/tools/workspace/list-folders.mcpx.ts",
+    "name": "List Workspace Folders",
+    "description": "List all workspace folders."
+  },
+  {
+    "id": "renameWorkspaceFolder",
+    "namespace": "workspace",
+    "path": "src/tools/workspace/rename-folder.mcpx.ts",
+    "name": "Rename Workspace Folder",
+    "description": "Rename a folder in the workspace using VS Code's file system API (preserves user security permissions)."
   }
 ] as const;

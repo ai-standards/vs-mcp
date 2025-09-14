@@ -11,6 +11,7 @@ export type OutputContext = {
 };
 
 /**
+ * @namespace github
  * @name Create GitHub Issue
  * @description Create a new issue in a GitHub repository using VS Code's GitHub integration.
  */

@@ -12,6 +12,7 @@ export type OutputContext = InputContext & {
 };
 
 /**
+ * @namespace fs
  * @name Write File
  * @description Write a UTF-8 file inside the workspace (with confirm).
  */

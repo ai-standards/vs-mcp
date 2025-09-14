@@ -10,6 +10,7 @@ export type OutputContext = {
 };
 
 /**
+ * @namespace git
  * @name Merge Git Branch
  * @description Merge the specified branch into the current branch using VS Code's Git extension.
  */

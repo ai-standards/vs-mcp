@@ -7,6 +7,7 @@ export type OutputContext = {
 };
 
 /**
+ * @namespace editor
  * @name Active File
  * @description Get the active editor file's path, languageId, and selected or full text.
  */

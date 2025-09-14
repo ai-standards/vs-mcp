@@ -10,6 +10,7 @@ export type OutputContext = {
 };
 
 /**
+ * @namespace fs
  * @name Find Files
  * @description Find files by glob pattern (workspace relative).
  */

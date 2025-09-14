@@ -11,6 +11,7 @@ export type OutputContext = InputContext & {
 };
 
 /**
+ * @namespace ai
  * @name Generate Tests
  * @description Generate unit tests for code using the specified framework and language.
  */

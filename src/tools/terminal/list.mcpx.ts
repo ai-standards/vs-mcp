@@ -5,6 +5,7 @@ export type OutputContext = {
 };
 
 /**
+ * @namespace terminal
  * @name List Terminals
  * @description List all open integrated terminals in VS Code.
  */

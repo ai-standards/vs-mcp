@@ -10,6 +10,7 @@ export type OutputContext = {
 };
 
 /**
+ * @namespace ui
  * @name Show Warning Message
  * @description Show warning message with optional actions.
  */

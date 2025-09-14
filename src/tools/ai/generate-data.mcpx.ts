@@ -13,6 +13,7 @@ export type OutputContext = InputContext & {
 };
 
 /**
+ * @namespace ai
  * @name Generate Structured Data
  * @description Generate structured data (e.g., JSON) from a prompt and optional schema.
  */

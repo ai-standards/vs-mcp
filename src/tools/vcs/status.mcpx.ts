@@ -6,6 +6,7 @@ export type OutputContext = {
 };
 
 /**
+ * @namespace vcs
  * @name VCS Status
  * @description Get the status of the current repository (supports any VCS provider).
  */

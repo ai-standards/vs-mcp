@@ -12,6 +12,7 @@ export type OutputContext = InputContext & {
 };
 
 /**
+ * @namespace ai
  * @name Refactor Code
  * @description Refactor existing code based on instructions, language, and style.
  */

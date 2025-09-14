@@ -10,6 +10,7 @@ export type OutputContext = {
 };
 
 /**
+ * @namespace git
  * @name Delete Git Branch
  * @description Delete the specified branch in the current repository using VS Code's Git extension.
  */

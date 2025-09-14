@@ -14,6 +14,7 @@ export type OutputContext = InputContext & {
 };
 
 /**
+ * @namespace ai
  * @name Generate Images
  * @description Generate images from a prompt using an AI model and optional parameters.
  */

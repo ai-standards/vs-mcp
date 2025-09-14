@@ -12,6 +12,7 @@ export type OutputContext = {
 };
 
 /**
+ * @namespace workspace
  * @name Rename Workspace Folder
  * @description Rename a folder in the workspace using VS Code's file system API (preserves user security permissions).
  */

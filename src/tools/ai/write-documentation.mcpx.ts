@@ -11,6 +11,7 @@ export type OutputContext = InputContext & {
 };
 
 /**
+ * @namespace ai
  * @name Write Documentation
  * @description Write or update documentation for code in the specified format and audience.
  */

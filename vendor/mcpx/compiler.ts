@@ -11,6 +11,7 @@ export type McpxTool = {
   id: string;             // function name (or "default" if anonymous default export)
   name: string;           // id or JSDoc, if present
   path: string;           // absolute file path
+  namespace: string;      // parent directory name
   description?: string;   // from JSDoc, if present
   input: TypeMap;         // first-parameter object properties -> type(s)
   output: TypeMap;        // resolved return object (Promise unwrapped) -> type(s)
@@ -68,7 +69,7 @@ function unwrapPromiseIfNeeded(t: Type): Type {
   return t;
 }
 
-function getFunctionDocs(sym?: MorphSymbol): {name?: string, description?: string} | undefined {
+function getFunctionDocs(sym?: MorphSymbol): {name?: string, description?: string, namespace?: string} | undefined {
   if (!sym) return;
   const docs = sym.getJsDocTags?.() ?? [];
   if (! docs) {
@@ -77,10 +78,12 @@ function getFunctionDocs(sym?: MorphSymbol): {name?: string, description?: strin
 
   const description = docs.find(d => d.getName() === 'description');
   const name = docs.find(d => d.getName() === 'name');
+  const namespace = docs.find(d => d.getName() === 'namespace');
 
   return {
     name: name?.getText()[0].text,
-    description: description?.getText()[0].text
+    description: description?.getText()[0].text,
+    namespace: namespace?.getText()[0].text
   }
 }
 
@@ -183,7 +186,10 @@ function extractIOFromFunctionNode(
   const sym = node.getSymbol() ?? (Node.isFunctionDeclaration(node)
     ? node.getNameNode()?.getSymbol()
     : node.getNameNode()?.getSymbol());
-  const {description, name} = getFunctionDocs(sym);
+  const docs = getFunctionDocs(sym) || {};
+  const description = docs.description;
+  const name = docs.name;
+  const namespace = docs.namespace;
 
   // Make path relative to cwd
   const cwd = process.cwd();
@@ -192,6 +198,7 @@ function extractIOFromFunctionNode(
     id,
     name: name || id,
     path: relPath,
+    namespace: namespace || "",
     description,
     input,
     output,

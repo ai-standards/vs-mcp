@@ -9,6 +9,7 @@ export type OutputContext = InputContext & {
 };
 
 /**
+ * @namespace status
  * @name Dismiss Status
  * @description Dismiss any status notification by id.
  */

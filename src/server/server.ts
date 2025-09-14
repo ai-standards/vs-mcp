@@ -7,7 +7,8 @@ const toolCache: Partial<{ [K in ToolId]: (payload: any) => Promise<any> }> = {}
 
 export async function dispatch<K extends ToolId>(mcpId: K, payload: CommandMap[K]["props"]): Promise<CommandMap[K]["response"]> {
 	if (!toolCache[mcpId]) {
-		const toolMeta = mcpToolIndex.tools.find(t => t.id === mcpId);
+		const [namespace = 'default', id] = mcpId.split('.').map(s => s.trim());
+		const toolMeta = mcpToolIndex.tools.find(t => t.id === id && t.namespace === namespace);
 		if (!toolMeta) throw new Error(`Tool not found in index: ${mcpId}`);
 	// Dynamic import, relative to server directory
 	const mod = await import(/* @vite-ignore */ `../${toolMeta.path}`);

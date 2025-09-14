@@ -10,7 +10,7 @@ export default function App() {
 
   const handleClick = async () => {
     try {
-     const res = await mcp.send("openVirtual", { content: "test" });
+     const res = await mcp.send("editor.openVirtual", { content: "test" });
      console.log({res});
       } catch (err) {
         console.error("MCP error:", err);

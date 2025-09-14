@@ -9,6 +9,7 @@ export type OutputContext = {
 };
 
 /**
+ * @namespace github
  * @name Open GitHub Repository
  * @description Open a GitHub repository in the browser using VS Code's GitHub integration.
  */
