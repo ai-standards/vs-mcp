@@ -5,6 +5,7 @@ import { registerOpenMcpSettings } from "./commands/open-mcp-settings";
 // import { registerCreateIdeContext } from "./commands/create-ide-context";
 import { VsMcpWebviewProvider } from "./ui/VsMcpWebviewProvider";
 import { loadClient } from "./lib/ai";
+import { activateCreateAgent } from "./commands/create-agent";
 
 // ---------- Extension entry ----------
 export async function activate(context: vscode.ExtensionContext) {
@@ -12,7 +13,7 @@ export async function activate(context: vscode.ExtensionContext) {
   await loadClient(context);
 
   // activateRunAgent(context);
-  // activateCreateAgent(context);
+  activateCreateAgent(context);
   registerOpenMcpSettings(context);
   // registerCreateIdeContext(context);
 

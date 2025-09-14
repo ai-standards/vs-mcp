@@ -110,11 +110,6 @@ export class VsMcpWebviewProvider implements vscode.WebviewViewProvider {
         </style>
       </head>
       <body>
-        <button class="btn">
-          <span class="codicon codicon-add"></span>
-          New
-        </button>
-
         <div id="root"></div>
         <script type="module" src="${scriptUri}"></script>
       </body>

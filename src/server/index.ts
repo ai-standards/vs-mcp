@@ -2,6 +2,37 @@
 export const mcpToolIndex = {
   "tools": [
     {
+      "id": "createAgent",
+      "name": "Generate new agent",
+      "path": "src/tools/agent/create-agent.mcpx.ts",
+      "namespace": "agent",
+      "description": "Generate a new MCP agent",
+      "input": {
+        "filepath": {
+          "type": "string",
+          "required": false
+        },
+        "description": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "output": {
+        "filepath": {
+          "type": "string",
+          "required": false
+        },
+        "description": {
+          "type": "string",
+          "required": false
+        },
+        "code": {
+          "type": "null",
+          "required": false
+        }
+      }
+    },
+    {
       "id": "generateCode",
       "name": "Generate Code",
       "path": "src/tools/ai/generate-code.mcpx.ts",

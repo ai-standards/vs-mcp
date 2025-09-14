@@ -1,7 +1,7 @@
 import React from "react";
 import { useApi } from "./hooks/useApi";
 import { createMcpService } from "./services/mcpService";
-import { Button } from "./toolkit";
+import { Button, List, ListItem, Panel } from "./toolkit";
 
 // Add TypeScript definition for window.acquireVsCodeApi
 
@@ -19,9 +19,12 @@ export default function App() {
     };
 
   return (
-    <div>
-      <h1>Hello</h1>
-      <Button onClick={handleClick}>open file</Button>
-    </div>
+    <Panel title="MCP Agents">
+      <List>
+        <ListItem>Test</ListItem>
+        <ListItem>Test 2</ListItem>
+        <ListItem>Test 3</ListItem>
+      </List>
+    </Panel>
   );
 }

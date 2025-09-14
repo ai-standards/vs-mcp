@@ -17,3 +17,4 @@ export * from "./Spinner";
 export * from "./Card";
 export * from "./Divider";
 export * from "./Alert";
+export * from "./Typography";

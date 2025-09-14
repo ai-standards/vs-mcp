@@ -1,5 +1,17 @@
 // AUTO-GENERATED FROM MCP TOOL INDEX. Do not edit by hand.
 
+/** Generate a new MCP agent */
+export interface AgentCreateAgentProps {
+  "filepath"?: string;
+  "description"?: string;
+}
+
+export interface AgentCreateAgentResponse {
+  "filepath"?: string;
+  "description"?: string;
+  "code"?: null;
+}
+
 /** Generate new code from a natural language prompt, specifying language and style. */
 export interface AiGenerateCodeProps {
   "prompt": string;
@@ -470,9 +482,10 @@ export interface WorkspaceRenameWorkspaceFolderResponse {
   "error"?: string;
 }
 
-export type ToolId = "ai.generateCode" | "ai.generateData" | "ai.generateImages" | "ai.generateText" | "ai.refactorCode" | "ai.testCode" | "ai.writeDocumentation" | "editor.activeFile" | "editor.openVirtual" | "editor.proposeEdits" | "editor.editorSelection" | "git.createGitBranch" | "git.deleteGitBranch" | "git.mergeGitBranch" | "fs.findFiles" | "fs.readDir" | "fs.readFile" | "fs.writeFile" | "status.showStatusBar" | "status.dismissStatus" | "status.showStatusWindow" | "github.createGitHubIssue" | "github.createGitHubPullRequest" | "github.openGitHubRepository" | "terminal.closeTerminal" | "terminal.createTerminal" | "terminal.listTerminals" | "terminal.sendTextToTerminal" | "terminal.showTerminal" | "ui.showInfoMessage" | "ui.showInputBox" | "ui.showWarningMessage" | "vcs.commitChanges" | "vcs.pullChanges" | "vcs.pushChanges" | "vcs.getVcsStatus" | "workspace.createWorkspaceFile" | "workspace.deleteWorkspaceFile" | "workspace.listWorkspaceFiles" | "workspace.listWorkspaceFolders" | "workspace.renameWorkspaceFolder";
+export type ToolId = "agent.createAgent" | "ai.generateCode" | "ai.generateData" | "ai.generateImages" | "ai.generateText" | "ai.refactorCode" | "ai.testCode" | "ai.writeDocumentation" | "editor.activeFile" | "editor.openVirtual" | "editor.proposeEdits" | "editor.editorSelection" | "git.createGitBranch" | "git.deleteGitBranch" | "git.mergeGitBranch" | "fs.findFiles" | "fs.readDir" | "fs.readFile" | "fs.writeFile" | "status.showStatusBar" | "status.dismissStatus" | "status.showStatusWindow" | "github.createGitHubIssue" | "github.createGitHubPullRequest" | "github.openGitHubRepository" | "terminal.closeTerminal" | "terminal.createTerminal" | "terminal.listTerminals" | "terminal.sendTextToTerminal" | "terminal.showTerminal" | "ui.showInfoMessage" | "ui.showInputBox" | "ui.showWarningMessage" | "vcs.commitChanges" | "vcs.pullChanges" | "vcs.pushChanges" | "vcs.getVcsStatus" | "workspace.createWorkspaceFile" | "workspace.deleteWorkspaceFile" | "workspace.listWorkspaceFiles" | "workspace.listWorkspaceFolders" | "workspace.renameWorkspaceFolder";
   
 export type CommandMap = {
+  "agent.createAgent": { props: AgentCreateAgentProps; response: AgentCreateAgentResponse; path: "src/tools/agent/create-agent.mcpx.ts" };
   "ai.generateCode": { props: AiGenerateCodeProps; response: AiGenerateCodeResponse; path: "src/tools/ai/generate-code.mcpx.ts" };
   "ai.generateData": { props: AiGenerateDataProps; response: AiGenerateDataResponse; path: "src/tools/ai/generate-data.mcpx.ts" };
   "ai.generateImages": { props: AiGenerateImagesProps; response: AiGenerateImagesResponse; path: "src/tools/ai/generate-images.mcpx.ts" };
@@ -516,6 +529,8 @@ export type CommandMap = {
   "workspace.renameWorkspaceFolder": { props: WorkspaceRenameWorkspaceFolderProps; response: WorkspaceRenameWorkspaceFolderResponse; path: "src/tools/workspace/rename-folder.mcpx.ts" };
 };
 
+type AgentCreateAgentPropsKey = "agent.createAgentProps";
+type AgentCreateAgentResponseKey = "agent.createAgentResponse";
 type AiGenerateCodePropsKey = "ai.generateCodeProps";
 type AiGenerateCodeResponseKey = "ai.generateCodeResponse";
 type AiGenerateDataPropsKey = "ai.generateDataProps";
@@ -621,6 +636,13 @@ export type ToolDescriptor = {
 };
 
 export const AllTools = [
+  {
+    "id": "createAgent",
+    "namespace": "agent",
+    "path": "src/tools/agent/create-agent.mcpx.ts",
+    "name": "Generate new agent",
+    "description": "Generate a new MCP agent"
+  },
   {
     "id": "generateCode",
     "namespace": "ai",

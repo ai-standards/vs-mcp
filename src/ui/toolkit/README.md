@@ -151,3 +151,30 @@ A set of minimal React components styled with VS Code CSS variables for building
 <Alert type="warning">Warning message</Alert>
 <Alert type="error">Error message</Alert>
 ```
+
+---
+
+### Typography
+```tsx
+// Default
+<Typography>Default text</Typography>
+
+// Sizes
+<Typography size="small">Small</Typography>
+<Typography size="medium">Medium</Typography>
+<Typography size="large">Large</Typography>
+<Typography size="xlarge">XLarge</Typography>
+
+// Bold
+<Typography bold>Bold text</Typography>
+
+// Colors
+<Typography color="default">Default</Typography>
+<Typography color="secondary">Secondary</Typography>
+<Typography color="error">Error</Typography>
+<Typography color="warning">Warning</Typography>
+<Typography color="info">Info</Typography>
+
+// Custom element
+<Typography as="h1" size="xlarge" bold>Heading</Typography>
+```
