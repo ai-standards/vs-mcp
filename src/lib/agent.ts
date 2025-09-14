@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { McpClient } from './mcp/client';
+import { McpClient } from '../tools/client';
 
   export interface McpAgentPayload {
     mcp: McpClient;

@@ -1,0 +1,20 @@
+import * as vscode from "vscode";
+
+export type InputContext = {
+  name?: string;
+};
+
+export type OutputContext = {
+  terminalId: string;
+};
+
+/**
+ * @namespace terminal
+ * @name Create Terminal
+ * @description Create a new integrated terminal in VS Code.
+ */
+export async function createTerminal(context: InputContext): Promise<OutputContext> {
+  const terminal = vscode.window.createTerminal(context.name ?? "Terminal");
+  terminal.show();
+  return { terminalId: terminal.name };
+}
