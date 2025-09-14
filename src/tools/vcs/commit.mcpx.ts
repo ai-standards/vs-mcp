@@ -13,7 +13,7 @@ export type OutputContext = {
  * @name Commit Changes
  * @description Commit staged changes in the current repository with a message (supports any VCS provider).
  */
-export async function commitChanges(context: InputContext): Promise<OutputContext> {
+async function commitChanges(context: InputContext): Promise<OutputContext> {
   try {
     const gitExtension = vscode.extensions.getExtension('vscode.git')?.exports;
     const api = gitExtension?.getAPI(1);
@@ -25,3 +25,5 @@ export async function commitChanges(context: InputContext): Promise<OutputContex
     return { success: false, error: err?.message };
   }
 }
+
+export default commitChanges;

@@ -13,7 +13,7 @@ export type OutputContext = {
  * @name Merge Git Branch
  * @description Merge the specified branch into the current branch using VS Code's Git extension.
  */
-export async function mergeGitBranch(context: InputContext): Promise<OutputContext> {
+async function mergeGitBranch(context: InputContext): Promise<OutputContext> {
   try {
     const gitExtension = vscode.extensions.getExtension('vscode.git')?.exports;
     const api = gitExtension?.getAPI(1);
@@ -25,3 +25,5 @@ export async function mergeGitBranch(context: InputContext): Promise<OutputConte
     return { success: false, error: err?.message };
   }
 }
+
+export default mergeGitBranch;

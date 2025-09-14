@@ -14,7 +14,7 @@ export type OutputContext = InputContext & {
  * @name Generate Tests
  * @description Generate unit tests for code using the specified framework and language.
  */
-export async function testCode(context: InputContext): Promise<OutputContext> {
+async function testCode(context: InputContext): Promise<OutputContext> {
   const { code, framework = "vitest", language = "typescript" } = context;
   if (!code) throw new Error("code:string required");
   const openai = await getClient();
@@ -25,3 +25,5 @@ export async function testCode(context: InputContext): Promise<OutputContext> {
   const tests = completion.choices[0]?.message?.content ?? "";
   return { ...context, tests };
 }
+
+export default testCode;

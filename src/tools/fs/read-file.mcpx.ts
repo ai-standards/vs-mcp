@@ -14,8 +14,10 @@ export type OutputContext = InputContext & {
  * @name Read File
  * @description Read a UTF-8 file inside the workspace.
  */
-export async function readFile(context: InputContext): Promise<OutputContext> {
+async function readFile(context: InputContext): Promise<OutputContext> {
   const abs = path.isAbsolute(context.path) ? context.path : path.join(context.workspaceRoot, context.path);
   const buff = await vscode.workspace.fs.readFile(vscode.Uri.file(abs));
   return { ...context, text: Buffer.from(buff).toString("utf8") };
 }
+
+export default readFile;

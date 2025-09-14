@@ -17,7 +17,7 @@ type OutputContext = InputContext & {
  * @returns something
  * 
  */
-export default async function generateText(context: InputContext): Promise<OutputContext> {
+async function generateText(context: InputContext): Promise<OutputContext> {
   const { prompt, maxTokens = 600, model = "gpt-4o-mini", temperature = 0.2 } = context;
   if (!prompt || typeof prompt !== "string") throw new Error("prompt:string required");
   const openai = await getClient();
@@ -30,3 +30,5 @@ export default async function generateText(context: InputContext): Promise<Outpu
   const text = completion.choices[0]?.message?.content ?? "";
   return { ...context, text };
 }
+
+export default generateText;

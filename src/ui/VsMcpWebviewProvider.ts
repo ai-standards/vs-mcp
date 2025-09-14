@@ -1,3 +1,5 @@
+
+import { dispatch } from "../server/server";
 import * as vscode from "vscode";
 
 export class VsMcpWebviewProvider implements vscode.WebviewViewProvider {
@@ -17,9 +19,34 @@ export class VsMcpWebviewProvider implements vscode.WebviewViewProvider {
     };
     webviewView.webview.html = this.getHtmlForWebview(webviewView.webview);
     // Listen for messages from the webview
-    webviewView.webview.onDidReceiveMessage((message) => {
+    webviewView.webview.onDidReceiveMessage(async (message: any) => {
       if (message.type === "ping") {
         webviewView.webview.postMessage({ type: "pong", text: "Hello from extension!" });
+        return;
+      }
+      if (message.mcp) {
+        const { mcpId, payload, requestId } = message.mcp;
+        try {
+          const result = await dispatch(mcpId, payload);
+          webviewView.webview.postMessage({
+            mcp: {
+              mcpId,
+              requestId,
+              props: payload,
+              result
+            }
+          });
+        } catch (error) {
+          console.error(error);
+          webviewView.webview.postMessage({
+            mcp: {
+              mcpId,
+              requestId,
+              props: payload,
+              error: error instanceof Error ? error.message : String(error)
+            }
+          });
+        }
       }
     });
   }

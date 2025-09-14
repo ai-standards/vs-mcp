@@ -17,7 +17,7 @@ export type OutputContext = InputContext & {
  * @name Generate Images
  * @description Generate images from a prompt using an AI model and optional parameters.
  */
-export async function generateImages(context: InputContext): Promise<OutputContext> {
+async function generateImages(context: InputContext): Promise<OutputContext> {
   const { prompt, count = 1, size = "512x512", model = "dall-e-3" } = context;
   if (!prompt || typeof prompt !== "string") throw new Error("prompt:string required");
   const openai = await getClient();
@@ -30,3 +30,5 @@ export async function generateImages(context: InputContext): Promise<OutputConte
   const result = await openai.images.generate({ prompt, n: count, size: safeSize, model });
   return { ...context, images: result.data ?? [], note: "" };
 }
+
+export default generateImages;

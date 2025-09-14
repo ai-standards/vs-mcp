@@ -1,0 +1,1131 @@
+import type { ToolId, CommandMap } from "./types";
+
+// Import all tool implementations
+import generateCode from "../tools/ai/generate-code.mcpx";
+import generateData from "../tools/ai/generate-data.mcpx";
+import generateImages from "../tools/ai/generate-images.mcpx";
+
+const toolMap: { [K in ToolId]?: (payload: any) => Promise<any> } = {
+  generateCode,
+  generateData,
+  generateImages,
+  // ...add all other tools here
+};
+
+export async function dispatch<K extends ToolId>(mcpId: K, payload: CommandMap[K]["props"]): Promise<CommandMap[K]["response"]> {
+  const fn = toolMap[mcpId] as ((payload: CommandMap[K]["props"]) => Promise<CommandMap[K]["response"]>) | undefined;
+  if (!fn) throw new Error(`Tool not found: ${mcpId}`);
+  return await fn(payload);
+}
+// Auto-generated MCP tool index
+export const mcpToolIndex = {
+  "tools": [
+    {
+      "id": "generateCode",
+      "name": "Generate Code",
+      "path": "src/tools/ai/generate-code.mcpx.ts",
+      "description": "Generate new code from a natural language prompt, specifying language and style.",
+      "input": {
+        "prompt": {
+          "type": "string",
+          "required": true
+        },
+        "language": {
+          "type": "string",
+          "required": false
+        },
+        "style": {
+          "type": "string",
+          "required": false
+        },
+        "maxTokens": {
+          "type": "number",
+          "required": false
+        }
+      },
+      "output": {
+        "prompt": {
+          "type": "string",
+          "required": true
+        },
+        "language": {
+          "type": "string",
+          "required": true
+        },
+        "style": {
+          "type": "string",
+          "required": false
+        },
+        "maxTokens": {
+          "type": "number",
+          "required": false
+        },
+        "code": {
+          "type": "string",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "generateData",
+      "name": "Generate Structured Data",
+      "path": "src/tools/ai/generate-data.mcpx.ts",
+      "description": "Generate structured data (e.g., JSON) from a prompt and optional schema.",
+      "input": {
+        "prompt": {
+          "type": "string",
+          "required": true
+        },
+        "schema": {
+          "type": "string",
+          "required": false
+        },
+        "maxTokens": {
+          "type": "number",
+          "required": false
+        },
+        "model": {
+          "type": "string",
+          "required": false
+        },
+        "temperature": {
+          "type": "number",
+          "required": false
+        }
+      },
+      "output": {
+        "prompt": {
+          "type": "string",
+          "required": true
+        },
+        "schema": {
+          "type": "string",
+          "required": false
+        },
+        "maxTokens": {
+          "type": "number",
+          "required": false
+        },
+        "model": {
+          "type": "string",
+          "required": false
+        },
+        "temperature": {
+          "type": "number",
+          "required": false
+        },
+        "data": {
+          "type": "any",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "generateImages",
+      "name": "Generate Images",
+      "path": "src/tools/ai/generate-images.mcpx.ts",
+      "description": "Generate images from a prompt using an AI model and optional parameters.",
+      "input": {
+        "prompt": {
+          "type": "string",
+          "required": true
+        },
+        "count": {
+          "type": "number",
+          "required": false
+        },
+        "size": {
+          "type": "\"512x512\"",
+          "required": false
+        },
+        "model": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "output": {
+        "prompt": {
+          "type": "string",
+          "required": true
+        },
+        "count": {
+          "type": "number",
+          "required": false
+        },
+        "size": {
+          "type": "\"512x512\"",
+          "required": false
+        },
+        "model": {
+          "type": "string",
+          "required": false
+        },
+        "images": {
+          "type": "any[]",
+          "required": true
+        },
+        "note": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "id": "generateText",
+      "name": "Generate Text",
+      "path": "src/tools/ai/generate-text.mcpx.ts",
+      "description": "Generate plain text from a prompt.",
+      "input": {
+        "prompt": {
+          "type": "string",
+          "required": true
+        },
+        "maxTokens": {
+          "type": "number",
+          "required": false
+        },
+        "model": {
+          "type": "string",
+          "required": false
+        },
+        "temperature": {
+          "type": "number",
+          "required": false
+        }
+      },
+      "output": {
+        "prompt": {
+          "type": "string",
+          "required": true
+        },
+        "maxTokens": {
+          "type": "number",
+          "required": false
+        },
+        "model": {
+          "type": "string",
+          "required": false
+        },
+        "temperature": {
+          "type": "number",
+          "required": false
+        },
+        "text": {
+          "type": "string",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "refactorCode",
+      "name": "Refactor Code",
+      "path": "src/tools/ai/refactor-code.mcpx.ts",
+      "description": "Refactor existing code based on instructions, language, and style.",
+      "input": {
+        "code": {
+          "type": "string",
+          "required": true
+        },
+        "instructions": {
+          "type": "string",
+          "required": true
+        },
+        "language": {
+          "type": "string",
+          "required": false
+        },
+        "style": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "output": {
+        "code": {
+          "type": "string",
+          "required": true
+        },
+        "instructions": {
+          "type": "string",
+          "required": true
+        },
+        "language": {
+          "type": "string",
+          "required": false
+        },
+        "style": {
+          "type": "string",
+          "required": false
+        },
+        "refactoredCode": {
+          "type": "string",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "testCode",
+      "name": "Generate Tests",
+      "path": "src/tools/ai/test-code.mcpx.ts",
+      "description": "Generate unit tests for code using the specified framework and language.",
+      "input": {
+        "code": {
+          "type": "string",
+          "required": true
+        },
+        "framework": {
+          "type": "string",
+          "required": false
+        },
+        "language": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "output": {
+        "code": {
+          "type": "string",
+          "required": true
+        },
+        "framework": {
+          "type": "string",
+          "required": false
+        },
+        "language": {
+          "type": "string",
+          "required": false
+        },
+        "tests": {
+          "type": "string",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "writeDocumentation",
+      "name": "Write Documentation",
+      "path": "src/tools/ai/write-documentation.mcpx.ts",
+      "description": "Write or update documentation for code in the specified format and audience.",
+      "input": {
+        "code": {
+          "type": "string",
+          "required": true
+        },
+        "format": {
+          "type": "string",
+          "required": false
+        },
+        "audience": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "output": {
+        "code": {
+          "type": "string",
+          "required": true
+        },
+        "format": {
+          "type": "string",
+          "required": false
+        },
+        "audience": {
+          "type": "string",
+          "required": false
+        },
+        "docs": {
+          "type": "string",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "activeFile",
+      "name": "Active File",
+      "path": "src/tools/editor/active-file.mcpx.ts",
+      "description": "Get the active editor file's path, languageId, and selected or full text.",
+      "input": {},
+      "output": {
+        "__self": {
+          "type": "null",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "openVirtual",
+      "name": "Open Virtual Document",
+      "path": "src/tools/editor/open-virtual.mcpx.ts",
+      "description": "Open a read-only virtual document with content and language.",
+      "input": {
+        "content": {
+          "type": "string",
+          "required": true
+        },
+        "language": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "output": {
+        "content": {
+          "type": "string",
+          "required": true
+        },
+        "language": {
+          "type": "string",
+          "required": false
+        },
+        "ok": {
+          "type": "false",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "proposeEdits",
+      "name": "Propose Edits",
+      "path": "src/tools/editor/propose-edits.mcpx.ts",
+      "description": "Show a diff and ask the user to apply changes to a file in the workspace.",
+      "input": {
+        "targetPath": {
+          "type": "string",
+          "required": true
+        },
+        "newContent": {
+          "type": "string",
+          "required": true
+        },
+        "title": {
+          "type": "string",
+          "required": false
+        },
+        "workspaceRoot": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "targetPath": {
+          "type": "string",
+          "required": true
+        },
+        "newContent": {
+          "type": "string",
+          "required": true
+        },
+        "title": {
+          "type": "string",
+          "required": false
+        },
+        "workspaceRoot": {
+          "type": "string",
+          "required": true
+        },
+        "applied": {
+          "type": "false",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "editorSelection",
+      "name": "Editor Selection",
+      "path": "src/tools/editor/selection.mcpx.ts",
+      "description": "Get selection offsets and text for the active editor.",
+      "input": {},
+      "output": {
+        "__self": {
+          "type": "null",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "findFiles",
+      "name": "Find Files",
+      "path": "src/tools/fs/find.mcpx.ts",
+      "description": "Find files by glob pattern (workspace relative).",
+      "input": {
+        "glob": {
+          "type": "string",
+          "required": false
+        },
+        "maxResults": {
+          "type": "number",
+          "required": false
+        }
+      },
+      "output": {
+        "files": {
+          "type": "string[]",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "readDir",
+      "name": "Read Directory",
+      "path": "src/tools/fs/read-dir.mcpx.ts",
+      "description": "List directory entries (name + kind).",
+      "input": {
+        "dir": {
+          "type": "string",
+          "required": true
+        },
+        "workspaceRoot": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "dir": {
+          "type": "string",
+          "required": true
+        },
+        "workspaceRoot": {
+          "type": "string",
+          "required": true
+        },
+        "items": {
+          "type": "{ name: string; type: string; }[]",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "readFile",
+      "name": "Read File",
+      "path": "src/tools/fs/read-file.mcpx.ts",
+      "description": "Read a UTF-8 file inside the workspace.",
+      "input": {
+        "path": {
+          "type": "string",
+          "required": true
+        },
+        "workspaceRoot": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "path": {
+          "type": "string",
+          "required": true
+        },
+        "workspaceRoot": {
+          "type": "string",
+          "required": true
+        },
+        "text": {
+          "type": "string",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "writeFile",
+      "name": "Write File",
+      "path": "src/tools/fs/write-file.mcpx.ts",
+      "description": "Write a UTF-8 file inside the workspace (with confirm).",
+      "input": {
+        "path": {
+          "type": "string",
+          "required": true
+        },
+        "content": {
+          "type": "string",
+          "required": true
+        },
+        "workspaceRoot": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "path": {
+          "type": "string",
+          "required": true
+        },
+        "content": {
+          "type": "string",
+          "required": true
+        },
+        "workspaceRoot": {
+          "type": "string",
+          "required": true
+        },
+        "ok": {
+          "type": "false",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "showStatusBar",
+      "name": "Show Status Bar",
+      "path": "src/tools/status/bar.mcpx.ts",
+      "description": "Show a status message in the status bar. Optionally show a spinner.",
+      "input": {
+        "id": {
+          "type": "string",
+          "required": true
+        },
+        "message": {
+          "type": "string",
+          "required": true
+        },
+        "spinner": {
+          "type": "false",
+          "required": false
+        }
+      },
+      "output": {
+        "id": {
+          "type": "string",
+          "required": true
+        },
+        "message": {
+          "type": "string",
+          "required": true
+        },
+        "spinner": {
+          "type": "false",
+          "required": true
+        },
+        "shown": {
+          "type": "false",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "dismissStatus",
+      "name": "Dismiss Status",
+      "path": "src/tools/status/dismiss.mcpx.ts",
+      "description": "Dismiss any status notification by id.",
+      "input": {
+        "id": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "id": {
+          "type": "string",
+          "required": true
+        },
+        "dismissed": {
+          "type": "false",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "showStatusWindow",
+      "name": "Show Status Window",
+      "path": "src/tools/status/window.mcpx.ts",
+      "description": "Show a status message in a window notification.",
+      "input": {
+        "id": {
+          "type": "string",
+          "required": true
+        },
+        "message": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "id": {
+          "type": "string",
+          "required": true
+        },
+        "message": {
+          "type": "string",
+          "required": true
+        },
+        "shown": {
+          "type": "false",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "showInfoMessage",
+      "name": "Show Info Message",
+      "path": "src/tools/ui/info.mcpx.ts",
+      "description": "Show info message with optional actions.",
+      "input": {
+        "message": {
+          "type": "string",
+          "required": true
+        },
+        "actions": {
+          "type": "string[]",
+          "required": false
+        }
+      },
+      "output": {
+        "choice": {
+          "type": "null",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "showInputBox",
+      "name": "Show Input Box",
+      "path": "src/tools/ui/input.mcpx.ts",
+      "description": "Prompt user for a string input.",
+      "input": {
+        "prompt": {
+          "type": "string",
+          "required": true
+        },
+        "placeHolder": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "output": {
+        "value": {
+          "type": "null",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "showWarningMessage",
+      "name": "Show Warning Message",
+      "path": "src/tools/ui/warn.mcpx.ts",
+      "description": "Show warning message with optional actions.",
+      "input": {
+        "message": {
+          "type": "string",
+          "required": true
+        },
+        "actions": {
+          "type": "string[]",
+          "required": false
+        }
+      },
+      "output": {
+        "choice": {
+          "type": "null",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "commitChanges",
+      "name": "Commit Changes",
+      "path": "src/tools/vcs/commit.mcpx.ts",
+      "description": "Commit staged changes in the current repository with a message (supports any VCS provider).",
+      "input": {
+        "message": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        },
+        "error": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "id": "pullChanges",
+      "name": "Pull Changes",
+      "path": "src/tools/vcs/pull.mcpx.ts",
+      "description": "Pull changes from the remote repository (supports any VCS provider).",
+      "input": {},
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        },
+        "error": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "id": "pushChanges",
+      "name": "Push Changes",
+      "path": "src/tools/vcs/push.mcpx.ts",
+      "description": "Push committed changes to the remote repository (supports any VCS provider).",
+      "input": {},
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        },
+        "error": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "id": "getVcsStatus",
+      "name": "VCS Status",
+      "path": "src/tools/vcs/status.mcpx.ts",
+      "description": "Get the status of the current repository (supports any VCS provider).",
+      "input": {},
+      "output": {
+        "status": {
+          "type": "string",
+          "required": true
+        },
+        "error": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "id": "createWorkspaceFile",
+      "name": "Create Workspace File",
+      "path": "src/tools/workspace/create-file.mcpx.ts",
+      "description": "Create a new file in the workspace with optional content.",
+      "input": {
+        "path": {
+          "type": "string",
+          "required": true
+        },
+        "content": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        },
+        "error": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "id": "deleteWorkspaceFile",
+      "name": "Delete Workspace File",
+      "path": "src/tools/workspace/delete-file.mcpx.ts",
+      "description": "Delete a file from the workspace.",
+      "input": {
+        "path": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        },
+        "error": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "id": "listWorkspaceFiles",
+      "name": "List Workspace Files",
+      "path": "src/tools/workspace/list-files.mcpx.ts",
+      "description": "List files in the workspace matching a glob pattern.",
+      "input": {
+        "glob": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "output": {
+        "files": {
+          "type": "string[]",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "listWorkspaceFolders",
+      "name": "List Workspace Folders",
+      "path": "src/tools/workspace/list-folders.mcpx.ts",
+      "description": "List all workspace folders.",
+      "input": {},
+      "output": {
+        "folders": {
+          "type": "string[]",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "renameWorkspaceFolder",
+      "name": "Rename Workspace Folder",
+      "path": "src/tools/workspace/rename-folder.mcpx.ts",
+      "description": "Rename a folder in the workspace using VS Code's file system API (preserves user security permissions).",
+      "input": {
+        "oldPath": {
+          "type": "string",
+          "required": true
+        },
+        "newPath": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        },
+        "error": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "id": "createGitBranch",
+      "name": "Create Git Branch",
+      "path": "src/tools/git/create-branch.mcpx.ts",
+      "description": "Create a new branch in the current repository using VS Code's Git extension.",
+      "input": {
+        "branchName": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        },
+        "error": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "id": "deleteGitBranch",
+      "name": "Delete Git Branch",
+      "path": "src/tools/git/delete-branch.mcpx.ts",
+      "description": "Delete the specified branch in the current repository using VS Code's Git extension.",
+      "input": {
+        "branchName": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        },
+        "error": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "id": "mergeGitBranch",
+      "name": "Merge Git Branch",
+      "path": "src/tools/git/merge-branch.mcpx.ts",
+      "description": "Merge the specified branch into the current branch using VS Code's Git extension.",
+      "input": {
+        "branchName": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        },
+        "error": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "id": "closeTerminal",
+      "name": "Close Terminal",
+      "path": "src/tools/terminal/close.mcpx.ts",
+      "description": "Close a specific integrated terminal in VS Code.",
+      "input": {
+        "terminalId": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "createTerminal",
+      "name": "Create Terminal",
+      "path": "src/tools/terminal/create.mcpx.ts",
+      "description": "Create a new integrated terminal in VS Code.",
+      "input": {
+        "name": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "output": {
+        "terminalId": {
+          "type": "string",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "listTerminals",
+      "name": "List Terminals",
+      "path": "src/tools/terminal/list.mcpx.ts",
+      "description": "List all open integrated terminals in VS Code.",
+      "input": {},
+      "output": {
+        "terminals": {
+          "type": "string[]",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "sendTextToTerminal",
+      "name": "Send Text to Terminal",
+      "path": "src/tools/terminal/send.mcpx.ts",
+      "description": "Send text or command to a specific integrated terminal.",
+      "input": {
+        "terminalId": {
+          "type": "string",
+          "required": true
+        },
+        "text": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "showTerminal",
+      "name": "Show Terminal",
+      "path": "src/tools/terminal/show.mcpx.ts",
+      "description": "Show a specific integrated terminal in VS Code.",
+      "input": {
+        "terminalId": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "createGitHubIssue",
+      "name": "Create GitHub Issue",
+      "path": "src/tools/github/create-issue.mcpx.ts",
+      "description": "Create a new issue in a GitHub repository using VS Code's GitHub integration.",
+      "input": {
+        "repository": {
+          "type": "string",
+          "required": true
+        },
+        "title": {
+          "type": "string",
+          "required": true
+        },
+        "body": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "output": {
+        "issueUrl": {
+          "type": "null",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "createGitHubPullRequest",
+      "name": "Create GitHub Pull Request",
+      "path": "src/tools/github/create-pr.mcpx.ts",
+      "description": "Create a new pull request in a GitHub repository using VS Code's GitHub integration.",
+      "input": {
+        "repository": {
+          "type": "string",
+          "required": true
+        },
+        "title": {
+          "type": "string",
+          "required": true
+        },
+        "body": {
+          "type": "string",
+          "required": false
+        },
+        "base": {
+          "type": "string",
+          "required": false
+        },
+        "head": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "output": {
+        "prUrl": {
+          "type": "null",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "openGitHubRepository",
+      "name": "Open GitHub Repository",
+      "path": "src/tools/github/open-repo.mcpx.ts",
+      "description": "Open a GitHub repository in the browser using VS Code's GitHub integration.",
+      "input": {
+        "repository": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "repoUrl": {
+          "type": "string",
+          "required": true
+        }
+      }
+    }
+  ]
+};

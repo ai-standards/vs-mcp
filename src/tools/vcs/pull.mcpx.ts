@@ -9,7 +9,7 @@ export type OutputContext = {
  * @name Pull Changes
  * @description Pull changes from the remote repository (supports any VCS provider).
  */
-export async function pullChanges(): Promise<OutputContext> {
+async function pullChanges(): Promise<OutputContext> {
   try {
     const gitExtension = vscode.extensions.getExtension('vscode.git')?.exports;
     const api = gitExtension?.getAPI(1);
@@ -21,3 +21,5 @@ export async function pullChanges(): Promise<OutputContext> {
     return { success: false, error: err?.message };
   }
 }
+
+export default pullChanges;

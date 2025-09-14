@@ -16,7 +16,7 @@ export type OutputContext = InputContext & {
  * @name Generate Structured Data
  * @description Generate structured data (e.g., JSON) from a prompt and optional schema.
  */
-export async function generateData(context: InputContext): Promise<OutputContext> {
+async function generateData(context: InputContext): Promise<OutputContext> {
   const { prompt, schema, maxTokens = 600, model = "gpt-4o-mini", temperature } = context;
   if (!prompt || typeof prompt !== "string") throw new Error("prompt:string required");
   const fullPrompt = schema
@@ -37,3 +37,5 @@ export async function generateData(context: InputContext): Promise<OutputContext
   }
   return { ...context, data };
 }
+
+export default generateData;

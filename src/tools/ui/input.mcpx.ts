@@ -13,8 +13,10 @@ export type OutputContext = {
  * @name Show Input Box
  * @description Prompt user for a string input.
  */
-export async function showInputBox(context: InputContext): Promise<OutputContext> {
+async function showInputBox(context: InputContext): Promise<OutputContext> {
   const { prompt, placeHolder } = context;
   const value = await vscode.window.showInputBox({ prompt: String(prompt ?? ""), placeHolder: placeHolder ? String(placeHolder) : undefined });
   return { value: value ?? null };
 }
+
+export default showInputBox;

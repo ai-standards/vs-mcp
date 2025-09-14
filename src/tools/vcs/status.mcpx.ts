@@ -9,7 +9,7 @@ export type OutputContext = {
  * @name VCS Status
  * @description Get the status of the current repository (supports any VCS provider).
  */
-export async function getVcsStatus(): Promise<OutputContext> {
+async function getVcsStatus(): Promise<OutputContext> {
   try {
     const gitExtension = vscode.extensions.getExtension('vscode.git')?.exports;
     const api = gitExtension?.getAPI(1);
@@ -21,3 +21,5 @@ export async function getVcsStatus(): Promise<OutputContext> {
     return { status: "error", error: err?.message };
   }
 }
+
+export default getVcsStatus;

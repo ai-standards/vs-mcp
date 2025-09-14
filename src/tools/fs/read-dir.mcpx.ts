@@ -14,8 +14,10 @@ export type OutputContext = InputContext & {
  * @name Read Directory
  * @description List directory entries (name + kind).
  */
-export async function readDir(context: InputContext): Promise<OutputContext> {
+async function readDir(context: InputContext): Promise<OutputContext> {
   const abs = path.isAbsolute(context.dir) ? context.dir : path.join(context.workspaceRoot, context.dir);
   const items = await vscode.workspace.fs.readDirectory(vscode.Uri.file(abs));
   return { ...context, items: items.map(([name, t]) => ({ name, type: t === vscode.FileType.Directory ? "dir" : "file" })) };
 }
+
+export default readDir;

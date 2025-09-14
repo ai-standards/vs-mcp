@@ -13,7 +13,7 @@ export type OutputContext = {
  * @name Delete Git Branch
  * @description Delete the specified branch in the current repository using VS Code's Git extension.
  */
-export async function deleteGitBranch(context: InputContext): Promise<OutputContext> {
+async function deleteGitBranch(context: InputContext): Promise<OutputContext> {
   try {
     const gitExtension = vscode.extensions.getExtension('vscode.git')?.exports;
     const api = gitExtension?.getAPI(1);
@@ -25,3 +25,5 @@ export async function deleteGitBranch(context: InputContext): Promise<OutputCont
     return { success: false, error: err?.message };
   }
 }
+
+export default deleteGitBranch;

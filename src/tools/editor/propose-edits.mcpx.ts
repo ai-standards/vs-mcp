@@ -16,7 +16,7 @@ export type OutputContext = InputContext & {
  * @name Propose Edits
  * @description Show a diff and ask the user to apply changes to a file in the workspace.
  */
-export async function proposeEdits(context: InputContext): Promise<OutputContext> {
+async function proposeEdits(context: InputContext): Promise<OutputContext> {
   const { targetPath, newContent, title = "Agent: Proposed edits", workspaceRoot } = context;
   const abs = path.isAbsolute(targetPath) ? targetPath : path.join(workspaceRoot, targetPath);
   if (!abs.startsWith(path.resolve(workspaceRoot) + path.sep)) throw new Error("Writes must stay in workspace.");
@@ -35,3 +35,5 @@ export async function proposeEdits(context: InputContext): Promise<OutputContext
   const ok = await vscode.workspace.applyEdit(edit);
   return { ...context, applied: ok };
 }
+
+export default proposeEdits;

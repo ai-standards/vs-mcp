@@ -11,7 +11,7 @@ export type OutputContext = {
  * @name Editor Selection
  * @description Get selection offsets and text for the active editor.
  */
-export async function editorSelection(): Promise<OutputContext | null> {
+async function editorSelection(): Promise<OutputContext | null> {
   const ed = vscode.window.activeTextEditor;
   if (!ed) return null;
   const { document, selection } = ed;
@@ -22,3 +22,5 @@ export async function editorSelection(): Promise<OutputContext | null> {
     text: document.getText(selection),
   };
 }
+
+export default editorSelection;

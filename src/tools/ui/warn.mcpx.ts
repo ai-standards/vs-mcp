@@ -13,8 +13,10 @@ export type OutputContext = {
  * @name Show Warning Message
  * @description Show warning message with optional actions.
  */
-export async function showWarningMessage(context: InputContext): Promise<OutputContext> {
+async function showWarningMessage(context: InputContext): Promise<OutputContext> {
   const { message, actions } = context;
   const choice = await vscode.window.showWarningMessage(String(message ?? ""), ...(actions ?? []));
   return { choice: choice ?? null };
 }
+
+export default showWarningMessage;

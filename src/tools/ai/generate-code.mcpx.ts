@@ -16,7 +16,7 @@ export type OutputContext = InputContext & {
  * @name Generate Code
  * @description Generate new code from a natural language prompt, specifying language and style.
  */
-export async function generateCode(context: InputContext): Promise<OutputContext> {
+async function generateCode(context: InputContext): Promise<OutputContext> {
   const { prompt, language = "typescript", style = "clean", maxTokens = 600 } = context;
   if (!prompt || typeof prompt !== "string") throw new Error("prompt:string required");
   const openai = await getClient();
@@ -28,3 +28,5 @@ export async function generateCode(context: InputContext): Promise<OutputContext
   const code = completion.choices[0]?.message?.content ?? "";
   return { ...context, code, language };
 }
+
+export default generateCode;

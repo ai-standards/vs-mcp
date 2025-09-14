@@ -15,7 +15,7 @@ export type OutputContext = InputContext & {
  * @name Show Status Bar
  * @description Show a status message in the status bar. Optionally show a spinner.
  */
-export async function showStatusBar(context: InputContext): Promise<OutputContext> {
+async function showStatusBar(context: InputContext): Promise<OutputContext> {
   const { id, message, spinner } = context;
   if (!id || typeof id !== "string") throw new Error("id:string required");
   if (!message || typeof message !== "string") throw new Error("message:string required");
@@ -27,3 +27,5 @@ export async function showStatusBar(context: InputContext): Promise<OutputContex
     return { ...context, shown: true, spinner: false };
   }
 }
+
+export default showStatusBar;

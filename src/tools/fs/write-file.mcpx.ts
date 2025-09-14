@@ -15,7 +15,7 @@ export type OutputContext = InputContext & {
  * @name Write File
  * @description Write a UTF-8 file inside the workspace (with confirm).
  */
-export async function writeFile(context: InputContext): Promise<OutputContext> {
+async function writeFile(context: InputContext): Promise<OutputContext> {
   const abs = path.isAbsolute(context.path) ? context.path : path.join(context.workspaceRoot, context.path);
   const ok = await vscode.window.showWarningMessage(`Write file?\n${abs}`, { modal: true }, "Write");
   if (ok !== "Write") return { ...context, ok: false };
@@ -23,3 +23,5 @@ export async function writeFile(context: InputContext): Promise<OutputContext> {
   await vscode.workspace.fs.writeFile(vscode.Uri.file(abs), Buffer.from(context.content, "utf8"));
   return { ...context, ok: true };
 }
+
+export default writeFile;

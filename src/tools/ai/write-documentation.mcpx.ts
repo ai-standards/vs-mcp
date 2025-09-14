@@ -14,7 +14,7 @@ export type OutputContext = InputContext & {
  * @name Write Documentation
  * @description Write or update documentation for code in the specified format and audience.
  */
-export async function writeDocumentation(context: InputContext): Promise<OutputContext> {
+async function writeDocumentation(context: InputContext): Promise<OutputContext> {
   const { code, format = "markdown", audience = "developers" } = context;
   if (!code) throw new Error("code:string required");
   const openai = await getClient();
@@ -25,3 +25,5 @@ export async function writeDocumentation(context: InputContext): Promise<OutputC
   const docs = completion.choices[0]?.message?.content ?? "";
   return { ...context, docs };
 }
+
+export default writeDocumentation;

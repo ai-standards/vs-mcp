@@ -9,7 +9,7 @@ export type OutputContext = {
  * @name Push Changes
  * @description Push committed changes to the remote repository (supports any VCS provider).
  */
-export async function pushChanges(): Promise<OutputContext> {
+async function pushChanges(): Promise<OutputContext> {
   try {
     const gitExtension = vscode.extensions.getExtension('vscode.git')?.exports;
     const api = gitExtension?.getAPI(1);
@@ -21,3 +21,5 @@ export async function pushChanges(): Promise<OutputContext> {
     return { success: false, error: err?.message };
   }
 }
+
+export default pushChanges;

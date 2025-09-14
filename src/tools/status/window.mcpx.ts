@@ -13,7 +13,7 @@ export type OutputContext = InputContext & {
  * @name Show Status Window
  * @description Show a status message in a window notification.
  */
-export async function showStatusWindow(context: InputContext): Promise<OutputContext> {
+async function showStatusWindow(context: InputContext): Promise<OutputContext> {
   const { id, message } = context;
   if (!id || typeof id !== "string") throw new Error("id:string required");
   if (!message || typeof message !== "string") throw new Error("message:string required");
@@ -23,3 +23,5 @@ export async function showStatusWindow(context: InputContext): Promise<OutputCon
   setTimeout(() => notification.dispose(), 3000);
   return { ...context, shown: true };
 }
+
+export default showStatusWindow;
