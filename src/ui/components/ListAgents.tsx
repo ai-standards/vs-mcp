@@ -42,7 +42,7 @@ export const ListAgents: React.FC = () => {
 				<li>No agents found.</li>
 			) : (
 				agents.map(agent => (
-					<ListItem border={false} key={agent.id} onClick={() => openAgent(agent)} style={{cursor: 'pointer'}} toolbar={<div style={{ display: "flex", gap: 8 }}>
+					<ListItem border={false} key={agent.id} style={{cursor: 'pointer'}} toolbar={<div style={{ display: "flex", gap: 8 }}>
 						<IconButton icon={<VscEdit />} onClick={() => mcpService.dispatch('editor.openFile', {path: agent.path as string})}/>
 						<IconButton icon={<VscPlay />}  onClick={() => mcpService.dispatch('agent.runAgent', {filepath: agent.path})}/>
 					</div>}>

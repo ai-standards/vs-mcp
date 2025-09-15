@@ -14,14 +14,14 @@ const baseStyle: React.CSSProperties = {
 };
 
 const focusStyle: React.CSSProperties = {
-  boxShadow: "0 0 0 2px #0078d4",
-  borderColor: "#0078d4",
+  border: "#0078d4 1px solid",
 };
 
 export function TextField(props: TextFieldProps) {
   const { rows, className, style, ...rest } = props;
   const [focused, setFocused] = React.useState(false);
   const combinedStyle = {
+    padding: '8px',
     ...baseStyle,
     ...(focused ? focusStyle : {}),
     ...style,
