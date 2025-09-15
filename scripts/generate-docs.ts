@@ -1,0 +1,58 @@
+import path from "path";
+import fs from "fs";
+import { compileMCPX } from "../vendor/mcpx/compiler";
+
+export async function generateMarkdownDocs(index: any, outDir: string) {
+  // Prepare index for README.md at the end
+  // (removed duplicate declaration, only declare 'readme' at the end)
+  const mcpxDir = path.join(outDir, "mcpx");
+  if (!fs.existsSync(mcpxDir)) fs.mkdirSync(mcpxDir, { recursive: true });
+  // Group tools by namespace
+  const byNamespace: Record<string, any[]> = {};
+  for (const tool of index.tools) {
+    const ns = tool.namespace || "default";
+    if (!byNamespace[ns]) byNamespace[ns] = [];
+    byNamespace[ns].push(tool);
+  }
+  for (const [namespace, tools] of Object.entries(byNamespace)) {
+    let md = `# ${namespace}\n\n`;
+    for (const tool of tools) {
+      md += `## ${tool.name || tool.id}\n\n`;
+      if (tool.description) md += `${tool.description}\n\n`;
+      md += `**Path:** ${tool.path}\n\n`;
+      md += `### Input\n`;
+      md += renderTable(tool.input, ["Name", "Type", "Required"]);
+      md += `\n### Output\n`;
+      md += renderTable(tool.output, ["Name", "Type", "Required"]);
+      if (tool.example) {
+        md += `\n### Example\n`;
+        md += '```js\n' + JSON.stringify(tool.example, null, 2) + '\n```\n';
+      }
+      md += `\n`;
+    }
+    const filePath = path.join(mcpxDir, `${namespace}.md`);
+    fs.writeFileSync(filePath, md);
+  }
+
+  // Now generate README.md index
+  let readme = `# MCPX Tool Documentation\n\n`;
+  readme += `This index lists all available MCPX tool namespaces and their tools.\n\n`;
+  for (const [namespace, tools] of Object.entries(byNamespace)) {
+    readme += `## ${namespace}\n`;
+    readme += `[Full docs for ${namespace}](mcpx/${namespace}.md)\n\n`;
+    for (const tool of tools) {
+          const key = `${namespace}.${tool.id}`;
+          readme += `- **${tool.name || tool.id}** \`${key}\`: ${tool.description ? tool.description.replace(/\n/g, ' ') : ''}\n`;
+    }
+    readme += `\n`;
+  }
+  fs.writeFileSync(path.join(outDir, "README.md"), readme);
+}
+function renderTable(obj: Record<string, any>, headers: string[]): string {
+  if (!obj || Object.keys(obj).length === 0) return "_None_\n";
+  let table = `| ${headers.join(" | ")} |\n| ${headers.map(() => "---").join(" | ")} |\n`;
+  for (const [key, val] of Object.entries(obj)) {
+    table += `| ${key} | ${val.type || ""} | ${val.required ? "Yes" : "No"} |\n`;
+  }
+  return table;
+}
