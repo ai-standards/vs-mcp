@@ -7,12 +7,11 @@
   "engines": {
     "vscode": "^1.74.0"
   },
-  "categories": [
-    "Other"
-  ],
+  "categories": ["Other"],
   "activationEvents": [
     "onCommand:vs-mcp.helloWorld",
-    "onCommand:vs-mcp.createIdeContext"
+    "onCommand:vs-mcp.createIdeContext",
+    "onView:vs-mcp.webview"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -30,7 +29,7 @@
       "explorer": [
         {
           "id": "vs-mcp.webview",
-          "name": "VS-MCP Webview",
+          "name": "VS MCP Agents",
           "icon": "$(window)",
           "type": "webview"
         }
@@ -39,15 +38,18 @@
     "commands": [
       {
         "command": "vs-mcp.runAgent",
-        "title": "Run VS-MCP Agent"
+        "title": "Run VS-MCP Agent",
+        "icon": "$(play-circle)"
       },
       {
         "command": "vs-mcp.createAgent",
-        "title": "Create VS-MCP Agent"
+        "title": "Create VS-MCP Agent",
+        "icon": "$(edit)"
       },
       {
         "command": "vs-mcp.openMcpSettings",
-        "title": "Open VS-MCP Settings"
+        "title": "Open VS-MCP Settings",
+        "icon": "$(gear)"
       },
       {
         "command": "vs-mcp.createIdeContext",
@@ -59,6 +61,13 @@
       }
     ],
     "menus": {
+      "view/title": [
+        {
+          "command": "vs-mcp.openMcpSettings",
+          "when": "view == vs-mcp.webview",
+          "group": "navigation@3"
+        }
+      ],
       "explorer/context": [
         {
           "command": "vs-mcp.runAgent",
