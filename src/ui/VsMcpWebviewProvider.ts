@@ -79,8 +79,6 @@ export class VsMcpWebviewProvider implements vscode.WebviewViewProvider {
           body {
             font-family: var(--vscode-font-family, system-ui, sans-serif);
             color: var(--vscode-foreground);
-            background: var(--vscode-editor-background);
-            padding: 1rem;
           }
           .btn {
             display: inline-flex;
