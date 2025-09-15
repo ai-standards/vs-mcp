@@ -68,17 +68,6 @@ export class VsMcpWebviewProvider implements vscode.WebviewViewProvider {
       )
     );
 
-    // Resolve Codicons CSS
-    const codiconsUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(
-        this.context.extensionUri,
-        "node_modules",
-        "@vscode/codicons",
-        "dist",
-        "codicon.css"
-      )
-    );
-
     return /* html */ `
       <!DOCTYPE html>
       <html lang="en">
@@ -86,7 +75,6 @@ export class VsMcpWebviewProvider implements vscode.WebviewViewProvider {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>VS-MCP Webview</title>
-        <link href="${codiconsUri}" rel="stylesheet" />
         <style>
           body {
             font-family: var(--vscode-font-family, system-ui, sans-serif);

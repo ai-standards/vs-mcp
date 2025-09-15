@@ -104,8 +104,11 @@ ${agentContext}
                 // Resolve the target directory from the clicked/selected URI
                 const {filepath} = context;
 
+
                 if (filepath) {
                     const fileUri = vscode.Uri.file(filepath);
+
+                    console.log(filepath, fileUri.fsPath);
 
                     const stat = await vscode.workspace.fs.stat(fileUri);
                     const targetDir =

@@ -6,13 +6,14 @@ import { registerOpenMcpSettings } from "./commands/open-mcp-settings";
 import { VsMcpWebviewProvider } from "./ui/VsMcpWebviewProvider";
 import { loadClient } from "./lib/ai";
 import { activateCreateAgent } from "./commands/create-agent";
+import { activateRunAgent } from "./commands/run-agent";
 
 // ---------- Extension entry ----------
 export async function activate(context: vscode.ExtensionContext) {
   // start by loading the ai client, everything needs that
   await loadClient(context);
 
-  // activateRunAgent(context);
+  activateRunAgent(context);
   activateCreateAgent(context);
   registerOpenMcpSettings(context);
   // registerCreateIdeContext(context);

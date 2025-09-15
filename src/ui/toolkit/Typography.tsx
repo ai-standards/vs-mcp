@@ -3,7 +3,7 @@ import * as React from "react";
 export interface TypographyProps {
   size?: "small" | "medium" | "large" | "xlarge";
   bold?: boolean;
-  color?: "default" | "secondary" | "error" | "warning" | "info";
+  color?: "default" | "secondary" | "error" | "warning" | "info" | "muted";
   style?: React.CSSProperties;
   children: React.ReactNode;
   as?: React.ElementType;
@@ -22,6 +22,7 @@ const colorMap: Record<string, string> = {
   error: "var(--vscode-errorForeground)",
   warning: "var(--vscode-editorWarning-foreground, orange)",
   info: "var(--vscode-editorInfo-foreground, blue)",
+  muted: "var(--vscode-editorHint-foreground, #888)", // gray
 };
 
 export function Typography({
