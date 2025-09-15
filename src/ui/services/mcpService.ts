@@ -6,7 +6,7 @@ export function createMcpService(api: {
   onMessage?: (handler: (message: any) => void) => void;
   offMessage?: (handler: (message: any) => void) => void;
 } | null) {
-  async function send<K extends ToolId>(tool: K, payload: CommandMap[K]["props"]): Promise<CommandMap[K]["response"]> {
+  async function dispatch<K extends ToolId>(tool: K, payload: CommandMap[K]["props"] = {}): Promise<CommandMap[K]["response"]> {
     if (!api) throw new Error("VS Code API not available");
     const uniqueId = nanoid();
     return new Promise<CommandMap[K]["response"]>((resolve, reject) => {
@@ -26,5 +26,5 @@ export function createMcpService(api: {
       api.postMessage({ mcp: {mcpId: tool, payload, requestId: uniqueId} });
     });
   }
-  return { send };
+  return { dispatch };
 }

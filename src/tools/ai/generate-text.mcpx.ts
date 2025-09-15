@@ -1,4 +1,4 @@
-import { getClient } from "@/lib/ai";
+import { getClient } from "../../lib/ai";
 
 type InputContext = {
   prompt: string;

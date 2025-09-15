@@ -7,10 +7,15 @@ export type VsCodeApi = {
   offMessage: (handler: (message: any) => void) => void;
 };
 
+let cachedVsApi: any = null;
+if (typeof window !== "undefined" && (window as any).acquireVsCodeApi) {
+  if (!cachedVsApi) {
+    cachedVsApi = (window as any).acquireVsCodeApi();
+  }
+}
+
 export function useApi(): VsCodeApi | null {
-  const vsApi = typeof window !== "undefined" && (window as any).acquireVsCodeApi
-    ? (window as any).acquireVsCodeApi()
-    : null;
+  const vsApi = cachedVsApi;
 
   const listeners = useRef<Set<(message: any) => void>>(new Set());
 

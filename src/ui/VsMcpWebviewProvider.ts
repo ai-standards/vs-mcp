@@ -1,4 +1,3 @@
-
 import { dispatch } from "../server/server";
 import * as vscode from "vscode";
 
@@ -15,13 +14,21 @@ export class VsMcpWebviewProvider implements vscode.WebviewViewProvider {
   ) {
     this._view = webviewView;
     webviewView.webview.options = {
-      enableScripts: true
+      enableScripts: true,
+      localResourceRoots: [
+        vscode.Uri.joinPath(this.context.extensionUri, "media")
+      ]
     };
+
     webviewView.webview.html = this.getHtmlForWebview(webviewView.webview);
+
     // Listen for messages from the webview
     webviewView.webview.onDidReceiveMessage(async (message: any) => {
       if (message.type === "ping") {
-        webviewView.webview.postMessage({ type: "pong", text: "Hello from extension!" });
+        webviewView.webview.postMessage({
+          type: "pong",
+          text: "Hello from extension!"
+        });
         return;
       }
       if (message.mcp) {
@@ -52,19 +59,48 @@ export class VsMcpWebviewProvider implements vscode.WebviewViewProvider {
   }
 
   private getHtmlForWebview(webview: vscode.Webview): string {
-    const scriptUri = webview.asWebviewUri(vscode.Uri.joinPath(
-      this.context.extensionUri,
-      "media",
-      "webview",
-      "main.js"
-    ));
-    return `
+    const scriptUri = webview.asWebviewUri(
+      vscode.Uri.joinPath(
+        this.context.extensionUri,
+        "media",
+        "webview",
+        "main.js"
+      )
+    );
+
+    return /* html */ `
       <!DOCTYPE html>
       <html lang="en">
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>VS-MCP Webview</title>
+        <style>
+          html, body, #root {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            padding: 0;
+          }
+          body {
+            font-family: var(--vscode-font-family, system-ui, sans-serif);
+            color: var(--vscode-foreground);
+          }
+          .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 4px 8px;
+            background: var(--vscode-button-background);
+            color: var(--vscode-button-foreground);
+            border: none;
+            border-radius: 4px;
+          }
+          .btn:hover {
+            background: var(--vscode-button-hoverBackground);
+          }
+        </style>
       </head>
       <body>
         <div id="root"></div>

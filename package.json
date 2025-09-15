@@ -7,12 +7,12 @@
   "engines": {
     "vscode": "^1.74.0"
   },
-  "categories": [
-    "Other"
-  ],
+  "categories": ["Other"],
   "activationEvents": [
     "onCommand:vs-mcp.helloWorld",
-    "onCommand:vs-mcp.createIdeContext"
+    "onCommand:vs-mcp.createIdeContext",
+    "onCommand:vs-mcp.setApiKey",
+    "onView:vs-mcp.webview"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -30,7 +30,7 @@
       "explorer": [
         {
           "id": "vs-mcp.webview",
-          "name": "VS-MCP Webview",
+          "name": "VS MCP Agents",
           "icon": "$(window)",
           "type": "webview"
         }
@@ -39,15 +39,23 @@
     "commands": [
       {
         "command": "vs-mcp.runAgent",
-        "title": "Run VS-MCP Agent"
+        "title": "Run VS-MCP Agent",
+        "icon": "$(play-circle)"
       },
       {
         "command": "vs-mcp.createAgent",
-        "title": "Create VS-MCP Agent"
+        "title": "Create VS-MCP Agent",
+        "icon": "$(edit)"
       },
       {
         "command": "vs-mcp.openMcpSettings",
-        "title": "Open VS-MCP Settings"
+        "title": "Open VS-MCP Settings",
+        "icon": "$(gear)"
+      },
+      {
+        "command": "vs-mcp.setApiKey",
+        "title": "Set VS-MCP API Key",
+        "icon": "$(key)"
       },
       {
         "command": "vs-mcp.createIdeContext",
@@ -59,6 +67,18 @@
       }
     ],
     "menus": {
+      "view/title": [
+        {
+          "command": "vs-mcp.setApiKey",
+          "when": "view == vs-mcp.webview",
+          "group": "navigation@4"
+        },
+        {
+          "command": "vs-mcp.openMcpSettings",
+          "when": "view == vs-mcp.webview",
+          "group": "navigation@3"
+        }
+      ],
       "explorer/context": [
         {
           "command": "vs-mcp.runAgent",
@@ -107,10 +127,11 @@
     "@vitejs/plugin-react": "^5.0.2",
     "fast-glob": "^3.3.3",
     "nanoid": "^5.1.5",
-    "openai": "^5.20.1",
+    "openai": "^5.20.2",
     "ora": "^8.2.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-icons": "^5.5.0",
     "ts-morph": "^27.0.0",
     "vscode": "^1.1.37",
     "zod": "^3.25.76"
