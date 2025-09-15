@@ -1,20 +1,27 @@
 import * as React from "react";
 
-export function Button(
-  props: React.ButtonHTMLAttributes<HTMLButtonElement>
-) {
+export function Button({ color = "primary", style, className, ...props }: React.ButtonHTMLAttributes<HTMLButtonElement> & { color?: "primary" | "secondary" | "none" }) {
+  let background = "var(--vscode-button-background)";
+  let textColor = "var(--vscode-button-foreground)";
+  if (color === "secondary") {
+    background = "var(--vscode-editorWidget-background)";
+    textColor = "var(--vscode-descriptionForeground)";
+  } else if (color === "none") {
+    background = "none";
+    textColor = "inherit";
+  }
   return (
     <button
       {...props}
-      className={`btn ${props.className ?? ""}`}
+      className={`btn ${className ?? ""}`}
       style={{
-        background: "var(--vscode-button-background)",
-        color: "var(--vscode-button-foreground)",
+        background,
+        color: textColor,
         border: "none",
         padding: "4px 12px",
         borderRadius: 4,
         cursor: "pointer",
-        ...props.style,
+        ...style,
       }}
     />
   );

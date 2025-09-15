@@ -76,6 +76,13 @@ export class VsMcpWebviewProvider implements vscode.WebviewViewProvider {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>VS-MCP Webview</title>
         <style>
+          html, body, #root {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            padding: 0;
+          }
           body {
             font-family: var(--vscode-font-family, system-ui, sans-serif);
             color: var(--vscode-foreground);

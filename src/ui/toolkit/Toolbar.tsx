@@ -9,8 +9,6 @@ export function Toolbar({ children, ...props }: React.HTMLAttributes<HTMLDivElem
         display: "flex",
         alignItems: "center",
         gap: "var(--space-2)",
-        background: "var(--vscode-editorWidget-background)",
-        borderBottom: "1px solid var(--vscode-editorWidget-border)",
         padding: "var(--space-1) var(--space-2)",
         ...props.style,
       }}

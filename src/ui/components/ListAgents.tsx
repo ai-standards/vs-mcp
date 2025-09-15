@@ -4,6 +4,7 @@ import { List, ListItem } from "../toolkit/List";
 import { createMcpService } from "../services/mcpService";
 import { Button, IconButton, Typography } from "../toolkit";
 import { VscPlay, VscOpenPreview, VscEdit } from "react-icons/vsc";
+import { Loading } from "../toolkit/Loading";
 
 export const ListAgents: React.FC = () => {
 	const [agents, setAgents] = useState<Array<{ id: string; name: string; description?: string; path?: string }>>([]);
@@ -28,7 +29,7 @@ export const ListAgents: React.FC = () => {
 		fetchAgents();
 	}, []);
 
-	if (loading) return <div>Loading agents...</div>;
+	if (loading) return <Loading align="center" />;
 	if (error) return <div>Error: {error}</div>;
 
     const openAgent = (agent: any) => {
@@ -46,7 +47,7 @@ export const ListAgents: React.FC = () => {
 						<IconButton icon={<VscPlay />}  onClick={() => mcpService.dispatch('agent.runAgent', {filepath: agent.path})}/>
 					</div>}>
 						<Typography as="div">{agent.name}</Typography>
-						<Typography as="div" size="small" color="muted">...{agent.path?.slice(-40)}</Typography>
+						<Typography as="div" size="small" color="muted">...{agent.path?.slice(-35)}</Typography>
 					</ListItem>
 				))
 			)}
