@@ -7,6 +7,7 @@ import { VsMcpWebviewProvider } from "./ui/VsMcpWebviewProvider";
 import { loadClient } from "./lib/ai";
 import { activateCreateAgent } from "./commands/create-agent";
 import { activateRunAgent } from "./commands/run-agent";
+import { activateSetApiKey } from "./commands/set-api-key";
 
 // ---------- Extension entry ----------
 export async function activate(context: vscode.ExtensionContext) {
@@ -16,6 +17,8 @@ export async function activate(context: vscode.ExtensionContext) {
   activateRunAgent(context);
   activateCreateAgent(context);
   registerOpenMcpSettings(context);
+  activateSetApiKey(context);
+  
   // registerCreateIdeContext(context);
 
   // Register VS-MCP Webview Provider

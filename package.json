@@ -11,6 +11,7 @@
   "activationEvents": [
     "onCommand:vs-mcp.helloWorld",
     "onCommand:vs-mcp.createIdeContext",
+    "onCommand:vs-mcp.setApiKey",
     "onView:vs-mcp.webview"
   ],
   "main": "./out/extension.js",
@@ -52,6 +53,11 @@
         "icon": "$(gear)"
       },
       {
+        "command": "vs-mcp.setApiKey",
+        "title": "Set VS-MCP API Key",
+        "icon": "$(key)"
+      },
+      {
         "command": "vs-mcp.createIdeContext",
         "title": "Create VS-MCP IDE Context"
       },
@@ -62,6 +68,11 @@
     ],
     "menus": {
       "view/title": [
+        {
+          "command": "vs-mcp.setApiKey",
+          "when": "view == vs-mcp.webview",
+          "group": "navigation@4"
+        },
         {
           "command": "vs-mcp.openMcpSettings",
           "when": "view == vs-mcp.webview",
