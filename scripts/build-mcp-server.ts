@@ -189,6 +189,8 @@ export async function runTool<K extends keyof CommandMap>(
       path: t.path ?? "",
       name: t.name,
       description: t.description,
+      input: t.input ?? {},
+      output: t.output ?? {}
     }));
     chunks.push(`
 export type ToolDescriptor = {

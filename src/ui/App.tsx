@@ -1,26 +1,15 @@
 import React from "react";
-import { useApi } from "./hooks/useApi";
-import { createMcpService } from "./services/mcpService";
-
-// Add TypeScript definition for window.acquireVsCodeApi
+import { ListAgents } from "./components/ListAgents";
+import { Section } from "./toolkit/Section";
+import CreateAgent from "./components/CreateAgent";
 
 export default function App() {
-  const api = useApi();
-  const mcp = createMcpService(api);
-
-  const handleClick = async () => {
-    try {
-     const res = await mcp.send("editor.openVirtual", { content: "test" });
-     console.log({res});
-      } catch (err) {
-        console.error("MCP error:", err);
-      }
-    };
-
   return (
-    <div>
-      <h1>Hello</h1>
-      <button onClick={handleClick}>open file</button>
-    </div>
+    <Section fullHeight={true}>
+      <div style={{flex: 1, overflowY: "auto"}}>
+        <ListAgents />
+      </div>
+      <CreateAgent />
+    </Section>
   );
 }
