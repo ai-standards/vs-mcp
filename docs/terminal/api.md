@@ -4,7 +4,8 @@
 
 Close a specific integrated terminal in VS Code.
 
-**Path:** src/tools/terminal/close.mcpx.ts
+* **Token:** `terminal.closeTerminal`
+* **Path:** src/tools/terminal/close.mcpx.ts
 
 ### Input
 | Name | Type | Required |
@@ -20,7 +21,8 @@ Close a specific integrated terminal in VS Code.
 
 Create a new integrated terminal in VS Code.
 
-**Path:** src/tools/terminal/create.mcpx.ts
+* **Token:** `terminal.createTerminal`
+* **Path:** src/tools/terminal/create.mcpx.ts
 
 ### Input
 | Name | Type | Required |
@@ -36,7 +38,8 @@ Create a new integrated terminal in VS Code.
 
 List all open integrated terminals in VS Code.
 
-**Path:** src/tools/terminal/list.mcpx.ts
+* **Token:** `terminal.listTerminals`
+* **Path:** src/tools/terminal/list.mcpx.ts
 
 ### Input
 _None_
@@ -50,7 +53,8 @@ _None_
 
 Send text or command to a specific integrated terminal.
 
-**Path:** src/tools/terminal/send.mcpx.ts
+* **Token:** `terminal.sendTextToTerminal`
+* **Path:** src/tools/terminal/send.mcpx.ts
 
 ### Input
 | Name | Type | Required |
@@ -67,7 +71,8 @@ Send text or command to a specific integrated terminal.
 
 Show a specific integrated terminal in VS Code.
 
-**Path:** src/tools/terminal/show.mcpx.ts
+* **Token:** `terminal.showTerminal`
+* **Path:** src/tools/terminal/show.mcpx.ts
 
 ### Input
 | Name | Type | Required |

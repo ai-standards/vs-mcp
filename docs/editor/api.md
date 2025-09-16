@@ -4,7 +4,8 @@
 
 Get the active editor file's path, languageId, and selected or full text.
 
-**Path:** src/tools/editor/active-file.mcpx.ts
+* **Token:** `editor.activeFile`
+* **Path:** src/tools/editor/active-file.mcpx.ts
 
 ### Input
 _None_
@@ -16,7 +17,8 @@ _None_
 
 Open a file in the editor by absolute path.
 
-**Path:** src/tools/editor/open-file.mcpx.ts
+* **Token:** `editor.openFile`
+* **Path:** src/tools/editor/open-file.mcpx.ts
 
 ### Input
 | Name | Type | Required |
@@ -32,7 +34,8 @@ Open a file in the editor by absolute path.
 
 Open a read-only virtual document with content and language.
 
-**Path:** src/tools/editor/open-virtual.mcpx.ts
+* **Token:** `editor.openVirtual`
+* **Path:** src/tools/editor/open-virtual.mcpx.ts
 
 ### Input
 | Name | Type | Required |
@@ -51,7 +54,8 @@ Open a read-only virtual document with content and language.
 
 Show a diff and ask the user to apply changes to a file in the workspace.
 
-**Path:** src/tools/editor/propose-edits.mcpx.ts
+* **Token:** `editor.proposeEdits`
+* **Path:** src/tools/editor/propose-edits.mcpx.ts
 
 ### Input
 | Name | Type | Required |
@@ -74,7 +78,8 @@ Show a diff and ask the user to apply changes to a file in the workspace.
 
 Get selection offsets and text for the active editor.
 
-**Path:** src/tools/editor/selection.mcpx.ts
+* **Token:** `editor.editorSelection`
+* **Path:** src/tools/editor/selection.mcpx.ts
 
 ### Input
 _None_

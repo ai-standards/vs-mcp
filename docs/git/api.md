@@ -4,7 +4,8 @@
 
 Create a new branch in the current repository using VS Code's Git extension.
 
-**Path:** src/tools/git/create-branch.mcpx.ts
+* **Token:** `git.createGitBranch`
+* **Path:** src/tools/git/create-branch.mcpx.ts
 
 ### Input
 | Name | Type | Required |
@@ -21,7 +22,8 @@ Create a new branch in the current repository using VS Code's Git extension.
 
 Delete the specified branch in the current repository using VS Code's Git extension.
 
-**Path:** src/tools/git/delete-branch.mcpx.ts
+* **Token:** `git.deleteGitBranch`
+* **Path:** src/tools/git/delete-branch.mcpx.ts
 
 ### Input
 | Name | Type | Required |
@@ -38,7 +40,8 @@ Delete the specified branch in the current repository using VS Code's Git extens
 
 Merge the specified branch into the current branch using VS Code's Git extension.
 
-**Path:** src/tools/git/merge-branch.mcpx.ts
+* **Token:** `git.mergeGitBranch`
+* **Path:** src/tools/git/merge-branch.mcpx.ts
 
 ### Input
 | Name | Type | Required |

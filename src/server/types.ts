@@ -342,86 +342,6 @@ export interface VcsGetVcsStatusResponse {
   "error"?: string;
 }
 
-/** Create a new file in the workspace with optional content. */
-export interface WorkspaceCreateWorkspaceFileProps {
-  "path": string;
-  "content"?: string;
-}
-
-export interface WorkspaceCreateWorkspaceFileResponse {
-  "success": false;
-  "error"?: string;
-}
-
-/** Delete a file from the workspace. */
-export interface WorkspaceDeleteWorkspaceFileProps {
-  "path": string;
-}
-
-export interface WorkspaceDeleteWorkspaceFileResponse {
-  "success": false;
-  "error"?: string;
-}
-
-/** List files in the workspace matching a glob pattern. */
-export interface WorkspaceListWorkspaceFilesProps {
-  "glob"?: string;
-}
-
-export interface WorkspaceListWorkspaceFilesResponse {
-  "files": string[];
-}
-
-/** List all workspace folders. */
-export interface WorkspaceListWorkspaceFoldersProps {
-
-}
-
-export interface WorkspaceListWorkspaceFoldersResponse {
-  "folders": string[];
-}
-
-/** Rename a folder in the workspace using VS Code's file system API (preserves user security permissions). */
-export interface WorkspaceRenameWorkspaceFolderProps {
-  "oldPath": string;
-  "newPath": string;
-}
-
-export interface WorkspaceRenameWorkspaceFolderResponse {
-  "success": false;
-  "error"?: string;
-}
-
-/** Create a new branch in the current repository using VS Code's Git extension. */
-export interface GitCreateGitBranchProps {
-  "branchName": string;
-}
-
-export interface GitCreateGitBranchResponse {
-  "success": false;
-  "error"?: string;
-}
-
-/** Delete the specified branch in the current repository using VS Code's Git extension. */
-export interface GitDeleteGitBranchProps {
-  "branchName": string;
-}
-
-export interface GitDeleteGitBranchResponse {
-  "success": false;
-  "error"?: string;
-}
-
-/** Merge the specified branch into the current branch using VS Code's Git extension. */
-export interface GitMergeGitBranchProps {
-  "branchName": string;
-}
-
-export interface GitMergeGitBranchResponse {
-  "success": false;
-  "error"?: string;
-}
-
 /** Get the active editor file's path, languageId, and selected or full text. */
 export interface EditorActiveFileProps {
 
@@ -477,6 +397,56 @@ export interface EditorEditorSelectionResponse {
   "__self": null;
 }
 
+/** Create a new file in the workspace with optional content. */
+export interface WorkspaceCreateWorkspaceFileProps {
+  "path": string;
+  "content"?: string;
+}
+
+export interface WorkspaceCreateWorkspaceFileResponse {
+  "success": false;
+  "error"?: string;
+}
+
+/** Delete a file from the workspace. */
+export interface WorkspaceDeleteWorkspaceFileProps {
+  "path": string;
+}
+
+export interface WorkspaceDeleteWorkspaceFileResponse {
+  "success": false;
+  "error"?: string;
+}
+
+/** List files in the workspace matching a glob pattern. */
+export interface WorkspaceListWorkspaceFilesProps {
+  "glob"?: string;
+}
+
+export interface WorkspaceListWorkspaceFilesResponse {
+  "files": string[];
+}
+
+/** List all workspace folders. */
+export interface WorkspaceListWorkspaceFoldersProps {
+
+}
+
+export interface WorkspaceListWorkspaceFoldersResponse {
+  "folders": string[];
+}
+
+/** Rename a folder in the workspace using VS Code's file system API (preserves user security permissions). */
+export interface WorkspaceRenameWorkspaceFolderProps {
+  "oldPath": string;
+  "newPath": string;
+}
+
+export interface WorkspaceRenameWorkspaceFolderResponse {
+  "success": false;
+  "error"?: string;
+}
+
 /** Create a new issue in a GitHub repository using VS Code's GitHub integration. */
 export interface GithubCreateGitHubIssueProps {
   "repository": string;
@@ -510,7 +480,37 @@ export interface GithubOpenGitHubRepositoryResponse {
   "repoUrl": string;
 }
 
-export type ToolId = "agent.createAgent" | "agent.listAgents" | "agent.runAgent" | "ai.generateCode" | "ai.generateData" | "ai.generateImages" | "ai.generateText" | "ai.refactorCode" | "ai.testCode" | "ai.writeDocumentation" | "fs.findFiles" | "fs.readDir" | "fs.readFile" | "fs.writeFile" | "status.showStatusBar" | "status.dismissStatus" | "status.showStatusWindow" | "terminal.closeTerminal" | "terminal.createTerminal" | "terminal.listTerminals" | "terminal.sendTextToTerminal" | "terminal.showTerminal" | "ui.showInfoMessage" | "ui.showInputBox" | "ui.showWarningMessage" | "vcs.commitChanges" | "vcs.pullChanges" | "vcs.pushChanges" | "vcs.getVcsStatus" | "workspace.createWorkspaceFile" | "workspace.deleteWorkspaceFile" | "workspace.listWorkspaceFiles" | "workspace.listWorkspaceFolders" | "workspace.renameWorkspaceFolder" | "git.createGitBranch" | "git.deleteGitBranch" | "git.mergeGitBranch" | "editor.activeFile" | "editor.openFile" | "editor.openVirtual" | "editor.proposeEdits" | "editor.editorSelection" | "github.createGitHubIssue" | "github.createGitHubPullRequest" | "github.openGitHubRepository";
+/** Create a new branch in the current repository using VS Code's Git extension. */
+export interface GitCreateGitBranchProps {
+  "branchName": string;
+}
+
+export interface GitCreateGitBranchResponse {
+  "success": false;
+  "error"?: string;
+}
+
+/** Delete the specified branch in the current repository using VS Code's Git extension. */
+export interface GitDeleteGitBranchProps {
+  "branchName": string;
+}
+
+export interface GitDeleteGitBranchResponse {
+  "success": false;
+  "error"?: string;
+}
+
+/** Merge the specified branch into the current branch using VS Code's Git extension. */
+export interface GitMergeGitBranchProps {
+  "branchName": string;
+}
+
+export interface GitMergeGitBranchResponse {
+  "success": false;
+  "error"?: string;
+}
+
+export type ToolId = "agent.createAgent" | "agent.listAgents" | "agent.runAgent" | "ai.generateCode" | "ai.generateData" | "ai.generateImages" | "ai.generateText" | "ai.refactorCode" | "ai.testCode" | "ai.writeDocumentation" | "fs.findFiles" | "fs.readDir" | "fs.readFile" | "fs.writeFile" | "status.showStatusBar" | "status.dismissStatus" | "status.showStatusWindow" | "terminal.closeTerminal" | "terminal.createTerminal" | "terminal.listTerminals" | "terminal.sendTextToTerminal" | "terminal.showTerminal" | "ui.showInfoMessage" | "ui.showInputBox" | "ui.showWarningMessage" | "vcs.commitChanges" | "vcs.pullChanges" | "vcs.pushChanges" | "vcs.getVcsStatus" | "editor.activeFile" | "editor.openFile" | "editor.openVirtual" | "editor.proposeEdits" | "editor.editorSelection" | "workspace.createWorkspaceFile" | "workspace.deleteWorkspaceFile" | "workspace.listWorkspaceFiles" | "workspace.listWorkspaceFolders" | "workspace.renameWorkspaceFolder" | "github.createGitHubIssue" | "github.createGitHubPullRequest" | "github.openGitHubRepository" | "git.createGitBranch" | "git.deleteGitBranch" | "git.mergeGitBranch";
   
 export type CommandMap = {
   "agent.createAgent": { props: AgentCreateAgentProps; response: AgentCreateAgentResponse; path: "src/tools/agent/create-agent.mcpx.ts" };
@@ -542,22 +542,22 @@ export type CommandMap = {
   "vcs.pullChanges": { props: VcsPullChangesProps; response: VcsPullChangesResponse; path: "src/tools/vcs/pull.mcpx.ts" };
   "vcs.pushChanges": { props: VcsPushChangesProps; response: VcsPushChangesResponse; path: "src/tools/vcs/push.mcpx.ts" };
   "vcs.getVcsStatus": { props: VcsGetVcsStatusProps; response: VcsGetVcsStatusResponse; path: "src/tools/vcs/status.mcpx.ts" };
-  "workspace.createWorkspaceFile": { props: WorkspaceCreateWorkspaceFileProps; response: WorkspaceCreateWorkspaceFileResponse; path: "src/tools/workspace/create-file.mcpx.ts" };
-  "workspace.deleteWorkspaceFile": { props: WorkspaceDeleteWorkspaceFileProps; response: WorkspaceDeleteWorkspaceFileResponse; path: "src/tools/workspace/delete-file.mcpx.ts" };
-  "workspace.listWorkspaceFiles": { props: WorkspaceListWorkspaceFilesProps; response: WorkspaceListWorkspaceFilesResponse; path: "src/tools/workspace/list-files.mcpx.ts" };
-  "workspace.listWorkspaceFolders": { props: WorkspaceListWorkspaceFoldersProps; response: WorkspaceListWorkspaceFoldersResponse; path: "src/tools/workspace/list-folders.mcpx.ts" };
-  "workspace.renameWorkspaceFolder": { props: WorkspaceRenameWorkspaceFolderProps; response: WorkspaceRenameWorkspaceFolderResponse; path: "src/tools/workspace/rename-folder.mcpx.ts" };
-  "git.createGitBranch": { props: GitCreateGitBranchProps; response: GitCreateGitBranchResponse; path: "src/tools/git/create-branch.mcpx.ts" };
-  "git.deleteGitBranch": { props: GitDeleteGitBranchProps; response: GitDeleteGitBranchResponse; path: "src/tools/git/delete-branch.mcpx.ts" };
-  "git.mergeGitBranch": { props: GitMergeGitBranchProps; response: GitMergeGitBranchResponse; path: "src/tools/git/merge-branch.mcpx.ts" };
   "editor.activeFile": { props: EditorActiveFileProps; response: EditorActiveFileResponse; path: "src/tools/editor/active-file.mcpx.ts" };
   "editor.openFile": { props: EditorOpenFileProps; response: EditorOpenFileResponse; path: "src/tools/editor/open-file.mcpx.ts" };
   "editor.openVirtual": { props: EditorOpenVirtualProps; response: EditorOpenVirtualResponse; path: "src/tools/editor/open-virtual.mcpx.ts" };
   "editor.proposeEdits": { props: EditorProposeEditsProps; response: EditorProposeEditsResponse; path: "src/tools/editor/propose-edits.mcpx.ts" };
   "editor.editorSelection": { props: EditorEditorSelectionProps; response: EditorEditorSelectionResponse; path: "src/tools/editor/selection.mcpx.ts" };
+  "workspace.createWorkspaceFile": { props: WorkspaceCreateWorkspaceFileProps; response: WorkspaceCreateWorkspaceFileResponse; path: "src/tools/workspace/create-file.mcpx.ts" };
+  "workspace.deleteWorkspaceFile": { props: WorkspaceDeleteWorkspaceFileProps; response: WorkspaceDeleteWorkspaceFileResponse; path: "src/tools/workspace/delete-file.mcpx.ts" };
+  "workspace.listWorkspaceFiles": { props: WorkspaceListWorkspaceFilesProps; response: WorkspaceListWorkspaceFilesResponse; path: "src/tools/workspace/list-files.mcpx.ts" };
+  "workspace.listWorkspaceFolders": { props: WorkspaceListWorkspaceFoldersProps; response: WorkspaceListWorkspaceFoldersResponse; path: "src/tools/workspace/list-folders.mcpx.ts" };
+  "workspace.renameWorkspaceFolder": { props: WorkspaceRenameWorkspaceFolderProps; response: WorkspaceRenameWorkspaceFolderResponse; path: "src/tools/workspace/rename-folder.mcpx.ts" };
   "github.createGitHubIssue": { props: GithubCreateGitHubIssueProps; response: GithubCreateGitHubIssueResponse; path: "src/tools/github/create-issue.mcpx.ts" };
   "github.createGitHubPullRequest": { props: GithubCreateGitHubPullRequestProps; response: GithubCreateGitHubPullRequestResponse; path: "src/tools/github/create-pr.mcpx.ts" };
   "github.openGitHubRepository": { props: GithubOpenGitHubRepositoryProps; response: GithubOpenGitHubRepositoryResponse; path: "src/tools/github/open-repo.mcpx.ts" };
+  "git.createGitBranch": { props: GitCreateGitBranchProps; response: GitCreateGitBranchResponse; path: "src/tools/git/create-branch.mcpx.ts" };
+  "git.deleteGitBranch": { props: GitDeleteGitBranchProps; response: GitDeleteGitBranchResponse; path: "src/tools/git/delete-branch.mcpx.ts" };
+  "git.mergeGitBranch": { props: GitMergeGitBranchProps; response: GitMergeGitBranchResponse; path: "src/tools/git/merge-branch.mcpx.ts" };
 };
 
 type AgentCreateAgentPropsKey = "agent.createAgentProps";
@@ -618,22 +618,6 @@ type VcsPushChangesPropsKey = "vcs.pushChangesProps";
 type VcsPushChangesResponseKey = "vcs.pushChangesResponse";
 type VcsGetVcsStatusPropsKey = "vcs.getVcsStatusProps";
 type VcsGetVcsStatusResponseKey = "vcs.getVcsStatusResponse";
-type WorkspaceCreateWorkspaceFilePropsKey = "workspace.createWorkspaceFileProps";
-type WorkspaceCreateWorkspaceFileResponseKey = "workspace.createWorkspaceFileResponse";
-type WorkspaceDeleteWorkspaceFilePropsKey = "workspace.deleteWorkspaceFileProps";
-type WorkspaceDeleteWorkspaceFileResponseKey = "workspace.deleteWorkspaceFileResponse";
-type WorkspaceListWorkspaceFilesPropsKey = "workspace.listWorkspaceFilesProps";
-type WorkspaceListWorkspaceFilesResponseKey = "workspace.listWorkspaceFilesResponse";
-type WorkspaceListWorkspaceFoldersPropsKey = "workspace.listWorkspaceFoldersProps";
-type WorkspaceListWorkspaceFoldersResponseKey = "workspace.listWorkspaceFoldersResponse";
-type WorkspaceRenameWorkspaceFolderPropsKey = "workspace.renameWorkspaceFolderProps";
-type WorkspaceRenameWorkspaceFolderResponseKey = "workspace.renameWorkspaceFolderResponse";
-type GitCreateGitBranchPropsKey = "git.createGitBranchProps";
-type GitCreateGitBranchResponseKey = "git.createGitBranchResponse";
-type GitDeleteGitBranchPropsKey = "git.deleteGitBranchProps";
-type GitDeleteGitBranchResponseKey = "git.deleteGitBranchResponse";
-type GitMergeGitBranchPropsKey = "git.mergeGitBranchProps";
-type GitMergeGitBranchResponseKey = "git.mergeGitBranchResponse";
 type EditorActiveFilePropsKey = "editor.activeFileProps";
 type EditorActiveFileResponseKey = "editor.activeFileResponse";
 type EditorOpenFilePropsKey = "editor.openFileProps";
@@ -644,12 +628,28 @@ type EditorProposeEditsPropsKey = "editor.proposeEditsProps";
 type EditorProposeEditsResponseKey = "editor.proposeEditsResponse";
 type EditorEditorSelectionPropsKey = "editor.editorSelectionProps";
 type EditorEditorSelectionResponseKey = "editor.editorSelectionResponse";
+type WorkspaceCreateWorkspaceFilePropsKey = "workspace.createWorkspaceFileProps";
+type WorkspaceCreateWorkspaceFileResponseKey = "workspace.createWorkspaceFileResponse";
+type WorkspaceDeleteWorkspaceFilePropsKey = "workspace.deleteWorkspaceFileProps";
+type WorkspaceDeleteWorkspaceFileResponseKey = "workspace.deleteWorkspaceFileResponse";
+type WorkspaceListWorkspaceFilesPropsKey = "workspace.listWorkspaceFilesProps";
+type WorkspaceListWorkspaceFilesResponseKey = "workspace.listWorkspaceFilesResponse";
+type WorkspaceListWorkspaceFoldersPropsKey = "workspace.listWorkspaceFoldersProps";
+type WorkspaceListWorkspaceFoldersResponseKey = "workspace.listWorkspaceFoldersResponse";
+type WorkspaceRenameWorkspaceFolderPropsKey = "workspace.renameWorkspaceFolderProps";
+type WorkspaceRenameWorkspaceFolderResponseKey = "workspace.renameWorkspaceFolderResponse";
 type GithubCreateGitHubIssuePropsKey = "github.createGitHubIssueProps";
 type GithubCreateGitHubIssueResponseKey = "github.createGitHubIssueResponse";
 type GithubCreateGitHubPullRequestPropsKey = "github.createGitHubPullRequestProps";
 type GithubCreateGitHubPullRequestResponseKey = "github.createGitHubPullRequestResponse";
 type GithubOpenGitHubRepositoryPropsKey = "github.openGitHubRepositoryProps";
 type GithubOpenGitHubRepositoryResponseKey = "github.openGitHubRepositoryResponse";
+type GitCreateGitBranchPropsKey = "git.createGitBranchProps";
+type GitCreateGitBranchResponseKey = "git.createGitBranchResponse";
+type GitDeleteGitBranchPropsKey = "git.deleteGitBranchProps";
+type GitDeleteGitBranchResponseKey = "git.deleteGitBranchResponse";
+type GitMergeGitBranchPropsKey = "git.mergeGitBranchProps";
+type GitMergeGitBranchResponseKey = "git.mergeGitBranchResponse";
 
 export type PropsFor<K extends keyof CommandMap> =
   { [P in `${Extract<K, string>}Props`]: CommandMap[K]["props"] };
@@ -1529,185 +1529,6 @@ export const AllTools = [
     }
   },
   {
-    "id": "createWorkspaceFile",
-    "namespace": "workspace",
-    "path": "src/tools/workspace/create-file.mcpx.ts",
-    "name": "Create Workspace File",
-    "description": "Create a new file in the workspace with optional content.",
-    "input": {
-      "path": {
-        "type": "string",
-        "required": true
-      },
-      "content": {
-        "type": "string",
-        "required": false
-      }
-    },
-    "output": {
-      "success": {
-        "type": "false",
-        "required": true
-      },
-      "error": {
-        "type": "string",
-        "required": false
-      }
-    }
-  },
-  {
-    "id": "deleteWorkspaceFile",
-    "namespace": "workspace",
-    "path": "src/tools/workspace/delete-file.mcpx.ts",
-    "name": "Delete Workspace File",
-    "description": "Delete a file from the workspace.",
-    "input": {
-      "path": {
-        "type": "string",
-        "required": true
-      }
-    },
-    "output": {
-      "success": {
-        "type": "false",
-        "required": true
-      },
-      "error": {
-        "type": "string",
-        "required": false
-      }
-    }
-  },
-  {
-    "id": "listWorkspaceFiles",
-    "namespace": "workspace",
-    "path": "src/tools/workspace/list-files.mcpx.ts",
-    "name": "List Workspace Files",
-    "description": "List files in the workspace matching a glob pattern.",
-    "input": {
-      "glob": {
-        "type": "string",
-        "required": false
-      }
-    },
-    "output": {
-      "files": {
-        "type": "string[]",
-        "required": true
-      }
-    }
-  },
-  {
-    "id": "listWorkspaceFolders",
-    "namespace": "workspace",
-    "path": "src/tools/workspace/list-folders.mcpx.ts",
-    "name": "List Workspace Folders",
-    "description": "List all workspace folders.",
-    "input": {},
-    "output": {
-      "folders": {
-        "type": "string[]",
-        "required": true
-      }
-    }
-  },
-  {
-    "id": "renameWorkspaceFolder",
-    "namespace": "workspace",
-    "path": "src/tools/workspace/rename-folder.mcpx.ts",
-    "name": "Rename Workspace Folder",
-    "description": "Rename a folder in the workspace using VS Code's file system API (preserves user security permissions).",
-    "input": {
-      "oldPath": {
-        "type": "string",
-        "required": true
-      },
-      "newPath": {
-        "type": "string",
-        "required": true
-      }
-    },
-    "output": {
-      "success": {
-        "type": "false",
-        "required": true
-      },
-      "error": {
-        "type": "string",
-        "required": false
-      }
-    }
-  },
-  {
-    "id": "createGitBranch",
-    "namespace": "git",
-    "path": "src/tools/git/create-branch.mcpx.ts",
-    "name": "Create Git Branch",
-    "description": "Create a new branch in the current repository using VS Code's Git extension.",
-    "input": {
-      "branchName": {
-        "type": "string",
-        "required": true
-      }
-    },
-    "output": {
-      "success": {
-        "type": "false",
-        "required": true
-      },
-      "error": {
-        "type": "string",
-        "required": false
-      }
-    }
-  },
-  {
-    "id": "deleteGitBranch",
-    "namespace": "git",
-    "path": "src/tools/git/delete-branch.mcpx.ts",
-    "name": "Delete Git Branch",
-    "description": "Delete the specified branch in the current repository using VS Code's Git extension.",
-    "input": {
-      "branchName": {
-        "type": "string",
-        "required": true
-      }
-    },
-    "output": {
-      "success": {
-        "type": "false",
-        "required": true
-      },
-      "error": {
-        "type": "string",
-        "required": false
-      }
-    }
-  },
-  {
-    "id": "mergeGitBranch",
-    "namespace": "git",
-    "path": "src/tools/git/merge-branch.mcpx.ts",
-    "name": "Merge Git Branch",
-    "description": "Merge the specified branch into the current branch using VS Code's Git extension.",
-    "input": {
-      "branchName": {
-        "type": "string",
-        "required": true
-      }
-    },
-    "output": {
-      "success": {
-        "type": "false",
-        "required": true
-      },
-      "error": {
-        "type": "string",
-        "required": false
-      }
-    }
-  },
-  {
     "id": "activeFile",
     "namespace": "editor",
     "path": "src/tools/editor/active-file.mcpx.ts",
@@ -1833,6 +1654,116 @@ export const AllTools = [
     }
   },
   {
+    "id": "createWorkspaceFile",
+    "namespace": "workspace",
+    "path": "src/tools/workspace/create-file.mcpx.ts",
+    "name": "Create Workspace File",
+    "description": "Create a new file in the workspace with optional content.",
+    "input": {
+      "path": {
+        "type": "string",
+        "required": true
+      },
+      "content": {
+        "type": "string",
+        "required": false
+      }
+    },
+    "output": {
+      "success": {
+        "type": "false",
+        "required": true
+      },
+      "error": {
+        "type": "string",
+        "required": false
+      }
+    }
+  },
+  {
+    "id": "deleteWorkspaceFile",
+    "namespace": "workspace",
+    "path": "src/tools/workspace/delete-file.mcpx.ts",
+    "name": "Delete Workspace File",
+    "description": "Delete a file from the workspace.",
+    "input": {
+      "path": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "output": {
+      "success": {
+        "type": "false",
+        "required": true
+      },
+      "error": {
+        "type": "string",
+        "required": false
+      }
+    }
+  },
+  {
+    "id": "listWorkspaceFiles",
+    "namespace": "workspace",
+    "path": "src/tools/workspace/list-files.mcpx.ts",
+    "name": "List Workspace Files",
+    "description": "List files in the workspace matching a glob pattern.",
+    "input": {
+      "glob": {
+        "type": "string",
+        "required": false
+      }
+    },
+    "output": {
+      "files": {
+        "type": "string[]",
+        "required": true
+      }
+    }
+  },
+  {
+    "id": "listWorkspaceFolders",
+    "namespace": "workspace",
+    "path": "src/tools/workspace/list-folders.mcpx.ts",
+    "name": "List Workspace Folders",
+    "description": "List all workspace folders.",
+    "input": {},
+    "output": {
+      "folders": {
+        "type": "string[]",
+        "required": true
+      }
+    }
+  },
+  {
+    "id": "renameWorkspaceFolder",
+    "namespace": "workspace",
+    "path": "src/tools/workspace/rename-folder.mcpx.ts",
+    "name": "Rename Workspace Folder",
+    "description": "Rename a folder in the workspace using VS Code's file system API (preserves user security permissions).",
+    "input": {
+      "oldPath": {
+        "type": "string",
+        "required": true
+      },
+      "newPath": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "output": {
+      "success": {
+        "type": "false",
+        "required": true
+      },
+      "error": {
+        "type": "string",
+        "required": false
+      }
+    }
+  },
+  {
     "id": "createGitHubIssue",
     "namespace": "github",
     "path": "src/tools/github/create-issue.mcpx.ts",
@@ -1910,6 +1841,75 @@ export const AllTools = [
       "repoUrl": {
         "type": "string",
         "required": true
+      }
+    }
+  },
+  {
+    "id": "createGitBranch",
+    "namespace": "git",
+    "path": "src/tools/git/create-branch.mcpx.ts",
+    "name": "Create Git Branch",
+    "description": "Create a new branch in the current repository using VS Code's Git extension.",
+    "input": {
+      "branchName": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "output": {
+      "success": {
+        "type": "false",
+        "required": true
+      },
+      "error": {
+        "type": "string",
+        "required": false
+      }
+    }
+  },
+  {
+    "id": "deleteGitBranch",
+    "namespace": "git",
+    "path": "src/tools/git/delete-branch.mcpx.ts",
+    "name": "Delete Git Branch",
+    "description": "Delete the specified branch in the current repository using VS Code's Git extension.",
+    "input": {
+      "branchName": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "output": {
+      "success": {
+        "type": "false",
+        "required": true
+      },
+      "error": {
+        "type": "string",
+        "required": false
+      }
+    }
+  },
+  {
+    "id": "mergeGitBranch",
+    "namespace": "git",
+    "path": "src/tools/git/merge-branch.mcpx.ts",
+    "name": "Merge Git Branch",
+    "description": "Merge the specified branch into the current branch using VS Code's Git extension.",
+    "input": {
+      "branchName": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "output": {
+      "success": {
+        "type": "false",
+        "required": true
+      },
+      "error": {
+        "type": "string",
+        "required": false
       }
     }
   }

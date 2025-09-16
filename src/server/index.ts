@@ -857,185 +857,6 @@ export const mcpToolIndex = {
       }
     },
     {
-      "id": "createWorkspaceFile",
-      "name": "Create Workspace File",
-      "path": "src/tools/workspace/create-file.mcpx.ts",
-      "namespace": "workspace",
-      "description": "Create a new file in the workspace with optional content.",
-      "input": {
-        "path": {
-          "type": "string",
-          "required": true
-        },
-        "content": {
-          "type": "string",
-          "required": false
-        }
-      },
-      "output": {
-        "success": {
-          "type": "false",
-          "required": true
-        },
-        "error": {
-          "type": "string",
-          "required": false
-        }
-      }
-    },
-    {
-      "id": "deleteWorkspaceFile",
-      "name": "Delete Workspace File",
-      "path": "src/tools/workspace/delete-file.mcpx.ts",
-      "namespace": "workspace",
-      "description": "Delete a file from the workspace.",
-      "input": {
-        "path": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "success": {
-          "type": "false",
-          "required": true
-        },
-        "error": {
-          "type": "string",
-          "required": false
-        }
-      }
-    },
-    {
-      "id": "listWorkspaceFiles",
-      "name": "List Workspace Files",
-      "path": "src/tools/workspace/list-files.mcpx.ts",
-      "namespace": "workspace",
-      "description": "List files in the workspace matching a glob pattern.",
-      "input": {
-        "glob": {
-          "type": "string",
-          "required": false
-        }
-      },
-      "output": {
-        "files": {
-          "type": "string[]",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "listWorkspaceFolders",
-      "name": "List Workspace Folders",
-      "path": "src/tools/workspace/list-folders.mcpx.ts",
-      "namespace": "workspace",
-      "description": "List all workspace folders.",
-      "input": {},
-      "output": {
-        "folders": {
-          "type": "string[]",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "renameWorkspaceFolder",
-      "name": "Rename Workspace Folder",
-      "path": "src/tools/workspace/rename-folder.mcpx.ts",
-      "namespace": "workspace",
-      "description": "Rename a folder in the workspace using VS Code's file system API (preserves user security permissions).",
-      "input": {
-        "oldPath": {
-          "type": "string",
-          "required": true
-        },
-        "newPath": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "success": {
-          "type": "false",
-          "required": true
-        },
-        "error": {
-          "type": "string",
-          "required": false
-        }
-      }
-    },
-    {
-      "id": "createGitBranch",
-      "name": "Create Git Branch",
-      "path": "src/tools/git/create-branch.mcpx.ts",
-      "namespace": "git",
-      "description": "Create a new branch in the current repository using VS Code's Git extension.",
-      "input": {
-        "branchName": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "success": {
-          "type": "false",
-          "required": true
-        },
-        "error": {
-          "type": "string",
-          "required": false
-        }
-      }
-    },
-    {
-      "id": "deleteGitBranch",
-      "name": "Delete Git Branch",
-      "path": "src/tools/git/delete-branch.mcpx.ts",
-      "namespace": "git",
-      "description": "Delete the specified branch in the current repository using VS Code's Git extension.",
-      "input": {
-        "branchName": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "success": {
-          "type": "false",
-          "required": true
-        },
-        "error": {
-          "type": "string",
-          "required": false
-        }
-      }
-    },
-    {
-      "id": "mergeGitBranch",
-      "name": "Merge Git Branch",
-      "path": "src/tools/git/merge-branch.mcpx.ts",
-      "namespace": "git",
-      "description": "Merge the specified branch into the current branch using VS Code's Git extension.",
-      "input": {
-        "branchName": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "success": {
-          "type": "false",
-          "required": true
-        },
-        "error": {
-          "type": "string",
-          "required": false
-        }
-      }
-    },
-    {
       "id": "activeFile",
       "name": "Active File",
       "path": "src/tools/editor/active-file.mcpx.ts",
@@ -1161,6 +982,116 @@ export const mcpToolIndex = {
       }
     },
     {
+      "id": "createWorkspaceFile",
+      "name": "Create Workspace File",
+      "path": "src/tools/workspace/create-file.mcpx.ts",
+      "namespace": "workspace",
+      "description": "Create a new file in the workspace with optional content.",
+      "input": {
+        "path": {
+          "type": "string",
+          "required": true
+        },
+        "content": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        },
+        "error": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "id": "deleteWorkspaceFile",
+      "name": "Delete Workspace File",
+      "path": "src/tools/workspace/delete-file.mcpx.ts",
+      "namespace": "workspace",
+      "description": "Delete a file from the workspace.",
+      "input": {
+        "path": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        },
+        "error": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "id": "listWorkspaceFiles",
+      "name": "List Workspace Files",
+      "path": "src/tools/workspace/list-files.mcpx.ts",
+      "namespace": "workspace",
+      "description": "List files in the workspace matching a glob pattern.",
+      "input": {
+        "glob": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "output": {
+        "files": {
+          "type": "string[]",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "listWorkspaceFolders",
+      "name": "List Workspace Folders",
+      "path": "src/tools/workspace/list-folders.mcpx.ts",
+      "namespace": "workspace",
+      "description": "List all workspace folders.",
+      "input": {},
+      "output": {
+        "folders": {
+          "type": "string[]",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "renameWorkspaceFolder",
+      "name": "Rename Workspace Folder",
+      "path": "src/tools/workspace/rename-folder.mcpx.ts",
+      "namespace": "workspace",
+      "description": "Rename a folder in the workspace using VS Code's file system API (preserves user security permissions).",
+      "input": {
+        "oldPath": {
+          "type": "string",
+          "required": true
+        },
+        "newPath": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        },
+        "error": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
       "id": "createGitHubIssue",
       "name": "Create GitHub Issue",
       "path": "src/tools/github/create-issue.mcpx.ts",
@@ -1238,6 +1169,75 @@ export const mcpToolIndex = {
         "repoUrl": {
           "type": "string",
           "required": true
+        }
+      }
+    },
+    {
+      "id": "createGitBranch",
+      "name": "Create Git Branch",
+      "path": "src/tools/git/create-branch.mcpx.ts",
+      "namespace": "git",
+      "description": "Create a new branch in the current repository using VS Code's Git extension.",
+      "input": {
+        "branchName": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        },
+        "error": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "id": "deleteGitBranch",
+      "name": "Delete Git Branch",
+      "path": "src/tools/git/delete-branch.mcpx.ts",
+      "namespace": "git",
+      "description": "Delete the specified branch in the current repository using VS Code's Git extension.",
+      "input": {
+        "branchName": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        },
+        "error": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "id": "mergeGitBranch",
+      "name": "Merge Git Branch",
+      "path": "src/tools/git/merge-branch.mcpx.ts",
+      "namespace": "git",
+      "description": "Merge the specified branch into the current branch using VS Code's Git extension.",
+      "input": {
+        "branchName": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        },
+        "error": {
+          "type": "string",
+          "required": false
         }
       }
     }

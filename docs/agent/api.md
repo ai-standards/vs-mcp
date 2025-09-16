@@ -4,7 +4,8 @@
 
 Generate a new MCP agent
 
-**Path:** src/tools/agent/create-agent.mcpx.ts
+* **Token:** `agent.createAgent`
+* **Path:** src/tools/agent/create-agent.mcpx.ts
 
 ### Input
 | Name | Type | Required |
@@ -23,7 +24,8 @@ Generate a new MCP agent
 
 List all MCP agents in the project
 
-**Path:** src/tools/agent/list-agents.mcpx.ts
+* **Token:** `agent.listAgents`
+* **Path:** src/tools/agent/list-agents.mcpx.ts
 
 ### Input
 _None_
@@ -37,7 +39,8 @@ _None_
 
 Generate a new MCP agent
 
-**Path:** src/tools/agent/run-agent.mcpx.ts
+* **Token:** `agent.runAgent`
+* **Path:** src/tools/agent/run-agent.mcpx.ts
 
 ### Input
 | Name | Type | Required |
