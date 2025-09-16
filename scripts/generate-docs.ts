@@ -10,6 +10,23 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+const docContext = `We want the documentation to feel like a well written coding book, conversational, engaging but 0 tolerance for fluff.
+
+Format the document as **semantic Markdown**, following these rules:
+
+  - Use appropriate headings:
+    - # for the main document title
+    - ## for major sections
+    - ### for subsections
+  - Use bullet points (-) for unordered lists.
+  - Use numbers (1.) for ordered lists when order matters.
+  - Use **bold** for emphasis on key terms, and *italics* for lighter emphasis.
+  - Convert inline URLs into Markdown links: [title](url).
+  - Use fenced code blocks (\`\`\`language … \`\`\`) for code or structured text.
+  - Keep paragraphs concise (one idea per paragraph).
+  - Do not include extra decoration or styling beyond semantic Markdown.
+`
+
 async function main() {
   const index = {...mcpToolIndex};
   const docPath = path.join(process.cwd(), 'docs');
@@ -23,13 +40,24 @@ async function main() {
     throw err;
   }
 
-  const readmeSpinner = ora('Generating README...').start();
-  try {
-    await generateReadme(index, docPath);
-    readmeSpinner.succeed('README generated.');
-  } catch (err) {
-    readmeSpinner.fail('Failed to generate README.');
-    throw err;
+  // const readmeSpinner = ora('Generating README...').start();
+  // try {
+  //   await generateReadme(index, docPath);
+  //   readmeSpinner.succeed('README generated.');
+  // } catch (err) {
+  //   readmeSpinner.fail('Failed to generate README.');
+  //   throw err;
+  // }
+
+  for (const tool of index.tools.slice(1)) {
+    const readmeSpinner = ora('Generating tool docs: ' + tool.id + '...').start();
+    try {
+      await generateTool(tool, docPath);
+      readmeSpinner.succeed('Tool docs generated.');
+    } catch (err) {
+      readmeSpinner.fail('Failed to generate tool docs.');
+      throw err;
+    }
   }
 }
 
@@ -105,8 +133,9 @@ function renderTable(obj: Record<string, any>, headers: string[]): string {
 async function generateReadme(index: any, docPath: string) {
   const prompt = `Generate the documentation home page for the vs-mcp extension
 
-  Start with a headline and paragraph or two about the extension. We want the documentation to feel like a well written 
-  coding book, conversational, engaging but 0 tolerance for fluff. Here's a bit of information about the extension:
+  ${docContext}
+
+  Start with a headline and paragraph or two about the extension. Here's a bit of information about the extension:
 
   "VS-MCP grew out of a simple need: trying out ideas in VS Code without the overhead of a full extension build. 
   With it, a single JavaScript function can run as an extension at runtime. That makes it straightforward to 
@@ -193,4 +222,54 @@ export const run = async ({ mcp, scope }) => {
   const content = completion.choices?.[0]?.message?.content || "";
   const readmePath = path.join(docPath, "README.md");
   fs.writeFileSync(readmePath, content);
+}
+
+async function generateTool(tool: any, docPath: string) {
+  const prompt = `Generate the documentation page for this mcp tool in the vs-mcp extension
+
+  ${docContext}
+
+  Start with a headline and paragraph or two about the tool. Explain what it does, why you might need it, ways to use it. 
+
+  Next show examples. 
+  
+  - all examples should be in javascript
+  - you have an instance of mcp, the mcp server, and scope, which is the filepath (optional) in all of your examples
+  - call all mcps with the mcp.dispatch(...) function
+  - use minimal vanilla JS, always use the mcps if possible in your examples 
+
+  Start with basic usage (obviously replace with basic usage of this tool):
+
+  const { value } = await mcp.dispatch('ui.showInputBox', {
+    prompt: 'What topic do you want to write about?'
+  });
+
+  If there are a number of different things you can do with this tool then show the variations as sections with 
+  a paragraph explaining and a code example.
+  
+  We want the documentation to feel like a well written coding book, conversational, engaging but 0 tolerance for 
+  fluff.
+
+  Here is the tool details in JSON format:
+
+  \`\`\`json\n${JSON.stringify(tool)}\n\`\`\`
+
+  This is a list of the available tools for your reference: 
+  \`\`\`json\n${JSON.stringify(mcpToolIndex)}\n\`\`\`
+  `;
+
+  // Call OpenAI to generate the README.md content
+  const completion = await openai.chat.completions.create({
+    model: "gpt-5",
+    messages: [
+      { role: "system", content: "You are a helpful technical documentation assistant." },
+      { role: "user", content: prompt }
+    ],
+    max_completion_tokens: 5000
+  });
+
+  const content = completion.choices?.[0]?.message?.content || "";
+  const toolPath = path.join(docPath, tool.namespace);
+  fs.mkdirSync(toolPath, {recursive: true});
+  fs.writeFileSync(path.join(toolPath, tool.id + '.md'), content);
 }

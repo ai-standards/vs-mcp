@@ -1,11 +1,12 @@
-# VS‑MCP: Runtime extensions for VS Code
+# VS-MCP: Runtime Extensions for VS Code
 
-VS‑MCP lets you ship an extension as a single JavaScript function. No scaffolding, no packaging. Write a function, run it, and it behaves like a real extension at runtime. That makes it ideal for testing commands, exploring editor APIs, or wiring small tools directly into your workflow.
+VS-MCP grew out of a simple need: trying out ideas in VS Code without the overhead of a full extension build. With it, a single JavaScript function can run as an extension at runtime. That makes it straightforward to test commands, explore APIs, or wire up quick tools directly in the editor.
 
-Under the hood, VS‑MCP hosts a lightweight MCP server and injects it into your functions. You get direct access to VS Code’s APIs without boilerplate; the server handles integration. Iteration stays tight: change code, reload, and you’re live. Whether you’re prototyping a command, adding AI to your editor, or sharing a tool with your team, VS‑MCP is the shortest path from idea to working extension.
+Under the hood, VS-MCP runs on a lightweight MCP server injected into your functions. You get direct access to editor APIs with almost no boilerplate — you focus on logic, the server handles integration. Iteration is fast: update your function, reload, and you’re live. Whether you’re prototyping a new command, wiring AI into your workflow, or building a tool for your team, VS-MCP offers the shortest path from idea to working extension.
 
+## Example: a one-file runtime extension
 
-```javascript 
+```javascript
 export const metadata = {
   id: 'create-blog-post-with-ai',
   name: 'Create Blog Post with AI',
@@ -49,9 +50,13 @@ export const run = async ({ mcp, scope }) => {
 }
 ```
 
-## [agent](/docs/agent)
+## agent
 
-The agent namespace manages MCP agents you can generate, list, and run from inside VS Code. Use it to scaffold an agent, inspect what’s available in your project, and execute one against a given input or file path. It’s a simple way to prototype agent-driven flows without wiring a full extension.
+Folder: [/docs/agent](/docs/agent)
+
+The agent namespace helps you create, list, and run custom MCP agents directly from your workspace. Use it to scaffold assistants that encapsulate workflows or project-aware behaviors.
+
+Agents can be iterated quickly: generate one, run it, and refine the behavior without leaving the editor.
 
 | MCP | Description |
 | --- | ----------- |
@@ -59,9 +64,13 @@ The agent namespace manages MCP agents you can generate, list, and run from insi
 | `agent.listAgents` | List all MCP agents in the project |
 | `agent.runAgent` | Generate a new MCP agent |
 
-## [ai](/docs/ai)
+## ai
 
-The ai namespace wires AI into your editor tasks: generate code or text, produce structured data, refactor existing code, write docs, or even synthesize images. Each tool focuses on a concrete outcome, so you can compose them into command flows that fit your project.
+Folder: [/docs/ai](/docs/ai)
+
+The ai namespace provides higher-level AI helpers for text, code, images, and structured data. These tools pair well with editor and workspace actions for end-to-end automation.
+
+Use them to prototype AI-assisted features: code generation, refactors, tests, or content workflows.
 
 | MCP | Description |
 | --- | ----------- |
@@ -73,9 +82,13 @@ The ai namespace wires AI into your editor tasks: generate code or text, produce
 | `ai.testCode` | Generate unit tests for code using the specified framework and language. |
 | `ai.writeDocumentation` | Write or update documentation for code in the specified format and audience. |
 
-## [fs](/docs/fs)
+## fs
 
-The fs namespace gives you safe, workspace‑scoped file operations: find, read, write, and list directories. All interactions go through VS Code’s file system interfaces, so they respect workspace boundaries and user permissions.
+Folder: [/docs/fs](/docs/fs)
+
+The fs namespace offers direct access to files and directories within the workspace. It’s ideal for building tools that scan, read, or write project files under user control.
+
+Combine fs with editor and ai to implement smart transforms or project audits.
 
 | MCP | Description |
 | --- | ----------- |
@@ -84,9 +97,13 @@ The fs namespace gives you safe, workspace‑scoped file operations: find, read,
 | `fs.readFile` | Read a UTF-8 file inside the workspace. |
 | `fs.writeFile` | Write a UTF-8 file inside the workspace (with confirm). |
 
-## [status](/docs/status)
+## status
 
-Use the status namespace to surface feedback in the editor: show a transient status bar message, a spinner during long tasks, or a window notification. You can also dismiss messages programmatically when the work completes.
+Folder: [/docs/status](/docs/status)
+
+The status namespace shows progress and notifications in the editor. Use it to keep users informed during long-running or multi-step tasks.
+
+Status messages can be bar or window style, and can be dismissed by id.
 
 | MCP | Description |
 | --- | ----------- |
@@ -94,9 +111,13 @@ Use the status namespace to surface feedback in the editor: show a transient sta
 | `status.dismissStatus` | Dismiss any status notification by id. |
 | `status.showStatusWindow` | Show a status message in a window notification. |
 
-## [terminal](/docs/terminal)
+## terminal
 
-The terminal namespace manages integrated terminals. Create or show a terminal, list what’s open, send commands, and close when done. It’s useful for automating build, test, or dev server workflows without leaving the editor.
+Folder: [/docs/terminal](/docs/terminal)
+
+The terminal namespace manages integrated terminals. It lets you create, show, send commands to, and close terminals programmatically.
+
+Use it to script builds, run linters, or orchestrate dev tasks from your functions.
 
 | MCP | Description |
 | --- | ----------- |
@@ -106,9 +127,13 @@ The terminal namespace manages integrated terminals. Create or show a terminal, 
 | `terminal.sendTextToTerminal` | Send text or command to a specific integrated terminal. |
 | `terminal.showTerminal` | Show a specific integrated terminal in VS Code. |
 
-## [ui](/docs/ui)
+## ui
 
-The ui namespace provides simple prompts and messages. Ask for input, show info or warnings, and capture user choices to drive the next step in your command.
+Folder: [/docs/ui](/docs/ui)
+
+The ui namespace provides simple prompts and messages. It’s the fastest way to gather user input or present choices.
+
+Keep flows simple: ask, act, confirm.
 
 | MCP | Description |
 | --- | ----------- |
@@ -116,9 +141,13 @@ The ui namespace provides simple prompts and messages. Ask for input, show info 
 | `ui.showInputBox` | Prompt user for a string input. |
 | `ui.showWarningMessage` | Show warning message with optional actions. |
 
-## [vcs](/docs/vcs)
+## vcs
 
-The vcs namespace abstracts basic version control actions—commit, pull, push, and status—so your commands can operate across providers supported by VS Code. It’s a thin layer for common flows like “generate → review → commit → push.”
+Folder: [/docs/vcs](/docs/vcs)
+
+The vcs namespace abstracts version control actions usable across providers supported by VS Code. It handles status checks and basic sync operations.
+
+Automate commit/pull/push flows around generated changes.
 
 | MCP | Description |
 | --- | ----------- |
@@ -127,9 +156,13 @@ The vcs namespace abstracts basic version control actions—commit, pull, push, 
 | `vcs.pushChanges` | Push committed changes to the remote repository (supports any VCS provider). |
 | `vcs.getVcsStatus` | Get the status of the current repository (supports any VCS provider). |
 
-## [editor](/docs/editor)
+## editor
 
-The editor namespace interacts with the active editor. Open files (real or virtual), inspect the current file and selection, and propose edits via a diff view users can accept. It’s designed to keep humans in the loop while automating the busywork.
+Folder: [/docs/editor](/docs/editor)
+
+The editor namespace interacts with the active editor and documents. It can open files, create virtual documents, inspect selections, and propose edits with a diff.
+
+Use it to close the loop: generate content, show it, and optionally apply changes.
 
 | MCP | Description |
 | --- | ----------- |
@@ -139,9 +172,13 @@ The editor namespace interacts with the active editor. Open files (real or virtu
 | `editor.proposeEdits` | Show a diff and ask the user to apply changes to a file in the workspace. |
 | `editor.editorSelection` | Get selection offsets and text for the active editor. |
 
-## [workspace](/docs/workspace)
+## workspace
 
-The workspace namespace works at the project level: create or delete files, list folders and files, and rename folders through VS Code’s APIs (respecting permissions and security prompts).
+Folder: [/docs/workspace](/docs/workspace)
+
+The workspace namespace operates on files and folders at the project level. It’s useful for scaffolding, cleanup, and bulk operations across the repo.
+
+Use it alongside ai and fs to build project-wide tools.
 
 | MCP | Description |
 | --- | ----------- |
@@ -151,9 +188,13 @@ The workspace namespace works at the project level: create or delete files, list
 | `workspace.listWorkspaceFolders` | List all workspace folders. |
 | `workspace.renameWorkspaceFolder` | Rename a folder in the workspace using VS Code's file system API (preserves user security permissions). |
 
-## [github](/docs/github)
+## github
 
-The github namespace integrates with VS Code’s GitHub support. Create issues and pull requests, or open a repository in the browser—handy for stitching editor actions to GitHub workflows.
+Folder: [/docs/github](/docs/github)
+
+The github namespace integrates with VS Code’s GitHub features. It can open repositories, and create issues or pull requests from inside the editor.
+
+Great for turning local changes into shareable work without context switching.
 
 | MCP | Description |
 | --- | ----------- |
@@ -161,9 +202,13 @@ The github namespace integrates with VS Code’s GitHub support. Create issues a
 | `github.createGitHubPullRequest` | Create a new pull request in a GitHub repository using VS Code's GitHub integration. |
 | `github.openGitHubRepository` | Open a GitHub repository in the browser using VS Code's GitHub integration. |
 
-## [git](/docs/git)
+## git
 
-The git namespace handles branch‑level operations through VS Code’s Git extension. Create, delete, and merge branches from your command flow.
+Folder: [/docs/git](/docs/git)
+
+The git namespace exposes common Git actions through the VS Code Git extension. It’s focused on branch operations you’ll use in scripted flows.
+
+Use it to create and manage branches around automated changes.
 
 | MCP | Description |
 | --- | ----------- |

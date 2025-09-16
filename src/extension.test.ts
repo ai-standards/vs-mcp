@@ -1,55 +1,47 @@
 import { describe, it, expect, vi } from 'vitest';
-import * as vscode from 'vscode';
+import { activate } from './extension';
 
-// Mock vscode module
 vi.mock('vscode', () => ({
   window: {
-    showInformationMessage: vi.fn()
+    showInformationMessage: vi.fn(),
+    showInputBox: vi.fn().mockResolvedValue('test-api-key'),
+    registerWebviewViewProvider: vi.fn(),
+    showQuickPick: vi.fn().mockResolvedValue(undefined)
   },
   commands: {
     registerCommand: vi.fn()
+  },
+  workspace: {
+    getConfiguration: vi.fn().mockReturnValue({ get: vi.fn().mockReturnValue('https://api.openai.com/v1') }),
+    findFiles: vi.fn().mockResolvedValue([])
   },
   ExtensionContext: {}
 }));
 
 describe('Extension', () => {
-  it('should register hello world command', () => {
-    const mockRegisterCommand = vi.mocked(vscode.commands.registerCommand);
-    
-    // Import and activate the extension
-    const { activate } = require('./extension');
+  it('should activate without error', async () => {
     const mockContext = {
-      subscriptions: []
+      subscriptions: [],
+      workspaceState: {
+        get: vi.fn(),
+        update: vi.fn()
+      },
+      globalState: {
+        get: vi.fn(),
+        update: vi.fn()
+      },
+      extensionPath: '',
+      asAbsolutePath: (p: string) => p,
+      storagePath: '',
+      globalStoragePath: '',
+      logPath: '',
+      extensionUri: {},
+      environmentVariableCollection: {},
+      secrets: {
+        get: vi.fn().mockResolvedValue('test-api-key'),
+        store: vi.fn()
+      }
     };
-    
-    activate(mockContext);
-    
-    expect(mockRegisterCommand).toHaveBeenCalledWith(
-      'vs-mcp.helloWorld',
-      expect.any(Function)
-    );
-  });
-
-  it('should show information message when command is executed', () => {
-    const mockShowInformationMessage = vi.mocked(vscode.window.showInformationMessage);
-    const mockRegisterCommand = vi.mocked(vscode.commands.registerCommand);
-    
-    // Import and activate the extension
-    const { activate } = require('./extension');
-    const mockContext = {
-      subscriptions: []
-    };
-    
-    activate(mockContext);
-    
-    // Get the registered command callback
-    const commandCallback = mockRegisterCommand.mock.calls[0][1];
-    
-    // Execute the command
-    commandCallback();
-    
-    expect(mockShowInformationMessage).toHaveBeenCalledWith(
-      'Hello World from AI Extension!'
-    );
+    await expect(activate(mockContext)).resolves.not.toThrow();
   });
 });
