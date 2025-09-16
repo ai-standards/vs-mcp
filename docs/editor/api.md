@@ -10,9 +10,7 @@ Get the active editor file's path, languageId, and selected or full text.
 _None_
 
 ### Output
-| Name | Type | Required |
-| --- | --- | --- |
-| __self | null | Yes |
+_None_
 
 ## Open File By Path
 
@@ -82,7 +80,5 @@ Get selection offsets and text for the active editor.
 _None_
 
 ### Output
-| Name | Type | Required |
-| --- | --- | --- |
-| __self | null | Yes |
+_None_
 

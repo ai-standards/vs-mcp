@@ -26,9 +26,7 @@ List all MCP agents in the project
 **Path:** src/tools/agent/list-agents.mcpx.ts
 
 ### Input
-| Name | Type | Required |
-| --- | --- | --- |
-| __self | import("/Users/flyman/Desktop/projects/vs-mcp/src/tools/agent/list-agents.mcpx").InputContext | Yes |
+_None_
 
 ### Output
 | Name | Type | Required |
