@@ -49,13 +49,26 @@ async function main() {
   //   throw err;
   // }
 
-  for (const tool of index.tools.slice(1)) {
-    const readmeSpinner = ora('Generating tool docs: ' + tool.id + '...').start();
+  // for (const tool of index.tools.slice(1)) {
+  //   const readmeSpinner = ora('Generating tool docs: ' + tool.id + '...').start();
+  //   try {
+  //     await generateTool(tool, docPath);
+  //     readmeSpinner.succeed('Tool docs generated.');
+  //   } catch (err) {
+  //     readmeSpinner.fail('Failed to generate tool docs.');
+  //     throw err;
+  //   }
+  // }
+
+  const namespaces = Array.from(new Set(index.tools.map(tool => tool.namespace)));
+
+  for (const ns of namespaces) {
+    const readmeSpinner = ora('Generating tool namespace docs: ' + ns + '...').start();
     try {
-      await generateTool(tool, docPath);
-      readmeSpinner.succeed('Tool docs generated.');
+      await generateNamespace(ns, docPath);
+      readmeSpinner.succeed('Namespace docs generated.');
     } catch (err) {
-      readmeSpinner.fail('Failed to generate tool docs.');
+      readmeSpinner.fail('Failed to generate namespace docs.');
       throw err;
     }
   }
@@ -223,6 +236,42 @@ export const run = async ({ mcp, scope }) => {
   const readmePath = path.join(docPath, "README.md");
   fs.writeFileSync(readmePath, content);
 }
+
+async function generateNamespace(namespace: string, docPath: string) {
+  const namespacePath = path.join(docPath, namespace);
+
+  const files = fs.readdirSync(namespacePath)
+    .filter(f => f.endsWith('.md') && f !== 'api.md' && f !== 'README.md');
+  const docs = files.map(f => fs.readFileSync(path.join(namespacePath, f), 'utf8'));
+
+  const prompt = `Generate the documentation section page for this namespace of mcp tools in the vs-mcp extension
+
+  ${namespace}
+
+  Start with a headline and paragraph or two about the namespace. Explain what it does, why you might need it, ways to use it. 
+
+  Next show each of the tools in the namespace. The tool name should be a ## h2 that is linked to the tool doc. the tool doc
+  is located at 'docs/{namespace}/{tool.id}.md. Then include a description of the tool, a simple example (usually the first example in the tool doc).
+
+  These are the existing docs for each of the tools in this namespace:
+
+  ${docs.join('\n---\n')}
+  `;
+
+  // Call OpenAI to generate the README.md content
+  const completion = await openai.chat.completions.create({
+    model: "gpt-5",
+    messages: [
+      { role: "system", content: "You are a helpful technical documentation assistant." },
+      { role: "user", content: prompt }
+    ],
+    max_completion_tokens: 5000
+  });
+
+  const content = completion.choices?.[0]?.message?.content || "";
+  fs.writeFileSync(path.join(namespacePath, 'README.md'), content);
+}
+
 
 async function generateTool(tool: any, docPath: string) {
   const prompt = `Generate the documentation page for this mcp tool in the vs-mcp extension
