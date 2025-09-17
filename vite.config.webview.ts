@@ -21,17 +21,22 @@ function getUiEntries(root = "src/ui") {
 export default defineConfig({
   plugins: [react()],
   base: "",
-  build: {
-    outDir: "media/ui",          // <-- moved out of /out
-    emptyOutDir: true,
-    target: "es2020",
-    rollupOptions: {
-      input: getUiEntries(),
-      output: {
-        entryFileNames: `[name]/main.js`,
-        chunkFileNames: `[name]/chunks/[name].js`,
-        assetFileNames: `[name]/assets/[name][extname]`
+    resolve: {
+      alias: {
+        "@": resolve(__dirname, "src"),
+      },
+    },
+    build: {
+      outDir: "media/ui",          // <-- moved out of /out
+      emptyOutDir: true,
+      target: "es2020",
+      rollupOptions: {
+        input: getUiEntries(),
+        output: {
+          entryFileNames: `[name]/main.js`,
+          chunkFileNames: `[name]/chunks/[name].js`,
+          assetFileNames: `[name]/assets/[name][extname]`
+        }
       }
     }
-  }
 });
