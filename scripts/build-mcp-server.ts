@@ -3,7 +3,6 @@ import ora from "ora";
 import path from "path";
 import fs from "fs";
 import { compileMCPX } from "../vendor/mcpx/compiler";
-import { generateMarkdownDocs } from "./generate-docs";
 
 async function main() {
   const index = await compileMCPX("src/tools/**/*.mcpx.ts");
@@ -17,9 +16,6 @@ async function main() {
   const types = await generateMcpTypes(index);
   const typePath = path.resolve(process.cwd(), "src/server/types.ts");
   fs.writeFileSync(typePath, types);
-
-  // generate markdown docs (grouped by namespace in docs/mcpx)
-  await generateMarkdownDocs(index, path.resolve(process.cwd(), "docs"));
 
 }
 

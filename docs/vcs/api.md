@@ -4,7 +4,8 @@
 
 Commit staged changes in the current repository with a message (supports any VCS provider).
 
-**Path:** src/tools/vcs/commit.mcpx.ts
+* **Token:** `vcs.commitChanges`
+* **Path:** src/tools/vcs/commit.mcpx.ts
 
 ### Input
 | Name | Type | Required |
@@ -21,7 +22,8 @@ Commit staged changes in the current repository with a message (supports any VCS
 
 Pull changes from the remote repository (supports any VCS provider).
 
-**Path:** src/tools/vcs/pull.mcpx.ts
+* **Token:** `vcs.pullChanges`
+* **Path:** src/tools/vcs/pull.mcpx.ts
 
 ### Input
 _None_
@@ -36,7 +38,8 @@ _None_
 
 Push committed changes to the remote repository (supports any VCS provider).
 
-**Path:** src/tools/vcs/push.mcpx.ts
+* **Token:** `vcs.pushChanges`
+* **Path:** src/tools/vcs/push.mcpx.ts
 
 ### Input
 _None_
@@ -51,7 +54,8 @@ _None_
 
 Get the status of the current repository (supports any VCS provider).
 
-**Path:** src/tools/vcs/status.mcpx.ts
+* **Token:** `vcs.getVcsStatus`
+* **Path:** src/tools/vcs/status.mcpx.ts
 
 ### Input
 _None_

@@ -4,7 +4,8 @@
 
 Find files by glob pattern (workspace relative).
 
-**Path:** src/tools/fs/find.mcpx.ts
+* **Token:** `fs.findFiles`
+* **Path:** src/tools/fs/find.mcpx.ts
 
 ### Input
 | Name | Type | Required |
@@ -21,7 +22,8 @@ Find files by glob pattern (workspace relative).
 
 List directory entries (name + kind).
 
-**Path:** src/tools/fs/read-dir.mcpx.ts
+* **Token:** `fs.readDir`
+* **Path:** src/tools/fs/read-dir.mcpx.ts
 
 ### Input
 | Name | Type | Required |
@@ -40,7 +42,8 @@ List directory entries (name + kind).
 
 Read a UTF-8 file inside the workspace.
 
-**Path:** src/tools/fs/read-file.mcpx.ts
+* **Token:** `fs.readFile`
+* **Path:** src/tools/fs/read-file.mcpx.ts
 
 ### Input
 | Name | Type | Required |
@@ -59,7 +62,8 @@ Read a UTF-8 file inside the workspace.
 
 Write a UTF-8 file inside the workspace (with confirm).
 
-**Path:** src/tools/fs/write-file.mcpx.ts
+* **Token:** `fs.writeFile`
+* **Path:** src/tools/fs/write-file.mcpx.ts
 
 ### Input
 | Name | Type | Required |

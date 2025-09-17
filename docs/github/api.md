@@ -4,7 +4,8 @@
 
 Create a new issue in a GitHub repository using VS Code's GitHub integration.
 
-**Path:** src/tools/github/create-issue.mcpx.ts
+* **Token:** `github.createGitHubIssue`
+* **Path:** src/tools/github/create-issue.mcpx.ts
 
 ### Input
 | Name | Type | Required |
@@ -22,7 +23,8 @@ Create a new issue in a GitHub repository using VS Code's GitHub integration.
 
 Create a new pull request in a GitHub repository using VS Code's GitHub integration.
 
-**Path:** src/tools/github/create-pr.mcpx.ts
+* **Token:** `github.createGitHubPullRequest`
+* **Path:** src/tools/github/create-pr.mcpx.ts
 
 ### Input
 | Name | Type | Required |
@@ -42,7 +44,8 @@ Create a new pull request in a GitHub repository using VS Code's GitHub integrat
 
 Open a GitHub repository in the browser using VS Code's GitHub integration.
 
-**Path:** src/tools/github/open-repo.mcpx.ts
+* **Token:** `github.openGitHubRepository`
+* **Path:** src/tools/github/open-repo.mcpx.ts
 
 ### Input
 | Name | Type | Required |

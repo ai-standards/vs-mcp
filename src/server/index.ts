@@ -2,6 +2,79 @@
 export const mcpToolIndex = {
   "tools": [
     {
+      "id": "createAgent",
+      "name": "Generate new agent",
+      "path": "src/tools/agent/create-agent.mcpx.ts",
+      "namespace": "agent",
+      "description": "Generate a new MCP agent",
+      "input": {
+        "filepath": {
+          "type": "string",
+          "required": false
+        },
+        "description": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "output": {
+        "filepath": {
+          "type": "string",
+          "required": false
+        },
+        "description": {
+          "type": "string",
+          "required": false
+        },
+        "code": {
+          "type": "null",
+          "required": false
+        }
+      }
+    },
+    {
+      "id": "listAgents",
+      "name": "List Agents",
+      "path": "src/tools/agent/list-agents.mcpx.ts",
+      "namespace": "agent",
+      "description": "List all MCP agents in the project",
+      "input": {
+        "__self": {
+          "type": "import(\"/Users/flyman/Desktop/projects/vs-mcp/src/tools/agent/list-agents.mcpx\").InputContext",
+          "required": true
+        }
+      },
+      "output": {
+        "agents": {
+          "type": "{ id: string; name: string; description?: string | undefined; path?: string | undefined; }[]",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "runAgent",
+      "name": "Generate new agent",
+      "path": "src/tools/agent/run-agent.mcpx.ts",
+      "namespace": "agent",
+      "description": "Generate a new MCP agent",
+      "input": {
+        "filepath": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "output": {
+        "filepath": {
+          "type": "string",
+          "required": false
+        },
+        "response": {
+          "type": "unknown",
+          "required": true
+        }
+      }
+    },
+    {
       "id": "generateCode",
       "name": "Generate Code",
       "path": "src/tools/ai/generate-code.mcpx.ts",
@@ -327,182 +400,6 @@ export const mcpToolIndex = {
       }
     },
     {
-      "id": "activeFile",
-      "name": "Active File",
-      "path": "src/tools/editor/active-file.mcpx.ts",
-      "namespace": "editor",
-      "description": "Get the active editor file's path, languageId, and selected or full text.",
-      "input": {},
-      "output": {
-        "__self": {
-          "type": "null",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "openVirtual",
-      "name": "Open Virtual Document",
-      "path": "src/tools/editor/open-virtual.mcpx.ts",
-      "namespace": "editor",
-      "description": "Open a read-only virtual document with content and language.",
-      "input": {
-        "content": {
-          "type": "string",
-          "required": true
-        },
-        "language": {
-          "type": "string",
-          "required": false
-        }
-      },
-      "output": {
-        "content": {
-          "type": "string",
-          "required": true
-        },
-        "language": {
-          "type": "string",
-          "required": false
-        },
-        "ok": {
-          "type": "false",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "proposeEdits",
-      "name": "Propose Edits",
-      "path": "src/tools/editor/propose-edits.mcpx.ts",
-      "namespace": "editor",
-      "description": "Show a diff and ask the user to apply changes to a file in the workspace.",
-      "input": {
-        "targetPath": {
-          "type": "string",
-          "required": true
-        },
-        "newContent": {
-          "type": "string",
-          "required": true
-        },
-        "title": {
-          "type": "string",
-          "required": false
-        },
-        "workspaceRoot": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "targetPath": {
-          "type": "string",
-          "required": true
-        },
-        "newContent": {
-          "type": "string",
-          "required": true
-        },
-        "title": {
-          "type": "string",
-          "required": false
-        },
-        "workspaceRoot": {
-          "type": "string",
-          "required": true
-        },
-        "applied": {
-          "type": "false",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "editorSelection",
-      "name": "Editor Selection",
-      "path": "src/tools/editor/selection.mcpx.ts",
-      "namespace": "editor",
-      "description": "Get selection offsets and text for the active editor.",
-      "input": {},
-      "output": {
-        "__self": {
-          "type": "null",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "createGitBranch",
-      "name": "Create Git Branch",
-      "path": "src/tools/git/create-branch.mcpx.ts",
-      "namespace": "git",
-      "description": "Create a new branch in the current repository using VS Code's Git extension.",
-<<<<<<< Updated upstream
-      "input": {
-        "branchName": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "success": {
-          "type": "false",
-          "required": true
-        },
-        "error": {
-          "type": "string",
-          "required": false
-        }
-      }
-    },
-    {
-      "id": "deleteGitBranch",
-      "name": "Delete Git Branch",
-      "path": "src/tools/git/delete-branch.mcpx.ts",
-      "namespace": "git",
-      "description": "Delete the specified branch in the current repository using VS Code's Git extension.",
-      "input": {
-        "branchName": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "success": {
-          "type": "false",
-          "required": true
-        },
-        "error": {
-          "type": "string",
-          "required": false
-        }
-      }
-    },
-    {
-      "id": "mergeGitBranch",
-      "name": "Merge Git Branch",
-      "path": "src/tools/git/merge-branch.mcpx.ts",
-      "namespace": "git",
-      "description": "Merge the specified branch into the current branch using VS Code's Git extension.",
-      "input": {
-        "branchName": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "success": {
-          "type": "false",
-          "required": true
-        },
-        "error": {
-          "type": "string",
-          "required": false
-        }
-      }
-    },
-    {
       "id": "findFiles",
       "name": "Find Files",
       "path": "src/tools/fs/find.mcpx.ts",
@@ -720,15 +617,13 @@ export const mcpToolIndex = {
       }
     },
     {
-      "id": "createGitHubIssue",
-      "name": "Create GitHub Issue",
-      "path": "src/tools/github/create-issue.mcpx.ts",
-      "namespace": "github",
-      "description": "Create a new issue in a GitHub repository using VS Code's GitHub integration.",
-=======
->>>>>>> Stashed changes
+      "id": "closeTerminal",
+      "name": "Close Terminal",
+      "path": "src/tools/terminal/close.mcpx.ts",
+      "namespace": "terminal",
+      "description": "Close a specific integrated terminal in VS Code.",
       "input": {
-        "branchName": {
+        "terminalId": {
           "type": "string",
           "required": true
         }
@@ -737,21 +632,54 @@ export const mcpToolIndex = {
         "success": {
           "type": "false",
           "required": true
-        },
-        "error": {
-          "type": "string",
-          "required": false
         }
       }
     },
     {
-      "id": "deleteGitBranch",
-      "name": "Delete Git Branch",
-      "path": "src/tools/git/delete-branch.mcpx.ts",
-      "namespace": "git",
-      "description": "Delete the specified branch in the current repository using VS Code's Git extension.",
+      "id": "createTerminal",
+      "name": "Create Terminal",
+      "path": "src/tools/terminal/create.mcpx.ts",
+      "namespace": "terminal",
+      "description": "Create a new integrated terminal in VS Code.",
       "input": {
-        "branchName": {
+        "name": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "output": {
+        "terminalId": {
+          "type": "string",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "listTerminals",
+      "name": "List Terminals",
+      "path": "src/tools/terminal/list.mcpx.ts",
+      "namespace": "terminal",
+      "description": "List all open integrated terminals in VS Code.",
+      "input": {},
+      "output": {
+        "terminals": {
+          "type": "string[]",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "sendTextToTerminal",
+      "name": "Send Text to Terminal",
+      "path": "src/tools/terminal/send.mcpx.ts",
+      "namespace": "terminal",
+      "description": "Send text or command to a specific integrated terminal.",
+      "input": {
+        "terminalId": {
+          "type": "string",
+          "required": true
+        },
+        "text": {
           "type": "string",
           "required": true
         }
@@ -760,124 +688,23 @@ export const mcpToolIndex = {
         "success": {
           "type": "false",
           "required": true
-        },
-        "error": {
-          "type": "string",
-          "required": false
         }
       }
     },
     {
-      "id": "mergeGitBranch",
-      "name": "Merge Git Branch",
-      "path": "src/tools/git/merge-branch.mcpx.ts",
-      "namespace": "git",
-      "description": "Merge the specified branch into the current branch using VS Code's Git extension.",
+      "id": "showTerminal",
+      "name": "Show Terminal",
+      "path": "src/tools/terminal/show.mcpx.ts",
+      "namespace": "terminal",
+      "description": "Show a specific integrated terminal in VS Code.",
       "input": {
-        "branchName": {
+        "terminalId": {
           "type": "string",
           "required": true
         }
       },
       "output": {
         "success": {
-          "type": "false",
-          "required": true
-        },
-        "error": {
-          "type": "string",
-          "required": false
-        }
-      }
-    },
-    {
-      "id": "showStatusBar",
-      "name": "Show Status Bar",
-      "path": "src/tools/status/bar.mcpx.ts",
-      "namespace": "status",
-      "description": "Show a status message in the status bar. Optionally show a spinner.",
-      "input": {
-        "id": {
-          "type": "string",
-          "required": true
-        },
-        "message": {
-          "type": "string",
-          "required": true
-        },
-        "spinner": {
-          "type": "false",
-          "required": false
-        }
-      },
-      "output": {
-        "id": {
-          "type": "string",
-          "required": true
-        },
-        "message": {
-          "type": "string",
-          "required": true
-        },
-        "spinner": {
-          "type": "false",
-          "required": true
-        },
-        "shown": {
-          "type": "false",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "dismissStatus",
-      "name": "Dismiss Status",
-      "path": "src/tools/status/dismiss.mcpx.ts",
-      "namespace": "status",
-      "description": "Dismiss any status notification by id.",
-      "input": {
-        "id": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "id": {
-          "type": "string",
-          "required": true
-        },
-        "dismissed": {
-          "type": "false",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "showStatusWindow",
-      "name": "Show Status Window",
-      "path": "src/tools/status/window.mcpx.ts",
-      "namespace": "status",
-      "description": "Show a status message in a window notification.",
-      "input": {
-        "id": {
-          "type": "string",
-          "required": true
-        },
-        "message": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "id": {
-          "type": "string",
-          "required": true
-        },
-        "message": {
-          "type": "string",
-          "required": true
-        },
-        "shown": {
           "type": "false",
           "required": true
         }
@@ -1030,6 +857,131 @@ export const mcpToolIndex = {
       }
     },
     {
+      "id": "activeFile",
+      "name": "Active File",
+      "path": "src/tools/editor/active-file.mcpx.ts",
+      "namespace": "editor",
+      "description": "Get the active editor file's path, languageId, and selected or full text.",
+      "input": {},
+      "output": {
+        "__self": {
+          "type": "null",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "openFile",
+      "name": "Open File By Path",
+      "path": "src/tools/editor/open-file.mcpx.ts",
+      "namespace": "editor",
+      "description": "Open a file in the editor by absolute path.",
+      "input": {
+        "path": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "ok": {
+          "type": "false",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "openVirtual",
+      "name": "Open Virtual Document",
+      "path": "src/tools/editor/open-virtual.mcpx.ts",
+      "namespace": "editor",
+      "description": "Open a read-only virtual document with content and language.",
+      "input": {
+        "content": {
+          "type": "string",
+          "required": true
+        },
+        "language": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "output": {
+        "content": {
+          "type": "string",
+          "required": true
+        },
+        "language": {
+          "type": "string",
+          "required": false
+        },
+        "ok": {
+          "type": "false",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "proposeEdits",
+      "name": "Propose Edits",
+      "path": "src/tools/editor/propose-edits.mcpx.ts",
+      "namespace": "editor",
+      "description": "Show a diff and ask the user to apply changes to a file in the workspace.",
+      "input": {
+        "targetPath": {
+          "type": "string",
+          "required": true
+        },
+        "newContent": {
+          "type": "string",
+          "required": true
+        },
+        "title": {
+          "type": "string",
+          "required": false
+        },
+        "workspaceRoot": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "targetPath": {
+          "type": "string",
+          "required": true
+        },
+        "newContent": {
+          "type": "string",
+          "required": true
+        },
+        "title": {
+          "type": "string",
+          "required": false
+        },
+        "workspaceRoot": {
+          "type": "string",
+          "required": true
+        },
+        "applied": {
+          "type": "false",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "editorSelection",
+      "name": "Editor Selection",
+      "path": "src/tools/editor/selection.mcpx.ts",
+      "namespace": "editor",
+      "description": "Get selection offsets and text for the active editor.",
+      "input": {},
+      "output": {
+        "__self": {
+          "type": "null",
+          "required": true
+        }
+      }
+    },
+    {
       "id": "createWorkspaceFile",
       "name": "Create Workspace File",
       "path": "src/tools/workspace/create-file.mcpx.ts",
@@ -1138,226 +1090,6 @@ export const mcpToolIndex = {
           "required": false
         }
       }
-<<<<<<< Updated upstream
-=======
-    },
-    {
-      "id": "findFiles",
-      "name": "Find Files",
-      "path": "src/tools/fs/find.mcpx.ts",
-      "namespace": "fs",
-      "description": "Find files by glob pattern (workspace relative).",
-      "input": {
-        "glob": {
-          "type": "string",
-          "required": false
-        },
-        "maxResults": {
-          "type": "number",
-          "required": false
-        }
-      },
-      "output": {
-        "files": {
-          "type": "string[]",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "readDir",
-      "name": "Read Directory",
-      "path": "src/tools/fs/read-dir.mcpx.ts",
-      "namespace": "fs",
-      "description": "List directory entries (name + kind).",
-      "input": {
-        "dir": {
-          "type": "string",
-          "required": true
-        },
-        "workspaceRoot": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "dir": {
-          "type": "string",
-          "required": true
-        },
-        "workspaceRoot": {
-          "type": "string",
-          "required": true
-        },
-        "items": {
-          "type": "{ name: string; type: string; }[]",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "readFile",
-      "name": "Read File",
-      "path": "src/tools/fs/read-file.mcpx.ts",
-      "namespace": "fs",
-      "description": "Read a UTF-8 file inside the workspace.",
-      "input": {
-        "path": {
-          "type": "string",
-          "required": true
-        },
-        "workspaceRoot": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "path": {
-          "type": "string",
-          "required": true
-        },
-        "workspaceRoot": {
-          "type": "string",
-          "required": true
-        },
-        "text": {
-          "type": "string",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "writeFile",
-      "name": "Write File",
-      "path": "src/tools/fs/write-file.mcpx.ts",
-      "namespace": "fs",
-      "description": "Write a UTF-8 file inside the workspace (with confirm).",
-      "input": {
-        "path": {
-          "type": "string",
-          "required": true
-        },
-        "content": {
-          "type": "string",
-          "required": true
-        },
-        "workspaceRoot": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "path": {
-          "type": "string",
-          "required": true
-        },
-        "content": {
-          "type": "string",
-          "required": true
-        },
-        "workspaceRoot": {
-          "type": "string",
-          "required": true
-        },
-        "ok": {
-          "type": "false",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "closeTerminal",
-      "name": "Close Terminal",
-      "path": "src/tools/terminal/close.mcpx.ts",
-      "namespace": "terminal",
-      "description": "Close a specific integrated terminal in VS Code.",
-      "input": {
-        "terminalId": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "success": {
-          "type": "false",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "createTerminal",
-      "name": "Create Terminal",
-      "path": "src/tools/terminal/create.mcpx.ts",
-      "namespace": "terminal",
-      "description": "Create a new integrated terminal in VS Code.",
-      "input": {
-        "name": {
-          "type": "string",
-          "required": false
-        }
-      },
-      "output": {
-        "terminalId": {
-          "type": "string",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "listTerminals",
-      "name": "List Terminals",
-      "path": "src/tools/terminal/list.mcpx.ts",
-      "namespace": "terminal",
-      "description": "List all open integrated terminals in VS Code.",
-      "input": {},
-      "output": {
-        "terminals": {
-          "type": "string[]",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "sendTextToTerminal",
-      "name": "Send Text to Terminal",
-      "path": "src/tools/terminal/send.mcpx.ts",
-      "namespace": "terminal",
-      "description": "Send text or command to a specific integrated terminal.",
-      "input": {
-        "terminalId": {
-          "type": "string",
-          "required": true
-        },
-        "text": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "success": {
-          "type": "false",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "showTerminal",
-      "name": "Show Terminal",
-      "path": "src/tools/terminal/show.mcpx.ts",
-      "namespace": "terminal",
-      "description": "Show a specific integrated terminal in VS Code.",
-      "input": {
-        "terminalId": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "success": {
-          "type": "false",
-          "required": true
-        }
-      }
     },
     {
       "id": "createGitHubIssue",
@@ -1439,7 +1171,75 @@ export const mcpToolIndex = {
           "required": true
         }
       }
->>>>>>> Stashed changes
+    },
+    {
+      "id": "createGitBranch",
+      "name": "Create Git Branch",
+      "path": "src/tools/git/create-branch.mcpx.ts",
+      "namespace": "git",
+      "description": "Create a new branch in the current repository using VS Code's Git extension.",
+      "input": {
+        "branchName": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        },
+        "error": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "id": "deleteGitBranch",
+      "name": "Delete Git Branch",
+      "path": "src/tools/git/delete-branch.mcpx.ts",
+      "namespace": "git",
+      "description": "Delete the specified branch in the current repository using VS Code's Git extension.",
+      "input": {
+        "branchName": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        },
+        "error": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "id": "mergeGitBranch",
+      "name": "Merge Git Branch",
+      "path": "src/tools/git/merge-branch.mcpx.ts",
+      "namespace": "git",
+      "description": "Merge the specified branch into the current branch using VS Code's Git extension.",
+      "input": {
+        "branchName": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        },
+        "error": {
+          "type": "string",
+          "required": false
+        }
+      }
     }
   ]
 };

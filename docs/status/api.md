@@ -4,7 +4,8 @@
 
 Show a status message in the status bar. Optionally show a spinner.
 
-**Path:** src/tools/status/bar.mcpx.ts
+* **Token:** `status.showStatusBar`
+* **Path:** src/tools/status/bar.mcpx.ts
 
 ### Input
 | Name | Type | Required |
@@ -25,7 +26,8 @@ Show a status message in the status bar. Optionally show a spinner.
 
 Dismiss any status notification by id.
 
-**Path:** src/tools/status/dismiss.mcpx.ts
+* **Token:** `status.dismissStatus`
+* **Path:** src/tools/status/dismiss.mcpx.ts
 
 ### Input
 | Name | Type | Required |
@@ -42,7 +44,8 @@ Dismiss any status notification by id.
 
 Show a status message in a window notification.
 
-**Path:** src/tools/status/window.mcpx.ts
+* **Token:** `status.showStatusWindow`
+* **Path:** src/tools/status/window.mcpx.ts
 
 ### Input
 | Name | Type | Required |

@@ -6,11 +6,12 @@ export default defineConfig({
     globals: true,
     environment: 'node',
     include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
-    exclude: ['node_modules', 'out', 'dist']
+  exclude: ['node_modules', 'out', 'dist'],
   },
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'src')
+      '@': resolve(__dirname, 'src'),
+      'vscode': resolve(__dirname, '__mocks__/vscode.js')
     }
   }
 })

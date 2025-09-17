@@ -4,7 +4,8 @@
 
 Create a new file in the workspace with optional content.
 
-**Path:** src/tools/workspace/create-file.mcpx.ts
+* **Token:** `workspace.createWorkspaceFile`
+* **Path:** src/tools/workspace/create-file.mcpx.ts
 
 ### Input
 | Name | Type | Required |
@@ -22,7 +23,8 @@ Create a new file in the workspace with optional content.
 
 Delete a file from the workspace.
 
-**Path:** src/tools/workspace/delete-file.mcpx.ts
+* **Token:** `workspace.deleteWorkspaceFile`
+* **Path:** src/tools/workspace/delete-file.mcpx.ts
 
 ### Input
 | Name | Type | Required |
@@ -39,7 +41,8 @@ Delete a file from the workspace.
 
 List files in the workspace matching a glob pattern.
 
-**Path:** src/tools/workspace/list-files.mcpx.ts
+* **Token:** `workspace.listWorkspaceFiles`
+* **Path:** src/tools/workspace/list-files.mcpx.ts
 
 ### Input
 | Name | Type | Required |
@@ -55,7 +58,8 @@ List files in the workspace matching a glob pattern.
 
 List all workspace folders.
 
-**Path:** src/tools/workspace/list-folders.mcpx.ts
+* **Token:** `workspace.listWorkspaceFolders`
+* **Path:** src/tools/workspace/list-folders.mcpx.ts
 
 ### Input
 _None_
@@ -69,7 +73,8 @@ _None_
 
 Rename a folder in the workspace using VS Code's file system API (preserves user security permissions).
 
-**Path:** src/tools/workspace/rename-folder.mcpx.ts
+* **Token:** `workspace.renameWorkspaceFolder`
+* **Path:** src/tools/workspace/rename-folder.mcpx.ts
 
 ### Input
 | Name | Type | Required |

@@ -4,7 +4,8 @@
 
 Generate new code from a natural language prompt, specifying language and style.
 
-**Path:** src/tools/ai/generate-code.mcpx.ts
+* **Token:** `ai.generateCode`
+* **Path:** src/tools/ai/generate-code.mcpx.ts
 
 ### Input
 | Name | Type | Required |
@@ -27,7 +28,8 @@ Generate new code from a natural language prompt, specifying language and style.
 
 Generate structured data (e.g., JSON) from a prompt and optional schema.
 
-**Path:** src/tools/ai/generate-data.mcpx.ts
+* **Token:** `ai.generateData`
+* **Path:** src/tools/ai/generate-data.mcpx.ts
 
 ### Input
 | Name | Type | Required |
@@ -52,7 +54,8 @@ Generate structured data (e.g., JSON) from a prompt and optional schema.
 
 Generate images from a prompt using an AI model and optional parameters.
 
-**Path:** src/tools/ai/generate-images.mcpx.ts
+* **Token:** `ai.generateImages`
+* **Path:** src/tools/ai/generate-images.mcpx.ts
 
 ### Input
 | Name | Type | Required |
@@ -76,7 +79,8 @@ Generate images from a prompt using an AI model and optional parameters.
 
 Generate plain text from a prompt.
 
-**Path:** src/tools/ai/generate-text.mcpx.ts
+* **Token:** `ai.generateText`
+* **Path:** src/tools/ai/generate-text.mcpx.ts
 
 ### Input
 | Name | Type | Required |
@@ -99,7 +103,8 @@ Generate plain text from a prompt.
 
 Refactor existing code based on instructions, language, and style.
 
-**Path:** src/tools/ai/refactor-code.mcpx.ts
+* **Token:** `ai.refactorCode`
+* **Path:** src/tools/ai/refactor-code.mcpx.ts
 
 ### Input
 | Name | Type | Required |
@@ -122,7 +127,8 @@ Refactor existing code based on instructions, language, and style.
 
 Generate unit tests for code using the specified framework and language.
 
-**Path:** src/tools/ai/test-code.mcpx.ts
+* **Token:** `ai.testCode`
+* **Path:** src/tools/ai/test-code.mcpx.ts
 
 ### Input
 | Name | Type | Required |
@@ -143,7 +149,8 @@ Generate unit tests for code using the specified framework and language.
 
 Write or update documentation for code in the specified format and audience.
 
-**Path:** src/tools/ai/write-documentation.mcpx.ts
+* **Token:** `ai.writeDocumentation`
+* **Path:** src/tools/ai/write-documentation.mcpx.ts
 
 ### Input
 | Name | Type | Required |

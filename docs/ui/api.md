@@ -4,7 +4,8 @@
 
 Show info message with optional actions.
 
-**Path:** src/tools/ui/info.mcpx.ts
+* **Token:** `ui.showInfoMessage`
+* **Path:** src/tools/ui/info.mcpx.ts
 
 ### Input
 | Name | Type | Required |
@@ -21,7 +22,8 @@ Show info message with optional actions.
 
 Prompt user for a string input.
 
-**Path:** src/tools/ui/input.mcpx.ts
+* **Token:** `ui.showInputBox`
+* **Path:** src/tools/ui/input.mcpx.ts
 
 ### Input
 | Name | Type | Required |
@@ -38,7 +40,8 @@ Prompt user for a string input.
 
 Show warning message with optional actions.
 
-**Path:** src/tools/ui/warn.mcpx.ts
+* **Token:** `ui.showWarningMessage`
+* **Path:** src/tools/ui/warn.mcpx.ts
 
 ### Input
 | Name | Type | Required |
