@@ -21,7 +21,7 @@ export async function activate(context: vscode.ExtensionContext) {
   
   // registerCreateIdeContext(context);
 
-  // Register VS-MCP Webview Provider
+  // Register VS-MCP Webview Providers
   const webviewProvider = new VsMcpWebviewProvider(context);
   context.subscriptions.push(
     vscode.window.registerWebviewViewProvider(
@@ -29,9 +29,16 @@ export async function activate(context: vscode.ExtensionContext) {
       webviewProvider
     )
   );
+  // Register provider for new view column (activity bar)
+  context.subscriptions.push(
+    vscode.window.registerWebviewViewProvider(
+      "vsMcpMainView",
+      webviewProvider
+    )
+  );
   context.subscriptions.push(
     vscode.commands.registerCommand("vs-mcp.showWebview", () => {
-      vscode.commands.executeCommand("workbench.view.extension.vs-mcp.webview");
+      vscode.commands.executeCommand("workbench.view.extension.vsMcpMainView");
     })
   );
 // ...existing code...

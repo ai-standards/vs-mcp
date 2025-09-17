@@ -36,6 +36,14 @@
           "icon": "$(window)",
           "type": "webview"
         }
+      ],
+      "vsMcpViewContainer": [
+        {
+          "id": "vsMcpMainView",
+          "name": "Main Panel",
+          "icon": "media/mcpx-icon.svg",
+          "type": "webview"
+        }
       ]
     },
     "commands": [
@@ -68,6 +76,15 @@
         "title": "Show VS-MCP Webview"
       }
     ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "vsMcpViewContainer",
+          "title": "VS-MCP",
+          "icon": "media/mcpx-icon.svg"
+        }
+      ]
+    },
     "menus": {
       "view/title": [
         {
