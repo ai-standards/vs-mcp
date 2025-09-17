@@ -400,6 +400,131 @@ export const mcpToolIndex = {
       }
     },
     {
+      "id": "activeFile",
+      "name": "Active File",
+      "path": "src/tools/editor/active-file.mcpx.ts",
+      "namespace": "editor",
+      "description": "Get the active editor file's path, languageId, and selected or full text.",
+      "input": {},
+      "output": {
+        "__self": {
+          "type": "null",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "openFile",
+      "name": "Open File By Path",
+      "path": "src/tools/editor/open-file.mcpx.ts",
+      "namespace": "editor",
+      "description": "Open a file in the editor by absolute path.",
+      "input": {
+        "path": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "ok": {
+          "type": "false",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "openVirtual",
+      "name": "Open Virtual Document",
+      "path": "src/tools/editor/open-virtual.mcpx.ts",
+      "namespace": "editor",
+      "description": "Open a read-only virtual document with content and language.",
+      "input": {
+        "content": {
+          "type": "string",
+          "required": true
+        },
+        "language": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "output": {
+        "content": {
+          "type": "string",
+          "required": true
+        },
+        "language": {
+          "type": "string",
+          "required": false
+        },
+        "ok": {
+          "type": "false",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "proposeEdits",
+      "name": "Propose Edits",
+      "path": "src/tools/editor/propose-edits.mcpx.ts",
+      "namespace": "editor",
+      "description": "Show a diff and ask the user to apply changes to a file in the workspace.",
+      "input": {
+        "targetPath": {
+          "type": "string",
+          "required": true
+        },
+        "newContent": {
+          "type": "string",
+          "required": true
+        },
+        "title": {
+          "type": "string",
+          "required": false
+        },
+        "workspaceRoot": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "targetPath": {
+          "type": "string",
+          "required": true
+        },
+        "newContent": {
+          "type": "string",
+          "required": true
+        },
+        "title": {
+          "type": "string",
+          "required": false
+        },
+        "workspaceRoot": {
+          "type": "string",
+          "required": true
+        },
+        "applied": {
+          "type": "false",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "editorSelection",
+      "name": "Editor Selection",
+      "path": "src/tools/editor/selection.mcpx.ts",
+      "namespace": "editor",
+      "description": "Get selection offsets and text for the active editor.",
+      "input": {},
+      "output": {
+        "__self": {
+          "type": "null",
+          "required": true
+        }
+      }
+    },
+    {
       "id": "findFiles",
       "name": "Find Files",
       "path": "src/tools/fs/find.mcpx.ts",
@@ -519,6 +644,156 @@ export const mcpToolIndex = {
         },
         "ok": {
           "type": "false",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "createGitBranch",
+      "name": "Create Git Branch",
+      "path": "src/tools/git/create-branch.mcpx.ts",
+      "namespace": "git",
+      "description": "Create a new branch in the current repository using VS Code's Git extension.",
+      "input": {
+        "branchName": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        },
+        "error": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "id": "deleteGitBranch",
+      "name": "Delete Git Branch",
+      "path": "src/tools/git/delete-branch.mcpx.ts",
+      "namespace": "git",
+      "description": "Delete the specified branch in the current repository using VS Code's Git extension.",
+      "input": {
+        "branchName": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        },
+        "error": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "id": "mergeGitBranch",
+      "name": "Merge Git Branch",
+      "path": "src/tools/git/merge-branch.mcpx.ts",
+      "namespace": "git",
+      "description": "Merge the specified branch into the current branch using VS Code's Git extension.",
+      "input": {
+        "branchName": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        },
+        "error": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "id": "createGitHubIssue",
+      "name": "Create GitHub Issue",
+      "path": "src/tools/github/create-issue.mcpx.ts",
+      "namespace": "github",
+      "description": "Create a new issue in a GitHub repository using VS Code's GitHub integration.",
+      "input": {
+        "repository": {
+          "type": "string",
+          "required": true
+        },
+        "title": {
+          "type": "string",
+          "required": true
+        },
+        "body": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "output": {
+        "issueUrl": {
+          "type": "null",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "createGitHubPullRequest",
+      "name": "Create GitHub Pull Request",
+      "path": "src/tools/github/create-pr.mcpx.ts",
+      "namespace": "github",
+      "description": "Create a new pull request in a GitHub repository using VS Code's GitHub integration.",
+      "input": {
+        "repository": {
+          "type": "string",
+          "required": true
+        },
+        "title": {
+          "type": "string",
+          "required": true
+        },
+        "body": {
+          "type": "string",
+          "required": false
+        },
+        "base": {
+          "type": "string",
+          "required": false
+        },
+        "head": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "output": {
+        "prUrl": {
+          "type": "null",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "openGitHubRepository",
+      "name": "Open GitHub Repository",
+      "path": "src/tools/github/open-repo.mcpx.ts",
+      "namespace": "github",
+      "description": "Open a GitHub repository in the browser using VS Code's GitHub integration.",
+      "input": {
+        "repository": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "repoUrl": {
+          "type": "string",
           "required": true
         }
       }
@@ -857,126 +1132,47 @@ export const mcpToolIndex = {
       }
     },
     {
-      "id": "activeFile",
-      "name": "Active File",
-      "path": "src/tools/editor/active-file.mcpx.ts",
-      "namespace": "editor",
-      "description": "Get the active editor file's path, languageId, and selected or full text.",
-      "input": {},
-      "output": {
-        "__self": {
-          "type": "null",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "openFile",
-      "name": "Open File By Path",
-      "path": "src/tools/editor/open-file.mcpx.ts",
-      "namespace": "editor",
-      "description": "Open a file in the editor by absolute path.",
+      "id": "connectIntegration",
+      "name": "Connect Integration",
+      "path": "src/tools/integration/connect.mcpx.ts",
+      "namespace": "integration",
+      "description": "Connect to a specified MCP integration",
       "input": {
-        "path": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "ok": {
-          "type": "false",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "openVirtual",
-      "name": "Open Virtual Document",
-      "path": "src/tools/editor/open-virtual.mcpx.ts",
-      "namespace": "editor",
-      "description": "Open a read-only virtual document with content and language.",
-      "input": {
-        "content": {
+        "integrationId": {
           "type": "string",
           "required": true
         },
-        "language": {
-          "type": "string",
+        "options": {
+          "type": "any",
+          "required": true
+        },
+        "showUI": {
+          "type": "false",
           "required": false
         }
       },
       "output": {
-        "content": {
-          "type": "string",
-          "required": true
-        },
-        "language": {
-          "type": "string",
-          "required": false
-        },
-        "ok": {
-          "type": "false",
+        "result": {
+          "type": "any",
           "required": true
         }
       }
     },
     {
-      "id": "proposeEdits",
-      "name": "Propose Edits",
-      "path": "src/tools/editor/propose-edits.mcpx.ts",
-      "namespace": "editor",
-      "description": "Show a diff and ask the user to apply changes to a file in the workspace.",
+      "id": "listIntegrations",
+      "name": "List Integrations",
+      "path": "src/tools/integration/list.mcpx.ts",
+      "namespace": "integration",
+      "description": "List all available MCP integrations",
       "input": {
-        "targetPath": {
-          "type": "string",
-          "required": true
-        },
-        "newContent": {
-          "type": "string",
-          "required": true
-        },
-        "title": {
-          "type": "string",
+        "showUI": {
+          "type": "false",
           "required": false
-        },
-        "workspaceRoot": {
-          "type": "string",
-          "required": true
         }
       },
       "output": {
-        "targetPath": {
-          "type": "string",
-          "required": true
-        },
-        "newContent": {
-          "type": "string",
-          "required": true
-        },
-        "title": {
-          "type": "string",
-          "required": false
-        },
-        "workspaceRoot": {
-          "type": "string",
-          "required": true
-        },
-        "applied": {
-          "type": "false",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "editorSelection",
-      "name": "Editor Selection",
-      "path": "src/tools/editor/selection.mcpx.ts",
-      "namespace": "editor",
-      "description": "Get selection offsets and text for the active editor.",
-      "input": {},
-      "output": {
-        "__self": {
-          "type": "null",
+        "integrations": {
+          "type": "any[]",
           "required": true
         }
       }
@@ -1076,156 +1272,6 @@ export const mcpToolIndex = {
           "required": true
         },
         "newPath": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "success": {
-          "type": "false",
-          "required": true
-        },
-        "error": {
-          "type": "string",
-          "required": false
-        }
-      }
-    },
-    {
-      "id": "createGitHubIssue",
-      "name": "Create GitHub Issue",
-      "path": "src/tools/github/create-issue.mcpx.ts",
-      "namespace": "github",
-      "description": "Create a new issue in a GitHub repository using VS Code's GitHub integration.",
-      "input": {
-        "repository": {
-          "type": "string",
-          "required": true
-        },
-        "title": {
-          "type": "string",
-          "required": true
-        },
-        "body": {
-          "type": "string",
-          "required": false
-        }
-      },
-      "output": {
-        "issueUrl": {
-          "type": "null",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "createGitHubPullRequest",
-      "name": "Create GitHub Pull Request",
-      "path": "src/tools/github/create-pr.mcpx.ts",
-      "namespace": "github",
-      "description": "Create a new pull request in a GitHub repository using VS Code's GitHub integration.",
-      "input": {
-        "repository": {
-          "type": "string",
-          "required": true
-        },
-        "title": {
-          "type": "string",
-          "required": true
-        },
-        "body": {
-          "type": "string",
-          "required": false
-        },
-        "base": {
-          "type": "string",
-          "required": false
-        },
-        "head": {
-          "type": "string",
-          "required": false
-        }
-      },
-      "output": {
-        "prUrl": {
-          "type": "null",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "openGitHubRepository",
-      "name": "Open GitHub Repository",
-      "path": "src/tools/github/open-repo.mcpx.ts",
-      "namespace": "github",
-      "description": "Open a GitHub repository in the browser using VS Code's GitHub integration.",
-      "input": {
-        "repository": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "repoUrl": {
-          "type": "string",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "createGitBranch",
-      "name": "Create Git Branch",
-      "path": "src/tools/git/create-branch.mcpx.ts",
-      "namespace": "git",
-      "description": "Create a new branch in the current repository using VS Code's Git extension.",
-      "input": {
-        "branchName": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "success": {
-          "type": "false",
-          "required": true
-        },
-        "error": {
-          "type": "string",
-          "required": false
-        }
-      }
-    },
-    {
-      "id": "deleteGitBranch",
-      "name": "Delete Git Branch",
-      "path": "src/tools/git/delete-branch.mcpx.ts",
-      "namespace": "git",
-      "description": "Delete the specified branch in the current repository using VS Code's Git extension.",
-      "input": {
-        "branchName": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "success": {
-          "type": "false",
-          "required": true
-        },
-        "error": {
-          "type": "string",
-          "required": false
-        }
-      }
-    },
-    {
-      "id": "mergeGitBranch",
-      "name": "Merge Git Branch",
-      "path": "src/tools/git/merge-branch.mcpx.ts",
-      "namespace": "git",
-      "description": "Merge the specified branch into the current branch using VS Code's Git extension.",
-      "input": {
-        "branchName": {
           "type": "string",
           "required": true
         }

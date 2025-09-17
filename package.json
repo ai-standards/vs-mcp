@@ -56,6 +56,12 @@
           "name": "Generate",
           "icon": "media/mcpx-icon.svg",
           "type": "webview"
+        },
+        {
+          "id": "vsMcpIntegrate",
+          "name": "Integrate",
+          "icon": "media/mcpx-icon.svg",
+          "type": "webview"
         }
       ]
     },
@@ -122,6 +128,7 @@
     "react-dom": "^19.1.1",
     "react-icons": "^5.5.0",
     "ts-morph": "^27.0.0",
+    "vscode": "^1.94.0",
     "zod": "^3.25.76"
   }
 }
