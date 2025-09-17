@@ -21,7 +21,8 @@ export async function activate(context: vscode.ExtensionContext) {
   // Register VS-MCP Webview Providers
   context.subscriptions.push(
     registerWebview(context, "vsMcpListView", "ui/list"),
-    registerWebview(context, "vsMcpGenerateView", "ui/generate")
+    registerWebview(context, "vsMcpGenerateView", "ui/generate"),
+    registerWebview(context, "vsMcpIntegrate", "ui/integrate"),
   );
 // ...existing code...
 }

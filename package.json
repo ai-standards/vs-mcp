@@ -56,6 +56,12 @@
           "name": "Generate",
           "icon": "media/mcpx-icon.svg",
           "type": "webview"
+        },
+        {
+          "id": "vsMcpIntegrate",
+          "name": "Integrate",
+          "icon": "media/mcpx-icon.svg",
+          "type": "webview"
         }
       ]
     },
