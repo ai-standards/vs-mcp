@@ -5,16 +5,15 @@
   "description": "A minimal VSCode extension built with Vite and Vitest",
   "version": "0.0.1",
   "engines": {
-    "vscode": "^1.74.0"
+    "vscode": "^1.94.0"
   },
-  "categories": [
-    "Other"
-  ],
+  "categories": ["Other"],
   "activationEvents": [
     "onCommand:vs-mcp.helloWorld",
     "onCommand:vs-mcp.createIdeContext",
     "onCommand:vs-mcp.setApiKey",
-    "onView:vs-mcp.webview"
+    "onView:vsMcpListView",
+    "onView:vsMcpGenerateView"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -28,53 +27,12 @@
         }
       }
     },
-    "views": {
-      "explorer": [
-        {
-          "id": "vs-mcp.webview",
-          "name": "VS MCP Agents",
-          "icon": "$(window)",
-          "type": "webview"
-        }
-      ],
-      "vsMcpViewContainer": [
-        {
-          "id": "vsMcpMainView",
-          "name": "Main Panel",
-          "icon": "media/mcpx-icon.svg",
-          "type": "webview"
-        }
-      ]
-    },
     "commands": [
-      {
-        "command": "vs-mcp.runAgent",
-        "title": "Run VS-MCP Agent",
-        "icon": "$(play-circle)"
-      },
-      {
-        "command": "vs-mcp.createAgent",
-        "title": "Create VS-MCP Agent",
-        "icon": "$(edit)"
-      },
-      {
-        "command": "vs-mcp.openMcpSettings",
-        "title": "Open VS-MCP Settings",
-        "icon": "$(gear)"
-      },
-      {
-        "command": "vs-mcp.setApiKey",
-        "title": "Set VS-MCP API Key",
-        "icon": "$(key)"
-      },
-      {
-        "command": "vs-mcp.createIdeContext",
-        "title": "Create VS-MCP IDE Context"
-      },
-      {
-        "command": "vs-mcp.showWebview",
-        "title": "Show VS-MCP Webview"
-      }
+      { "command": "vs-mcp.runAgent", "title": "Run VS-MCP Agent", "icon": "$(play-circle)" },
+      { "command": "vs-mcp.createAgent", "title": "Create VS-MCP Agent", "icon": "$(edit)" },
+      { "command": "vs-mcp.openMcpSettings", "title": "Open VS-MCP Settings", "icon": "$(gear)" },
+      { "command": "vs-mcp.setApiKey", "title": "Set VS-MCP API Key", "icon": "$(key)" },
+      { "command": "vs-mcp.createIdeContext", "title": "Create VS-MCP IDE Context" }
     ],
     "viewsContainers": {
       "activitybar": [
@@ -85,28 +43,38 @@
         }
       ]
     },
+    "views": {
+      "vsMcpViewContainer": [
+        {
+          "id": "vsMcpListView",
+          "name": "Agents",
+          "icon": "media/mcpx-icon.svg",
+          "type": "webview"
+        },
+        {
+          "id": "vsMcpGenerateView",
+          "name": "Generate",
+          "icon": "media/mcpx-icon.svg",
+          "type": "webview"
+        }
+      ]
+    },
     "menus": {
       "view/title": [
         {
           "command": "vs-mcp.setApiKey",
-          "when": "view == vs-mcp.webview",
+          "when": "view == vsMcpGenerateView",
           "group": "navigation@4"
         },
         {
           "command": "vs-mcp.openMcpSettings",
-          "when": "view == vs-mcp.webview",
+          "when": "view == vsMcpGenerateView",
           "group": "navigation@3"
         }
       ],
       "explorer/context": [
-        {
-          "command": "vs-mcp.runAgent",
-          "group": "mcp-agents@1"
-        },
-        {
-          "command": "vs-mcp.createAgent",
-          "group": "mcp-agents@2"
-        }
+        { "command": "vs-mcp.runAgent", "group": "mcp-agents@1" },
+        { "command": "vs-mcp.createAgent", "group": "mcp-agents@2" }
       ],
       "editor/title": [
         {
@@ -135,7 +103,7 @@
   "devDependencies": {
     "@types/node": "^20.0.0",
     "@types/react-dom": "^19.1.9",
-    "@types/vscode": "^1.74.0",
+    "@types/vscode": "^1.94.0",
     "@vitest/ui": "^1.0.0",
     "tsx": "^4.20.5",
     "typescript": "^5.0.0",
@@ -154,7 +122,6 @@
     "react-dom": "^19.1.1",
     "react-icons": "^5.5.0",
     "ts-morph": "^27.0.0",
-    "vscode": "^1.1.37",
     "zod": "^3.25.76"
   }
 }
