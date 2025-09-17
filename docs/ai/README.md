@@ -1,6 +1,6 @@
-# AI namespace
+# AI Generation
 
-The ai namespace provides model-powered helpers for text, code, data, docs, and images—all wired for MCP workflows in VS Code. Use these tools to draft or refactor code, generate structured JSON, create documentation, synthesize images, or write plain text. Each tool returns predictable outputs that fit naturally with editor and workspace operations like openVirtual, proposeEdits, and createWorkspaceFile.
+The AI MCPs provides model-powered helpers for text, code, data, docs, and images—all wired for MCP workflows in VS Code. Use these tools to draft or refactor code, generate structured JSON, create documentation, synthesize images, or write plain text. Each tool returns predictable outputs that fit naturally with editor and workspace operations like openVirtual, proposeEdits, and createWorkspaceFile.
 
 You might reach for ai tools when you want to scaffold code quickly, convert prompts into structured data, keep docs up to date, or automate content generation around your development flow. Dispatch them directly, chain results, and integrate with review-first editor actions for safe, iterative work.
 

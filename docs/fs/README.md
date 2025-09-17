@@ -1,6 +1,6 @@
-# fs — Workspace file system tools
+# Workspace file system tools
 
-The fs namespace gives you safe, workspace-scoped file operations for vs-mcp. Use these tools to discover files by pattern, list directories, read UTF‑8 text, and write files—without leaving the boundaries of the active workspace. They’re designed to compose: find → read → transform → write, and to pair naturally with UI, editor, and workspace tools.
+The fs MCPs gives you safe, workspace-scoped file operations for vs-mcp. Use these tools to discover files by pattern, list directories, read UTF‑8 text, and write files—without leaving the boundaries of the active workspace. They’re designed to compose: find → read → transform → write, and to pair naturally with UI, editor, and workspace tools.
 
 You’ll use fs when you need to inventory files, build pickers and navigators, inspect or generate content, and automate refactors or scaffolding. Most outputs are workspace-relative paths; when absolute roots are required, combine with workspace.listWorkspaceFolders.
 

@@ -1,6 +1,6 @@
-# Git namespace (git)
+# Managing GIT
 
-The git namespace in the vs-mcp extension provides high-level, editor-native Git operations powered by the VS Code Git extension. It lets you create, delete, and merge branches without leaving your coding flow, and works seamlessly with your current workspace and authentication context.
+The git MCPs in the vs-mcp extension provides high-level, editor-native Git operations powered by the VS Code Git extension. It lets you create, delete, and merge branches without leaving your coding flow, and works seamlessly with your current workspace and authentication context.
 
 Use these tools to automate common Git tasks in scripts or interactive flows. Prompt users for input, enforce naming conventions, and show progress or results using MCP UI/status tools. Pair git tools with vcs tools (commit, pull, push) to build end-to-end workflows.
 

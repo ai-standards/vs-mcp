@@ -1,6 +1,6 @@
-# Editor namespace
+# VSCode editor integration
 
-The editor namespace contains tools that work directly with the VS Code editor: reading what the user is looking at, opening files or virtual documents, and proposing diffs for review. These are the building blocks for context-aware flows, like summarizing the current file, refactoring a selection, previewing generated output, or guiding users through safe, review-first changes.
+The editor MCPs contains tools that work directly with the VS Code editor: reading what the user is looking at, opening files or virtual documents, and proposing diffs for review. These are the building blocks for context-aware flows, like summarizing the current file, refactoring a selection, previewing generated output, or guiding users through safe, review-first changes.
 
 Use editor tools to:
 - Grab grounded, real-time context from the active editor (file path, language, selection).

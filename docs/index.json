@@ -1,0 +1,1500 @@
+[
+  {
+    "type": "page",
+    "doc": "/README.md",
+    "headline": "VS-MCP: Runtime Extensions for VS Code",
+    "excerpt": "VS-MCP grew out of a simple need: trying out ideas in VS Code without the overhead of a full extension build. With it, a single JavaScript function can run as an extension at runtime. That makes it st"
+  },
+  {
+    "type": "page",
+    "doc": "/agent/README.md",
+    "headline": "Managing agents",
+    "excerpt": "The agent MCPs gives you everything you need to scaffold, discover, and run MCP agents from the vs-mcp extension. Use it to quickly create new agents without boilerplate, enumerate all agents in your "
+  },
+  {
+    "type": "tool",
+    "doc": "/agent/createAgent.md",
+    "headline": "agent.createAgent — Generate new MCP agent",
+    "excerpt": "The agent.createAgent tool scaffolds a new MCP agent in your workspace. It writes a ready-to-edit source file and returns where it put it. Use it when you want to spin up a new agent quickly without h",
+    "id": "createAgent",
+    "name": "Generate new agent",
+    "path": "src/tools/agent/create-agent.mcpx.ts",
+    "namespace": "agent",
+    "description": "Generate a new MCP agent",
+    "input": {
+      "filepath": {
+        "type": "string",
+        "required": false
+      },
+      "description": {
+        "type": "string",
+        "required": false
+      }
+    },
+    "output": {
+      "filepath": {
+        "type": "string",
+        "required": false
+      },
+      "description": {
+        "type": "string",
+        "required": false
+      },
+      "code": {
+        "type": "null",
+        "required": false
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/agent/listAgents.md",
+    "headline": "agent.listAgents — List all MCP agents in your project",
+    "excerpt": "The List Agents tool scans your workspace and returns the MCP agents it finds. Use it to discover what agents exist, build quick selection UIs, or chain into other tools (like running or editing an ag",
+    "id": "listAgents",
+    "name": "List Agents",
+    "path": "src/tools/agent/list-agents.mcpx.ts",
+    "namespace": "agent",
+    "description": "List all MCP agents in the project",
+    "input": {
+      "__self": {
+        "type": "import(\"/Users/flyman/Desktop/projects/vs-mcp/src/tools/agent/list-agents.mcpx\").InputContext",
+        "required": true
+      }
+    },
+    "output": {
+      "agents": {
+        "type": "{ id: string; name: string; description?: string | undefined; path?: string | undefined; }[]",
+        "required": true
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/agent/runAgent.md",
+    "headline": "Run Agent (agent.runAgent)",
+    "excerpt": "Run an MCP agent and get its response back in your extension. You can point it at a specific agent file, or let the server choose a default. The tool returns whatever the agent produces: text, JSON, o",
+    "id": "runAgent",
+    "name": "Generate new agent",
+    "path": "src/tools/agent/run-agent.mcpx.ts",
+    "namespace": "agent",
+    "description": "Generate a new MCP agent",
+    "input": {
+      "filepath": {
+        "type": "string",
+        "required": false
+      }
+    },
+    "output": {
+      "filepath": {
+        "type": "string",
+        "required": false
+      },
+      "response": {
+        "type": "unknown",
+        "required": true
+      }
+    }
+  },
+  {
+    "type": "page",
+    "doc": "/ai/README.md",
+    "headline": "AI Generation",
+    "excerpt": "The AI MCPs provides model-powered helpers for text, code, data, docs, and images—all wired for MCP workflows in VS Code. Use these tools to draft or refactor code, generate structured JSON, create do"
+  },
+  {
+    "type": "tool",
+    "doc": "/ai/generateCode.md",
+    "headline": "ai.generateCode — Generate Code from Natural Language",
+    "excerpt": "The ai.generateCode tool turns a plain-English prompt into runnable source code. You tell it what you want, optionally specify a target language and style, and it returns a code string with enough str",
+    "id": "generateCode",
+    "name": "Generate Code",
+    "path": "src/tools/ai/generate-code.mcpx.ts",
+    "namespace": "ai",
+    "description": "Generate new code from a natural language prompt, specifying language and style.",
+    "input": {
+      "prompt": {
+        "type": "string",
+        "required": true
+      },
+      "language": {
+        "type": "string",
+        "required": false
+      },
+      "style": {
+        "type": "string",
+        "required": false
+      },
+      "maxTokens": {
+        "type": "number",
+        "required": false
+      }
+    },
+    "output": {
+      "prompt": {
+        "type": "string",
+        "required": true
+      },
+      "language": {
+        "type": "string",
+        "required": true
+      },
+      "style": {
+        "type": "string",
+        "required": false
+      },
+      "maxTokens": {
+        "type": "number",
+        "required": false
+      },
+      "code": {
+        "type": "string",
+        "required": true
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/ai/generateData.md",
+    "headline": "ai.generateData — Generate Structured Data",
+    "excerpt": "The ai.generateData tool turns messy prompts into predictable, machine-usable structures. Think “give me JSON that matches this shape,” or “extract these fields from text and return a typed object.” I",
+    "id": "generateData",
+    "name": "Generate Structured Data",
+    "path": "src/tools/ai/generate-data.mcpx.ts",
+    "namespace": "ai",
+    "description": "Generate structured data (e.g., JSON) from a prompt and optional schema.",
+    "input": {
+      "prompt": {
+        "type": "string",
+        "required": true
+      },
+      "schema": {
+        "type": "string",
+        "required": false
+      },
+      "maxTokens": {
+        "type": "number",
+        "required": false
+      },
+      "model": {
+        "type": "string",
+        "required": false
+      },
+      "temperature": {
+        "type": "number",
+        "required": false
+      }
+    },
+    "output": {
+      "prompt": {
+        "type": "string",
+        "required": true
+      },
+      "schema": {
+        "type": "string",
+        "required": false
+      },
+      "maxTokens": {
+        "type": "number",
+        "required": false
+      },
+      "model": {
+        "type": "string",
+        "required": false
+      },
+      "temperature": {
+        "type": "number",
+        "required": false
+      },
+      "data": {
+        "type": "any",
+        "required": true
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/ai/generateImages.md",
+    "headline": "Generate Images (ai.generateImages)",
+    "excerpt": "Turn a short description into one or more images. The ai.generateImages tool asks your configured AI image model to synthesize images from a text prompt. You can optionally request multiple variations",
+    "id": "generateImages",
+    "name": "Generate Images",
+    "path": "src/tools/ai/generate-images.mcpx.ts",
+    "namespace": "ai",
+    "description": "Generate images from a prompt using an AI model and optional parameters.",
+    "input": {
+      "prompt": {
+        "type": "string",
+        "required": true
+      },
+      "count": {
+        "type": "number",
+        "required": false
+      },
+      "size": {
+        "type": "\"512x512\"",
+        "required": false
+      },
+      "model": {
+        "type": "string",
+        "required": false
+      }
+    },
+    "output": {
+      "prompt": {
+        "type": "string",
+        "required": true
+      },
+      "count": {
+        "type": "number",
+        "required": false
+      },
+      "size": {
+        "type": "\"512x512\"",
+        "required": false
+      },
+      "model": {
+        "type": "string",
+        "required": false
+      },
+      "images": {
+        "type": "any[]",
+        "required": true
+      },
+      "note": {
+        "type": "string",
+        "required": false
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/ai/generateText.md",
+    "headline": "AI · Generate Text (ai.generateText)",
+    "excerpt": "Generate plain, readable text from a prompt. Use it for summaries, outlines, commit messages, release notes, or any freeform content you need during development.  This tool is intentionally simple: yo",
+    "id": "generateText",
+    "name": "Generate Text",
+    "path": "src/tools/ai/generate-text.mcpx.ts",
+    "namespace": "ai",
+    "description": "Generate plain text from a prompt.",
+    "input": {
+      "prompt": {
+        "type": "string",
+        "required": true
+      },
+      "maxTokens": {
+        "type": "number",
+        "required": false
+      },
+      "model": {
+        "type": "string",
+        "required": false
+      },
+      "temperature": {
+        "type": "number",
+        "required": false
+      }
+    },
+    "output": {
+      "prompt": {
+        "type": "string",
+        "required": true
+      },
+      "maxTokens": {
+        "type": "number",
+        "required": false
+      },
+      "model": {
+        "type": "string",
+        "required": false
+      },
+      "temperature": {
+        "type": "number",
+        "required": false
+      },
+      "text": {
+        "type": "string",
+        "required": true
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/ai/refactorCode.md",
+    "headline": "Refactor Code (ai.refactorCode)",
+    "excerpt": "Refactor Code takes existing source code and rewrites it according to your instructions. You can guide the transformation with optional language and style hints. It’s ideal for modernizing legacy code",
+    "id": "refactorCode",
+    "name": "Refactor Code",
+    "path": "src/tools/ai/refactor-code.mcpx.ts",
+    "namespace": "ai",
+    "description": "Refactor existing code based on instructions, language, and style.",
+    "input": {
+      "code": {
+        "type": "string",
+        "required": true
+      },
+      "instructions": {
+        "type": "string",
+        "required": true
+      },
+      "language": {
+        "type": "string",
+        "required": false
+      },
+      "style": {
+        "type": "string",
+        "required": false
+      }
+    },
+    "output": {
+      "code": {
+        "type": "string",
+        "required": true
+      },
+      "instructions": {
+        "type": "string",
+        "required": true
+      },
+      "language": {
+        "type": "string",
+        "required": false
+      },
+      "style": {
+        "type": "string",
+        "required": false
+      },
+      "refactoredCode": {
+        "type": "string",
+        "required": true
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/ai/testCode.md",
+    "headline": "",
+    "excerpt": "",
+    "id": "testCode",
+    "name": "Generate Tests",
+    "path": "src/tools/ai/test-code.mcpx.ts",
+    "namespace": "ai",
+    "description": "Generate unit tests for code using the specified framework and language.",
+    "input": {
+      "code": {
+        "type": "string",
+        "required": true
+      },
+      "framework": {
+        "type": "string",
+        "required": false
+      },
+      "language": {
+        "type": "string",
+        "required": false
+      }
+    },
+    "output": {
+      "code": {
+        "type": "string",
+        "required": true
+      },
+      "framework": {
+        "type": "string",
+        "required": false
+      },
+      "language": {
+        "type": "string",
+        "required": false
+      },
+      "tests": {
+        "type": "string",
+        "required": true
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/ai/writeDocumentation.md",
+    "headline": "ai.writeDocumentation — Write Documentation",
+    "excerpt": "This tool generates clear, audience‑appropriate documentation directly from source code. Feed it code, optionally specify a format and audience, and it returns polished docs you can preview, save, or ",
+    "id": "writeDocumentation",
+    "name": "Write Documentation",
+    "path": "src/tools/ai/write-documentation.mcpx.ts",
+    "namespace": "ai",
+    "description": "Write or update documentation for code in the specified format and audience.",
+    "input": {
+      "code": {
+        "type": "string",
+        "required": true
+      },
+      "format": {
+        "type": "string",
+        "required": false
+      },
+      "audience": {
+        "type": "string",
+        "required": false
+      }
+    },
+    "output": {
+      "code": {
+        "type": "string",
+        "required": true
+      },
+      "format": {
+        "type": "string",
+        "required": false
+      },
+      "audience": {
+        "type": "string",
+        "required": false
+      },
+      "docs": {
+        "type": "string",
+        "required": true
+      }
+    }
+  },
+  {
+    "type": "page",
+    "doc": "/editor/README.md",
+    "headline": "VSCode editor integration",
+    "excerpt": "The editor MCPs contains tools that work directly with the VS Code editor: reading what the user is looking at, opening files or virtual documents, and proposing diffs for review. These are the buildi"
+  },
+  {
+    "type": "tool",
+    "doc": "/editor/activeFile.md",
+    "headline": "Active File (editor.activeFile)",
+    "excerpt": "Get exactly what the user is looking at in the editor: the file’s absolute path, its VS Code languageId, and the current selection text (or the entire document when nothing is selected).  You reach fo",
+    "id": "activeFile",
+    "name": "Active File",
+    "path": "src/tools/editor/active-file.mcpx.ts",
+    "namespace": "editor",
+    "description": "Get the active editor file's path, languageId, and selected or full text.",
+    "input": {},
+    "output": {
+      "__self": {
+        "type": "null",
+        "required": true
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/editor/editorSelection.md",
+    "headline": "Editor Selection (editor.editorSelection)",
+    "excerpt": "The Editor Selection tool fetches the current selection from the active editor: the selected text and its numeric offsets within the document. You use it when you need to read exactly what the user hi",
+    "id": "editorSelection",
+    "name": "Editor Selection",
+    "path": "src/tools/editor/selection.mcpx.ts",
+    "namespace": "editor",
+    "description": "Get selection offsets and text for the active editor.",
+    "input": {},
+    "output": {
+      "__self": {
+        "type": "null",
+        "required": true
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/editor/openFile.md",
+    "headline": "Open File By Path (editor.openFile)",
+    "excerpt": "Open any file in VS Code by absolute path. That’s it—no prompts, no guesses. You point at a path; the editor opens it.  Use this when you already know the file you want, or when other tools have resol",
+    "id": "openFile",
+    "name": "Open File By Path",
+    "path": "src/tools/editor/open-file.mcpx.ts",
+    "namespace": "editor",
+    "description": "Open a file in the editor by absolute path.",
+    "input": {
+      "path": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "output": {
+      "ok": {
+        "type": "false",
+        "required": true
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/editor/openVirtual.md",
+    "headline": "Open Virtual Document (editor.openVirtual)",
+    "excerpt": "Open a read-only document directly in the editor from a string. No files, no side-effects, no cleanup. When you want to show generated code, a JSON preview, logs, or a scratch note without touching th",
+    "id": "openVirtual",
+    "name": "Open Virtual Document",
+    "path": "src/tools/editor/open-virtual.mcpx.ts",
+    "namespace": "editor",
+    "description": "Open a read-only virtual document with content and language.",
+    "input": {
+      "content": {
+        "type": "string",
+        "required": true
+      },
+      "language": {
+        "type": "string",
+        "required": false
+      }
+    },
+    "output": {
+      "content": {
+        "type": "string",
+        "required": true
+      },
+      "language": {
+        "type": "string",
+        "required": false
+      },
+      "ok": {
+        "type": "false",
+        "required": true
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/editor/proposeEdits.md",
+    "headline": "Propose Edits (editor.proposeEdits)",
+    "excerpt": "Propose Edits lets you preview a diff and ask the user to apply changes to a file in the workspace. You provide the target file and the full new content; the tool opens a diff view and the user choose",
+    "id": "proposeEdits",
+    "name": "Propose Edits",
+    "path": "src/tools/editor/propose-edits.mcpx.ts",
+    "namespace": "editor",
+    "description": "Show a diff and ask the user to apply changes to a file in the workspace.",
+    "input": {
+      "targetPath": {
+        "type": "string",
+        "required": true
+      },
+      "newContent": {
+        "type": "string",
+        "required": true
+      },
+      "title": {
+        "type": "string",
+        "required": false
+      },
+      "workspaceRoot": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "output": {
+      "targetPath": {
+        "type": "string",
+        "required": true
+      },
+      "newContent": {
+        "type": "string",
+        "required": true
+      },
+      "title": {
+        "type": "string",
+        "required": false
+      },
+      "workspaceRoot": {
+        "type": "string",
+        "required": true
+      },
+      "applied": {
+        "type": "false",
+        "required": true
+      }
+    }
+  },
+  {
+    "type": "page",
+    "doc": "/git/README.md",
+    "headline": "Managing GIT",
+    "excerpt": "The git MCPs in the vs-mcp extension provides high-level, editor-native Git operations powered by the VS Code Git extension. It lets you create, delete, and merge branches without leaving your coding "
+  },
+  {
+    "type": "tool",
+    "doc": "/git/createGitBranch.md",
+    "headline": "Create Git Branch (git.createGitBranch)",
+    "excerpt": "Create a new Git branch in the current repository without leaving your editor. This tool delegates to VS Code’s Git extension, so it respects your workspace and authentication context.  You’ll use thi",
+    "id": "createGitBranch",
+    "name": "Create Git Branch",
+    "path": "src/tools/git/create-branch.mcpx.ts",
+    "namespace": "git",
+    "description": "Create a new branch in the current repository using VS Code's Git extension.",
+    "input": {
+      "branchName": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "output": {
+      "success": {
+        "type": "false",
+        "required": true
+      },
+      "error": {
+        "type": "string",
+        "required": false
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/git/deleteGitBranch.md",
+    "headline": "Delete Git Branch (git.deleteGitBranch)",
+    "excerpt": "Delete a local Git branch from your current repository using VS Code’s Git integration—no shell, no fuss. This tool is perfect for cleaning up branches after merges, pruning stale spikes, or enforcing",
+    "id": "deleteGitBranch",
+    "name": "Delete Git Branch",
+    "path": "src/tools/git/delete-branch.mcpx.ts",
+    "namespace": "git",
+    "description": "Delete the specified branch in the current repository using VS Code's Git extension.",
+    "input": {
+      "branchName": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "output": {
+      "success": {
+        "type": "false",
+        "required": true
+      },
+      "error": {
+        "type": "string",
+        "required": false
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/git/mergeGitBranch.md",
+    "headline": "git.mergeGitBranch — Merge Git Branch",
+    "excerpt": "Merge the specified branch into your current branch using VS Code’s Git extension. This tool removes the need to jump into a terminal for routine merges and keeps your workflow consistent inside MCP-d",
+    "id": "mergeGitBranch",
+    "name": "Merge Git Branch",
+    "path": "src/tools/git/merge-branch.mcpx.ts",
+    "namespace": "git",
+    "description": "Merge the specified branch into the current branch using VS Code's Git extension.",
+    "input": {
+      "branchName": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "output": {
+      "success": {
+        "type": "false",
+        "required": true
+      },
+      "error": {
+        "type": "string",
+        "required": false
+      }
+    }
+  },
+  {
+    "type": "page",
+    "doc": "/status/README.md",
+    "headline": "UI status",
+    "excerpt": "The status MCPs give you simple, non-blocking ways to communicate progress and outcomes in VS Code via the status bar and window notifications. Use it to keep users informed during long-running tasks,"
+  },
+  {
+    "type": "tool",
+    "doc": "/status/dismissStatus.md",
+    "headline": "Dismiss Status (status.dismissStatus)",
+    "excerpt": "Status messages are great when you need quick, non-blocking feedback in VS Code. They appear either in the status bar or as window notifications. The Dismiss Status tool gives you precise control to r",
+    "id": "dismissStatus",
+    "name": "Dismiss Status",
+    "path": "src/tools/status/dismiss.mcpx.ts",
+    "namespace": "status",
+    "description": "Dismiss any status notification by id.",
+    "input": {
+      "id": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "output": {
+      "id": {
+        "type": "string",
+        "required": true
+      },
+      "dismissed": {
+        "type": "false",
+        "required": true
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/status/showStatusBar.md",
+    "headline": "Show Status Bar (status.showStatusBar)",
+    "excerpt": "The Show Status Bar tool displays a short, persistent message in VS Code’s status bar. It’s ideal for indicating progress (“Running tests…”), success (“Build complete”), or background work with an opt",
+    "id": "showStatusBar",
+    "name": "Show Status Bar",
+    "path": "src/tools/status/bar.mcpx.ts",
+    "namespace": "status",
+    "description": "Show a status message in the status bar. Optionally show a spinner.",
+    "input": {
+      "id": {
+        "type": "string",
+        "required": true
+      },
+      "message": {
+        "type": "string",
+        "required": true
+      },
+      "spinner": {
+        "type": "false",
+        "required": false
+      }
+    },
+    "output": {
+      "id": {
+        "type": "string",
+        "required": true
+      },
+      "message": {
+        "type": "string",
+        "required": true
+      },
+      "spinner": {
+        "type": "false",
+        "required": true
+      },
+      "shown": {
+        "type": "false",
+        "required": true
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/status/showStatusWindow.md",
+    "headline": "Show Status Window (status.showStatusWindow)",
+    "excerpt": "Show a high-visibility status message as a VS Code window notification. When the message matters—build finished, tests failed, credentials expired—this is the surface that gets noticed.  Use it to sur",
+    "id": "showStatusWindow",
+    "name": "Show Status Window",
+    "path": "src/tools/status/window.mcpx.ts",
+    "namespace": "status",
+    "description": "Show a status message in a window notification.",
+    "input": {
+      "id": {
+        "type": "string",
+        "required": true
+      },
+      "message": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "output": {
+      "id": {
+        "type": "string",
+        "required": true
+      },
+      "message": {
+        "type": "string",
+        "required": true
+      },
+      "shown": {
+        "type": "false",
+        "required": true
+      }
+    }
+  },
+  {
+    "type": "page",
+    "doc": "/ui/README.md",
+    "headline": "UI namespace",
+    "excerpt": "The ui namespace provides lightweight, in-editor interactions: info toasts, warnings, and quick text inputs. Use these tools to guide users through small decisions, collect a parameter, or surface sta"
+  },
+  {
+    "type": "tool",
+    "doc": "/ui/showInfoMessage.md",
+    "headline": "ui.showInfoMessage — Show an information message with optional actions",
+    "excerpt": "This tool pops an information toast in the editor. Use it to notify the user and, optionally, present a few actionable choices (buttons). It’s perfect for lightweight decisions: “Open logs?”, “Push no",
+    "id": "showInfoMessage",
+    "name": "Show Info Message",
+    "path": "src/tools/ui/info.mcpx.ts",
+    "namespace": "ui",
+    "description": "Show info message with optional actions.",
+    "input": {
+      "message": {
+        "type": "string",
+        "required": true
+      },
+      "actions": {
+        "type": "string[]",
+        "required": false
+      }
+    },
+    "output": {
+      "choice": {
+        "type": "null",
+        "required": true
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/ui/showInputBox.md",
+    "headline": "Show Input Box (ui.showInputBox)",
+    "excerpt": "Prompt the user for a short piece of text directly in VS Code. It’s the fastest way to turn a conversation into a parameter: a branch name, a commit message, a file path, or an AI prompt.  Use it when",
+    "id": "showInputBox",
+    "name": "Show Input Box",
+    "path": "src/tools/ui/input.mcpx.ts",
+    "namespace": "ui",
+    "description": "Prompt user for a string input.",
+    "input": {
+      "prompt": {
+        "type": "string",
+        "required": true
+      },
+      "placeHolder": {
+        "type": "string",
+        "required": false
+      }
+    },
+    "output": {
+      "value": {
+        "type": "null",
+        "required": true
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/ui/showWarningMessage.md",
+    "headline": "Show Warning Message (ui.showWarningMessage)",
+    "excerpt": "Surface a prominent warning to the user, optionally with action buttons. This tool is ideal for calling out risky operations, failed tasks, or anything that needs immediate attention inside VS Code.  ",
+    "id": "showWarningMessage",
+    "name": "Show Warning Message",
+    "path": "src/tools/ui/warn.mcpx.ts",
+    "namespace": "ui",
+    "description": "Show warning message with optional actions.",
+    "input": {
+      "message": {
+        "type": "string",
+        "required": true
+      },
+      "actions": {
+        "type": "string[]",
+        "required": false
+      }
+    },
+    "output": {
+      "choice": {
+        "type": "null",
+        "required": true
+      }
+    }
+  },
+  {
+    "type": "page",
+    "doc": "/vcs/README.md",
+    "headline": "vcs namespace",
+    "excerpt": "The vcs namespace provides version control operations through your editor’s built‑in VCS integration. It is provider‑agnostic, so the same tools work whether you’re using Git or another VCS supported "
+  },
+  {
+    "type": "tool",
+    "doc": "/vcs/commitChanges.md",
+    "headline": "VCS: Commit Changes",
+    "excerpt": "Commit Changes is a small, sharp tool: it commits currently staged changes in your workspace using the editor’s VCS integration. It works across providers (Git and others supported by VS Code), so you",
+    "id": "commitChanges",
+    "name": "Commit Changes",
+    "path": "src/tools/vcs/commit.mcpx.ts",
+    "namespace": "vcs",
+    "description": "Commit staged changes in the current repository with a message (supports any VCS provider).",
+    "input": {
+      "message": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "output": {
+      "success": {
+        "type": "false",
+        "required": true
+      },
+      "error": {
+        "type": "string",
+        "required": false
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/vcs/getVcsStatus.md",
+    "headline": "VCS Status (vcs.getVcsStatus)",
+    "excerpt": "The VCS Status tool returns the current repository’s status as a plain string. It is provider-agnostic: Git, Mercurial, or any VCS supported by your environment. Use it to gate workflows (e.g., only p",
+    "id": "getVcsStatus",
+    "name": "VCS Status",
+    "path": "src/tools/vcs/status.mcpx.ts",
+    "namespace": "vcs",
+    "description": "Get the status of the current repository (supports any VCS provider).",
+    "input": {},
+    "output": {
+      "status": {
+        "type": "string",
+        "required": true
+      },
+      "error": {
+        "type": "string",
+        "required": false
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/vcs/pullChanges.md",
+    "headline": "Pull Changes (vcs.pullChanges)",
+    "excerpt": "Pull Changes updates your local repository by fetching and merging the latest commits from its remote. Use it to stay current before you push, review changes pulled by teammates, or sync after switchi",
+    "id": "pullChanges",
+    "name": "Pull Changes",
+    "path": "src/tools/vcs/pull.mcpx.ts",
+    "namespace": "vcs",
+    "description": "Pull changes from the remote repository (supports any VCS provider).",
+    "input": {},
+    "output": {
+      "success": {
+        "type": "false",
+        "required": true
+      },
+      "error": {
+        "type": "string",
+        "required": false
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/vcs/pushChanges.md",
+    "headline": "Push Changes (vcs.pushChanges)",
+    "excerpt": "Push committed work from your local repository to its remote with one call. This tool wraps your editor’s VCS integration, so it works regardless of whether the repo is Git, GitHub-backed, or another ",
+    "id": "pushChanges",
+    "name": "Push Changes",
+    "path": "src/tools/vcs/push.mcpx.ts",
+    "namespace": "vcs",
+    "description": "Push committed changes to the remote repository (supports any VCS provider).",
+    "input": {},
+    "output": {
+      "success": {
+        "type": "false",
+        "required": true
+      },
+      "error": {
+        "type": "string",
+        "required": false
+      }
+    }
+  },
+  {
+    "type": "page",
+    "doc": "/workspace/README.md",
+    "headline": "workspace — Workspace-aware file and folder operations",
+    "excerpt": "The workspace namespace provides safe, editor-aware tools for working with files and folders inside your current VS Code workspace. Use these when you want predictable behavior that plays nicely with "
+  },
+  {
+    "type": "tool",
+    "doc": "/workspace/createWorkspaceFile.md",
+    "headline": "workspace.createWorkspaceFile",
+    "excerpt": "Create a new file in the current VS Code workspace, optionally seeding it with content. It’s the quickest way to scaffold files from code: generate a README, drop a config stub, or spin up a new modul",
+    "id": "createWorkspaceFile",
+    "name": "Create Workspace File",
+    "path": "src/tools/workspace/create-file.mcpx.ts",
+    "namespace": "workspace",
+    "description": "Create a new file in the workspace with optional content.",
+    "input": {
+      "path": {
+        "type": "string",
+        "required": true
+      },
+      "content": {
+        "type": "string",
+        "required": false
+      }
+    },
+    "output": {
+      "success": {
+        "type": "false",
+        "required": true
+      },
+      "error": {
+        "type": "string",
+        "required": false
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/workspace/deleteWorkspaceFile.md",
+    "headline": "workspace.deleteWorkspaceFile",
+    "excerpt": "Delete Workspace File removes a file from your current VS Code workspace. It’s the fast, scriptable way to clean up generated artifacts, remove obsolete modules, or tidy temporary files without leavin",
+    "id": "deleteWorkspaceFile",
+    "name": "Delete Workspace File",
+    "path": "src/tools/workspace/delete-file.mcpx.ts",
+    "namespace": "workspace",
+    "description": "Delete a file from the workspace.",
+    "input": {
+      "path": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "output": {
+      "success": {
+        "type": "false",
+        "required": true
+      },
+      "error": {
+        "type": "string",
+        "required": false
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/workspace/listWorkspaceFiles.md",
+    "headline": "workspace.listWorkspaceFiles — List Files in Your Workspace",
+    "excerpt": "The workspace.listWorkspaceFiles tool scans your workspace and returns file paths that match a glob pattern. It’s a fast way to answer questions like “What .ts files live under src?” or “Show me all t",
+    "id": "listWorkspaceFiles",
+    "name": "List Workspace Files",
+    "path": "src/tools/workspace/list-files.mcpx.ts",
+    "namespace": "workspace",
+    "description": "List files in the workspace matching a glob pattern.",
+    "input": {
+      "glob": {
+        "type": "string",
+        "required": false
+      }
+    },
+    "output": {
+      "files": {
+        "type": "string[]",
+        "required": true
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/workspace/listWorkspaceFolders.md",
+    "headline": "workspace.listWorkspaceFolders",
+    "excerpt": "List Workspace Folders returns the absolute paths of all folders in the current VS Code workspace. It works for single-folder projects and multi-root workspaces.  You’ll use this when you need a start",
+    "id": "listWorkspaceFolders",
+    "name": "List Workspace Folders",
+    "path": "src/tools/workspace/list-folders.mcpx.ts",
+    "namespace": "workspace",
+    "description": "List all workspace folders.",
+    "input": {},
+    "output": {
+      "folders": {
+        "type": "string[]",
+        "required": true
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/workspace/renameWorkspaceFolder.md",
+    "headline": "workspace.renameWorkspaceFolder",
+    "excerpt": "Rename Workspace Folder uses VS Code’s FileSystem API to rename a folder inside your workspace. Because it goes through VS Code, permissions and file metadata are preserved, and the UI stays in sync. ",
+    "id": "renameWorkspaceFolder",
+    "name": "Rename Workspace Folder",
+    "path": "src/tools/workspace/rename-folder.mcpx.ts",
+    "namespace": "workspace",
+    "description": "Rename a folder in the workspace using VS Code's file system API (preserves user security permissions).",
+    "input": {
+      "oldPath": {
+        "type": "string",
+        "required": true
+      },
+      "newPath": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "output": {
+      "success": {
+        "type": "false",
+        "required": true
+      },
+      "error": {
+        "type": "string",
+        "required": false
+      }
+    }
+  },
+  {
+    "type": "page",
+    "doc": "/fs/README.md",
+    "headline": "Workspace file system tools",
+    "excerpt": "The fs MCPs gives you safe, workspace-scoped file operations for vs-mcp. Use these tools to discover files by pattern, list directories, read UTF‑8 text, and write files—without leaving the boundaries"
+  },
+  {
+    "type": "tool",
+    "doc": "/fs/findFiles.md",
+    "headline": "Find Files (fs.findFiles)",
+    "excerpt": "Find Files locates files in your workspace using a glob pattern. It’s fast, workspace-aware, and returns clean, relative paths you can feed directly into other tools.  Use it when you need to: - Gathe",
+    "id": "findFiles",
+    "name": "Find Files",
+    "path": "src/tools/fs/find.mcpx.ts",
+    "namespace": "fs",
+    "description": "Find files by glob pattern (workspace relative).",
+    "input": {
+      "glob": {
+        "type": "string",
+        "required": false
+      },
+      "maxResults": {
+        "type": "number",
+        "required": false
+      }
+    },
+    "output": {
+      "files": {
+        "type": "string[]",
+        "required": true
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/fs/readDir.md",
+    "headline": "fs.readDir — Read Directory",
+    "excerpt": "Read Directory lists the immediate entries in a folder inside your workspace. It returns each entry’s name and kind so you can quickly build pickers, navigators, and file workflows without touching No",
+    "id": "readDir",
+    "name": "Read Directory",
+    "path": "src/tools/fs/read-dir.mcpx.ts",
+    "namespace": "fs",
+    "description": "List directory entries (name + kind).",
+    "input": {
+      "dir": {
+        "type": "string",
+        "required": true
+      },
+      "workspaceRoot": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "output": {
+      "dir": {
+        "type": "string",
+        "required": true
+      },
+      "workspaceRoot": {
+        "type": "string",
+        "required": true
+      },
+      "items": {
+        "type": "{ name: string; type: string; }[]",
+        "required": true
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/fs/readFile.md",
+    "headline": "fs.readFile — Read File",
+    "excerpt": "Read a UTF‑8 file from your VS Code workspace, fast and safely. The fs.readFile tool gives you the file’s text content along with echo metadata (the path and workspace root you requested).  Use it whe",
+    "id": "readFile",
+    "name": "Read File",
+    "path": "src/tools/fs/read-file.mcpx.ts",
+    "namespace": "fs",
+    "description": "Read a UTF-8 file inside the workspace.",
+    "input": {
+      "path": {
+        "type": "string",
+        "required": true
+      },
+      "workspaceRoot": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "output": {
+      "path": {
+        "type": "string",
+        "required": true
+      },
+      "workspaceRoot": {
+        "type": "string",
+        "required": true
+      },
+      "text": {
+        "type": "string",
+        "required": true
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/fs/writeFile.md",
+    "headline": "fs.writeFile — Write a UTF‑8 file in your workspace",
+    "excerpt": "The fs.writeFile tool writes a UTF‑8 file inside the current workspace, with a confirmation step when needed. It’s your straightforward “persist this text to disk” primitive, but scoped safely to the ",
+    "id": "writeFile",
+    "name": "Write File",
+    "path": "src/tools/fs/write-file.mcpx.ts",
+    "namespace": "fs",
+    "description": "Write a UTF-8 file inside the workspace (with confirm).",
+    "input": {
+      "path": {
+        "type": "string",
+        "required": true
+      },
+      "content": {
+        "type": "string",
+        "required": true
+      },
+      "workspaceRoot": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "output": {
+      "path": {
+        "type": "string",
+        "required": true
+      },
+      "content": {
+        "type": "string",
+        "required": true
+      },
+      "workspaceRoot": {
+        "type": "string",
+        "required": true
+      },
+      "ok": {
+        "type": "false",
+        "required": true
+      }
+    }
+  },
+  {
+    "type": "page",
+    "doc": "/github/README.md",
+    "headline": "Managing GitHub",
+    "excerpt": "The GitHub MCPs in the vs-mcp extension provide high-level, editor-native GitHub operations powered by the VS Code GitHub integration. You can create issues, open pull requests, and jump to repositori"
+  },
+  {
+    "type": "tool",
+    "doc": "/github/createGitHubIssue.md",
+    "headline": "GitHub: Create Issue (github.createGitHubIssue)",
+    "excerpt": "Create a new GitHub issue without leaving VS Code. This tool uses the VS Code GitHub integration to open issues in any repository you can access.  Use it when you need to capture bugs, feature request",
+    "id": "createGitHubIssue",
+    "name": "Create GitHub Issue",
+    "path": "src/tools/github/create-issue.mcpx.ts",
+    "namespace": "github",
+    "description": "Create a new issue in a GitHub repository using VS Code's GitHub integration.",
+    "input": {
+      "repository": {
+        "type": "string",
+        "required": true
+      },
+      "title": {
+        "type": "string",
+        "required": true
+      },
+      "body": {
+        "type": "string",
+        "required": false
+      }
+    },
+    "output": {
+      "issueUrl": {
+        "type": "null",
+        "required": true
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/github/createGitHubPullRequest.md",
+    "headline": "GitHub: Create Pull Request (github.createGitHubPullRequest)",
+    "excerpt": "Create a pull request without leaving VS Code. This tool delegates to VS Code’s GitHub integration, so it respects your signed-in account, repository permissions, and workspace context.  Use it when y",
+    "id": "createGitHubPullRequest",
+    "name": "Create GitHub Pull Request",
+    "path": "src/tools/github/create-pr.mcpx.ts",
+    "namespace": "github",
+    "description": "Create a new pull request in a GitHub repository using VS Code's GitHub integration.",
+    "input": {
+      "repository": {
+        "type": "string",
+        "required": true
+      },
+      "title": {
+        "type": "string",
+        "required": true
+      },
+      "body": {
+        "type": "string",
+        "required": false
+      },
+      "base": {
+        "type": "string",
+        "required": false
+      },
+      "head": {
+        "type": "string",
+        "required": false
+      }
+    },
+    "output": {
+      "prUrl": {
+        "type": "null",
+        "required": true
+      }
+    }
+  },
+  {
+    "type": "page",
+    "doc": "/github/github.md",
+    "headline": "GitHub namespace",
+    "excerpt": "The github namespace in the vs-mcp extension connects your MCP workflows to GitHub through VS Code’s GitHub integration. It lets you create issues, open pull requests, and jump to repositories directl"
+  },
+  {
+    "type": "tool",
+    "doc": "/github/openGitHubRepository.md",
+    "headline": "Open GitHub Repository (github.openGitHubRepository)",
+    "excerpt": "Open a GitHub repository in your browser directly from VS Code via the GitHub integration. You pass an owner/repo slug, it opens the repo page, and returns the URL it opened.  Use it whenever you need",
+    "id": "openGitHubRepository",
+    "name": "Open GitHub Repository",
+    "path": "src/tools/github/open-repo.mcpx.ts",
+    "namespace": "github",
+    "description": "Open a GitHub repository in the browser using VS Code's GitHub integration.",
+    "input": {
+      "repository": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "output": {
+      "repoUrl": {
+        "type": "string",
+        "required": true
+      }
+    }
+  },
+  {
+    "type": "page",
+    "doc": "/terminal/README.md",
+    "headline": "Managing terminals",
+    "excerpt": "The terminal MCPs provide programmatic control over VS Code’s integrated terminals. Use it to create, list, reveal, drive, and dispose terminals from your MCP workflows—no manual UI interaction requir"
+  },
+  {
+    "type": "tool",
+    "doc": "/terminal/closeTerminal.md",
+    "headline": "Close Terminal (terminal.closeTerminal)",
+    "excerpt": "Close Terminal lets you programmatically dispose a specific integrated terminal in VS Code. When you’re automating workflows that spawn terminals—running scripts, launching dev servers, or executing b",
+    "id": "closeTerminal",
+    "name": "Close Terminal",
+    "path": "src/tools/terminal/close.mcpx.ts",
+    "namespace": "terminal",
+    "description": "Close a specific integrated terminal in VS Code.",
+    "input": {
+      "terminalId": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "output": {
+      "success": {
+        "type": "false",
+        "required": true
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/terminal/createTerminal.md",
+    "headline": "Create Terminal (terminal.createTerminal)",
+    "excerpt": "Spin up a new integrated terminal in VS Code without touching the UI. This tool is a thin, fast bridge from your code to VS Code’s terminal panel. It returns a stable terminalId you can use to show th",
+    "id": "createTerminal",
+    "name": "Create Terminal",
+    "path": "src/tools/terminal/create.mcpx.ts",
+    "namespace": "terminal",
+    "description": "Create a new integrated terminal in VS Code.",
+    "input": {
+      "name": {
+        "type": "string",
+        "required": false
+      }
+    },
+    "output": {
+      "terminalId": {
+        "type": "string",
+        "required": true
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/terminal/listTerminals.md",
+    "headline": "terminal.listTerminals",
+    "excerpt": "List Terminals gives you a fast snapshot of every open integrated terminal in VS Code. It returns an array of terminal identifiers you can feed into other terminal tools (show, send text, close). If y",
+    "id": "listTerminals",
+    "name": "List Terminals",
+    "path": "src/tools/terminal/list.mcpx.ts",
+    "namespace": "terminal",
+    "description": "List all open integrated terminals in VS Code.",
+    "input": {},
+    "output": {
+      "terminals": {
+        "type": "string[]",
+        "required": true
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/terminal/sendTextToTerminal.md",
+    "headline": "terminal.sendTextToTerminal — Send Text to the Integrated Terminal",
+    "excerpt": "Send text or a shell command into a specific VS Code integrated terminal from your MCP workflow.  Use it when you want to: - Kick off builds, tests, or dev servers from code. - Drive an interactive CL",
+    "id": "sendTextToTerminal",
+    "name": "Send Text to Terminal",
+    "path": "src/tools/terminal/send.mcpx.ts",
+    "namespace": "terminal",
+    "description": "Send text or command to a specific integrated terminal.",
+    "input": {
+      "terminalId": {
+        "type": "string",
+        "required": true
+      },
+      "text": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "output": {
+      "success": {
+        "type": "false",
+        "required": true
+      }
+    }
+  },
+  {
+    "type": "tool",
+    "doc": "/terminal/showTerminal.md",
+    "headline": "Show Terminal (terminal.showTerminal)",
+    "excerpt": "The Show Terminal tool brings a specific integrated terminal to the foreground in VS Code. It does not create a terminal or send any text—its job is purely to reveal the terminal you specify by ID.  U",
+    "id": "showTerminal",
+    "name": "Show Terminal",
+    "path": "src/tools/terminal/show.mcpx.ts",
+    "namespace": "terminal",
+    "description": "Show a specific integrated terminal in VS Code.",
+    "input": {
+      "terminalId": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "output": {
+      "success": {
+        "type": "false",
+        "required": true
+      }
+    }
+  }
+]

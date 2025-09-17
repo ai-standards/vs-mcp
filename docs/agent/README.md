@@ -1,6 +1,6 @@
-# agent namespace
+# Managing agents
 
-The agent namespace gives you everything you need to scaffold, discover, and run MCP agents from the vs-mcp extension. Use it to quickly create new agents without boilerplate, enumerate all agents in your workspace, and execute one to capture its output.
+The agent MCPs gives you everything you need to scaffold, discover, and run MCP agents from the vs-mcp extension. Use it to quickly create new agents without boilerplate, enumerate all agents in your workspace, and execute one to capture its output.
 
 Typical workflows include:
 - Scaffolding a new agent, then opening or running it.

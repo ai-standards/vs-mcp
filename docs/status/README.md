@@ -1,6 +1,6 @@
-# status namespace
+# UI status
 
-The status namespace gives you simple, non-blocking ways to communicate progress and outcomes in VS Code via the status bar and window notifications. Use it to keep users informed during long-running tasks, to announce results, and to maintain a clean UI by explicitly dismissing messages when they’re no longer needed.
+The status MCPs give you simple, non-blocking ways to communicate progress and outcomes in VS Code via the status bar and window notifications. Use it to keep users informed during long-running tasks, to announce results, and to maintain a clean UI by explicitly dismissing messages when they’re no longer needed.
 
 Why you might use it:
 - Show ambient progress with a status bar message and optional spinner.

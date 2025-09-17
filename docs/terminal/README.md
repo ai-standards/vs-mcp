@@ -1,6 +1,6 @@
-# terminal namespace
+# Managing terminals
 
-The terminal namespace provides programmatic control over VS Code’s integrated terminals. Use it to create, list, reveal, drive, and dispose terminals from your MCP workflows—no manual UI interaction required. This is ideal for automating builds and tests, spinning up dev servers, tailing logs, or coordinating multi-terminal tasks.
+The terminal MCPs provide programmatic control over VS Code’s integrated terminals. Use it to create, list, reveal, drive, and dispose terminals from your MCP workflows—no manual UI interaction required. This is ideal for automating builds and tests, spinning up dev servers, tailing logs, or coordinating multi-terminal tasks.
 
 Why use it? It gives you reproducible, scriptable terminal operations you can compose: create a terminal, show it, send commands, then close it when you’re done. It’s especially useful for one-off task runners, project bootstrappers, and cleanup routines that keep workspaces tidy.
 

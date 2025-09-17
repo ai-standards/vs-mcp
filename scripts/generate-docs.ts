@@ -5,6 +5,8 @@ dotenv.config();
 import OpenAI from "openai";
 import ora from "ora";
 import {mcpToolIndex} from '../src/server'
+import fg from "fast-glob";
+import fsPromises from "fs/promises";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -31,14 +33,14 @@ async function main() {
   const index = {...mcpToolIndex};
   const docPath = path.join(process.cwd(), 'docs');
 
-  const apiSpinner = ora('Generating API docs...').start();
-  try {
-    await generateApiDocs(index, docPath);
-    apiSpinner.succeed('API docs generated.');
-  } catch (err) {
-    apiSpinner.fail('Failed to generate API docs.');
-    throw err;
-  }
+  // const apiSpinner = ora('Generating API docs...').start();
+  // try {
+  //   await generateApiDocs(index, docPath);
+  //   apiSpinner.succeed('API docs generated.');
+  // } catch (err) {
+  //   apiSpinner.fail('Failed to generate API docs.');
+  //   throw err;
+  // }
 
   // const readmeSpinner = ora('Generating README...').start();
   // try {
@@ -60,21 +62,35 @@ async function main() {
   //   }
   // }
 
-  const namespaces = Array.from(new Set(index.tools.map(tool => tool.namespace)));
+  // const namespaces = Array.from(new Set(index.tools.map(tool => tool.namespace)));
 
-  for (const ns of namespaces) {
-    const readmeSpinner = ora('Generating tool namespace docs: ' + ns + '...').start();
-    try {
-      await generateNamespace(ns, docPath);
-      readmeSpinner.succeed('Namespace docs generated.');
-    } catch (err) {
-      readmeSpinner.fail('Failed to generate namespace docs.');
-      throw err;
-    }
+  // for (const ns of namespaces) {
+  //   const readmeSpinner = ora('Generating tool namespace docs: ' + ns + '...').start();
+  //   try {
+  //     await generateNamespace(ns, docPath);
+  //     readmeSpinner.succeed('Namespace docs generated.');
+  //   } catch (err) {
+  //     readmeSpinner.fail('Failed to generate namespace docs.');
+  //     throw err;
+  //   }
+  // }
+
+  const indexSpinner = ora('Generating docs index...').start();
+  try {
+    await generateDocIndex(docPath);
+    indexSpinner.succeed('Doc index generated.');
+  } catch (err) {
+    indexSpinner.fail('Failed to generate API docs.');
+    throw err;
   }
+  
 }
 
 main().then(_ => console.log('Completed generating docs'));
+
+export async function generateApiIndex(index: any, outDir: string) {
+
+}
 
 export async function generateApiDocs(index: any, outDir: string) {
   // Prepare index for README.md at the end
@@ -321,4 +337,38 @@ async function generateTool(tool: any, docPath: string) {
   const toolPath = path.join(docPath, tool.namespace);
   fs.mkdirSync(toolPath, {recursive: true});
   fs.writeFileSync(path.join(toolPath, tool.id + '.md'), content);
+}
+
+async function generateDocIndex(docPath: string) {
+  const files = await fg(path.join(docPath, '**/*.md'), {
+    cwd: docPath,
+    ignore: ['**/api.md']
+  });
+
+  const summaries = [];
+  for (const file of files) {
+    // file is already relative to docPath due to fg config
+    const content = fs.readFileSync(file, 'utf8');
+    const lines = content.split('\n');
+    const headline = (lines.find((line) => line.trim().startsWith('#'))?.trim().replace(/^#+\s*/, '') || '');
+    const headlineIdx = lines.findIndex((line) => line.trim().startsWith('#'));
+    let excerpt = '';
+    if (headlineIdx >= 0 && headlineIdx < lines.length - 1) {
+      excerpt = lines.slice(headlineIdx + 1).join(' ').trim().slice(0, 200);
+    }
+    const relDoc = file.replace(docPath, '');
+    // Try to match /{namespace}/{toolname}.md
+    const match = relDoc.match(/^\/?([^\/]+)\/([^\/]+)\.md$/);
+    let toolMeta = undefined;
+    if (match) {
+      const [_, namespace, toolname] = match;
+      toolMeta = (mcpToolIndex.tools || []).find(
+        (tool) => tool.namespace === namespace && tool.id === toolname
+      );
+    }
+    let summary = { type: toolMeta ? 'tool' : 'page', doc: relDoc, headline, excerpt, ...(toolMeta || {})};
+    summaries.push(summary);
+  }
+
+  fs.writeFileSync(path.join(docPath, "index.json"), JSON.stringify(summaries, null, 2));
 }
