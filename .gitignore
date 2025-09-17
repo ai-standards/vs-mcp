@@ -23,5 +23,6 @@ coverage/
 tmp/
 
 media/webview/
+media/ui/
 
 .env
