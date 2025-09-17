@@ -1,12 +1,12 @@
 import { List, ListItem, IconButton, Typography } from "@/lib/ui/components";
 import { Loading } from "@/lib/ui/components/Loading";
 import React, { useEffect, useState } from "react";
-import { VscEdit, VscPlay } from "react-icons/vsc";
+import { VscEdit, VscPlay, VscRefresh, VscAdd } from "react-icons/vsc";
 import { useApi } from "@/lib/ui//hooks/useApi";
 import { createMcpService } from "@/lib/ui/services/mcpService";
 
 export default function App() {
-  const [integrations, setIntegrations] = useState<Array<{ id: string; name: string; description?: string; path?: string }>>([]);
+  const [integrations, setIntegrations] = useState<Array<{ id: string; title: string, enabled: boolean, path: string }>>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
     const api = useApi();
@@ -31,9 +31,14 @@ export default function App() {
   if (loading) return <Loading align="center" />;
   if (error) return <div>Error: {error}</div>;
 
-    const openIntegration = (integration: any) => {
-        mcpService.dispatch("editor.openFile", {path: integration.path});
-    }
+  const handleClick = async (integration: any) => {
+    await mcpService.dispatch('integration.connectIntegration', {integrationId: integration.id});
+    setIntegrations(prevIntegrations =>
+      prevIntegrations.map(item =>
+        item.id === integration.id ? { ...item, enabled: true } : item
+      )
+    );
+  }
 
   return (
     <List border={false}>
@@ -41,12 +46,12 @@ export default function App() {
         <li>No integrations found.</li>
       ) : (
         integrations.map(integration => (
-          <ListItem border={false} key={integration.id} style={{cursor: 'pointer'}} toolbar={<div style={{ display: "flex", gap: 8 }}>
-            <IconButton icon={<VscEdit />} onClick={() => mcpService.dispatch('editor.openFile', {path: integration.path as string})}/>
-            <IconButton icon={<VscPlay />}  onClick={() => mcpService.dispatch('integration.runIntegration', {filepath: integration.path})}/>
-          </div>}>
-            <Typography as="div">{integration.name}</Typography>
-            <Typography as="div" size="small" color="muted">...{integration.path?.slice(-35)}</Typography>
+          <ListItem border={true} key={integration.id} toolbar={<IconButton 
+              icon={integration.enabled ? <VscRefresh /> : <VscAdd />}  
+              onClick={() => handleClick(integration)}
+            />}>
+            <Typography as="div">{integration.title}</Typography>
+            <Typography size="small" color="muted">{integration.path}</Typography>
           </ListItem>
         ))
       )}

@@ -39,7 +39,7 @@ export function ListItem({ children, border = true, toolbar, ...props }: ListIte
         display: "flex",
         alignItems: "center",
         gap: "16px",
-        padding: "8px",
+        padding: "4px 8px",
         ...(border ? { borderBottom: "1px solid var(--vscode-editorWidget-border)" } : {}),
         ...props.style,
       }}
