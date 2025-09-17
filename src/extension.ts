@@ -1,13 +1,10 @@
 import * as vscode from "vscode";
-// import { activateRunAgent } from "./commands/run-agent";
-// import { activateCreateAgent } from "./commands/create-agent";
 import { registerOpenMcpSettings } from "./commands/open-mcp-settings";
-// import { registerCreateIdeContext } from "./commands/create-ide-context";
-import { VsMcpWebviewProvider } from "./ui/VsMcpWebviewProvider";
 import { loadClient } from "./lib/ai";
 import { activateCreateAgent } from "./commands/create-agent";
 import { activateRunAgent } from "./commands/run-agent";
 import { activateSetApiKey } from "./commands/set-api-key";
+import { registerWebview } from "./lib/webview";
 
 // ---------- Extension entry ----------
 export async function activate(context: vscode.ExtensionContext) {
@@ -22,24 +19,9 @@ export async function activate(context: vscode.ExtensionContext) {
   // registerCreateIdeContext(context);
 
   // Register VS-MCP Webview Providers
-  const webviewProvider = new VsMcpWebviewProvider(context);
   context.subscriptions.push(
-    vscode.window.registerWebviewViewProvider(
-      VsMcpWebviewProvider.viewType,
-      webviewProvider
-    )
-  );
-  // Register provider for new view column (activity bar)
-  context.subscriptions.push(
-    vscode.window.registerWebviewViewProvider(
-      "vsMcpMainView",
-      webviewProvider
-    )
-  );
-  context.subscriptions.push(
-    vscode.commands.registerCommand("vs-mcp.showWebview", () => {
-      vscode.commands.executeCommand("workbench.view.extension.vsMcpMainView");
-    })
+    registerWebview(context, "vsMcpListView", "ui/list"),
+    registerWebview(context, "vsMcpGenerateView", "ui/generate")
   );
 // ...existing code...
 }
