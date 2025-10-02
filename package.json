@@ -1,9 +1,9 @@
 {
   "type": "module",
   "name": "vs-mcp",
-  "displayName": "AI Extension",
-  "description": "A minimal VSCode extension built with Vite and Vitest",
-  "version": "0.1.0",
+  "displayName": "VS-MCP",
+  "description": "Generate and run realtime VSCode MCP agents",
+  "version": "0.5.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/ai-standards/vs-mcp.git"

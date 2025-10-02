@@ -1,9 +1,9 @@
 name: Build and Release Extension
 
+
 on:
-  push:
-    branches:
-      - main
+  release:
+    types: [created]
 
 jobs:
   build-and-release:
@@ -21,15 +21,6 @@ jobs:
         run: npm install
 
 
-      - name: Bump minor version
-        run: |
-          CURRENT_VERSION=$(jq -r '.version' package.json)
-          IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT_VERSION"
-          MINOR=$((MINOR + 1))
-          PATCH=0
-          NEW_VERSION="$MAJOR.$MINOR.$PATCH"
-          jq ".version = \"$NEW_VERSION\"" package.json > package.json.tmp && mv package.json.tmp package.json
-          echo "Bumped version to $NEW_VERSION"
 
 
       - name: Build MCP server
