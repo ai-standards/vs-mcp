@@ -602,47 +602,94 @@ export const mcpToolIndex = {
       }
     },
     {
-      "id": "connectIntegration",
-      "name": "Connect Integration",
-      "path": "src/tools/integration/connect.mcpx.ts",
-      "namespace": "integration",
-      "description": "Connect to a specified MCP integration",
+      "id": "showStatusBar",
+      "name": "Show Status Bar",
+      "path": "src/tools/status/bar.mcpx.ts",
+      "namespace": "status",
+      "description": "Show a status message in the status bar. Optionally show a spinner.",
       "input": {
-        "integrationId": {
+        "id": {
           "type": "string",
           "required": true
         },
-        "options": {
-          "type": "any",
+        "message": {
+          "type": "string",
           "required": true
         },
-        "showUI": {
+        "spinner": {
           "type": "false",
           "required": false
         }
       },
       "output": {
-        "result": {
-          "type": "any",
+        "id": {
+          "type": "string",
+          "required": true
+        },
+        "message": {
+          "type": "string",
+          "required": true
+        },
+        "spinner": {
+          "type": "false",
+          "required": true
+        },
+        "shown": {
+          "type": "false",
           "required": true
         }
       }
     },
     {
-      "id": "listIntegrations",
-      "name": "List Integrations",
-      "path": "src/tools/integration/list.mcpx.ts",
-      "namespace": "integration",
-      "description": "List all available MCP integrations",
+      "id": "dismissStatus",
+      "name": "Dismiss Status",
+      "path": "src/tools/status/dismiss.mcpx.ts",
+      "namespace": "status",
+      "description": "Dismiss any status notification by id.",
       "input": {
-        "showUI": {
-          "type": "false",
-          "required": false
+        "id": {
+          "type": "string",
+          "required": true
         }
       },
       "output": {
-        "integrations": {
-          "type": "any[]",
+        "id": {
+          "type": "string",
+          "required": true
+        },
+        "dismissed": {
+          "type": "false",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "showStatusWindow",
+      "name": "Show Status Window",
+      "path": "src/tools/status/window.mcpx.ts",
+      "namespace": "status",
+      "description": "Show a status message in a window notification.",
+      "input": {
+        "id": {
+          "type": "string",
+          "required": true
+        },
+        "message": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "id": {
+          "type": "string",
+          "required": true
+        },
+        "message": {
+          "type": "string",
+          "required": true
+        },
+        "shown": {
+          "type": "false",
           "required": true
         }
       }
@@ -806,286 +853,6 @@ export const mcpToolIndex = {
       "output": {
         "choice": {
           "type": "null",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "commitChanges",
-      "name": "Commit Changes",
-      "path": "src/tools/vcs/commit.mcpx.ts",
-      "namespace": "vcs",
-      "description": "Commit staged changes in the current repository with a message (supports any VCS provider).",
-      "input": {
-        "message": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "success": {
-          "type": "false",
-          "required": true
-        },
-        "error": {
-          "type": "string",
-          "required": false
-        }
-      }
-    },
-    {
-      "id": "pullChanges",
-      "name": "Pull Changes",
-      "path": "src/tools/vcs/pull.mcpx.ts",
-      "namespace": "vcs",
-      "description": "Pull changes from the remote repository (supports any VCS provider).",
-      "input": {},
-      "output": {
-        "success": {
-          "type": "false",
-          "required": true
-        },
-        "error": {
-          "type": "string",
-          "required": false
-        }
-      }
-    },
-    {
-      "id": "pushChanges",
-      "name": "Push Changes",
-      "path": "src/tools/vcs/push.mcpx.ts",
-      "namespace": "vcs",
-      "description": "Push committed changes to the remote repository (supports any VCS provider).",
-      "input": {},
-      "output": {
-        "success": {
-          "type": "false",
-          "required": true
-        },
-        "error": {
-          "type": "string",
-          "required": false
-        }
-      }
-    },
-    {
-      "id": "getVcsStatus",
-      "name": "VCS Status",
-      "path": "src/tools/vcs/status.mcpx.ts",
-      "namespace": "vcs",
-      "description": "Get the status of the current repository (supports any VCS provider).",
-      "input": {},
-      "output": {
-        "status": {
-          "type": "string",
-          "required": true
-        },
-        "error": {
-          "type": "string",
-          "required": false
-        }
-      }
-    },
-    {
-      "id": "createWorkspaceFile",
-      "name": "Create Workspace File",
-      "path": "src/tools/workspace/create-file.mcpx.ts",
-      "namespace": "workspace",
-      "description": "Create a new file in the workspace with optional content.",
-      "input": {
-        "path": {
-          "type": "string",
-          "required": true
-        },
-        "content": {
-          "type": "string",
-          "required": false
-        }
-      },
-      "output": {
-        "success": {
-          "type": "false",
-          "required": true
-        },
-        "error": {
-          "type": "string",
-          "required": false
-        }
-      }
-    },
-    {
-      "id": "deleteWorkspaceFile",
-      "name": "Delete Workspace File",
-      "path": "src/tools/workspace/delete-file.mcpx.ts",
-      "namespace": "workspace",
-      "description": "Delete a file from the workspace.",
-      "input": {
-        "path": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "success": {
-          "type": "false",
-          "required": true
-        },
-        "error": {
-          "type": "string",
-          "required": false
-        }
-      }
-    },
-    {
-      "id": "listWorkspaceFiles",
-      "name": "List Workspace Files",
-      "path": "src/tools/workspace/list-files.mcpx.ts",
-      "namespace": "workspace",
-      "description": "List files in the workspace matching a glob pattern.",
-      "input": {
-        "glob": {
-          "type": "string",
-          "required": false
-        }
-      },
-      "output": {
-        "files": {
-          "type": "string[]",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "listWorkspaceFolders",
-      "name": "List Workspace Folders",
-      "path": "src/tools/workspace/list-folders.mcpx.ts",
-      "namespace": "workspace",
-      "description": "List all workspace folders.",
-      "input": {},
-      "output": {
-        "folders": {
-          "type": "string[]",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "renameWorkspaceFolder",
-      "name": "Rename Workspace Folder",
-      "path": "src/tools/workspace/rename-folder.mcpx.ts",
-      "namespace": "workspace",
-      "description": "Rename a folder in the workspace using VS Code's file system API (preserves user security permissions).",
-      "input": {
-        "oldPath": {
-          "type": "string",
-          "required": true
-        },
-        "newPath": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "success": {
-          "type": "false",
-          "required": true
-        },
-        "error": {
-          "type": "string",
-          "required": false
-        }
-      }
-    },
-    {
-      "id": "showStatusBar",
-      "name": "Show Status Bar",
-      "path": "src/tools/status/bar.mcpx.ts",
-      "namespace": "status",
-      "description": "Show a status message in the status bar. Optionally show a spinner.",
-      "input": {
-        "id": {
-          "type": "string",
-          "required": true
-        },
-        "message": {
-          "type": "string",
-          "required": true
-        },
-        "spinner": {
-          "type": "false",
-          "required": false
-        }
-      },
-      "output": {
-        "id": {
-          "type": "string",
-          "required": true
-        },
-        "message": {
-          "type": "string",
-          "required": true
-        },
-        "spinner": {
-          "type": "false",
-          "required": true
-        },
-        "shown": {
-          "type": "false",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "dismissStatus",
-      "name": "Dismiss Status",
-      "path": "src/tools/status/dismiss.mcpx.ts",
-      "namespace": "status",
-      "description": "Dismiss any status notification by id.",
-      "input": {
-        "id": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "id": {
-          "type": "string",
-          "required": true
-        },
-        "dismissed": {
-          "type": "false",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "showStatusWindow",
-      "name": "Show Status Window",
-      "path": "src/tools/status/window.mcpx.ts",
-      "namespace": "status",
-      "description": "Show a status message in a window notification.",
-      "input": {
-        "id": {
-          "type": "string",
-          "required": true
-        },
-        "message": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "id": {
-          "type": "string",
-          "required": true
-        },
-        "message": {
-          "type": "string",
-          "required": true
-        },
-        "shown": {
-          "type": "false",
           "required": true
         }
       }
@@ -1292,6 +1059,239 @@ export const mcpToolIndex = {
         "repoUrl": {
           "type": "string",
           "required": true
+        }
+      }
+    },
+    {
+      "id": "commitChanges",
+      "name": "Commit Changes",
+      "path": "src/tools/vcs/commit.mcpx.ts",
+      "namespace": "vcs",
+      "description": "Commit staged changes in the current repository with a message (supports any VCS provider).",
+      "input": {
+        "message": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        },
+        "error": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "id": "pullChanges",
+      "name": "Pull Changes",
+      "path": "src/tools/vcs/pull.mcpx.ts",
+      "namespace": "vcs",
+      "description": "Pull changes from the remote repository (supports any VCS provider).",
+      "input": {},
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        },
+        "error": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "id": "pushChanges",
+      "name": "Push Changes",
+      "path": "src/tools/vcs/push.mcpx.ts",
+      "namespace": "vcs",
+      "description": "Push committed changes to the remote repository (supports any VCS provider).",
+      "input": {},
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        },
+        "error": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "id": "getVcsStatus",
+      "name": "VCS Status",
+      "path": "src/tools/vcs/status.mcpx.ts",
+      "namespace": "vcs",
+      "description": "Get the status of the current repository (supports any VCS provider).",
+      "input": {},
+      "output": {
+        "status": {
+          "type": "string",
+          "required": true
+        },
+        "error": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "id": "connectIntegration",
+      "name": "Connect Integration",
+      "path": "src/tools/integration/connect.mcpx.ts",
+      "namespace": "integration",
+      "description": "Connect to a specified MCP integration",
+      "input": {
+        "integrationId": {
+          "type": "string",
+          "required": true
+        },
+        "options": {
+          "type": "any",
+          "required": true
+        },
+        "showUI": {
+          "type": "false",
+          "required": false
+        }
+      },
+      "output": {
+        "result": {
+          "type": "any",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "listIntegrations",
+      "name": "List Integrations",
+      "path": "src/tools/integration/list.mcpx.ts",
+      "namespace": "integration",
+      "description": "List all available MCP integrations",
+      "input": {
+        "showUI": {
+          "type": "false",
+          "required": false
+        }
+      },
+      "output": {
+        "integrations": {
+          "type": "any[]",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "createWorkspaceFile",
+      "name": "Create Workspace File",
+      "path": "src/tools/workspace/create-file.mcpx.ts",
+      "namespace": "workspace",
+      "description": "Create a new file in the workspace with optional content.",
+      "input": {
+        "path": {
+          "type": "string",
+          "required": true
+        },
+        "content": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        },
+        "error": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "id": "deleteWorkspaceFile",
+      "name": "Delete Workspace File",
+      "path": "src/tools/workspace/delete-file.mcpx.ts",
+      "namespace": "workspace",
+      "description": "Delete a file from the workspace.",
+      "input": {
+        "path": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        },
+        "error": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "id": "listWorkspaceFiles",
+      "name": "List Workspace Files",
+      "path": "src/tools/workspace/list-files.mcpx.ts",
+      "namespace": "workspace",
+      "description": "List files in the workspace matching a glob pattern.",
+      "input": {
+        "glob": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "output": {
+        "files": {
+          "type": "string[]",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "listWorkspaceFolders",
+      "name": "List Workspace Folders",
+      "path": "src/tools/workspace/list-folders.mcpx.ts",
+      "namespace": "workspace",
+      "description": "List all workspace folders.",
+      "input": {},
+      "output": {
+        "folders": {
+          "type": "string[]",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "renameWorkspaceFolder",
+      "name": "Rename Workspace Folder",
+      "path": "src/tools/workspace/rename-folder.mcpx.ts",
+      "namespace": "workspace",
+      "description": "Rename a folder in the workspace using VS Code's file system API (preserves user security permissions).",
+      "input": {
+        "oldPath": {
+          "type": "string",
+          "required": true
+        },
+        "newPath": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        },
+        "error": {
+          "type": "string",
+          "required": false
         }
       }
     }

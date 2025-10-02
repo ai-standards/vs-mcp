@@ -229,24 +229,40 @@ export interface GitMergeGitBranchResponse {
   "error"?: string;
 }
 
-/** Connect to a specified MCP integration */
-export interface IntegrationConnectIntegrationProps {
-  "integrationId": string;
-  "options": any;
-  "showUI"?: false;
+/** Show a status message in the status bar. Optionally show a spinner. */
+export interface StatusShowStatusBarProps {
+  "id": string;
+  "message": string;
+  "spinner"?: false;
 }
 
-export interface IntegrationConnectIntegrationResponse {
-  "result": any;
+export interface StatusShowStatusBarResponse {
+  "id": string;
+  "message": string;
+  "spinner": false;
+  "shown": false;
 }
 
-/** List all available MCP integrations */
-export interface IntegrationListIntegrationsProps {
-  "showUI"?: false;
+/** Dismiss any status notification by id. */
+export interface StatusDismissStatusProps {
+  "id": string;
 }
 
-export interface IntegrationListIntegrationsResponse {
-  "integrations": any[];
+export interface StatusDismissStatusResponse {
+  "id": string;
+  "dismissed": false;
+}
+
+/** Show a status message in a window notification. */
+export interface StatusShowStatusWindowProps {
+  "id": string;
+  "message": string;
+}
+
+export interface StatusShowStatusWindowResponse {
+  "id": string;
+  "message": string;
+  "shown": false;
 }
 
 /** Close a specific integrated terminal in VS Code. */
@@ -323,132 +339,6 @@ export interface UiShowWarningMessageProps {
 
 export interface UiShowWarningMessageResponse {
   "choice": null;
-}
-
-/** Commit staged changes in the current repository with a message (supports any VCS provider). */
-export interface VcsCommitChangesProps {
-  "message": string;
-}
-
-export interface VcsCommitChangesResponse {
-  "success": false;
-  "error"?: string;
-}
-
-/** Pull changes from the remote repository (supports any VCS provider). */
-export interface VcsPullChangesProps {
-
-}
-
-export interface VcsPullChangesResponse {
-  "success": false;
-  "error"?: string;
-}
-
-/** Push committed changes to the remote repository (supports any VCS provider). */
-export interface VcsPushChangesProps {
-
-}
-
-export interface VcsPushChangesResponse {
-  "success": false;
-  "error"?: string;
-}
-
-/** Get the status of the current repository (supports any VCS provider). */
-export interface VcsGetVcsStatusProps {
-
-}
-
-export interface VcsGetVcsStatusResponse {
-  "status": string;
-  "error"?: string;
-}
-
-/** Create a new file in the workspace with optional content. */
-export interface WorkspaceCreateWorkspaceFileProps {
-  "path": string;
-  "content"?: string;
-}
-
-export interface WorkspaceCreateWorkspaceFileResponse {
-  "success": false;
-  "error"?: string;
-}
-
-/** Delete a file from the workspace. */
-export interface WorkspaceDeleteWorkspaceFileProps {
-  "path": string;
-}
-
-export interface WorkspaceDeleteWorkspaceFileResponse {
-  "success": false;
-  "error"?: string;
-}
-
-/** List files in the workspace matching a glob pattern. */
-export interface WorkspaceListWorkspaceFilesProps {
-  "glob"?: string;
-}
-
-export interface WorkspaceListWorkspaceFilesResponse {
-  "files": string[];
-}
-
-/** List all workspace folders. */
-export interface WorkspaceListWorkspaceFoldersProps {
-
-}
-
-export interface WorkspaceListWorkspaceFoldersResponse {
-  "folders": string[];
-}
-
-/** Rename a folder in the workspace using VS Code's file system API (preserves user security permissions). */
-export interface WorkspaceRenameWorkspaceFolderProps {
-  "oldPath": string;
-  "newPath": string;
-}
-
-export interface WorkspaceRenameWorkspaceFolderResponse {
-  "success": false;
-  "error"?: string;
-}
-
-/** Show a status message in the status bar. Optionally show a spinner. */
-export interface StatusShowStatusBarProps {
-  "id": string;
-  "message": string;
-  "spinner"?: false;
-}
-
-export interface StatusShowStatusBarResponse {
-  "id": string;
-  "message": string;
-  "spinner": false;
-  "shown": false;
-}
-
-/** Dismiss any status notification by id. */
-export interface StatusDismissStatusProps {
-  "id": string;
-}
-
-export interface StatusDismissStatusResponse {
-  "id": string;
-  "dismissed": false;
-}
-
-/** Show a status message in a window notification. */
-export interface StatusShowStatusWindowProps {
-  "id": string;
-  "message": string;
-}
-
-export interface StatusShowStatusWindowResponse {
-  "id": string;
-  "message": string;
-  "shown": false;
 }
 
 /** Find files by glob pattern (workspace relative). */
@@ -532,7 +422,117 @@ export interface GithubOpenGitHubRepositoryResponse {
   "repoUrl": string;
 }
 
-export type ToolId = "agent.createAgent" | "agent.listAgents" | "agent.runAgent" | "ai.generateCode" | "ai.generateData" | "ai.generateImages" | "ai.generateText" | "ai.refactorCode" | "ai.testCode" | "ai.writeDocumentation" | "editor.activeFile" | "editor.openFile" | "editor.openVirtual" | "editor.proposeEdits" | "editor.editorSelection" | "git.createGitBranch" | "git.deleteGitBranch" | "git.mergeGitBranch" | "integration.connectIntegration" | "integration.listIntegrations" | "terminal.closeTerminal" | "terminal.createTerminal" | "terminal.listTerminals" | "terminal.sendTextToTerminal" | "terminal.showTerminal" | "ui.showInfoMessage" | "ui.showInputBox" | "ui.showWarningMessage" | "vcs.commitChanges" | "vcs.pullChanges" | "vcs.pushChanges" | "vcs.getVcsStatus" | "workspace.createWorkspaceFile" | "workspace.deleteWorkspaceFile" | "workspace.listWorkspaceFiles" | "workspace.listWorkspaceFolders" | "workspace.renameWorkspaceFolder" | "status.showStatusBar" | "status.dismissStatus" | "status.showStatusWindow" | "fs.findFiles" | "fs.readDir" | "fs.readFile" | "fs.writeFile" | "github.createGitHubIssue" | "github.createGitHubPullRequest" | "github.openGitHubRepository";
+/** Commit staged changes in the current repository with a message (supports any VCS provider). */
+export interface VcsCommitChangesProps {
+  "message": string;
+}
+
+export interface VcsCommitChangesResponse {
+  "success": false;
+  "error"?: string;
+}
+
+/** Pull changes from the remote repository (supports any VCS provider). */
+export interface VcsPullChangesProps {
+
+}
+
+export interface VcsPullChangesResponse {
+  "success": false;
+  "error"?: string;
+}
+
+/** Push committed changes to the remote repository (supports any VCS provider). */
+export interface VcsPushChangesProps {
+
+}
+
+export interface VcsPushChangesResponse {
+  "success": false;
+  "error"?: string;
+}
+
+/** Get the status of the current repository (supports any VCS provider). */
+export interface VcsGetVcsStatusProps {
+
+}
+
+export interface VcsGetVcsStatusResponse {
+  "status": string;
+  "error"?: string;
+}
+
+/** Connect to a specified MCP integration */
+export interface IntegrationConnectIntegrationProps {
+  "integrationId": string;
+  "options": any;
+  "showUI"?: false;
+}
+
+export interface IntegrationConnectIntegrationResponse {
+  "result": any;
+}
+
+/** List all available MCP integrations */
+export interface IntegrationListIntegrationsProps {
+  "showUI"?: false;
+}
+
+export interface IntegrationListIntegrationsResponse {
+  "integrations": any[];
+}
+
+/** Create a new file in the workspace with optional content. */
+export interface WorkspaceCreateWorkspaceFileProps {
+  "path": string;
+  "content"?: string;
+}
+
+export interface WorkspaceCreateWorkspaceFileResponse {
+  "success": false;
+  "error"?: string;
+}
+
+/** Delete a file from the workspace. */
+export interface WorkspaceDeleteWorkspaceFileProps {
+  "path": string;
+}
+
+export interface WorkspaceDeleteWorkspaceFileResponse {
+  "success": false;
+  "error"?: string;
+}
+
+/** List files in the workspace matching a glob pattern. */
+export interface WorkspaceListWorkspaceFilesProps {
+  "glob"?: string;
+}
+
+export interface WorkspaceListWorkspaceFilesResponse {
+  "files": string[];
+}
+
+/** List all workspace folders. */
+export interface WorkspaceListWorkspaceFoldersProps {
+
+}
+
+export interface WorkspaceListWorkspaceFoldersResponse {
+  "folders": string[];
+}
+
+/** Rename a folder in the workspace using VS Code's file system API (preserves user security permissions). */
+export interface WorkspaceRenameWorkspaceFolderProps {
+  "oldPath": string;
+  "newPath": string;
+}
+
+export interface WorkspaceRenameWorkspaceFolderResponse {
+  "success": false;
+  "error"?: string;
+}
+
+export type ToolId = "agent.createAgent" | "agent.listAgents" | "agent.runAgent" | "ai.generateCode" | "ai.generateData" | "ai.generateImages" | "ai.generateText" | "ai.refactorCode" | "ai.testCode" | "ai.writeDocumentation" | "editor.activeFile" | "editor.openFile" | "editor.openVirtual" | "editor.proposeEdits" | "editor.editorSelection" | "git.createGitBranch" | "git.deleteGitBranch" | "git.mergeGitBranch" | "status.showStatusBar" | "status.dismissStatus" | "status.showStatusWindow" | "terminal.closeTerminal" | "terminal.createTerminal" | "terminal.listTerminals" | "terminal.sendTextToTerminal" | "terminal.showTerminal" | "ui.showInfoMessage" | "ui.showInputBox" | "ui.showWarningMessage" | "fs.findFiles" | "fs.readDir" | "fs.readFile" | "fs.writeFile" | "github.createGitHubIssue" | "github.createGitHubPullRequest" | "github.openGitHubRepository" | "vcs.commitChanges" | "vcs.pullChanges" | "vcs.pushChanges" | "vcs.getVcsStatus" | "integration.connectIntegration" | "integration.listIntegrations" | "workspace.createWorkspaceFile" | "workspace.deleteWorkspaceFile" | "workspace.listWorkspaceFiles" | "workspace.listWorkspaceFolders" | "workspace.renameWorkspaceFolder";
   
 export type CommandMap = {
   "agent.createAgent": { props: AgentCreateAgentProps; response: AgentCreateAgentResponse; path: "src/tools/agent/create-agent.mcpx.ts" };
@@ -553,8 +553,9 @@ export type CommandMap = {
   "git.createGitBranch": { props: GitCreateGitBranchProps; response: GitCreateGitBranchResponse; path: "src/tools/git/create-branch.mcpx.ts" };
   "git.deleteGitBranch": { props: GitDeleteGitBranchProps; response: GitDeleteGitBranchResponse; path: "src/tools/git/delete-branch.mcpx.ts" };
   "git.mergeGitBranch": { props: GitMergeGitBranchProps; response: GitMergeGitBranchResponse; path: "src/tools/git/merge-branch.mcpx.ts" };
-  "integration.connectIntegration": { props: IntegrationConnectIntegrationProps; response: IntegrationConnectIntegrationResponse; path: "src/tools/integration/connect.mcpx.ts" };
-  "integration.listIntegrations": { props: IntegrationListIntegrationsProps; response: IntegrationListIntegrationsResponse; path: "src/tools/integration/list.mcpx.ts" };
+  "status.showStatusBar": { props: StatusShowStatusBarProps; response: StatusShowStatusBarResponse; path: "src/tools/status/bar.mcpx.ts" };
+  "status.dismissStatus": { props: StatusDismissStatusProps; response: StatusDismissStatusResponse; path: "src/tools/status/dismiss.mcpx.ts" };
+  "status.showStatusWindow": { props: StatusShowStatusWindowProps; response: StatusShowStatusWindowResponse; path: "src/tools/status/window.mcpx.ts" };
   "terminal.closeTerminal": { props: TerminalCloseTerminalProps; response: TerminalCloseTerminalResponse; path: "src/tools/terminal/close.mcpx.ts" };
   "terminal.createTerminal": { props: TerminalCreateTerminalProps; response: TerminalCreateTerminalResponse; path: "src/tools/terminal/create.mcpx.ts" };
   "terminal.listTerminals": { props: TerminalListTerminalsProps; response: TerminalListTerminalsResponse; path: "src/tools/terminal/list.mcpx.ts" };
@@ -563,18 +564,6 @@ export type CommandMap = {
   "ui.showInfoMessage": { props: UiShowInfoMessageProps; response: UiShowInfoMessageResponse; path: "src/tools/ui/info.mcpx.ts" };
   "ui.showInputBox": { props: UiShowInputBoxProps; response: UiShowInputBoxResponse; path: "src/tools/ui/input.mcpx.ts" };
   "ui.showWarningMessage": { props: UiShowWarningMessageProps; response: UiShowWarningMessageResponse; path: "src/tools/ui/warn.mcpx.ts" };
-  "vcs.commitChanges": { props: VcsCommitChangesProps; response: VcsCommitChangesResponse; path: "src/tools/vcs/commit.mcpx.ts" };
-  "vcs.pullChanges": { props: VcsPullChangesProps; response: VcsPullChangesResponse; path: "src/tools/vcs/pull.mcpx.ts" };
-  "vcs.pushChanges": { props: VcsPushChangesProps; response: VcsPushChangesResponse; path: "src/tools/vcs/push.mcpx.ts" };
-  "vcs.getVcsStatus": { props: VcsGetVcsStatusProps; response: VcsGetVcsStatusResponse; path: "src/tools/vcs/status.mcpx.ts" };
-  "workspace.createWorkspaceFile": { props: WorkspaceCreateWorkspaceFileProps; response: WorkspaceCreateWorkspaceFileResponse; path: "src/tools/workspace/create-file.mcpx.ts" };
-  "workspace.deleteWorkspaceFile": { props: WorkspaceDeleteWorkspaceFileProps; response: WorkspaceDeleteWorkspaceFileResponse; path: "src/tools/workspace/delete-file.mcpx.ts" };
-  "workspace.listWorkspaceFiles": { props: WorkspaceListWorkspaceFilesProps; response: WorkspaceListWorkspaceFilesResponse; path: "src/tools/workspace/list-files.mcpx.ts" };
-  "workspace.listWorkspaceFolders": { props: WorkspaceListWorkspaceFoldersProps; response: WorkspaceListWorkspaceFoldersResponse; path: "src/tools/workspace/list-folders.mcpx.ts" };
-  "workspace.renameWorkspaceFolder": { props: WorkspaceRenameWorkspaceFolderProps; response: WorkspaceRenameWorkspaceFolderResponse; path: "src/tools/workspace/rename-folder.mcpx.ts" };
-  "status.showStatusBar": { props: StatusShowStatusBarProps; response: StatusShowStatusBarResponse; path: "src/tools/status/bar.mcpx.ts" };
-  "status.dismissStatus": { props: StatusDismissStatusProps; response: StatusDismissStatusResponse; path: "src/tools/status/dismiss.mcpx.ts" };
-  "status.showStatusWindow": { props: StatusShowStatusWindowProps; response: StatusShowStatusWindowResponse; path: "src/tools/status/window.mcpx.ts" };
   "fs.findFiles": { props: FsFindFilesProps; response: FsFindFilesResponse; path: "src/tools/fs/find.mcpx.ts" };
   "fs.readDir": { props: FsReadDirProps; response: FsReadDirResponse; path: "src/tools/fs/read-dir.mcpx.ts" };
   "fs.readFile": { props: FsReadFileProps; response: FsReadFileResponse; path: "src/tools/fs/read-file.mcpx.ts" };
@@ -582,6 +571,17 @@ export type CommandMap = {
   "github.createGitHubIssue": { props: GithubCreateGitHubIssueProps; response: GithubCreateGitHubIssueResponse; path: "src/tools/github/create-issue.mcpx.ts" };
   "github.createGitHubPullRequest": { props: GithubCreateGitHubPullRequestProps; response: GithubCreateGitHubPullRequestResponse; path: "src/tools/github/create-pr.mcpx.ts" };
   "github.openGitHubRepository": { props: GithubOpenGitHubRepositoryProps; response: GithubOpenGitHubRepositoryResponse; path: "src/tools/github/open-repo.mcpx.ts" };
+  "vcs.commitChanges": { props: VcsCommitChangesProps; response: VcsCommitChangesResponse; path: "src/tools/vcs/commit.mcpx.ts" };
+  "vcs.pullChanges": { props: VcsPullChangesProps; response: VcsPullChangesResponse; path: "src/tools/vcs/pull.mcpx.ts" };
+  "vcs.pushChanges": { props: VcsPushChangesProps; response: VcsPushChangesResponse; path: "src/tools/vcs/push.mcpx.ts" };
+  "vcs.getVcsStatus": { props: VcsGetVcsStatusProps; response: VcsGetVcsStatusResponse; path: "src/tools/vcs/status.mcpx.ts" };
+  "integration.connectIntegration": { props: IntegrationConnectIntegrationProps; response: IntegrationConnectIntegrationResponse; path: "src/tools/integration/connect.mcpx.ts" };
+  "integration.listIntegrations": { props: IntegrationListIntegrationsProps; response: IntegrationListIntegrationsResponse; path: "src/tools/integration/list.mcpx.ts" };
+  "workspace.createWorkspaceFile": { props: WorkspaceCreateWorkspaceFileProps; response: WorkspaceCreateWorkspaceFileResponse; path: "src/tools/workspace/create-file.mcpx.ts" };
+  "workspace.deleteWorkspaceFile": { props: WorkspaceDeleteWorkspaceFileProps; response: WorkspaceDeleteWorkspaceFileResponse; path: "src/tools/workspace/delete-file.mcpx.ts" };
+  "workspace.listWorkspaceFiles": { props: WorkspaceListWorkspaceFilesProps; response: WorkspaceListWorkspaceFilesResponse; path: "src/tools/workspace/list-files.mcpx.ts" };
+  "workspace.listWorkspaceFolders": { props: WorkspaceListWorkspaceFoldersProps; response: WorkspaceListWorkspaceFoldersResponse; path: "src/tools/workspace/list-folders.mcpx.ts" };
+  "workspace.renameWorkspaceFolder": { props: WorkspaceRenameWorkspaceFolderProps; response: WorkspaceRenameWorkspaceFolderResponse; path: "src/tools/workspace/rename-folder.mcpx.ts" };
 };
 
 type AgentCreateAgentPropsKey = "agent.createAgentProps";
@@ -620,10 +620,12 @@ type GitDeleteGitBranchPropsKey = "git.deleteGitBranchProps";
 type GitDeleteGitBranchResponseKey = "git.deleteGitBranchResponse";
 type GitMergeGitBranchPropsKey = "git.mergeGitBranchProps";
 type GitMergeGitBranchResponseKey = "git.mergeGitBranchResponse";
-type IntegrationConnectIntegrationPropsKey = "integration.connectIntegrationProps";
-type IntegrationConnectIntegrationResponseKey = "integration.connectIntegrationResponse";
-type IntegrationListIntegrationsPropsKey = "integration.listIntegrationsProps";
-type IntegrationListIntegrationsResponseKey = "integration.listIntegrationsResponse";
+type StatusShowStatusBarPropsKey = "status.showStatusBarProps";
+type StatusShowStatusBarResponseKey = "status.showStatusBarResponse";
+type StatusDismissStatusPropsKey = "status.dismissStatusProps";
+type StatusDismissStatusResponseKey = "status.dismissStatusResponse";
+type StatusShowStatusWindowPropsKey = "status.showStatusWindowProps";
+type StatusShowStatusWindowResponseKey = "status.showStatusWindowResponse";
 type TerminalCloseTerminalPropsKey = "terminal.closeTerminalProps";
 type TerminalCloseTerminalResponseKey = "terminal.closeTerminalResponse";
 type TerminalCreateTerminalPropsKey = "terminal.createTerminalProps";
@@ -640,30 +642,6 @@ type UiShowInputBoxPropsKey = "ui.showInputBoxProps";
 type UiShowInputBoxResponseKey = "ui.showInputBoxResponse";
 type UiShowWarningMessagePropsKey = "ui.showWarningMessageProps";
 type UiShowWarningMessageResponseKey = "ui.showWarningMessageResponse";
-type VcsCommitChangesPropsKey = "vcs.commitChangesProps";
-type VcsCommitChangesResponseKey = "vcs.commitChangesResponse";
-type VcsPullChangesPropsKey = "vcs.pullChangesProps";
-type VcsPullChangesResponseKey = "vcs.pullChangesResponse";
-type VcsPushChangesPropsKey = "vcs.pushChangesProps";
-type VcsPushChangesResponseKey = "vcs.pushChangesResponse";
-type VcsGetVcsStatusPropsKey = "vcs.getVcsStatusProps";
-type VcsGetVcsStatusResponseKey = "vcs.getVcsStatusResponse";
-type WorkspaceCreateWorkspaceFilePropsKey = "workspace.createWorkspaceFileProps";
-type WorkspaceCreateWorkspaceFileResponseKey = "workspace.createWorkspaceFileResponse";
-type WorkspaceDeleteWorkspaceFilePropsKey = "workspace.deleteWorkspaceFileProps";
-type WorkspaceDeleteWorkspaceFileResponseKey = "workspace.deleteWorkspaceFileResponse";
-type WorkspaceListWorkspaceFilesPropsKey = "workspace.listWorkspaceFilesProps";
-type WorkspaceListWorkspaceFilesResponseKey = "workspace.listWorkspaceFilesResponse";
-type WorkspaceListWorkspaceFoldersPropsKey = "workspace.listWorkspaceFoldersProps";
-type WorkspaceListWorkspaceFoldersResponseKey = "workspace.listWorkspaceFoldersResponse";
-type WorkspaceRenameWorkspaceFolderPropsKey = "workspace.renameWorkspaceFolderProps";
-type WorkspaceRenameWorkspaceFolderResponseKey = "workspace.renameWorkspaceFolderResponse";
-type StatusShowStatusBarPropsKey = "status.showStatusBarProps";
-type StatusShowStatusBarResponseKey = "status.showStatusBarResponse";
-type StatusDismissStatusPropsKey = "status.dismissStatusProps";
-type StatusDismissStatusResponseKey = "status.dismissStatusResponse";
-type StatusShowStatusWindowPropsKey = "status.showStatusWindowProps";
-type StatusShowStatusWindowResponseKey = "status.showStatusWindowResponse";
 type FsFindFilesPropsKey = "fs.findFilesProps";
 type FsFindFilesResponseKey = "fs.findFilesResponse";
 type FsReadDirPropsKey = "fs.readDirProps";
@@ -678,6 +656,28 @@ type GithubCreateGitHubPullRequestPropsKey = "github.createGitHubPullRequestProp
 type GithubCreateGitHubPullRequestResponseKey = "github.createGitHubPullRequestResponse";
 type GithubOpenGitHubRepositoryPropsKey = "github.openGitHubRepositoryProps";
 type GithubOpenGitHubRepositoryResponseKey = "github.openGitHubRepositoryResponse";
+type VcsCommitChangesPropsKey = "vcs.commitChangesProps";
+type VcsCommitChangesResponseKey = "vcs.commitChangesResponse";
+type VcsPullChangesPropsKey = "vcs.pullChangesProps";
+type VcsPullChangesResponseKey = "vcs.pullChangesResponse";
+type VcsPushChangesPropsKey = "vcs.pushChangesProps";
+type VcsPushChangesResponseKey = "vcs.pushChangesResponse";
+type VcsGetVcsStatusPropsKey = "vcs.getVcsStatusProps";
+type VcsGetVcsStatusResponseKey = "vcs.getVcsStatusResponse";
+type IntegrationConnectIntegrationPropsKey = "integration.connectIntegrationProps";
+type IntegrationConnectIntegrationResponseKey = "integration.connectIntegrationResponse";
+type IntegrationListIntegrationsPropsKey = "integration.listIntegrationsProps";
+type IntegrationListIntegrationsResponseKey = "integration.listIntegrationsResponse";
+type WorkspaceCreateWorkspaceFilePropsKey = "workspace.createWorkspaceFileProps";
+type WorkspaceCreateWorkspaceFileResponseKey = "workspace.createWorkspaceFileResponse";
+type WorkspaceDeleteWorkspaceFilePropsKey = "workspace.deleteWorkspaceFileProps";
+type WorkspaceDeleteWorkspaceFileResponseKey = "workspace.deleteWorkspaceFileResponse";
+type WorkspaceListWorkspaceFilesPropsKey = "workspace.listWorkspaceFilesProps";
+type WorkspaceListWorkspaceFilesResponseKey = "workspace.listWorkspaceFilesResponse";
+type WorkspaceListWorkspaceFoldersPropsKey = "workspace.listWorkspaceFoldersProps";
+type WorkspaceListWorkspaceFoldersResponseKey = "workspace.listWorkspaceFoldersResponse";
+type WorkspaceRenameWorkspaceFolderPropsKey = "workspace.renameWorkspaceFolderProps";
+type WorkspaceRenameWorkspaceFolderResponseKey = "workspace.renameWorkspaceFolderResponse";
 
 export type PropsFor<K extends keyof CommandMap> =
   { [P in `${Extract<K, string>}Props`]: CommandMap[K]["props"] };
@@ -1302,47 +1302,94 @@ export const AllTools = [
     }
   },
   {
-    "id": "connectIntegration",
-    "namespace": "integration",
-    "path": "src/tools/integration/connect.mcpx.ts",
-    "name": "Connect Integration",
-    "description": "Connect to a specified MCP integration",
+    "id": "showStatusBar",
+    "namespace": "status",
+    "path": "src/tools/status/bar.mcpx.ts",
+    "name": "Show Status Bar",
+    "description": "Show a status message in the status bar. Optionally show a spinner.",
     "input": {
-      "integrationId": {
+      "id": {
         "type": "string",
         "required": true
       },
-      "options": {
-        "type": "any",
+      "message": {
+        "type": "string",
         "required": true
       },
-      "showUI": {
+      "spinner": {
         "type": "false",
         "required": false
       }
     },
     "output": {
-      "result": {
-        "type": "any",
+      "id": {
+        "type": "string",
+        "required": true
+      },
+      "message": {
+        "type": "string",
+        "required": true
+      },
+      "spinner": {
+        "type": "false",
+        "required": true
+      },
+      "shown": {
+        "type": "false",
         "required": true
       }
     }
   },
   {
-    "id": "listIntegrations",
-    "namespace": "integration",
-    "path": "src/tools/integration/list.mcpx.ts",
-    "name": "List Integrations",
-    "description": "List all available MCP integrations",
+    "id": "dismissStatus",
+    "namespace": "status",
+    "path": "src/tools/status/dismiss.mcpx.ts",
+    "name": "Dismiss Status",
+    "description": "Dismiss any status notification by id.",
     "input": {
-      "showUI": {
-        "type": "false",
-        "required": false
+      "id": {
+        "type": "string",
+        "required": true
       }
     },
     "output": {
-      "integrations": {
-        "type": "any[]",
+      "id": {
+        "type": "string",
+        "required": true
+      },
+      "dismissed": {
+        "type": "false",
+        "required": true
+      }
+    }
+  },
+  {
+    "id": "showStatusWindow",
+    "namespace": "status",
+    "path": "src/tools/status/window.mcpx.ts",
+    "name": "Show Status Window",
+    "description": "Show a status message in a window notification.",
+    "input": {
+      "id": {
+        "type": "string",
+        "required": true
+      },
+      "message": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "output": {
+      "id": {
+        "type": "string",
+        "required": true
+      },
+      "message": {
+        "type": "string",
+        "required": true
+      },
+      "shown": {
+        "type": "false",
         "required": true
       }
     }
@@ -1506,286 +1553,6 @@ export const AllTools = [
     "output": {
       "choice": {
         "type": "null",
-        "required": true
-      }
-    }
-  },
-  {
-    "id": "commitChanges",
-    "namespace": "vcs",
-    "path": "src/tools/vcs/commit.mcpx.ts",
-    "name": "Commit Changes",
-    "description": "Commit staged changes in the current repository with a message (supports any VCS provider).",
-    "input": {
-      "message": {
-        "type": "string",
-        "required": true
-      }
-    },
-    "output": {
-      "success": {
-        "type": "false",
-        "required": true
-      },
-      "error": {
-        "type": "string",
-        "required": false
-      }
-    }
-  },
-  {
-    "id": "pullChanges",
-    "namespace": "vcs",
-    "path": "src/tools/vcs/pull.mcpx.ts",
-    "name": "Pull Changes",
-    "description": "Pull changes from the remote repository (supports any VCS provider).",
-    "input": {},
-    "output": {
-      "success": {
-        "type": "false",
-        "required": true
-      },
-      "error": {
-        "type": "string",
-        "required": false
-      }
-    }
-  },
-  {
-    "id": "pushChanges",
-    "namespace": "vcs",
-    "path": "src/tools/vcs/push.mcpx.ts",
-    "name": "Push Changes",
-    "description": "Push committed changes to the remote repository (supports any VCS provider).",
-    "input": {},
-    "output": {
-      "success": {
-        "type": "false",
-        "required": true
-      },
-      "error": {
-        "type": "string",
-        "required": false
-      }
-    }
-  },
-  {
-    "id": "getVcsStatus",
-    "namespace": "vcs",
-    "path": "src/tools/vcs/status.mcpx.ts",
-    "name": "VCS Status",
-    "description": "Get the status of the current repository (supports any VCS provider).",
-    "input": {},
-    "output": {
-      "status": {
-        "type": "string",
-        "required": true
-      },
-      "error": {
-        "type": "string",
-        "required": false
-      }
-    }
-  },
-  {
-    "id": "createWorkspaceFile",
-    "namespace": "workspace",
-    "path": "src/tools/workspace/create-file.mcpx.ts",
-    "name": "Create Workspace File",
-    "description": "Create a new file in the workspace with optional content.",
-    "input": {
-      "path": {
-        "type": "string",
-        "required": true
-      },
-      "content": {
-        "type": "string",
-        "required": false
-      }
-    },
-    "output": {
-      "success": {
-        "type": "false",
-        "required": true
-      },
-      "error": {
-        "type": "string",
-        "required": false
-      }
-    }
-  },
-  {
-    "id": "deleteWorkspaceFile",
-    "namespace": "workspace",
-    "path": "src/tools/workspace/delete-file.mcpx.ts",
-    "name": "Delete Workspace File",
-    "description": "Delete a file from the workspace.",
-    "input": {
-      "path": {
-        "type": "string",
-        "required": true
-      }
-    },
-    "output": {
-      "success": {
-        "type": "false",
-        "required": true
-      },
-      "error": {
-        "type": "string",
-        "required": false
-      }
-    }
-  },
-  {
-    "id": "listWorkspaceFiles",
-    "namespace": "workspace",
-    "path": "src/tools/workspace/list-files.mcpx.ts",
-    "name": "List Workspace Files",
-    "description": "List files in the workspace matching a glob pattern.",
-    "input": {
-      "glob": {
-        "type": "string",
-        "required": false
-      }
-    },
-    "output": {
-      "files": {
-        "type": "string[]",
-        "required": true
-      }
-    }
-  },
-  {
-    "id": "listWorkspaceFolders",
-    "namespace": "workspace",
-    "path": "src/tools/workspace/list-folders.mcpx.ts",
-    "name": "List Workspace Folders",
-    "description": "List all workspace folders.",
-    "input": {},
-    "output": {
-      "folders": {
-        "type": "string[]",
-        "required": true
-      }
-    }
-  },
-  {
-    "id": "renameWorkspaceFolder",
-    "namespace": "workspace",
-    "path": "src/tools/workspace/rename-folder.mcpx.ts",
-    "name": "Rename Workspace Folder",
-    "description": "Rename a folder in the workspace using VS Code's file system API (preserves user security permissions).",
-    "input": {
-      "oldPath": {
-        "type": "string",
-        "required": true
-      },
-      "newPath": {
-        "type": "string",
-        "required": true
-      }
-    },
-    "output": {
-      "success": {
-        "type": "false",
-        "required": true
-      },
-      "error": {
-        "type": "string",
-        "required": false
-      }
-    }
-  },
-  {
-    "id": "showStatusBar",
-    "namespace": "status",
-    "path": "src/tools/status/bar.mcpx.ts",
-    "name": "Show Status Bar",
-    "description": "Show a status message in the status bar. Optionally show a spinner.",
-    "input": {
-      "id": {
-        "type": "string",
-        "required": true
-      },
-      "message": {
-        "type": "string",
-        "required": true
-      },
-      "spinner": {
-        "type": "false",
-        "required": false
-      }
-    },
-    "output": {
-      "id": {
-        "type": "string",
-        "required": true
-      },
-      "message": {
-        "type": "string",
-        "required": true
-      },
-      "spinner": {
-        "type": "false",
-        "required": true
-      },
-      "shown": {
-        "type": "false",
-        "required": true
-      }
-    }
-  },
-  {
-    "id": "dismissStatus",
-    "namespace": "status",
-    "path": "src/tools/status/dismiss.mcpx.ts",
-    "name": "Dismiss Status",
-    "description": "Dismiss any status notification by id.",
-    "input": {
-      "id": {
-        "type": "string",
-        "required": true
-      }
-    },
-    "output": {
-      "id": {
-        "type": "string",
-        "required": true
-      },
-      "dismissed": {
-        "type": "false",
-        "required": true
-      }
-    }
-  },
-  {
-    "id": "showStatusWindow",
-    "namespace": "status",
-    "path": "src/tools/status/window.mcpx.ts",
-    "name": "Show Status Window",
-    "description": "Show a status message in a window notification.",
-    "input": {
-      "id": {
-        "type": "string",
-        "required": true
-      },
-      "message": {
-        "type": "string",
-        "required": true
-      }
-    },
-    "output": {
-      "id": {
-        "type": "string",
-        "required": true
-      },
-      "message": {
-        "type": "string",
-        "required": true
-      },
-      "shown": {
-        "type": "false",
         "required": true
       }
     }
@@ -1992,6 +1759,239 @@ export const AllTools = [
       "repoUrl": {
         "type": "string",
         "required": true
+      }
+    }
+  },
+  {
+    "id": "commitChanges",
+    "namespace": "vcs",
+    "path": "src/tools/vcs/commit.mcpx.ts",
+    "name": "Commit Changes",
+    "description": "Commit staged changes in the current repository with a message (supports any VCS provider).",
+    "input": {
+      "message": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "output": {
+      "success": {
+        "type": "false",
+        "required": true
+      },
+      "error": {
+        "type": "string",
+        "required": false
+      }
+    }
+  },
+  {
+    "id": "pullChanges",
+    "namespace": "vcs",
+    "path": "src/tools/vcs/pull.mcpx.ts",
+    "name": "Pull Changes",
+    "description": "Pull changes from the remote repository (supports any VCS provider).",
+    "input": {},
+    "output": {
+      "success": {
+        "type": "false",
+        "required": true
+      },
+      "error": {
+        "type": "string",
+        "required": false
+      }
+    }
+  },
+  {
+    "id": "pushChanges",
+    "namespace": "vcs",
+    "path": "src/tools/vcs/push.mcpx.ts",
+    "name": "Push Changes",
+    "description": "Push committed changes to the remote repository (supports any VCS provider).",
+    "input": {},
+    "output": {
+      "success": {
+        "type": "false",
+        "required": true
+      },
+      "error": {
+        "type": "string",
+        "required": false
+      }
+    }
+  },
+  {
+    "id": "getVcsStatus",
+    "namespace": "vcs",
+    "path": "src/tools/vcs/status.mcpx.ts",
+    "name": "VCS Status",
+    "description": "Get the status of the current repository (supports any VCS provider).",
+    "input": {},
+    "output": {
+      "status": {
+        "type": "string",
+        "required": true
+      },
+      "error": {
+        "type": "string",
+        "required": false
+      }
+    }
+  },
+  {
+    "id": "connectIntegration",
+    "namespace": "integration",
+    "path": "src/tools/integration/connect.mcpx.ts",
+    "name": "Connect Integration",
+    "description": "Connect to a specified MCP integration",
+    "input": {
+      "integrationId": {
+        "type": "string",
+        "required": true
+      },
+      "options": {
+        "type": "any",
+        "required": true
+      },
+      "showUI": {
+        "type": "false",
+        "required": false
+      }
+    },
+    "output": {
+      "result": {
+        "type": "any",
+        "required": true
+      }
+    }
+  },
+  {
+    "id": "listIntegrations",
+    "namespace": "integration",
+    "path": "src/tools/integration/list.mcpx.ts",
+    "name": "List Integrations",
+    "description": "List all available MCP integrations",
+    "input": {
+      "showUI": {
+        "type": "false",
+        "required": false
+      }
+    },
+    "output": {
+      "integrations": {
+        "type": "any[]",
+        "required": true
+      }
+    }
+  },
+  {
+    "id": "createWorkspaceFile",
+    "namespace": "workspace",
+    "path": "src/tools/workspace/create-file.mcpx.ts",
+    "name": "Create Workspace File",
+    "description": "Create a new file in the workspace with optional content.",
+    "input": {
+      "path": {
+        "type": "string",
+        "required": true
+      },
+      "content": {
+        "type": "string",
+        "required": false
+      }
+    },
+    "output": {
+      "success": {
+        "type": "false",
+        "required": true
+      },
+      "error": {
+        "type": "string",
+        "required": false
+      }
+    }
+  },
+  {
+    "id": "deleteWorkspaceFile",
+    "namespace": "workspace",
+    "path": "src/tools/workspace/delete-file.mcpx.ts",
+    "name": "Delete Workspace File",
+    "description": "Delete a file from the workspace.",
+    "input": {
+      "path": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "output": {
+      "success": {
+        "type": "false",
+        "required": true
+      },
+      "error": {
+        "type": "string",
+        "required": false
+      }
+    }
+  },
+  {
+    "id": "listWorkspaceFiles",
+    "namespace": "workspace",
+    "path": "src/tools/workspace/list-files.mcpx.ts",
+    "name": "List Workspace Files",
+    "description": "List files in the workspace matching a glob pattern.",
+    "input": {
+      "glob": {
+        "type": "string",
+        "required": false
+      }
+    },
+    "output": {
+      "files": {
+        "type": "string[]",
+        "required": true
+      }
+    }
+  },
+  {
+    "id": "listWorkspaceFolders",
+    "namespace": "workspace",
+    "path": "src/tools/workspace/list-folders.mcpx.ts",
+    "name": "List Workspace Folders",
+    "description": "List all workspace folders.",
+    "input": {},
+    "output": {
+      "folders": {
+        "type": "string[]",
+        "required": true
+      }
+    }
+  },
+  {
+    "id": "renameWorkspaceFolder",
+    "namespace": "workspace",
+    "path": "src/tools/workspace/rename-folder.mcpx.ts",
+    "name": "Rename Workspace Folder",
+    "description": "Rename a folder in the workspace using VS Code's file system API (preserves user security permissions).",
+    "input": {
+      "oldPath": {
+        "type": "string",
+        "required": true
+      },
+      "newPath": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "output": {
+      "success": {
+        "type": "false",
+        "required": true
+      },
+      "error": {
+        "type": "string",
+        "required": false
       }
     }
   }
