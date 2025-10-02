@@ -1,0 +1,26 @@
+# Exclude source files, configs, tests, docs, and other unnecessary files from VSIX
+src/
+tmp/
+docs/
+example/
+scripts/
+__mocks__/
+node_modules/
+.vscode/
+.git/
+.gitignore
+.vscodeignore
+*.ts
+*.tsx
+*.map
+*.md
+*.test.js
+*.test.ts
+*.spec.js
+*.spec.ts
+vitest.config.ts
+vite.config.ts
+vite.config.webview.ts
+tsconfig.json
+mcp-index.json
+README.md

@@ -1,0 +1,42 @@
+John Doe
+Email: johndoe@email.com
+Location: San Francisco, CA
+
+Summary:
+Experienced Fullstack Developer with 7 years of hands-on expertise in building scalable web applications, APIs, and cloud solutions. Proven track record in freelance, startup, and enterprise environments.
+
+Skills:
+- JavaScript (Node.js, React, TypeScript)
+- Python (Django, Flask)
+- SQL, MongoDB
+- AWS, Docker, CI/CD
+- REST, GraphQL
+- Agile, Remote Collaboration
+
+Experience:
+
+Freelance Fullstack Developer
+Self-Employed | Remote | 2018–2022
+- Built and deployed custom web applications for 15+ clients across e-commerce, education, and healthcare.
+- Designed RESTful APIs and integrated third-party services.
+- Managed end-to-end product lifecycle, from requirements to deployment and maintenance.
+
+Software Engineer
+StartupX | San Francisco, CA | 2022–2024
+- Developed core features for a SaaS analytics platform using React and Node.js.
+- Led migration to AWS and implemented CI/CD pipelines.
+- Collaborated with product and design teams to deliver MVPs under tight deadlines.
+
+Senior Software Engineer
+Tech Giant Inc. | Mountain View, CA | 2024–Present
+- Architected microservices for a global cloud product serving millions of users.
+- Mentored junior engineers and led code reviews.
+- Optimized backend performance, reducing latency by 30%.
+
+Education:
+B.S. in Computer Science, UC Berkeley
+
+Certifications:
+AWS Certified Developer
+
+References available upon request.

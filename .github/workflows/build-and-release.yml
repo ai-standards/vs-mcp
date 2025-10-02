@@ -1,0 +1,59 @@
+name: Build and Release Extension
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+
+      - name: Bump minor version
+        run: |
+          CURRENT_VERSION=$(jq -r '.version' package.json)
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT_VERSION"
+          MINOR=$((MINOR + 1))
+          PATCH=0
+          NEW_VERSION="$MAJOR.$MINOR.$PATCH"
+          jq ".version = \"$NEW_VERSION\"" package.json > package.json.tmp && mv package.json.tmp package.json
+          echo "Bumped version to $NEW_VERSION"
+
+
+      - name: Build MCP server
+        run: npm run build:server
+
+      - name: Build React webview
+        run: npm run build:webview
+
+      - name: Build extension
+        run: npm run build
+
+      - name: Package extension
+        run: npm run package
+
+      - name: Get new version
+        id: get_version
+        run: echo "version=$(npm pkg get version | tr -d '"')" >> $GITHUB_OUTPUT
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ steps.get_version.outputs.version }}
+          name: Release v${{ steps.get_version.outputs.version }}
+          files: |
+            packages/vsmcp-${{ steps.get_version.outputs.version }}.vsix
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

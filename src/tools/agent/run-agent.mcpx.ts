@@ -1,8 +1,9 @@
-import { callAgent, listAgents } from "../../lib/agent";
+import { AgentScope, callAgent, listAgents } from "../../lib/agent";
 import * as vscode from "vscode";
 
 export type InputContext = {
-    filepath?: string
+    filepath?: string,
+    scope?: AgentScope
 };
 
 // (optional) keep if you want a return value; not used below
@@ -16,9 +17,12 @@ export type OutputContext = InputContext & {
  * @description Generate a new MCP agent
  */
 export default async function runAgent(context: InputContext): Promise<OutputContext> {
+    const scope = context.scope || {
+        // the scope filepath is the original file the person clicked if they ran this from an explorer menu
+        filepath: context.filepath
+    }
     const agents = await listAgents();
     let filepath = context.filepath;
-    console.log({filepath, agents});
     if (! filepath || agents.findIndex(a => a.path === filepath) < 0) {
         // Show QuickPick to select agent
         const items = agents.map(agent => ({ label: agent.name || agent.id, description: agent.description || '', path: agent.path }));
@@ -33,6 +37,6 @@ export default async function runAgent(context: InputContext): Promise<OutputCon
             return { ...context };
         }
     }
-    const res = await callAgent(filepath as string);
+    const res = await callAgent(filepath as string, scope);
     return {...context} 
 }
