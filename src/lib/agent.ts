@@ -121,6 +121,10 @@ export interface McpAgent {
   run: (payload: any) => Promise<unknown>;
 }
 
+export interface AgentScope {
+  filepath?: string;
+}
+
 /** Detect agent filename extensions we support. */
 export function isAgentFile(relPath: string) {
   return (
@@ -176,7 +180,7 @@ export async function listAgents(): Promise<Array<McpAgent["metadata"]>> {
  * Run an agent by absolute path (js/mjs). Validates export shape, then calls run({ scope, mcp }).
  * For TS paths, you must supply a transpiled artifact or a TS loader.
  */
-export async function callAgent(agentPath: string, scope?: string): Promise<unknown> {
+export async function callAgent(agentPath: string, scope?: AgentScope): Promise<unknown> {
   const absPath = path.isAbsolute(agentPath)
     ? agentPath
     : path.resolve(agentPath);

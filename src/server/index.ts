@@ -61,12 +61,20 @@ export const mcpToolIndex = {
         "filepath": {
           "type": "string",
           "required": false
+        },
+        "scope": {
+          "type": "any",
+          "required": true
         }
       },
       "output": {
         "filepath": {
           "type": "string",
           "required": false
+        },
+        "scope": {
+          "type": "any",
+          "required": true
         },
         "response": {
           "type": "unknown",
@@ -525,130 +533,6 @@ export const mcpToolIndex = {
       }
     },
     {
-      "id": "findFiles",
-      "name": "Find Files",
-      "path": "src/tools/fs/find.mcpx.ts",
-      "namespace": "fs",
-      "description": "Find files by glob pattern (workspace relative).",
-      "input": {
-        "glob": {
-          "type": "string",
-          "required": false
-        },
-        "maxResults": {
-          "type": "number",
-          "required": false
-        }
-      },
-      "output": {
-        "files": {
-          "type": "string[]",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "readDir",
-      "name": "Read Directory",
-      "path": "src/tools/fs/read-dir.mcpx.ts",
-      "namespace": "fs",
-      "description": "List directory entries (name + kind).",
-      "input": {
-        "dir": {
-          "type": "string",
-          "required": true
-        },
-        "workspaceRoot": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "dir": {
-          "type": "string",
-          "required": true
-        },
-        "workspaceRoot": {
-          "type": "string",
-          "required": true
-        },
-        "items": {
-          "type": "{ name: string; type: string; }[]",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "readFile",
-      "name": "Read File",
-      "path": "src/tools/fs/read-file.mcpx.ts",
-      "namespace": "fs",
-      "description": "Read a UTF-8 file inside the workspace.",
-      "input": {
-        "path": {
-          "type": "string",
-          "required": true
-        },
-        "workspaceRoot": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "path": {
-          "type": "string",
-          "required": true
-        },
-        "workspaceRoot": {
-          "type": "string",
-          "required": true
-        },
-        "text": {
-          "type": "string",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "writeFile",
-      "name": "Write File",
-      "path": "src/tools/fs/write-file.mcpx.ts",
-      "namespace": "fs",
-      "description": "Write a UTF-8 file inside the workspace (with confirm).",
-      "input": {
-        "path": {
-          "type": "string",
-          "required": true
-        },
-        "content": {
-          "type": "string",
-          "required": true
-        },
-        "workspaceRoot": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "path": {
-          "type": "string",
-          "required": true
-        },
-        "content": {
-          "type": "string",
-          "required": true
-        },
-        "workspaceRoot": {
-          "type": "string",
-          "required": true
-        },
-        "ok": {
-          "type": "false",
-          "required": true
-        }
-      }
-    },
-    {
       "id": "createGitBranch",
       "name": "Create Git Branch",
       "path": "src/tools/git/create-branch.mcpx.ts",
@@ -718,175 +602,47 @@ export const mcpToolIndex = {
       }
     },
     {
-      "id": "createGitHubIssue",
-      "name": "Create GitHub Issue",
-      "path": "src/tools/github/create-issue.mcpx.ts",
-      "namespace": "github",
-      "description": "Create a new issue in a GitHub repository using VS Code's GitHub integration.",
+      "id": "connectIntegration",
+      "name": "Connect Integration",
+      "path": "src/tools/integration/connect.mcpx.ts",
+      "namespace": "integration",
+      "description": "Connect to a specified MCP integration",
       "input": {
-        "repository": {
+        "integrationId": {
           "type": "string",
           "required": true
         },
-        "title": {
-          "type": "string",
+        "options": {
+          "type": "any",
           "required": true
         },
-        "body": {
-          "type": "string",
-          "required": false
-        }
-      },
-      "output": {
-        "issueUrl": {
-          "type": "null",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "createGitHubPullRequest",
-      "name": "Create GitHub Pull Request",
-      "path": "src/tools/github/create-pr.mcpx.ts",
-      "namespace": "github",
-      "description": "Create a new pull request in a GitHub repository using VS Code's GitHub integration.",
-      "input": {
-        "repository": {
-          "type": "string",
-          "required": true
-        },
-        "title": {
-          "type": "string",
-          "required": true
-        },
-        "body": {
-          "type": "string",
-          "required": false
-        },
-        "base": {
-          "type": "string",
-          "required": false
-        },
-        "head": {
-          "type": "string",
-          "required": false
-        }
-      },
-      "output": {
-        "prUrl": {
-          "type": "null",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "openGitHubRepository",
-      "name": "Open GitHub Repository",
-      "path": "src/tools/github/open-repo.mcpx.ts",
-      "namespace": "github",
-      "description": "Open a GitHub repository in the browser using VS Code's GitHub integration.",
-      "input": {
-        "repository": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "repoUrl": {
-          "type": "string",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "showStatusBar",
-      "name": "Show Status Bar",
-      "path": "src/tools/status/bar.mcpx.ts",
-      "namespace": "status",
-      "description": "Show a status message in the status bar. Optionally show a spinner.",
-      "input": {
-        "id": {
-          "type": "string",
-          "required": true
-        },
-        "message": {
-          "type": "string",
-          "required": true
-        },
-        "spinner": {
+        "showUI": {
           "type": "false",
           "required": false
         }
       },
       "output": {
-        "id": {
-          "type": "string",
-          "required": true
-        },
-        "message": {
-          "type": "string",
-          "required": true
-        },
-        "spinner": {
-          "type": "false",
-          "required": true
-        },
-        "shown": {
-          "type": "false",
+        "result": {
+          "type": "any",
           "required": true
         }
       }
     },
     {
-      "id": "dismissStatus",
-      "name": "Dismiss Status",
-      "path": "src/tools/status/dismiss.mcpx.ts",
-      "namespace": "status",
-      "description": "Dismiss any status notification by id.",
+      "id": "listIntegrations",
+      "name": "List Integrations",
+      "path": "src/tools/integration/list.mcpx.ts",
+      "namespace": "integration",
+      "description": "List all available MCP integrations",
       "input": {
-        "id": {
-          "type": "string",
-          "required": true
+        "showUI": {
+          "type": "false",
+          "required": false
         }
       },
       "output": {
-        "id": {
-          "type": "string",
-          "required": true
-        },
-        "dismissed": {
-          "type": "false",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "showStatusWindow",
-      "name": "Show Status Window",
-      "path": "src/tools/status/window.mcpx.ts",
-      "namespace": "status",
-      "description": "Show a status message in a window notification.",
-      "input": {
-        "id": {
-          "type": "string",
-          "required": true
-        },
-        "message": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "id": {
-          "type": "string",
-          "required": true
-        },
-        "message": {
-          "type": "string",
-          "required": true
-        },
-        "shown": {
-          "type": "false",
+        "integrations": {
+          "type": "any[]",
           "required": true
         }
       }
@@ -1132,52 +888,6 @@ export const mcpToolIndex = {
       }
     },
     {
-      "id": "connectIntegration",
-      "name": "Connect Integration",
-      "path": "src/tools/integration/connect.mcpx.ts",
-      "namespace": "integration",
-      "description": "Connect to a specified MCP integration",
-      "input": {
-        "integrationId": {
-          "type": "string",
-          "required": true
-        },
-        "options": {
-          "type": "any",
-          "required": true
-        },
-        "showUI": {
-          "type": "false",
-          "required": false
-        }
-      },
-      "output": {
-        "result": {
-          "type": "any",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "listIntegrations",
-      "name": "List Integrations",
-      "path": "src/tools/integration/list.mcpx.ts",
-      "namespace": "integration",
-      "description": "List all available MCP integrations",
-      "input": {
-        "showUI": {
-          "type": "false",
-          "required": false
-        }
-      },
-      "output": {
-        "integrations": {
-          "type": "any[]",
-          "required": true
-        }
-      }
-    },
-    {
       "id": "createWorkspaceFile",
       "name": "Create Workspace File",
       "path": "src/tools/workspace/create-file.mcpx.ts",
@@ -1284,6 +994,304 @@ export const mcpToolIndex = {
         "error": {
           "type": "string",
           "required": false
+        }
+      }
+    },
+    {
+      "id": "showStatusBar",
+      "name": "Show Status Bar",
+      "path": "src/tools/status/bar.mcpx.ts",
+      "namespace": "status",
+      "description": "Show a status message in the status bar. Optionally show a spinner.",
+      "input": {
+        "id": {
+          "type": "string",
+          "required": true
+        },
+        "message": {
+          "type": "string",
+          "required": true
+        },
+        "spinner": {
+          "type": "false",
+          "required": false
+        }
+      },
+      "output": {
+        "id": {
+          "type": "string",
+          "required": true
+        },
+        "message": {
+          "type": "string",
+          "required": true
+        },
+        "spinner": {
+          "type": "false",
+          "required": true
+        },
+        "shown": {
+          "type": "false",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "dismissStatus",
+      "name": "Dismiss Status",
+      "path": "src/tools/status/dismiss.mcpx.ts",
+      "namespace": "status",
+      "description": "Dismiss any status notification by id.",
+      "input": {
+        "id": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "id": {
+          "type": "string",
+          "required": true
+        },
+        "dismissed": {
+          "type": "false",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "showStatusWindow",
+      "name": "Show Status Window",
+      "path": "src/tools/status/window.mcpx.ts",
+      "namespace": "status",
+      "description": "Show a status message in a window notification.",
+      "input": {
+        "id": {
+          "type": "string",
+          "required": true
+        },
+        "message": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "id": {
+          "type": "string",
+          "required": true
+        },
+        "message": {
+          "type": "string",
+          "required": true
+        },
+        "shown": {
+          "type": "false",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "findFiles",
+      "name": "Find Files",
+      "path": "src/tools/fs/find.mcpx.ts",
+      "namespace": "fs",
+      "description": "Find files by glob pattern (workspace relative).",
+      "input": {
+        "glob": {
+          "type": "string",
+          "required": false
+        },
+        "maxResults": {
+          "type": "number",
+          "required": false
+        }
+      },
+      "output": {
+        "files": {
+          "type": "string[]",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "readDir",
+      "name": "Read Directory",
+      "path": "src/tools/fs/read-dir.mcpx.ts",
+      "namespace": "fs",
+      "description": "List directory entries (name + kind).",
+      "input": {
+        "dir": {
+          "type": "string",
+          "required": true
+        },
+        "workspaceRoot": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "dir": {
+          "type": "string",
+          "required": true
+        },
+        "workspaceRoot": {
+          "type": "string",
+          "required": true
+        },
+        "items": {
+          "type": "{ name: string; type: string; }[]",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "readFile",
+      "name": "Read File",
+      "path": "src/tools/fs/read-file.mcpx.ts",
+      "namespace": "fs",
+      "description": "Read a UTF-8 file inside the workspace.",
+      "input": {
+        "path": {
+          "type": "string",
+          "required": true
+        },
+        "workspaceRoot": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "path": {
+          "type": "string",
+          "required": true
+        },
+        "workspaceRoot": {
+          "type": "string",
+          "required": true
+        },
+        "text": {
+          "type": "string",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "writeFile",
+      "name": "Write File",
+      "path": "src/tools/fs/write-file.mcpx.ts",
+      "namespace": "fs",
+      "description": "Write a UTF-8 file inside the workspace (with confirm).",
+      "input": {
+        "path": {
+          "type": "string",
+          "required": true
+        },
+        "content": {
+          "type": "string",
+          "required": true
+        },
+        "workspaceRoot": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "path": {
+          "type": "string",
+          "required": true
+        },
+        "content": {
+          "type": "string",
+          "required": true
+        },
+        "workspaceRoot": {
+          "type": "string",
+          "required": true
+        },
+        "ok": {
+          "type": "false",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "createGitHubIssue",
+      "name": "Create GitHub Issue",
+      "path": "src/tools/github/create-issue.mcpx.ts",
+      "namespace": "github",
+      "description": "Create a new issue in a GitHub repository using VS Code's GitHub integration.",
+      "input": {
+        "repository": {
+          "type": "string",
+          "required": true
+        },
+        "title": {
+          "type": "string",
+          "required": true
+        },
+        "body": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "output": {
+        "issueUrl": {
+          "type": "null",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "createGitHubPullRequest",
+      "name": "Create GitHub Pull Request",
+      "path": "src/tools/github/create-pr.mcpx.ts",
+      "namespace": "github",
+      "description": "Create a new pull request in a GitHub repository using VS Code's GitHub integration.",
+      "input": {
+        "repository": {
+          "type": "string",
+          "required": true
+        },
+        "title": {
+          "type": "string",
+          "required": true
+        },
+        "body": {
+          "type": "string",
+          "required": false
+        },
+        "base": {
+          "type": "string",
+          "required": false
+        },
+        "head": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "output": {
+        "prUrl": {
+          "type": "null",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "openGitHubRepository",
+      "name": "Open GitHub Repository",
+      "path": "src/tools/github/open-repo.mcpx.ts",
+      "namespace": "github",
+      "description": "Open a GitHub repository in the browser using VS Code's GitHub integration.",
+      "input": {
+        "repository": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "repoUrl": {
+          "type": "string",
+          "required": true
         }
       }
     }

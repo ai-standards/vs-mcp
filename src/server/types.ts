@@ -24,10 +24,12 @@ export interface AgentListAgentsResponse {
 /** Generate a new MCP agent */
 export interface AgentRunAgentProps {
   "filepath"?: string;
+  "scope": any;
 }
 
 export interface AgentRunAgentResponse {
   "filepath"?: string;
+  "scope": any;
   "response": unknown;
 }
 
@@ -197,54 +199,6 @@ export interface EditorEditorSelectionResponse {
   "__self": null;
 }
 
-/** Find files by glob pattern (workspace relative). */
-export interface FsFindFilesProps {
-  "glob"?: string;
-  "maxResults"?: number;
-}
-
-export interface FsFindFilesResponse {
-  "files": string[];
-}
-
-/** List directory entries (name + kind). */
-export interface FsReadDirProps {
-  "dir": string;
-  "workspaceRoot": string;
-}
-
-export interface FsReadDirResponse {
-  "dir": string;
-  "workspaceRoot": string;
-  "items": { name: string; type: string; }[];
-}
-
-/** Read a UTF-8 file inside the workspace. */
-export interface FsReadFileProps {
-  "path": string;
-  "workspaceRoot": string;
-}
-
-export interface FsReadFileResponse {
-  "path": string;
-  "workspaceRoot": string;
-  "text": string;
-}
-
-/** Write a UTF-8 file inside the workspace (with confirm). */
-export interface FsWriteFileProps {
-  "path": string;
-  "content": string;
-  "workspaceRoot": string;
-}
-
-export interface FsWriteFileResponse {
-  "path": string;
-  "content": string;
-  "workspaceRoot": string;
-  "ok": false;
-}
-
 /** Create a new branch in the current repository using VS Code's Git extension. */
 export interface GitCreateGitBranchProps {
   "branchName": string;
@@ -275,73 +229,24 @@ export interface GitMergeGitBranchResponse {
   "error"?: string;
 }
 
-/** Create a new issue in a GitHub repository using VS Code's GitHub integration. */
-export interface GithubCreateGitHubIssueProps {
-  "repository": string;
-  "title": string;
-  "body"?: string;
+/** Connect to a specified MCP integration */
+export interface IntegrationConnectIntegrationProps {
+  "integrationId": string;
+  "options": any;
+  "showUI"?: false;
 }
 
-export interface GithubCreateGitHubIssueResponse {
-  "issueUrl": null;
+export interface IntegrationConnectIntegrationResponse {
+  "result": any;
 }
 
-/** Create a new pull request in a GitHub repository using VS Code's GitHub integration. */
-export interface GithubCreateGitHubPullRequestProps {
-  "repository": string;
-  "title": string;
-  "body"?: string;
-  "base"?: string;
-  "head"?: string;
+/** List all available MCP integrations */
+export interface IntegrationListIntegrationsProps {
+  "showUI"?: false;
 }
 
-export interface GithubCreateGitHubPullRequestResponse {
-  "prUrl": null;
-}
-
-/** Open a GitHub repository in the browser using VS Code's GitHub integration. */
-export interface GithubOpenGitHubRepositoryProps {
-  "repository": string;
-}
-
-export interface GithubOpenGitHubRepositoryResponse {
-  "repoUrl": string;
-}
-
-/** Show a status message in the status bar. Optionally show a spinner. */
-export interface StatusShowStatusBarProps {
-  "id": string;
-  "message": string;
-  "spinner"?: false;
-}
-
-export interface StatusShowStatusBarResponse {
-  "id": string;
-  "message": string;
-  "spinner": false;
-  "shown": false;
-}
-
-/** Dismiss any status notification by id. */
-export interface StatusDismissStatusProps {
-  "id": string;
-}
-
-export interface StatusDismissStatusResponse {
-  "id": string;
-  "dismissed": false;
-}
-
-/** Show a status message in a window notification. */
-export interface StatusShowStatusWindowProps {
-  "id": string;
-  "message": string;
-}
-
-export interface StatusShowStatusWindowResponse {
-  "id": string;
-  "message": string;
-  "shown": false;
+export interface IntegrationListIntegrationsResponse {
+  "integrations": any[];
 }
 
 /** Close a specific integrated terminal in VS Code. */
@@ -460,26 +365,6 @@ export interface VcsGetVcsStatusResponse {
   "error"?: string;
 }
 
-/** Connect to a specified MCP integration */
-export interface IntegrationConnectIntegrationProps {
-  "integrationId": string;
-  "options": any;
-  "showUI"?: false;
-}
-
-export interface IntegrationConnectIntegrationResponse {
-  "result": any;
-}
-
-/** List all available MCP integrations */
-export interface IntegrationListIntegrationsProps {
-  "showUI"?: false;
-}
-
-export interface IntegrationListIntegrationsResponse {
-  "integrations": any[];
-}
-
 /** Create a new file in the workspace with optional content. */
 export interface WorkspaceCreateWorkspaceFileProps {
   "path": string;
@@ -530,7 +415,124 @@ export interface WorkspaceRenameWorkspaceFolderResponse {
   "error"?: string;
 }
 
-export type ToolId = "agent.createAgent" | "agent.listAgents" | "agent.runAgent" | "ai.generateCode" | "ai.generateData" | "ai.generateImages" | "ai.generateText" | "ai.refactorCode" | "ai.testCode" | "ai.writeDocumentation" | "editor.activeFile" | "editor.openFile" | "editor.openVirtual" | "editor.proposeEdits" | "editor.editorSelection" | "fs.findFiles" | "fs.readDir" | "fs.readFile" | "fs.writeFile" | "git.createGitBranch" | "git.deleteGitBranch" | "git.mergeGitBranch" | "github.createGitHubIssue" | "github.createGitHubPullRequest" | "github.openGitHubRepository" | "status.showStatusBar" | "status.dismissStatus" | "status.showStatusWindow" | "terminal.closeTerminal" | "terminal.createTerminal" | "terminal.listTerminals" | "terminal.sendTextToTerminal" | "terminal.showTerminal" | "ui.showInfoMessage" | "ui.showInputBox" | "ui.showWarningMessage" | "vcs.commitChanges" | "vcs.pullChanges" | "vcs.pushChanges" | "vcs.getVcsStatus" | "integration.connectIntegration" | "integration.listIntegrations" | "workspace.createWorkspaceFile" | "workspace.deleteWorkspaceFile" | "workspace.listWorkspaceFiles" | "workspace.listWorkspaceFolders" | "workspace.renameWorkspaceFolder";
+/** Show a status message in the status bar. Optionally show a spinner. */
+export interface StatusShowStatusBarProps {
+  "id": string;
+  "message": string;
+  "spinner"?: false;
+}
+
+export interface StatusShowStatusBarResponse {
+  "id": string;
+  "message": string;
+  "spinner": false;
+  "shown": false;
+}
+
+/** Dismiss any status notification by id. */
+export interface StatusDismissStatusProps {
+  "id": string;
+}
+
+export interface StatusDismissStatusResponse {
+  "id": string;
+  "dismissed": false;
+}
+
+/** Show a status message in a window notification. */
+export interface StatusShowStatusWindowProps {
+  "id": string;
+  "message": string;
+}
+
+export interface StatusShowStatusWindowResponse {
+  "id": string;
+  "message": string;
+  "shown": false;
+}
+
+/** Find files by glob pattern (workspace relative). */
+export interface FsFindFilesProps {
+  "glob"?: string;
+  "maxResults"?: number;
+}
+
+export interface FsFindFilesResponse {
+  "files": string[];
+}
+
+/** List directory entries (name + kind). */
+export interface FsReadDirProps {
+  "dir": string;
+  "workspaceRoot": string;
+}
+
+export interface FsReadDirResponse {
+  "dir": string;
+  "workspaceRoot": string;
+  "items": { name: string; type: string; }[];
+}
+
+/** Read a UTF-8 file inside the workspace. */
+export interface FsReadFileProps {
+  "path": string;
+  "workspaceRoot": string;
+}
+
+export interface FsReadFileResponse {
+  "path": string;
+  "workspaceRoot": string;
+  "text": string;
+}
+
+/** Write a UTF-8 file inside the workspace (with confirm). */
+export interface FsWriteFileProps {
+  "path": string;
+  "content": string;
+  "workspaceRoot": string;
+}
+
+export interface FsWriteFileResponse {
+  "path": string;
+  "content": string;
+  "workspaceRoot": string;
+  "ok": false;
+}
+
+/** Create a new issue in a GitHub repository using VS Code's GitHub integration. */
+export interface GithubCreateGitHubIssueProps {
+  "repository": string;
+  "title": string;
+  "body"?: string;
+}
+
+export interface GithubCreateGitHubIssueResponse {
+  "issueUrl": null;
+}
+
+/** Create a new pull request in a GitHub repository using VS Code's GitHub integration. */
+export interface GithubCreateGitHubPullRequestProps {
+  "repository": string;
+  "title": string;
+  "body"?: string;
+  "base"?: string;
+  "head"?: string;
+}
+
+export interface GithubCreateGitHubPullRequestResponse {
+  "prUrl": null;
+}
+
+/** Open a GitHub repository in the browser using VS Code's GitHub integration. */
+export interface GithubOpenGitHubRepositoryProps {
+  "repository": string;
+}
+
+export interface GithubOpenGitHubRepositoryResponse {
+  "repoUrl": string;
+}
+
+export type ToolId = "agent.createAgent" | "agent.listAgents" | "agent.runAgent" | "ai.generateCode" | "ai.generateData" | "ai.generateImages" | "ai.generateText" | "ai.refactorCode" | "ai.testCode" | "ai.writeDocumentation" | "editor.activeFile" | "editor.openFile" | "editor.openVirtual" | "editor.proposeEdits" | "editor.editorSelection" | "git.createGitBranch" | "git.deleteGitBranch" | "git.mergeGitBranch" | "integration.connectIntegration" | "integration.listIntegrations" | "terminal.closeTerminal" | "terminal.createTerminal" | "terminal.listTerminals" | "terminal.sendTextToTerminal" | "terminal.showTerminal" | "ui.showInfoMessage" | "ui.showInputBox" | "ui.showWarningMessage" | "vcs.commitChanges" | "vcs.pullChanges" | "vcs.pushChanges" | "vcs.getVcsStatus" | "workspace.createWorkspaceFile" | "workspace.deleteWorkspaceFile" | "workspace.listWorkspaceFiles" | "workspace.listWorkspaceFolders" | "workspace.renameWorkspaceFolder" | "status.showStatusBar" | "status.dismissStatus" | "status.showStatusWindow" | "fs.findFiles" | "fs.readDir" | "fs.readFile" | "fs.writeFile" | "github.createGitHubIssue" | "github.createGitHubPullRequest" | "github.openGitHubRepository";
   
 export type CommandMap = {
   "agent.createAgent": { props: AgentCreateAgentProps; response: AgentCreateAgentResponse; path: "src/tools/agent/create-agent.mcpx.ts" };
@@ -548,19 +550,11 @@ export type CommandMap = {
   "editor.openVirtual": { props: EditorOpenVirtualProps; response: EditorOpenVirtualResponse; path: "src/tools/editor/open-virtual.mcpx.ts" };
   "editor.proposeEdits": { props: EditorProposeEditsProps; response: EditorProposeEditsResponse; path: "src/tools/editor/propose-edits.mcpx.ts" };
   "editor.editorSelection": { props: EditorEditorSelectionProps; response: EditorEditorSelectionResponse; path: "src/tools/editor/selection.mcpx.ts" };
-  "fs.findFiles": { props: FsFindFilesProps; response: FsFindFilesResponse; path: "src/tools/fs/find.mcpx.ts" };
-  "fs.readDir": { props: FsReadDirProps; response: FsReadDirResponse; path: "src/tools/fs/read-dir.mcpx.ts" };
-  "fs.readFile": { props: FsReadFileProps; response: FsReadFileResponse; path: "src/tools/fs/read-file.mcpx.ts" };
-  "fs.writeFile": { props: FsWriteFileProps; response: FsWriteFileResponse; path: "src/tools/fs/write-file.mcpx.ts" };
   "git.createGitBranch": { props: GitCreateGitBranchProps; response: GitCreateGitBranchResponse; path: "src/tools/git/create-branch.mcpx.ts" };
   "git.deleteGitBranch": { props: GitDeleteGitBranchProps; response: GitDeleteGitBranchResponse; path: "src/tools/git/delete-branch.mcpx.ts" };
   "git.mergeGitBranch": { props: GitMergeGitBranchProps; response: GitMergeGitBranchResponse; path: "src/tools/git/merge-branch.mcpx.ts" };
-  "github.createGitHubIssue": { props: GithubCreateGitHubIssueProps; response: GithubCreateGitHubIssueResponse; path: "src/tools/github/create-issue.mcpx.ts" };
-  "github.createGitHubPullRequest": { props: GithubCreateGitHubPullRequestProps; response: GithubCreateGitHubPullRequestResponse; path: "src/tools/github/create-pr.mcpx.ts" };
-  "github.openGitHubRepository": { props: GithubOpenGitHubRepositoryProps; response: GithubOpenGitHubRepositoryResponse; path: "src/tools/github/open-repo.mcpx.ts" };
-  "status.showStatusBar": { props: StatusShowStatusBarProps; response: StatusShowStatusBarResponse; path: "src/tools/status/bar.mcpx.ts" };
-  "status.dismissStatus": { props: StatusDismissStatusProps; response: StatusDismissStatusResponse; path: "src/tools/status/dismiss.mcpx.ts" };
-  "status.showStatusWindow": { props: StatusShowStatusWindowProps; response: StatusShowStatusWindowResponse; path: "src/tools/status/window.mcpx.ts" };
+  "integration.connectIntegration": { props: IntegrationConnectIntegrationProps; response: IntegrationConnectIntegrationResponse; path: "src/tools/integration/connect.mcpx.ts" };
+  "integration.listIntegrations": { props: IntegrationListIntegrationsProps; response: IntegrationListIntegrationsResponse; path: "src/tools/integration/list.mcpx.ts" };
   "terminal.closeTerminal": { props: TerminalCloseTerminalProps; response: TerminalCloseTerminalResponse; path: "src/tools/terminal/close.mcpx.ts" };
   "terminal.createTerminal": { props: TerminalCreateTerminalProps; response: TerminalCreateTerminalResponse; path: "src/tools/terminal/create.mcpx.ts" };
   "terminal.listTerminals": { props: TerminalListTerminalsProps; response: TerminalListTerminalsResponse; path: "src/tools/terminal/list.mcpx.ts" };
@@ -573,13 +567,21 @@ export type CommandMap = {
   "vcs.pullChanges": { props: VcsPullChangesProps; response: VcsPullChangesResponse; path: "src/tools/vcs/pull.mcpx.ts" };
   "vcs.pushChanges": { props: VcsPushChangesProps; response: VcsPushChangesResponse; path: "src/tools/vcs/push.mcpx.ts" };
   "vcs.getVcsStatus": { props: VcsGetVcsStatusProps; response: VcsGetVcsStatusResponse; path: "src/tools/vcs/status.mcpx.ts" };
-  "integration.connectIntegration": { props: IntegrationConnectIntegrationProps; response: IntegrationConnectIntegrationResponse; path: "src/tools/integration/connect.mcpx.ts" };
-  "integration.listIntegrations": { props: IntegrationListIntegrationsProps; response: IntegrationListIntegrationsResponse; path: "src/tools/integration/list.mcpx.ts" };
   "workspace.createWorkspaceFile": { props: WorkspaceCreateWorkspaceFileProps; response: WorkspaceCreateWorkspaceFileResponse; path: "src/tools/workspace/create-file.mcpx.ts" };
   "workspace.deleteWorkspaceFile": { props: WorkspaceDeleteWorkspaceFileProps; response: WorkspaceDeleteWorkspaceFileResponse; path: "src/tools/workspace/delete-file.mcpx.ts" };
   "workspace.listWorkspaceFiles": { props: WorkspaceListWorkspaceFilesProps; response: WorkspaceListWorkspaceFilesResponse; path: "src/tools/workspace/list-files.mcpx.ts" };
   "workspace.listWorkspaceFolders": { props: WorkspaceListWorkspaceFoldersProps; response: WorkspaceListWorkspaceFoldersResponse; path: "src/tools/workspace/list-folders.mcpx.ts" };
   "workspace.renameWorkspaceFolder": { props: WorkspaceRenameWorkspaceFolderProps; response: WorkspaceRenameWorkspaceFolderResponse; path: "src/tools/workspace/rename-folder.mcpx.ts" };
+  "status.showStatusBar": { props: StatusShowStatusBarProps; response: StatusShowStatusBarResponse; path: "src/tools/status/bar.mcpx.ts" };
+  "status.dismissStatus": { props: StatusDismissStatusProps; response: StatusDismissStatusResponse; path: "src/tools/status/dismiss.mcpx.ts" };
+  "status.showStatusWindow": { props: StatusShowStatusWindowProps; response: StatusShowStatusWindowResponse; path: "src/tools/status/window.mcpx.ts" };
+  "fs.findFiles": { props: FsFindFilesProps; response: FsFindFilesResponse; path: "src/tools/fs/find.mcpx.ts" };
+  "fs.readDir": { props: FsReadDirProps; response: FsReadDirResponse; path: "src/tools/fs/read-dir.mcpx.ts" };
+  "fs.readFile": { props: FsReadFileProps; response: FsReadFileResponse; path: "src/tools/fs/read-file.mcpx.ts" };
+  "fs.writeFile": { props: FsWriteFileProps; response: FsWriteFileResponse; path: "src/tools/fs/write-file.mcpx.ts" };
+  "github.createGitHubIssue": { props: GithubCreateGitHubIssueProps; response: GithubCreateGitHubIssueResponse; path: "src/tools/github/create-issue.mcpx.ts" };
+  "github.createGitHubPullRequest": { props: GithubCreateGitHubPullRequestProps; response: GithubCreateGitHubPullRequestResponse; path: "src/tools/github/create-pr.mcpx.ts" };
+  "github.openGitHubRepository": { props: GithubOpenGitHubRepositoryProps; response: GithubOpenGitHubRepositoryResponse; path: "src/tools/github/open-repo.mcpx.ts" };
 };
 
 type AgentCreateAgentPropsKey = "agent.createAgentProps";
@@ -612,32 +614,16 @@ type EditorProposeEditsPropsKey = "editor.proposeEditsProps";
 type EditorProposeEditsResponseKey = "editor.proposeEditsResponse";
 type EditorEditorSelectionPropsKey = "editor.editorSelectionProps";
 type EditorEditorSelectionResponseKey = "editor.editorSelectionResponse";
-type FsFindFilesPropsKey = "fs.findFilesProps";
-type FsFindFilesResponseKey = "fs.findFilesResponse";
-type FsReadDirPropsKey = "fs.readDirProps";
-type FsReadDirResponseKey = "fs.readDirResponse";
-type FsReadFilePropsKey = "fs.readFileProps";
-type FsReadFileResponseKey = "fs.readFileResponse";
-type FsWriteFilePropsKey = "fs.writeFileProps";
-type FsWriteFileResponseKey = "fs.writeFileResponse";
 type GitCreateGitBranchPropsKey = "git.createGitBranchProps";
 type GitCreateGitBranchResponseKey = "git.createGitBranchResponse";
 type GitDeleteGitBranchPropsKey = "git.deleteGitBranchProps";
 type GitDeleteGitBranchResponseKey = "git.deleteGitBranchResponse";
 type GitMergeGitBranchPropsKey = "git.mergeGitBranchProps";
 type GitMergeGitBranchResponseKey = "git.mergeGitBranchResponse";
-type GithubCreateGitHubIssuePropsKey = "github.createGitHubIssueProps";
-type GithubCreateGitHubIssueResponseKey = "github.createGitHubIssueResponse";
-type GithubCreateGitHubPullRequestPropsKey = "github.createGitHubPullRequestProps";
-type GithubCreateGitHubPullRequestResponseKey = "github.createGitHubPullRequestResponse";
-type GithubOpenGitHubRepositoryPropsKey = "github.openGitHubRepositoryProps";
-type GithubOpenGitHubRepositoryResponseKey = "github.openGitHubRepositoryResponse";
-type StatusShowStatusBarPropsKey = "status.showStatusBarProps";
-type StatusShowStatusBarResponseKey = "status.showStatusBarResponse";
-type StatusDismissStatusPropsKey = "status.dismissStatusProps";
-type StatusDismissStatusResponseKey = "status.dismissStatusResponse";
-type StatusShowStatusWindowPropsKey = "status.showStatusWindowProps";
-type StatusShowStatusWindowResponseKey = "status.showStatusWindowResponse";
+type IntegrationConnectIntegrationPropsKey = "integration.connectIntegrationProps";
+type IntegrationConnectIntegrationResponseKey = "integration.connectIntegrationResponse";
+type IntegrationListIntegrationsPropsKey = "integration.listIntegrationsProps";
+type IntegrationListIntegrationsResponseKey = "integration.listIntegrationsResponse";
 type TerminalCloseTerminalPropsKey = "terminal.closeTerminalProps";
 type TerminalCloseTerminalResponseKey = "terminal.closeTerminalResponse";
 type TerminalCreateTerminalPropsKey = "terminal.createTerminalProps";
@@ -662,10 +648,6 @@ type VcsPushChangesPropsKey = "vcs.pushChangesProps";
 type VcsPushChangesResponseKey = "vcs.pushChangesResponse";
 type VcsGetVcsStatusPropsKey = "vcs.getVcsStatusProps";
 type VcsGetVcsStatusResponseKey = "vcs.getVcsStatusResponse";
-type IntegrationConnectIntegrationPropsKey = "integration.connectIntegrationProps";
-type IntegrationConnectIntegrationResponseKey = "integration.connectIntegrationResponse";
-type IntegrationListIntegrationsPropsKey = "integration.listIntegrationsProps";
-type IntegrationListIntegrationsResponseKey = "integration.listIntegrationsResponse";
 type WorkspaceCreateWorkspaceFilePropsKey = "workspace.createWorkspaceFileProps";
 type WorkspaceCreateWorkspaceFileResponseKey = "workspace.createWorkspaceFileResponse";
 type WorkspaceDeleteWorkspaceFilePropsKey = "workspace.deleteWorkspaceFileProps";
@@ -676,6 +658,26 @@ type WorkspaceListWorkspaceFoldersPropsKey = "workspace.listWorkspaceFoldersProp
 type WorkspaceListWorkspaceFoldersResponseKey = "workspace.listWorkspaceFoldersResponse";
 type WorkspaceRenameWorkspaceFolderPropsKey = "workspace.renameWorkspaceFolderProps";
 type WorkspaceRenameWorkspaceFolderResponseKey = "workspace.renameWorkspaceFolderResponse";
+type StatusShowStatusBarPropsKey = "status.showStatusBarProps";
+type StatusShowStatusBarResponseKey = "status.showStatusBarResponse";
+type StatusDismissStatusPropsKey = "status.dismissStatusProps";
+type StatusDismissStatusResponseKey = "status.dismissStatusResponse";
+type StatusShowStatusWindowPropsKey = "status.showStatusWindowProps";
+type StatusShowStatusWindowResponseKey = "status.showStatusWindowResponse";
+type FsFindFilesPropsKey = "fs.findFilesProps";
+type FsFindFilesResponseKey = "fs.findFilesResponse";
+type FsReadDirPropsKey = "fs.readDirProps";
+type FsReadDirResponseKey = "fs.readDirResponse";
+type FsReadFilePropsKey = "fs.readFileProps";
+type FsReadFileResponseKey = "fs.readFileResponse";
+type FsWriteFilePropsKey = "fs.writeFileProps";
+type FsWriteFileResponseKey = "fs.writeFileResponse";
+type GithubCreateGitHubIssuePropsKey = "github.createGitHubIssueProps";
+type GithubCreateGitHubIssueResponseKey = "github.createGitHubIssueResponse";
+type GithubCreateGitHubPullRequestPropsKey = "github.createGitHubPullRequestProps";
+type GithubCreateGitHubPullRequestResponseKey = "github.createGitHubPullRequestResponse";
+type GithubOpenGitHubRepositoryPropsKey = "github.openGitHubRepositoryProps";
+type GithubOpenGitHubRepositoryResponseKey = "github.openGitHubRepositoryResponse";
 
 export type PropsFor<K extends keyof CommandMap> =
   { [P in `${Extract<K, string>}Props`]: CommandMap[K]["props"] };
@@ -759,12 +761,20 @@ export const AllTools = [
       "filepath": {
         "type": "string",
         "required": false
+      },
+      "scope": {
+        "type": "any",
+        "required": true
       }
     },
     "output": {
       "filepath": {
         "type": "string",
         "required": false
+      },
+      "scope": {
+        "type": "any",
+        "required": true
       },
       "response": {
         "type": "unknown",
@@ -1223,130 +1233,6 @@ export const AllTools = [
     }
   },
   {
-    "id": "findFiles",
-    "namespace": "fs",
-    "path": "src/tools/fs/find.mcpx.ts",
-    "name": "Find Files",
-    "description": "Find files by glob pattern (workspace relative).",
-    "input": {
-      "glob": {
-        "type": "string",
-        "required": false
-      },
-      "maxResults": {
-        "type": "number",
-        "required": false
-      }
-    },
-    "output": {
-      "files": {
-        "type": "string[]",
-        "required": true
-      }
-    }
-  },
-  {
-    "id": "readDir",
-    "namespace": "fs",
-    "path": "src/tools/fs/read-dir.mcpx.ts",
-    "name": "Read Directory",
-    "description": "List directory entries (name + kind).",
-    "input": {
-      "dir": {
-        "type": "string",
-        "required": true
-      },
-      "workspaceRoot": {
-        "type": "string",
-        "required": true
-      }
-    },
-    "output": {
-      "dir": {
-        "type": "string",
-        "required": true
-      },
-      "workspaceRoot": {
-        "type": "string",
-        "required": true
-      },
-      "items": {
-        "type": "{ name: string; type: string; }[]",
-        "required": true
-      }
-    }
-  },
-  {
-    "id": "readFile",
-    "namespace": "fs",
-    "path": "src/tools/fs/read-file.mcpx.ts",
-    "name": "Read File",
-    "description": "Read a UTF-8 file inside the workspace.",
-    "input": {
-      "path": {
-        "type": "string",
-        "required": true
-      },
-      "workspaceRoot": {
-        "type": "string",
-        "required": true
-      }
-    },
-    "output": {
-      "path": {
-        "type": "string",
-        "required": true
-      },
-      "workspaceRoot": {
-        "type": "string",
-        "required": true
-      },
-      "text": {
-        "type": "string",
-        "required": true
-      }
-    }
-  },
-  {
-    "id": "writeFile",
-    "namespace": "fs",
-    "path": "src/tools/fs/write-file.mcpx.ts",
-    "name": "Write File",
-    "description": "Write a UTF-8 file inside the workspace (with confirm).",
-    "input": {
-      "path": {
-        "type": "string",
-        "required": true
-      },
-      "content": {
-        "type": "string",
-        "required": true
-      },
-      "workspaceRoot": {
-        "type": "string",
-        "required": true
-      }
-    },
-    "output": {
-      "path": {
-        "type": "string",
-        "required": true
-      },
-      "content": {
-        "type": "string",
-        "required": true
-      },
-      "workspaceRoot": {
-        "type": "string",
-        "required": true
-      },
-      "ok": {
-        "type": "false",
-        "required": true
-      }
-    }
-  },
-  {
     "id": "createGitBranch",
     "namespace": "git",
     "path": "src/tools/git/create-branch.mcpx.ts",
@@ -1416,175 +1302,47 @@ export const AllTools = [
     }
   },
   {
-    "id": "createGitHubIssue",
-    "namespace": "github",
-    "path": "src/tools/github/create-issue.mcpx.ts",
-    "name": "Create GitHub Issue",
-    "description": "Create a new issue in a GitHub repository using VS Code's GitHub integration.",
+    "id": "connectIntegration",
+    "namespace": "integration",
+    "path": "src/tools/integration/connect.mcpx.ts",
+    "name": "Connect Integration",
+    "description": "Connect to a specified MCP integration",
     "input": {
-      "repository": {
+      "integrationId": {
         "type": "string",
         "required": true
       },
-      "title": {
-        "type": "string",
+      "options": {
+        "type": "any",
         "required": true
       },
-      "body": {
-        "type": "string",
-        "required": false
-      }
-    },
-    "output": {
-      "issueUrl": {
-        "type": "null",
-        "required": true
-      }
-    }
-  },
-  {
-    "id": "createGitHubPullRequest",
-    "namespace": "github",
-    "path": "src/tools/github/create-pr.mcpx.ts",
-    "name": "Create GitHub Pull Request",
-    "description": "Create a new pull request in a GitHub repository using VS Code's GitHub integration.",
-    "input": {
-      "repository": {
-        "type": "string",
-        "required": true
-      },
-      "title": {
-        "type": "string",
-        "required": true
-      },
-      "body": {
-        "type": "string",
-        "required": false
-      },
-      "base": {
-        "type": "string",
-        "required": false
-      },
-      "head": {
-        "type": "string",
-        "required": false
-      }
-    },
-    "output": {
-      "prUrl": {
-        "type": "null",
-        "required": true
-      }
-    }
-  },
-  {
-    "id": "openGitHubRepository",
-    "namespace": "github",
-    "path": "src/tools/github/open-repo.mcpx.ts",
-    "name": "Open GitHub Repository",
-    "description": "Open a GitHub repository in the browser using VS Code's GitHub integration.",
-    "input": {
-      "repository": {
-        "type": "string",
-        "required": true
-      }
-    },
-    "output": {
-      "repoUrl": {
-        "type": "string",
-        "required": true
-      }
-    }
-  },
-  {
-    "id": "showStatusBar",
-    "namespace": "status",
-    "path": "src/tools/status/bar.mcpx.ts",
-    "name": "Show Status Bar",
-    "description": "Show a status message in the status bar. Optionally show a spinner.",
-    "input": {
-      "id": {
-        "type": "string",
-        "required": true
-      },
-      "message": {
-        "type": "string",
-        "required": true
-      },
-      "spinner": {
+      "showUI": {
         "type": "false",
         "required": false
       }
     },
     "output": {
-      "id": {
-        "type": "string",
-        "required": true
-      },
-      "message": {
-        "type": "string",
-        "required": true
-      },
-      "spinner": {
-        "type": "false",
-        "required": true
-      },
-      "shown": {
-        "type": "false",
+      "result": {
+        "type": "any",
         "required": true
       }
     }
   },
   {
-    "id": "dismissStatus",
-    "namespace": "status",
-    "path": "src/tools/status/dismiss.mcpx.ts",
-    "name": "Dismiss Status",
-    "description": "Dismiss any status notification by id.",
+    "id": "listIntegrations",
+    "namespace": "integration",
+    "path": "src/tools/integration/list.mcpx.ts",
+    "name": "List Integrations",
+    "description": "List all available MCP integrations",
     "input": {
-      "id": {
-        "type": "string",
-        "required": true
+      "showUI": {
+        "type": "false",
+        "required": false
       }
     },
     "output": {
-      "id": {
-        "type": "string",
-        "required": true
-      },
-      "dismissed": {
-        "type": "false",
-        "required": true
-      }
-    }
-  },
-  {
-    "id": "showStatusWindow",
-    "namespace": "status",
-    "path": "src/tools/status/window.mcpx.ts",
-    "name": "Show Status Window",
-    "description": "Show a status message in a window notification.",
-    "input": {
-      "id": {
-        "type": "string",
-        "required": true
-      },
-      "message": {
-        "type": "string",
-        "required": true
-      }
-    },
-    "output": {
-      "id": {
-        "type": "string",
-        "required": true
-      },
-      "message": {
-        "type": "string",
-        "required": true
-      },
-      "shown": {
-        "type": "false",
+      "integrations": {
+        "type": "any[]",
         "required": true
       }
     }
@@ -1830,52 +1588,6 @@ export const AllTools = [
     }
   },
   {
-    "id": "connectIntegration",
-    "namespace": "integration",
-    "path": "src/tools/integration/connect.mcpx.ts",
-    "name": "Connect Integration",
-    "description": "Connect to a specified MCP integration",
-    "input": {
-      "integrationId": {
-        "type": "string",
-        "required": true
-      },
-      "options": {
-        "type": "any",
-        "required": true
-      },
-      "showUI": {
-        "type": "false",
-        "required": false
-      }
-    },
-    "output": {
-      "result": {
-        "type": "any",
-        "required": true
-      }
-    }
-  },
-  {
-    "id": "listIntegrations",
-    "namespace": "integration",
-    "path": "src/tools/integration/list.mcpx.ts",
-    "name": "List Integrations",
-    "description": "List all available MCP integrations",
-    "input": {
-      "showUI": {
-        "type": "false",
-        "required": false
-      }
-    },
-    "output": {
-      "integrations": {
-        "type": "any[]",
-        "required": true
-      }
-    }
-  },
-  {
     "id": "createWorkspaceFile",
     "namespace": "workspace",
     "path": "src/tools/workspace/create-file.mcpx.ts",
@@ -1982,6 +1694,304 @@ export const AllTools = [
       "error": {
         "type": "string",
         "required": false
+      }
+    }
+  },
+  {
+    "id": "showStatusBar",
+    "namespace": "status",
+    "path": "src/tools/status/bar.mcpx.ts",
+    "name": "Show Status Bar",
+    "description": "Show a status message in the status bar. Optionally show a spinner.",
+    "input": {
+      "id": {
+        "type": "string",
+        "required": true
+      },
+      "message": {
+        "type": "string",
+        "required": true
+      },
+      "spinner": {
+        "type": "false",
+        "required": false
+      }
+    },
+    "output": {
+      "id": {
+        "type": "string",
+        "required": true
+      },
+      "message": {
+        "type": "string",
+        "required": true
+      },
+      "spinner": {
+        "type": "false",
+        "required": true
+      },
+      "shown": {
+        "type": "false",
+        "required": true
+      }
+    }
+  },
+  {
+    "id": "dismissStatus",
+    "namespace": "status",
+    "path": "src/tools/status/dismiss.mcpx.ts",
+    "name": "Dismiss Status",
+    "description": "Dismiss any status notification by id.",
+    "input": {
+      "id": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "output": {
+      "id": {
+        "type": "string",
+        "required": true
+      },
+      "dismissed": {
+        "type": "false",
+        "required": true
+      }
+    }
+  },
+  {
+    "id": "showStatusWindow",
+    "namespace": "status",
+    "path": "src/tools/status/window.mcpx.ts",
+    "name": "Show Status Window",
+    "description": "Show a status message in a window notification.",
+    "input": {
+      "id": {
+        "type": "string",
+        "required": true
+      },
+      "message": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "output": {
+      "id": {
+        "type": "string",
+        "required": true
+      },
+      "message": {
+        "type": "string",
+        "required": true
+      },
+      "shown": {
+        "type": "false",
+        "required": true
+      }
+    }
+  },
+  {
+    "id": "findFiles",
+    "namespace": "fs",
+    "path": "src/tools/fs/find.mcpx.ts",
+    "name": "Find Files",
+    "description": "Find files by glob pattern (workspace relative).",
+    "input": {
+      "glob": {
+        "type": "string",
+        "required": false
+      },
+      "maxResults": {
+        "type": "number",
+        "required": false
+      }
+    },
+    "output": {
+      "files": {
+        "type": "string[]",
+        "required": true
+      }
+    }
+  },
+  {
+    "id": "readDir",
+    "namespace": "fs",
+    "path": "src/tools/fs/read-dir.mcpx.ts",
+    "name": "Read Directory",
+    "description": "List directory entries (name + kind).",
+    "input": {
+      "dir": {
+        "type": "string",
+        "required": true
+      },
+      "workspaceRoot": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "output": {
+      "dir": {
+        "type": "string",
+        "required": true
+      },
+      "workspaceRoot": {
+        "type": "string",
+        "required": true
+      },
+      "items": {
+        "type": "{ name: string; type: string; }[]",
+        "required": true
+      }
+    }
+  },
+  {
+    "id": "readFile",
+    "namespace": "fs",
+    "path": "src/tools/fs/read-file.mcpx.ts",
+    "name": "Read File",
+    "description": "Read a UTF-8 file inside the workspace.",
+    "input": {
+      "path": {
+        "type": "string",
+        "required": true
+      },
+      "workspaceRoot": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "output": {
+      "path": {
+        "type": "string",
+        "required": true
+      },
+      "workspaceRoot": {
+        "type": "string",
+        "required": true
+      },
+      "text": {
+        "type": "string",
+        "required": true
+      }
+    }
+  },
+  {
+    "id": "writeFile",
+    "namespace": "fs",
+    "path": "src/tools/fs/write-file.mcpx.ts",
+    "name": "Write File",
+    "description": "Write a UTF-8 file inside the workspace (with confirm).",
+    "input": {
+      "path": {
+        "type": "string",
+        "required": true
+      },
+      "content": {
+        "type": "string",
+        "required": true
+      },
+      "workspaceRoot": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "output": {
+      "path": {
+        "type": "string",
+        "required": true
+      },
+      "content": {
+        "type": "string",
+        "required": true
+      },
+      "workspaceRoot": {
+        "type": "string",
+        "required": true
+      },
+      "ok": {
+        "type": "false",
+        "required": true
+      }
+    }
+  },
+  {
+    "id": "createGitHubIssue",
+    "namespace": "github",
+    "path": "src/tools/github/create-issue.mcpx.ts",
+    "name": "Create GitHub Issue",
+    "description": "Create a new issue in a GitHub repository using VS Code's GitHub integration.",
+    "input": {
+      "repository": {
+        "type": "string",
+        "required": true
+      },
+      "title": {
+        "type": "string",
+        "required": true
+      },
+      "body": {
+        "type": "string",
+        "required": false
+      }
+    },
+    "output": {
+      "issueUrl": {
+        "type": "null",
+        "required": true
+      }
+    }
+  },
+  {
+    "id": "createGitHubPullRequest",
+    "namespace": "github",
+    "path": "src/tools/github/create-pr.mcpx.ts",
+    "name": "Create GitHub Pull Request",
+    "description": "Create a new pull request in a GitHub repository using VS Code's GitHub integration.",
+    "input": {
+      "repository": {
+        "type": "string",
+        "required": true
+      },
+      "title": {
+        "type": "string",
+        "required": true
+      },
+      "body": {
+        "type": "string",
+        "required": false
+      },
+      "base": {
+        "type": "string",
+        "required": false
+      },
+      "head": {
+        "type": "string",
+        "required": false
+      }
+    },
+    "output": {
+      "prUrl": {
+        "type": "null",
+        "required": true
+      }
+    }
+  },
+  {
+    "id": "openGitHubRepository",
+    "namespace": "github",
+    "path": "src/tools/github/open-repo.mcpx.ts",
+    "name": "Open GitHub Repository",
+    "description": "Open a GitHub repository in the browser using VS Code's GitHub integration.",
+    "input": {
+      "repository": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "output": {
+      "repoUrl": {
+        "type": "string",
+        "required": true
       }
     }
   }
