@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 import * as path from "path";
-import { getClient } from "../../lib/ai";
+import { getClient, getModel } from "../../lib/ai";
 import { getAgentContext } from "../../lib/agent";
 import { z } from "zod";
 import { zodResponseFormat } from "openai/helpers/zod";
@@ -84,8 +84,8 @@ ${agentContext}
                 type AgentFile = z.infer<typeof AgentFile>;
 
                 // Use chat.completions.parse with zodResponseFormat
-                const completion = await ai.chat.completions.parse({
-                    model: "gpt-4o-mini", // or a recent gpt-4o-mini snapshot
+                    const completion = await ai.chat.completions.parse({
+                        model: getModel(),
                     messages: [
                         { role: "system", content: "You are a meticulous code generator." },
                         { role: "user", content: prompt },

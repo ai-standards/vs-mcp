@@ -1,4 +1,4 @@
-import { getClient } from "../../lib/ai";
+import { getClient, getModel } from "../../lib/ai";
 
 export type InputContext = {
   prompt: string;
@@ -22,7 +22,7 @@ async function generateCode(context: InputContext): Promise<OutputContext> {
   if (!prompt || typeof prompt !== "string") throw new Error("prompt:string required");
   const openai = await getClient();
   const completion = await openai.chat.completions.create({
-    model: "gpt-4o-mini",
+  model: getModel(),
     messages: [{ role: "user", content: `Generate ${language} code in a ${style} style.\nReturn only code.\n\nTask:\n${prompt}` }],
     max_tokens: maxTokens,
   });

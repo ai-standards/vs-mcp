@@ -5,6 +5,7 @@ dotenv.config();
 import OpenAI from "openai";
 import ora from "ora";
 import {mcpToolIndex} from '../src/server'
+import { getModel } from "../src/lib/ai";
 import fg from "fast-glob";
 import fsPromises from "fs/promises";
 
@@ -240,7 +241,7 @@ export const run = async ({ mcp, scope }) => {
 
   // Call OpenAI GPT-5 to generate the README.md content
   const completion = await openai.chat.completions.create({
-    model: "gpt-5",
+  model: getModel(),
     messages: [
       { role: "system", content: "You are a helpful technical documentation assistant." },
       { role: "user", content: prompt }
@@ -276,7 +277,7 @@ async function generateNamespace(namespace: string, docPath: string) {
 
   // Call OpenAI to generate the README.md content
   const completion = await openai.chat.completions.create({
-    model: "gpt-5",
+  model: getModel(),
     messages: [
       { role: "system", content: "You are a helpful technical documentation assistant." },
       { role: "user", content: prompt }
@@ -325,7 +326,7 @@ async function generateTool(tool: any, docPath: string) {
 
   // Call OpenAI to generate the README.md content
   const completion = await openai.chat.completions.create({
-    model: "gpt-5",
+  model: getModel(),
     messages: [
       { role: "system", content: "You are a helpful technical documentation assistant." },
       { role: "user", content: prompt }

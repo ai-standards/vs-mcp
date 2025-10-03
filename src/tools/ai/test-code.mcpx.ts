@@ -1,4 +1,4 @@
-import { getClient } from "../../lib/ai";
+import { getClient, getModel } from "../../lib/ai";
 
 export type InputContext = {
   code: string;
@@ -20,7 +20,7 @@ async function testCode(context: InputContext): Promise<OutputContext> {
   if (!code) throw new Error("code:string required");
   const openai = await getClient();
   const completion = await openai.chat.completions.create({
-    model: "gpt-4o-mini",
+  model: getModel(),
     messages: [{ role: "user", content: `Write comprehensive ${framework} tests in ${language} for the following code.\nCover edge cases and typical scenarios. Return only test code.\n\n---\n${code}\n---` }],
   });
   const tests = completion.choices[0]?.message?.content ?? "";

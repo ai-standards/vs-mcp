@@ -57,3 +57,8 @@ function getUri(): string {
     const apiUrl = config.get<string>('apiUrl', '');
     return apiUrl || 'https://api.openai.com/v1';
 }
+
+export function getModel(): string {
+    const config = vscode.workspace.getConfiguration('vs-mcp');
+    return config.get<string>('model', 'gpt-4o-mini');
+}
