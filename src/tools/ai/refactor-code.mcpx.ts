@@ -1,4 +1,4 @@
-import { getClient } from "../../lib/ai";
+import { getClient, getModel } from "../../lib/ai";
 
 export type InputContext = {
   code: string;
@@ -21,7 +21,7 @@ export async function refactorCode(context: InputContext): Promise<OutputContext
   if (!code || !instructions) throw new Error("code:string and instructions:string required");
   const openai = await getClient();
   const completion = await openai.chat.completions.create({
-    model: "gpt-4o-mini",
+  model: getModel(),
     messages: [{ role: "user", content: `Refactor the following ${language} code.\nGoal: ${instructions}\nStyle: ${style}\nReturn only code.\n\n---\n${code}\n---` }],
   });
   const refactoredCode = completion.choices[0]?.message?.content ?? "";

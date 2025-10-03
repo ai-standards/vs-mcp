@@ -1,4 +1,4 @@
-import { getClient } from "../../lib/ai";
+import { getClient, getModel } from "../../lib/ai";
 
 export type InputContext = {
   code: string;
@@ -20,7 +20,7 @@ async function writeDocumentation(context: InputContext): Promise<OutputContext>
   if (!code) throw new Error("code:string required");
   const openai = await getClient();
   const completion = await openai.chat.completions.create({
-    model: "gpt-4o-mini",
+  model: getModel(),
     messages: [{ role: "user", content: `Write ${format} documentation for the following code for ${audience}.\nExplain purpose, API, usage, and gotchas. Include brief snippets as needed.\n\n---\n${code}\n---` }],
   });
   const docs = completion.choices[0]?.message?.content ?? "";

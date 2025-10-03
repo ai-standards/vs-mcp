@@ -3,7 +3,7 @@
   "name": "vs-mcp",
   "displayName": "VS-MCP",
   "description": "Generate and run realtime VSCode MCP agents",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/ai-standards/vs-mcp.git"
@@ -25,12 +25,17 @@
   "main": "./out/extension.js",
   "contributes": {
     "configuration": {
-      "title": "MCP Settings",
+      "title": "VS-MCP Settings",
       "properties": {
         "vs-mcp.apiUrl": {
           "type": "string",
           "default": "",
           "description": "The AI API URL. Leave blank for default OpenAI endpoint."
+        },
+        "vs-mcp.model": {
+          "type": "string",
+          "default": "gpt-4o-mini",
+          "description": "The default model (You can override this in your agent scripts)."
         }
       }
     },
