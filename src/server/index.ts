@@ -533,60 +533,118 @@ export const mcpToolIndex = {
       }
     },
     {
-      "id": "createGitBranch",
-      "name": "Create Git Branch",
-      "path": "src/tools/git/create-branch.mcpx.ts",
-      "namespace": "git",
-      "description": "Create a new branch in the current repository using VS Code's Git extension.",
+      "id": "createGitHubIssue",
+      "name": "Create GitHub Issue",
+      "path": "src/tools/github/create-issue.mcpx.ts",
+      "namespace": "github",
+      "description": "Create a new issue in a GitHub repository using VS Code's GitHub integration.",
       "input": {
-        "branchName": {
+        "repository": {
           "type": "string",
           "required": true
+        },
+        "title": {
+          "type": "string",
+          "required": true
+        },
+        "body": {
+          "type": "string",
+          "required": false
         }
       },
       "output": {
-        "success": {
-          "type": "false",
+        "issueUrl": {
+          "type": "null",
           "required": true
-        },
-        "error": {
-          "type": "string",
-          "required": false
         }
       }
     },
     {
-      "id": "deleteGitBranch",
-      "name": "Delete Git Branch",
-      "path": "src/tools/git/delete-branch.mcpx.ts",
-      "namespace": "git",
-      "description": "Delete the specified branch in the current repository using VS Code's Git extension.",
+      "id": "createGitHubPullRequest",
+      "name": "Create GitHub Pull Request",
+      "path": "src/tools/github/create-pr.mcpx.ts",
+      "namespace": "github",
+      "description": "Create a new pull request in a GitHub repository using VS Code's GitHub integration.",
       "input": {
-        "branchName": {
+        "repository": {
           "type": "string",
           "required": true
+        },
+        "title": {
+          "type": "string",
+          "required": true
+        },
+        "body": {
+          "type": "string",
+          "required": false
+        },
+        "base": {
+          "type": "string",
+          "required": false
+        },
+        "head": {
+          "type": "string",
+          "required": false
         }
       },
       "output": {
-        "success": {
-          "type": "false",
+        "prUrl": {
+          "type": "null",
           "required": true
-        },
-        "error": {
-          "type": "string",
-          "required": false
         }
       }
     },
     {
-      "id": "mergeGitBranch",
-      "name": "Merge Git Branch",
-      "path": "src/tools/git/merge-branch.mcpx.ts",
-      "namespace": "git",
-      "description": "Merge the specified branch into the current branch using VS Code's Git extension.",
+      "id": "openGitHubRepository",
+      "name": "Open GitHub Repository",
+      "path": "src/tools/github/open-repo.mcpx.ts",
+      "namespace": "github",
+      "description": "Open a GitHub repository in the browser using VS Code's GitHub integration.",
       "input": {
-        "branchName": {
+        "repository": {
           "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "repoUrl": {
+          "type": "string",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "getState",
+      "name": "Get State",
+      "path": "src/tools/state/get-state.mcpx.ts",
+      "namespace": "state",
+      "description": "Get a value from the extension workspace state.",
+      "input": {
+        "key": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "value": {
+          "type": "any",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "setState",
+      "name": "Set State",
+      "path": "src/tools/state/set-state.mcpx.ts",
+      "namespace": "state",
+      "description": "Set a value in the extension workspace state.",
+      "input": {
+        "key": {
+          "type": "string",
+          "required": true
+        },
+        "value": {
+          "type": "any",
           "required": true
         }
       },
@@ -594,10 +652,6 @@ export const mcpToolIndex = {
         "success": {
           "type": "false",
           "required": true
-        },
-        "error": {
-          "type": "string",
-          "required": false
         }
       }
     },
@@ -982,87 +1036,6 @@ export const mcpToolIndex = {
       }
     },
     {
-      "id": "createGitHubIssue",
-      "name": "Create GitHub Issue",
-      "path": "src/tools/github/create-issue.mcpx.ts",
-      "namespace": "github",
-      "description": "Create a new issue in a GitHub repository using VS Code's GitHub integration.",
-      "input": {
-        "repository": {
-          "type": "string",
-          "required": true
-        },
-        "title": {
-          "type": "string",
-          "required": true
-        },
-        "body": {
-          "type": "string",
-          "required": false
-        }
-      },
-      "output": {
-        "issueUrl": {
-          "type": "null",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "createGitHubPullRequest",
-      "name": "Create GitHub Pull Request",
-      "path": "src/tools/github/create-pr.mcpx.ts",
-      "namespace": "github",
-      "description": "Create a new pull request in a GitHub repository using VS Code's GitHub integration.",
-      "input": {
-        "repository": {
-          "type": "string",
-          "required": true
-        },
-        "title": {
-          "type": "string",
-          "required": true
-        },
-        "body": {
-          "type": "string",
-          "required": false
-        },
-        "base": {
-          "type": "string",
-          "required": false
-        },
-        "head": {
-          "type": "string",
-          "required": false
-        }
-      },
-      "output": {
-        "prUrl": {
-          "type": "null",
-          "required": true
-        }
-      }
-    },
-    {
-      "id": "openGitHubRepository",
-      "name": "Open GitHub Repository",
-      "path": "src/tools/github/open-repo.mcpx.ts",
-      "namespace": "github",
-      "description": "Open a GitHub repository in the browser using VS Code's GitHub integration.",
-      "input": {
-        "repository": {
-          "type": "string",
-          "required": true
-        }
-      },
-      "output": {
-        "repoUrl": {
-          "type": "string",
-          "required": true
-        }
-      }
-    },
-    {
       "id": "commitChanges",
       "name": "Commit Changes",
       "path": "src/tools/vcs/commit.mcpx.ts",
@@ -1182,6 +1155,75 @@ export const mcpToolIndex = {
         "integrations": {
           "type": "any[]",
           "required": true
+        }
+      }
+    },
+    {
+      "id": "createGitBranch",
+      "name": "Create Git Branch",
+      "path": "src/tools/git/create-branch.mcpx.ts",
+      "namespace": "git",
+      "description": "Create a new branch in the current repository using VS Code's Git extension.",
+      "input": {
+        "branchName": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        },
+        "error": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "id": "deleteGitBranch",
+      "name": "Delete Git Branch",
+      "path": "src/tools/git/delete-branch.mcpx.ts",
+      "namespace": "git",
+      "description": "Delete the specified branch in the current repository using VS Code's Git extension.",
+      "input": {
+        "branchName": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        },
+        "error": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    {
+      "id": "mergeGitBranch",
+      "name": "Merge Git Branch",
+      "path": "src/tools/git/merge-branch.mcpx.ts",
+      "namespace": "git",
+      "description": "Merge the specified branch into the current branch using VS Code's Git extension.",
+      "input": {
+        "branchName": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "output": {
+        "success": {
+          "type": "false",
+          "required": true
+        },
+        "error": {
+          "type": "string",
+          "required": false
         }
       }
     },
